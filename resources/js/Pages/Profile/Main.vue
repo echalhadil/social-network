@@ -32,25 +32,10 @@
                     <div class=" w-36 h-36  mx-auto -mt-20 bg-transparent ">
                         <img class=" w-full h-full object-cover shadow-lg bg-transparent  rounded-full " 
                         :src="'http://127.0.0.1:8000/'+$page.profiler.picture" /> 
-                        <div v-if="$page.user.id == $page.profiler.id" class=" rounded-full target -mt-8 mr-6 border  text-black float-right hover:bg-gray-100  hover:text-gray-800 cursor-pointer bg-white relative top-0 ">
-                            <i class="fal fa-pencil p-1" aria-hidden="true"></i>
-                            
-                            <!--profile picture option -->
-                            <div class=" border border-grey-100 hidden   px-3 p-2 capitalize text-gray-800  dropdown-menu  absolute bg-white rounded ">
-                                <div  class="0 hover:text-indigo-500 flex py-1">
-                                    <i class="fal fa-pencil pr-2" aria-hidden="true"></i>
-                                    <p class=" "> edit </p>
-                                </div>
+                        
+                        <update-profile-picture v-if="$page.user.id == $page.profiler.id" :user="$page.profiler" @update-profile-picture="updateProfilePicture" />
+                  
 
-                                <div  @click="removepicture" class=" hover:text-indigo-500 flex py-1">
-                                <!-- v-if="$page.profiler.picture!='images/users/male_user.jpg'"-->
-                                    <i class="fal fa-trash pr-2" aria-hidden="true"></i>
-                                    <p  class="">remove </p>
-                                </div>
-                            </div>
-                            <!--profile picture option -->
-
-                        </div>
                     </div>
                     <!-- full name -->
                     <div class=" text-center p-2 " >
@@ -274,6 +259,7 @@
                 <div class=" w-full mx-auto bg-white shadow rounded-lg p-2">
                     <update-profile-information-form :user="$page.user" />
                     <update-password-form class=" mt-6 " />
+                    <delete-user-form />
                 </div>
             </div>
 
@@ -288,11 +274,12 @@
 
 <script>
     import AppLayout from '@/Layouts/AppLayout'
-    // import DeleteUserForm from './DeleteUserForm'
+    import DeleteUserForm from './DeleteUserForm'
     // import JetSectionBorder from '@/Jetstream/SectionBorder'
     // import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
     // import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
     import UpdatePasswordForm from './UpdatePasswordForm'
+    import UpdateProfilePicture from './UpdateProfilePicture'
     import UpdateProfileInformationForm from './UpdateProfileInformationForm'
     import AddPost from '@/Pages/Post/AddPost'
 
@@ -325,7 +312,8 @@
             PostOwner,
             PostText,
             PostPicture,
-            // DeleteUserForm,
+            DeleteUserForm,
+            UpdateProfilePicture,
             // JetSectionBorder,
             // LogoutOtherBrowserSessionsForm,
             // TwoFactorAuthenticationForm,
@@ -544,6 +532,10 @@
                 }
             });
         },
+        updateProfilePicture(user,picture)
+        {
+            user.picture = picture;
+        }
         
 
         
@@ -568,9 +560,5 @@
         display:block;
     }
    
-    @media (min-width: 640px){
-        .counting{
-            visibility:hidden;
-        }
-    }
+
 </style>

@@ -63,12 +63,12 @@
             </div>
 
             <!-- Email -->
-            <!--<div class="col-span-6 sm:col-span-4">
+            <div class="col-span-6 sm:col-span-4">
                 <jet-label for="email" value="Email" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" autocomplete="email" />
                 <jet-input-error :message="form.error('email')" class="mt-2" />
             </div>
-            -->
+            
         </template>
 
         <template #actions>

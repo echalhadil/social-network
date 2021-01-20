@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ReactController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      *

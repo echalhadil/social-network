@@ -44,3 +44,5 @@ Route::resource('reacts', ReactController::class);
 Route::resource('profiles', ProfileController::class);
 
 
+// update profile picture 
+Route::post('profiles/{id}/updateprofilepicture',[ProfileController::class,'updateProfilePicture']);

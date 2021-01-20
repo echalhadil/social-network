@@ -106,4 +106,31 @@ class ProfileController extends Controller
     {
         //
     }
+
+    public function updateProfilePicture($id,Request $request)
+    {
+        $request->validate([
+            'picture' =>'file|image',
+        ]);
+       
+        if($request ->hasFile('picture'))
+        {
+        $picture = $request->file('picture')->store('images/posts');
+        $user = User::find($id);
+        $user -> picture = $picture ; 
+        $user -> save();
+
+        return response() -> json($user -> picture);
+        }
+        else return response() -> json(false);
+    }
+
+
+    public function deleteProfilePicture(User $user,Request $request)
+    {
+        $user -> picture = "images/users/" . $request -> picture ; 
+        $user -> save();
+
+        return response() -> json(true);
+    }
 }
