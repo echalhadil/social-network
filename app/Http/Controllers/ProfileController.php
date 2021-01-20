@@ -53,6 +53,7 @@ class ProfileController extends Controller
 
         if($user)
         {
+            $user -> posts = $user -> posts;
             
             return Inertia::render('Profile/Main')->with('profiler',$user);
             

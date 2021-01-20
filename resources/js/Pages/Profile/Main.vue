@@ -5,13 +5,52 @@
 
             <div class="w-11/12 bg-white mx-auto mt-6 shadow rounded-lg">
                 <!-- cover -->
-                <div class=" w-full   h-64 ">
-                    <img class="w-full rounded-lg h-full object-cover p-1 " src="https://i.pinimg.com/564x/d8/5f/45/d85f454c5884b1a0acbe576574f4b840.jpg"  />
+                <div class=" w-full h-64 ">
+                    <div v-if="$page.user.id == $page.profiler.id" class="target rounded-full border -mb-9 mr-2 mt-2 text-black float-right hover:bg-gray-50  hover:text-gray-800 cursor-pointer bg-white relative top-0 ">
+                        <i class="fal fa-pencil p-1" aria-hidden="true"></i>
+                        <!--cover option -->
+                        <div class=" border border-grey-100 hidden  -ml-15 px-3 p-2 capitalize text-gray-800  dropdown-menu  absolute bg-white rounded ">
+                            <div  class="0 hover:text-indigo-500 flex py-1">
+                                <i class="fal fa-pencil pr-2" aria-hidden="true"></i>
+                                <p class=" "> edit </p>
+                            </div>
+
+                                <div @click="removecover" class=" hover:text-indigo-500 flex py-1">
+                                <i class="fal fa-trash pr-2" aria-hidden="true"></i>
+                                <p  class="">remove </p>
+                            </div>
+                        </div>
+                        <!--cover option -->
+                        
+                    
+                    </div>
+                    <img class="w-full rounded-lg h-full object-cover   p-1 " src="https://i.pinimg.com/564x/d8/5f/45/d85f454c5884b1a0acbe576574f4b840.jpg"  />
+                   
                 </div>
 
                 <div class=" w-full  ">
-                    <div class=" h-28 mx-auto w-28 -mt-16 bg-transparent ">
-                        <img class=" w-full h-full object-cover shadow-lg bg-transparent  rounded-full " src="https://i.pinimg.com/564x/d8/5f/45/d85f454c5884b1a0acbe576574f4b840.jpg" /> 
+                    <div class=" w-36 h-36  mx-auto -mt-20 bg-transparent ">
+                        <img class=" w-full h-full object-cover shadow-lg bg-transparent  rounded-full " 
+                        :src="'http://127.0.0.1:8000/'+$page.profiler.picture" /> 
+                        <div v-if="$page.user.id == $page.profiler.id" class=" rounded-full target -mt-8 mr-6 border  text-black float-right hover:bg-gray-100  hover:text-gray-800 cursor-pointer bg-white relative top-0 ">
+                            <i class="fal fa-pencil p-1" aria-hidden="true"></i>
+                            
+                            <!--profile picture option -->
+                            <div class=" border border-grey-100 hidden   px-3 p-2 capitalize text-gray-800  dropdown-menu  absolute bg-white rounded ">
+                                <div  class="0 hover:text-indigo-500 flex py-1">
+                                    <i class="fal fa-pencil pr-2" aria-hidden="true"></i>
+                                    <p class=" "> edit </p>
+                                </div>
+
+                                <div  @click="removepicture" class=" hover:text-indigo-500 flex py-1">
+                                <!-- v-if="$page.profiler.picture!='images/users/male_user.jpg'"-->
+                                    <i class="fal fa-trash pr-2" aria-hidden="true"></i>
+                                    <p  class="">remove </p>
+                                </div>
+                            </div>
+                            <!--profile picture option -->
+
+                        </div>
                     </div>
                     <!-- full name -->
                     <div class=" text-center p-2 " >
@@ -74,8 +113,8 @@
             <!-- ---------------------------------------------------------------------------------------------------------- -->
             <div :class="timelineClasses">
                 
-                <div class="md:w-4/12">
-                    <div class="  w-9/12 mt-4 ml-auto bg-white rounded-lg shadow ">
+                <div class="md:w-4/12 w-0 invisible md:visible ">
+                    <div class="  w-9/12  ml-auto bg-white rounded-lg shadow ">
 
                         <div class=" text-center p-2 hover:bg-gray-50 hover:text-indigo-500 " >
                             <i class="fas fa-users    "></i>
@@ -96,8 +135,8 @@
                     </div>
                 </div>
 
-                <div class=" md:w-8/12 mx-auto  mb-2 " >
-                    <add-post @add-post="addPost" />
+                <div class=" md:w-8/12 w-full mx-auto mb-2 " >
+                    <add-post  @add-post="addPost" style=" margin-top:0;" />
 
                     <div v-if="posts.length>0" v-for="post in posts" :key="post.id" class=" md:w-9/12 mt-4 mx-auto ">
                         <div class=" bg-white rounded-xl p-2 shadow">
@@ -177,8 +216,8 @@
             <div :class="picturesClasses" >
                 <div class=" w-full mx-auto bg-white shadow rounded-lg p-2">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class=" " v-for="post in posts" :key="post.id" v-if="post.picture!=null" >
-                            <img class=" rounded-lg w-full h-60 object-cover " :src="'http://127.0.0.1:8000/'+post.picture" />
+                        <div class=" shadow-lg rounded-md bg-gray-50 p-1 " v-for="post in posts" :key="post.id" v-if="post.picture!=null" >
+                            <img class=" rounded-lg w-full h-60 object-contain " :src="'http://127.0.0.1:8000/'+post.picture" />
                         </div>
                     </div>
                 </div>
@@ -198,12 +237,26 @@
                             </div>
                             <div class="pl-2 py-2 my-auto ">
                                 <p class=" font-semibold " > echalh adil  </p> 
-                                <p>  @echalhadil  </p> 
+                                <p class=" text-gray-500 ">  @echalhadil  </p> 
 
                             </div>
 
-                            <div class="ml-auto my-auto bg-indigo-500 cursor-pointer hover:bg-indigo-400 rounded text-white p-2 ">
+                            <div class="target ml-auto my-auto bg-indigo-500 cursor-pointer hover:bg-indigo-400 rounded text-white p-2 ">
                                 <p class=" font-semibold " > friends  </p> 
+                                <!--friendship option -->
+                                <div class=" border border-grey-100 mt-2 px-3 p-2 capitalize text-gray-800  dropdown-menu hidden absolute bg-white rounded ">
+                                    <div @click="unfriend" class="0 hover:text-indigo-500 flex py-2">
+                                        <i class="fal fa-user-minus pr-2"></i>
+                                        <p class=" "> unfriend </p>
+                                    </div>
+
+                                     <div class=" hover:text-indigo-500 flex py-2">
+                                        <i class="fal fa-user pr-2"></i>
+                                        <p class="">view profile </p>
+                                    </div>
+                                </div>
+                                <!--friendship option -->
+
 
                             </div>
                             
@@ -441,7 +494,57 @@
             }
            
 
-        }
+        },
+        unfriend(){
+            swal({
+                title: "Are you sure?",
+                text: "Once you unfriend, you will not be able to see they posts!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("You Unfriend successfuly!", {
+                    icon: "success",
+                    });
+                }
+            });
+        },
+        removecover(){
+            swal({
+                title: "Are you sure?",
+                text: "Once you unfriend, you will not be able to see they posts!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("You Unfriend successfuly!", {
+                    icon: "success",
+                    });
+                }
+            });
+        },
+        
+        removepicture(){
+            swal({
+                title: "Are you sure?",
+                text: "Once you remove it, you will not be able to restore it!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("Your Profile Picture Removed Successfuly!", {
+                    icon: "success",
+                    });
+                }
+            });
+        },
+        
 
         
     },
@@ -457,3 +560,17 @@
     },
     }
 </script>
+
+<style >
+
+    
+    .target:hover .dropdown-menu{
+        display:block;
+    }
+   
+    @media (min-width: 640px){
+        .counting{
+            visibility:hidden;
+        }
+    }
+</style>
