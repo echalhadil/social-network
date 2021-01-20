@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Inertia\Inertia as Inertia;
 
-class ProfileController extends Controller
+class ProfileController extends Controller 
 {
+
+    public function __construct()
+    {
+        $this->middleware('verified');
+    }
     /**
      * Display a listing of the resource.
      *
