@@ -33,7 +33,11 @@
                         <img class=" w-full h-full object-cover shadow-lg bg-transparent  rounded-full " 
                         :src="'http://127.0.0.1:8000/'+$page.profiler.picture" /> 
                         
-                        <update-profile-picture v-if="$page.user.id == $page.profiler.id" :user="$page.profiler" @update-profile-picture="updateProfilePicture" />
+                        <update-profile-picture 
+                        v-if="$page.user.id == $page.profiler.id" 
+                        :user="$page.profiler" 
+                        @update-profile-picture="updateProfilePicture"
+                        @delete-profile-picture ="deleteProfilePicture" />
                   
 
                     </div>
@@ -535,7 +539,12 @@
         updateProfilePicture(user,picture)
         {
             user.picture = picture;
-        }
+        },
+        
+        deleteProfilePicture(user,picture)
+        {
+            user.picture = picture;
+        },
         
 
         

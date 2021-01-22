@@ -115,7 +115,7 @@ class ProfileController extends Controller
        
         if($request ->hasFile('picture'))
         {
-        $picture = $request->file('picture')->store('images/posts');
+        $picture = $request->file('picture')->store('images/users');
         $user = User::find($id);
         $user -> picture = $picture ; 
         $user -> save();
@@ -126,11 +126,15 @@ class ProfileController extends Controller
     }
 
 
-    public function deleteProfilePicture(User $user,Request $request)
+    
+
+
+    public function deleteProfilePicture($id)
     {
-        $user -> picture = "images/users/" . $request -> picture ; 
+        $user = User::find($id);
+        $user -> picture = 'images/users/male_user.jpg';
         $user -> save();
 
-        return response() -> json(true);
+        return response() -> json($user -> picture);
     }
 }
