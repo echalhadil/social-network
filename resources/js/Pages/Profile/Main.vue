@@ -94,8 +94,11 @@
                         'hover:text-indigo-500 text-gray-700 ':(currentsection != 'settings') ,
                         'w-1/4 text-center m-2 p-2 rounded cursor-pointer':true,
                     }" >
-                    <i class="fal fa-cogs fa-2x" aria-hidden="true"></i>
-                    <p> settings</p>    
+
+                    <i class="fal fa-2x" :class="{'fa-cogs':$page.profiler.id == $page.user.id,' fa-info-circle':$page.profiler.id != $page.user.id }" aria-hidden="true"></i>
+                    <p v-if="$page.profiler.id == $page.user.id"> settings</p>    
+                    <p v-if="$page.profiler.id != $page.user.id"> about</p>    
+
                 </div>
             </div>
 
@@ -260,10 +263,13 @@
  <!-- ---------------------------------------------------------------------------------------------------------- -->
 
             <div :class="settingsClasses" >
-                <div class=" w-full mx-auto bg-white shadow rounded-lg p-2">
-                    <update-profile-information-form :user="$page.user" />
+                <div v-if="$page.profiler.id==$page.user.id" class=" w-full mx-auto bg-white shadow rounded-lg p-2">
+                    <update-profile-information-form  :user="$page.user" />
                     <update-password-form class=" mt-6 " />
                     <delete-user-form />
+                </div>
+
+                <div v-if="$page.profiler.id!=$page.user.id" class=" w-full mx-auto bg-white shadow rounded-lg p-2">
                 </div>
             </div>
 
