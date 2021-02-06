@@ -24,17 +24,83 @@
                         </div>
 
                         <div class="flex-shrink-0 flex text-indigo-500 md:ml-auto mx-auto md:w-1/3 w-2/3 items-center">
+                           
                             <inertia-link :href="route('main')" :class="{'border-indigo-500 border-b ':route().current('main')}" class=" cursor-pointer hover:text-indigo-700  mx-auto">
                                 <i class="far fa-home" aria-hidden="true"></i>
                             </inertia-link>
+
+                            <!--friends request -->
                             <div class=" cursor-pointer hover:text-indigo-700 mx-auto">
-                                <i class="far fa-user-friends"></i>
+                                <jet-dropdown align="left" width="64">
+                                    <template #trigger>
+                                        <i class=" far fa-user-friends"></i>
+                                    </template>
+
+                                    <template #content>
+                                        
+                                        <div class="block px-4 py-2 text-sm text-gray-400">
+                                            Friendship Requests
+                                        </div>
+
+                                        <div class="border-t border-gray-100"></div>
+
+                                        <div class="px-4 text-gray-400 text-center ">
+                                            <i class="fa mt-7 fa-3x fa-user-times" aria-hidden="true"></i>
+                                            <p class=" mb-7 mt-3 text-sm  ">No Requests</p>
+                                        </div>
+                                    
+                                    </template>
+                                </jet-dropdown>
                             </div>
+
+                            <!--notifications -->
                             <div class="cursor-pointer hover:text-indigo-700 mx-auto">
-                                <i class="far fa-bell" aria-hidden="true"></i>
+                            
+                                <jet-dropdown align="right" width="64">
+                                    <template #trigger>
+                                         <i class="far fa-bell" aria-hidden="true"></i>
+                                    </template>
+
+                                    <template #content>
+                                        
+                                        <div class="block px-4 py-2 text-sm text-gray-400">
+                                            Notifications
+                                        </div>
+
+                                        <div class="border-t border-gray-100"></div>
+                                        <div class="px-4 text-gray-400 text-center ">
+                                            <i class="fa mt-7 fa-3x fa-bell-slash" aria-hidden="true"></i>
+                                            <p class=" mb-7 mt-3 text-sm  ">No Notifications</p>
+                                        </div>
+
+                                    
+                                    </template>
+                                </jet-dropdown>
                             </div>
+
+                            <!--messages -->
                             <div class="cursor-pointer hover:text-indigo-700 mx-auto ">
-                                <i class="far fa-envelope" aria-hidden="true"></i>
+                                
+                                <jet-dropdown align="right" width="64">
+                                    <template #trigger>
+                                        <i class="far fa-envelope" aria-hidden="true"></i>
+                                    </template>
+
+                                    <template #content>
+                                        
+                                        <div class="block px-4 py-2 text-sm text-gray-400">
+                                            Conversations
+                                        </div>
+
+                                        <div class="border-t border-gray-100"></div>
+                                        <div class="px-4 text-gray-400 text-center ">
+                                            <i class="fa mt-7 fa-3x fa-comment-alt-slash" aria-hidden="true"></i>
+                                            <p class=" mb-7 mt-3 text-sm  ">No Conversations</p>
+                                        </div>
+
+                                    
+                                    </template>
+                                </jet-dropdown>
                             </div>
                       
                         </div>
@@ -50,7 +116,14 @@
                         <div class="ml-3 relative">
                             <jet-dropdown align="right" width="48">
                                 <template #trigger>
-                                    <button class="flex h-7 w-7 text-sm border-2 border-transparent rounded-full focus:outline-none border-indigo-500 hover:text-indigo-700 focus:text-indigo-100 transition duration-150 ease-in-out">
+                                    <button 
+                                    class="flex h-7 w-7 text-sm border-2 border-transparent rounded-full focus:outline-none
+                                     hover:text-indigo-700 focus:text-indigo-100 transition duration-150 ease-in-out"
+                                    :class="{
+                                        'border-gray-500':!route().current('profiles.show'),
+                                        'border-indigo-500':route().current('profiles.show')
+                                    }"
+                                     >
                                         <img  class=" w-6 h-6 rounded-full object-cover" 
                                         :src="'http://127.0.0.1:8000/'+$page.user.picture" :alt="$page.user.name" />
                                     </button>
@@ -64,7 +137,7 @@
                                         Manage Account
                                     </div>
 
-                                    <jet-dropdown-link :href="route('profile.show')">
+                                    <jet-dropdown-link :href="'http://127.0.0.1:8000/profiles/'+$page.user.id">
                                         Profile
                                     </jet-dropdown-link>
 
@@ -265,6 +338,16 @@
                     window.location = '/';
                 })
             },
-        }
+        },
+        mounted() {
+            // Echo.private("comment-channel")
+            // .listen(".CommentEvent", (e) => {
+            
+            //     console.log("dddddd");
+            // });
+        },
     }
+
 </script>
+
+

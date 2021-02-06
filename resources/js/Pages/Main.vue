@@ -1,7 +1,7 @@
 <template>
     <app-layout>
         <div class=" w-full bg-gray-100  flex pb-10 ">
-            <div class=" md:w-8/12 mt-4 mb-2 " >
+            <div class=" md:w-8/12 mt-4 mb-2 mx-auto " >
 
                 <add-post @add-post="addPost"> </add-post>
 
@@ -76,7 +76,7 @@
             
             </div>
 
-            <div class="md:w-4/12   right-0  md:visible mt-8 w-0" >
+            <div class="md:w-4/12 right-0 invisible md:visible mt-8 w-0" >
                 <div class=" mr-auto w-10/12 p-3 capitalize  shadow rounded-lg bg-white ">
                     <div class=" pb-3">
                         <img class=" h-28 w-28 rounded-full mx-auto object-cover" :src="'http://127.0.0.1:8000/'+$page.user.picture" />

@@ -29,8 +29,11 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
         "@tailwindcss/forms": "^0.2.1",
+        "laravel-echo": "^1.10.0",
+        "pusher-js": "^7.0.3",
         "sweetalert": "^2.1.2",
         "sweetalert2": "^10.13.0",
-        "vue-tailwind": "^2.0.0"
+        "vue-tailwind": "^2.0.0",
+        "vuex": "^3.6.2"
     }
 }

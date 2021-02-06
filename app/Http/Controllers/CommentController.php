@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentEvent;
 use App\Models\Comment;
 use App\Models\Post ;
 use Illuminate\Http\Request;
@@ -37,7 +38,8 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        broadcast(new CommentEvent(Auth::user() ))->toOthers();
         //create post's comment
         $comment = Post::find($request -> post_id) 
             -> comments() 
