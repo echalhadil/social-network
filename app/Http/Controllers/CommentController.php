@@ -39,9 +39,10 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {   
-        broadcast(new CommentEvent(Auth::user() ))->toOthers();
+       
         //create post's comment
         $comment = Post::find($request -> post_id) 
+
             -> comments() 
             -> create([
                 'text'      => $request -> text,
@@ -49,6 +50,9 @@ class CommentController extends Controller
             ]);
         //get post user 
         $comment -> user = $comment -> user;
+
+        // event(new CommentEvent($comment));
+        broadcast(new CommentEvent($comment ))->toOthers();
 
         return response() -> json($comment);
 

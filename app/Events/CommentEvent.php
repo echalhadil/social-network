@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -21,11 +21,11 @@ class CommentEvent implements ShouldBroadcastNow
      *
      * @return void
      */
-    public $user ;
-    public function __construct(User $user)
+    public $comment ;
+    public function __construct(Comment $comment)
     {
         //
-        $this->user = $user;
+        $this->comment = $comment;
     }
 
     /**
@@ -35,6 +35,7 @@ class CommentEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('comment-channel');
+        // return new PrivateChannel('comment-channel');
+        return new Channel('comment-channel');
     }
 }

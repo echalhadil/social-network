@@ -128,9 +128,9 @@
                 </div>
 
                 <div class=" md:w-8/12 w-full mx-auto mb-2 " >
-                    <add-post  @add-post="addPost" style=" margin-top:0;" />
+                    <add-post v-if="$page.user.id == $page.profiler.id"  @add-post="addPost" class="mb-4 -mt-0.5" />
 
-                    <div v-if="posts.length>0" v-for="post in posts" :key="post.id" class=" md:w-9/12 mt-4 mx-auto ">
+                    <div v-if="posts.length>0" v-for="post in posts" :key="post.id" class=" md:w-9/12 mb-4 mx-auto ">
                         <div class=" bg-white rounded-xl p-2 shadow">
                             
                             <!-- Post owner -->

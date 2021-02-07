@@ -8,6 +8,7 @@ import { InertiaApp } from '@inertiajs/inertia-vue';
 import { InertiaForm } from 'laravel-jetstream';
 import PortalVue from 'portal-vue';
 import Vuex from 'vuex';
+import Echo from 'laravel-echo';
 
 Vue.mixin({ methods: { route } });
 Vue.use(InertiaApp);
@@ -28,7 +29,8 @@ new Vue({
 
 
 
-var channel = Echo.channel('comment-channel');
-channel.listen('.CommentEvent', function(data) {
-  alert("ddd");
-});
+// Echo.private('comment-channel')
+// .listen('.CommentEvent', function(data) {
+//   console.log("dddggggg");
+// });
+

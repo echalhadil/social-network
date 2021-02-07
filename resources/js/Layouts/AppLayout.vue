@@ -345,6 +345,14 @@
             
             //     console.log("dddddd");
             // });
+
+            var channel = Echo.private('comment-channel');
+            channel.listen('.CommentEvent', function(data) {
+                console.log(data)
+            });
+
+
+
         },
     }
 
