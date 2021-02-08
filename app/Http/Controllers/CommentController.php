@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\CommentEvent;
 use App\Models\Comment;
+use App\Models\Notification;
 use App\Models\Post ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,25 +39,40 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-       
-        //create post's comment
-        $comment = Post::find($request -> post_id) 
+    {    
+        try {   
+            //create post's comment
+            $comment = Post::find($request -> post_id) 
+                        -> comments() 
+                        -> create([
+                            'text'      => $request -> text,
+                            'user_id'   => Auth::id(),
+                        ]);
 
-            -> comments() 
-            -> create([
-                'text'      => $request -> text,
-                'user_id'   => Auth::id(),
-            ]);
-        //get post user 
-        $comment -> user = $comment -> user;
+            //get post user 
+            $comment -> user = $comment -> user;
 
-        // event(new CommentEvent($comment));
-        broadcast(new CommentEvent($comment ))->toOthers();
+            return response() -> json($comment);
 
-        return response() -> json($comment);
+        } catch (\Throwable $th) { 
+            return response() -> json($th);
+        }
+        finally{
 
-        
+            $p = Post::find($request -> post_id);
+
+
+            $notification = new Notification();
+            $notification->maker_id = Auth::id();
+            $notification->target_id = $p->user_id;
+            $notification->type = 'c';
+            $notification->post_id = $request->post_id;
+
+            $notification->save();
+
+            event(new CommentEvent($notification));
+            // broadcast(new CommentEvent($comment ))->toOthers();
+        }
     }
 
     /**

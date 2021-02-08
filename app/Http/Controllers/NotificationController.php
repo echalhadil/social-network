@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Like;
-use App\Models\Post;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class LikeController extends Controller
+class NotificationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +15,14 @@ class LikeController extends Controller
      */
     public function index()
     {
-        //
+        $notifications = Notification::where('target_id',Auth::id())
+        ->get();
+        foreach ($notifications as $notification) {
+            $notification-> target = $notification -> target;
+            $notification-> maker = $notification -> maker;
+        }
+
+        return response() -> json($notifications);
     }
 
     /**
@@ -38,26 +43,16 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        //find the post
-        
-        $post = Post::find($request->id);
-
-        // like it
-        $like  = $post ->likes()->create([
-            'user_id' => Auth::id(),
-            ]);
-
-        // return the like back
-        return response() -> json($like);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Like  $like
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function show(Like $like)
+    public function show(Notification $notification)
     {
         //
     }
@@ -65,10 +60,10 @@ class LikeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Like  $like
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function edit(Like $like)
+    public function edit(Notification $notification)
     {
         //
     }
@@ -77,10 +72,10 @@ class LikeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Like  $like
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Like $like)
+    public function update(Request $request, Notification $notification)
     {
         //
     }
@@ -88,17 +83,11 @@ class LikeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Like  $like
+     * @param  \App\Models\Notification  $notification
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Like $like)
+    public function destroy(Notification $notification)
     {
-        //find the like
-        $like = Like::find($like->id);
-
-         // delete the like .
-        return response() -> json($like -> delete());
-
-        
+        //
     }
 }

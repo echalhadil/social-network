@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
@@ -42,6 +43,8 @@ Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class);
 Route::resource('reacts', ReactController::class);
 Route::resource('profiles', ProfileController::class);
+Route::resource('notifications', NotificationController::class);
+
 
 
 // update profile picture 

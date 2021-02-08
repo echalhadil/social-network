@@ -2,18 +2,16 @@
 
 namespace App\Events;
 
-use App\Models\Comment;
-use App\Models\Notification;
+use App\Models\Post;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class CommentEvent implements ShouldBroadcastNow
+class PostEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,11 +20,10 @@ class CommentEvent implements ShouldBroadcastNow
      *
      * @return void
      */
-    public $notification ;
-    public function __construct(Notification $notification)
+    public $post;
+    public function __construct(Post $post)
     {
-        //
-        $this->notification = $notification;
+        $this->post = $post;
     }
 
     /**
@@ -36,12 +33,6 @@ class CommentEvent implements ShouldBroadcastNow
      */
     public function broadcastOn()
     {
-        // return new PrivateChannel('comment-channel');
-        return new Channel('comment-channel');
-    }
-
-    public function broadcastAs()
-    {
-        return 'CommentEvent';
+        return new PrivateChannel('post-channel');
     }
 }

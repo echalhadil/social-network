@@ -56,7 +56,7 @@
                             <!--notifications -->
                             <div class="cursor-pointer hover:text-indigo-700 mx-auto">
                             
-                                <jet-dropdown align="right" width="64">
+                                <jet-dropdown align="right" width="72">
                                     <template #trigger>
                                          <i class="far fa-bell" aria-hidden="true"></i>
                                     </template>
@@ -68,9 +68,25 @@
                                         </div>
 
                                         <div class="border-t border-gray-100"></div>
-                                        <div class="px-4 text-gray-400 text-center ">
+                                        <div v-if="notifications.length === 0" class="px-4 text-gray-400 text-center ">
                                             <i class="fa mt-7 fa-3x fa-bell-slash" aria-hidden="true"></i>
                                             <p class=" mb-7 mt-3 text-sm  ">No Notifications</p>
+                                        </div>
+
+                                         <div v-if="notifications.length > 0" class="px-4 text-gray-400 text-center ">
+                                          
+                                           <div v-for="notification in notifications" :key="notification.id" class=" p-2 capitalize flex ">
+                                                <div class=" h-12 w-12">
+                                                    <img :src="'http://127.0.0.1:8000/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
+                                                </div>
+                                                <div class=" pl-1 text-left  ">
+                                                    <p class=" text-gray-700 text-sm "> 
+                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class="  float-left text-xs pl-1 lowercase"> {{ (notification.type=='c')? " commented on your" :" liked your" }} post. </span>
+                                                    </p>
+                                                    
+                                                   
+                                                </div>
+                                           </div>
                                         </div>
 
                                     
@@ -321,6 +337,8 @@
         data() {
             return {
                 showingNavigationDropdown: false,
+                notifications:[],
+                d:[],
             }
         },
 
@@ -338,18 +356,43 @@
                     window.location = '/';
                 })
             },
+
+            getNotifications(){
+                axios.get(route('notifications.index').url())
+                .then(response => {
+                    console.table(response.data)
+                    this.notifications = response.data;
+                    
+                }).catch(err => {
+                    console.table(err)
+                });
+            },
+
+        
+
         },
         mounted() {
-            // Echo.private("comment-channel")
-            // .listen(".CommentEvent", (e) => {
+         
+            this.getNotifications();
+
+            Echo.channel('comment-channel')
+                .listen('.CommentEvent', function(data) {
+                    
+                    // console.table(data);
+                      this.getNotifications();
+                    // return data;
+                });
             
-            //     console.log("dddddd");
+            // Echo.channel('comment-channel')
+            // .listen('.CommentEvent', function(data) {
+            //     console.log("channel :"+data)
             // });
 
-            var channel = Echo.private('comment-channel');
-            channel.listen('.CommentEvent', function(data) {
-                console.log(data)
-            });
+            //  let n = this.fetchNotification();
+
+
+        
+            
 
 
 
