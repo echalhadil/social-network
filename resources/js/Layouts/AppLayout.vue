@@ -58,7 +58,12 @@
                             
                                 <jet-dropdown align="right" width="72">
                                     <template #trigger>
-                                         <i class="far fa-bell" aria-hidden="true"></i>
+                                         <i class="far fa-bell" aria-hidden="true">
+                                         <b v-if="notifications.length!=0" class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full ">
+                                        
+                                         {{ (notifications.length>9)? '9+':notifications.length}}
+                                         </b>
+                                         </i>
                                     </template>
 
                                     <template #content>
@@ -316,6 +321,31 @@
         <!-- Modal Portal -->
         <portal-target name="modal" multiple>
         </portal-target>
+
+
+
+
+
+        <!--notification stuff -->
+        <!--
+        <div  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
+            <div class=" px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md ">
+                <div class=" h-12 w-12">
+                    <img :src="'http://127.0.0.1:8000/'+$page.user.picture" class=" h-12 w-12 rounded-full " >
+                </div>
+                <div class=" pl-1 text-left  ">
+                    <p class=" float-left  text-sm pr-1 "> 
+                    {{$page.user.firstname}} {{$page.user.lastname}} 
+                    </p>
+                    <p class=" text-gray-700 text-sm ">
+                        commented on your post.
+                    </p>
+                  
+                    
+                </div>
+            </div>
+        </div>
+        -->
     </div>
 </template>
 

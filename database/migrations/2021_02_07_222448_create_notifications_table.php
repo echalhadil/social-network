@@ -19,6 +19,8 @@ class CreateNotificationsTable extends Migration
             $table->foreignId('target_id');
             $table->foreignId('post_id');
             $table->char('type') -> nullable();  //comment 'c' or react 'r'
+            $table->boolean('seen')->default(0);
+            $table->boolean('readed')->default(0);
             $table->timestamps();
 
             $table->foreign('maker_id')->references('id')->on('users');
