@@ -22,7 +22,42 @@
                         </div>
                         <!--cover option -->
                         
-                    
+                    </div>
+
+                    <div v-if="$page.user.id != $page.profiler.id" class="target rounded-full border -mb-9 mr-2 mt-2 text-black float-right hover:bg-gray-50 hover:text-indigo-500 cursor-pointer bg-white relative top-0 ">
+                        <i class="fal fa-plus py-1 px-2" aria-hidden="true"></i>
+                        <i class="fal fa-check py-1 px-2 text-indigo-500" aria-hidden="true"></i>
+                        <i class="fal fa-minus py-1 px-2" aria-hidden="true"></i>
+                        <i class="fal fa-times py-1 px-2" aria-hidden="true"></i>
+
+
+                        <!--cover option -->
+                        <div class=" border border-grey-100 hidden  -ml-15 px-3 p-2 capitalize text-gray-800  dropdown-menu  absolute bg-white rounded ">
+                            <div  class="hover:text-indigo-500 flex py-1">
+                                <i class="fal fa-plus pr-2 my-auto" aria-hidden="true"></i>
+                                <p class=" "> add friend </p>
+                            </div>
+                            <div  class=" hover:text-indigo-500 flex py-1">
+                                <i class="fal fa-minus pr-2 my-auto" aria-hidden="true"></i>
+                                <p class=" "> unfriend </p>
+                            </div>
+
+                            <div class=" hover:text-indigo-500 flex py-1">
+                                <i class="fal fa-times pr-2 my-auto" aria-hidden="true"></i>
+                                <p class=" "> Cancel request </p>
+                            </div>
+
+                            <div class=" hover:text-indigo-500 flex py-1">
+                                <i class="fal fa-check pr-2 my-auto" aria-hidden="true"></i>
+                                <p class=" "> confirm </p>
+                            </div>
+                            <div class=" hover:text-indigo-500 flex py-1">
+                                <i class="fal fa-times pr-2 my-auto" aria-hidden="true"></i>
+                                <p class=" "> delete</p>
+                            </div>
+                        </div>
+                        <!--cover option -->
+                        
                     </div>
                     <img class="w-full rounded-lg h-full object-cover   p-1 " src="https://i.pinimg.com/564x/d8/5f/45/d85f454c5884b1a0acbe576574f4b840.jpg"  />
                    

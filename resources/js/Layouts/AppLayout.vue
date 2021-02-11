@@ -31,7 +31,7 @@
 
                             <!--friends request -->
                             <div class=" cursor-pointer hover:text-indigo-700 mx-auto">
-                                <jet-dropdown align="left" width="64">
+                                <jet-dropdown align="left" width="72">
                                     <template #trigger>
                                         <i class=" far fa-user-friends"></i>
                                     </template>
@@ -44,10 +44,33 @@
 
                                         <div class="border-t border-gray-100"></div>
 
-                                        <div class="px-4 text-gray-400 text-center ">
+                                        <div v-if="false" class="px-4 text-gray-400 text-center ">
                                             <i class="fa mt-7 fa-3x fa-user-times" aria-hidden="true"></i>
                                             <p class=" mb-7 mt-3 text-sm  ">No Requests</p>
                                         </div>
+
+                                        <div v-if="notifications.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
+                                            <div v-for="notification in notifications" :key="notification.id" class="p-2 capitalize flex hover:bg-gray-100 rounded-md ">
+                                                <div class=" h-13 w-13">
+                                                    <img :src="'http://127.0.0.1:8000/'+$page.user.picture" class=" h-12 w-12 rounded-full " >
+                                                </div>
+                                                <div class=" pl-1 text-left pr-0.5  ">
+                                                    <p class="  text-gray-700 font-bold "> 
+                                                    {{$page.user.firstname}} {{$page.user.lastname}} 
+                                                    <!--<span class=" font-normal text-xs ">sent you friend request.</span> -->
+                                                    </p>
+                                                
+                                                    <div class=" text-sm">
+                                                        <button class="capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white ">confirm</button>
+                                                        <button class="capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 ">delete</button>
+
+                                                    </div>
+                                                </div>
+
+                                           </div>
+                                         
+                                        </div>
+
                                     
                                     </template>
                                 </jet-dropdown>
@@ -79,13 +102,13 @@
                                             <p class=" mb-7 mt-3 text-sm  ">No Notifications</p>
                                         </div>
 
-                                         <div v-if="notifications.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
+                                        <div v-if="notifications.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
                                           
                                            <div v-for="notification in notifications" :key="notification.id" class=" p-2 capitalize flex hover:bg-gray-100 rounded-md ">
-                                                <div class=" h-12 w-12">
+                                                <div class=" h-13 w-13">
                                                     <img :src="'http://127.0.0.1:8000/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
                                                 </div>
-                                                <div class=" pl-1 text-left  ">
+                                                <div class=" pl-1 text-left pr-0.5  ">
                                                     <p class=" float-left text-gray-700 text-sm "> 
                                                     {{notification.maker.firstname}} {{notification.maker.lastname}} <span class=" text-xs pl-0.5"> {{ (notification.type=='c')? " commented on your" :" reacted to your" }} post. </span>
                                                     </p>
@@ -374,6 +397,7 @@
                 notifications:[],
                 newNotifications:0,
                 user_id:'',
+
             }
         },
 
@@ -396,7 +420,7 @@
                 axios.get(route('notifications.index').url())
                 .then(response => {
                     console.table(response.data)
-                    this.notifications = response.data;
+                    this.notifications = _.orderBy(response.data, ['created_at'], ['desc']);;
                     this.newNotifications = response.data.filter(n => n.seen === 0 ).length;
 
                     console.log(this.newNotifications)
@@ -441,7 +465,7 @@
 
                     let notification = data.notification
                     console.table(notification);
-                    this.notifications.push(notification);
+                    this.notifications.unshift(notification);
                     this.newNotifications++;
                     this.playSound();
                 });
