@@ -68,23 +68,24 @@
                                         </div>
 
                                         <div class="border-t border-gray-100"></div>
+                                        <!-- no notifications -->
                                         <div v-if="notifications.length === 0" class="px-4 text-gray-400 text-center ">
                                             <i class="fa mt-7 fa-3x fa-bell-slash" aria-hidden="true"></i>
                                             <p class=" mb-7 mt-3 text-sm  ">No Notifications</p>
                                         </div>
 
-                                         <div v-if="notifications.length > 0" class="px-4 text-gray-400 text-center ">
+                                         <div v-if="notifications.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
                                           
-                                           <div v-for="notification in notifications" :key="notification.id" class=" p-2 capitalize flex ">
+                                           <div v-for="notification in notifications" :key="notification.id" class=" p-2 capitalize flex hover:bg-gray-100 rounded-md ">
                                                 <div class=" h-12 w-12">
                                                     <img :src="'http://127.0.0.1:8000/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
                                                 </div>
                                                 <div class=" pl-1 text-left  ">
-                                                    <p class=" text-gray-700 text-sm "> 
-                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class="  float-left text-xs pl-1 lowercase"> {{ (notification.type=='c')? " commented on your" :" liked your" }} post. </span>
+                                                    <p class=" float-left text-gray-700 text-sm "> 
+                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class=" text-xs pl-1 lowercase"> {{ (notification.type=='c')? " commented on your" :" liked your" }} post. </span>
                                                     </p>
+                                                    <p class=" text-xs "> {{ notification.created_at }} </p>
                                                     
-                                                   
                                                 </div>
                                            </div>
                                         </div>
@@ -333,7 +334,7 @@
             JetNavLink,
             JetResponsiveNavLink,
         },
-
+       
         data() {
             return {
                 showingNavigationDropdown: false,
@@ -367,38 +368,47 @@
                     console.table(err)
                 });
             },
-
-        
+       
 
         },
         mounted() {
          
             this.getNotifications();
 
-            Echo.channel('comment-channel')
-                .listen('.CommentEvent', function(data) {
-                    
-                    // console.table(data);
-                      this.getNotifications();
-                    // return data;
+            Echo.channel('notification-channel')
+                .listen('.NotificationEvent', (data) => {
+
+                    let notification = data.notification
+                    console.table(notification);
+                    this.notifications.push(notification);
                 });
-            
-            // Echo.channel('comment-channel')
-            // .listen('.CommentEvent', function(data) {
-            //     console.log("channel :"+data)
-            // });
-
-            //  let n = this.fetchNotification();
-
-
-        
-            
-
-
-
         },
+       
     }
+   
 
 </script>
 
 
+
+<style>
+
+
+ .dropdown::-webkit-scrollbar {
+        width: 3px;
+        }
+
+    .dropdown::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        }
+
+    .dropdown::-webkit-scrollbar-thumb {
+        background: #e5e7eb;
+        }
+
+    .dropdown::-webkit-scrollbar-thumb:hover {
+        background: #555;
+        }
+    
+
+</style>

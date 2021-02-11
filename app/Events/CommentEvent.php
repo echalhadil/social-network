@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-use App\Models\Comment;
 use App\Models\Notification;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;

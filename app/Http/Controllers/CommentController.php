@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\CommentEvent;
+use App\Events\NotificationEvent;
 use App\Models\Comment;
 use App\Models\Notification;
 use App\Models\Post ;
@@ -58,20 +59,22 @@ class CommentController extends Controller
             return response() -> json($th);
         }
         finally{
-
             $p = Post::find($request -> post_id);
-
+            if((int) Auth::id()!= (int) $p->user_id){
 
             $notification = new Notification();
             $notification->maker_id = Auth::id();
             $notification->target_id = $p->user_id;
             $notification->type = 'c';
             $notification->post_id = $request->post_id;
-
             $notification->save();
+            $notification->maker = $notification->maker;
+            $notification->target = $notification->target;
 
-            event(new CommentEvent($notification));
-            // broadcast(new CommentEvent($comment ))->toOthers();
+            // event(new CommentEvent($notification));
+            event( new NotificationEvent($notification) );
+            
+            }
         }
     }
 
