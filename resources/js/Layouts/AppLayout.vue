@@ -55,7 +55,7 @@
                                                     <img :src="'http://127.0.0.1:8000/'+$page.user.picture" class=" h-12 w-12 rounded-full " >
                                                 </div>
                                                 <div class=" pl-1 text-left pr-0.5  ">
-                                                    <p class="  text-gray-700 font-bold "> 
+                                                    <p class=" text-sm text-gray-700 font-bold "> 
                                                     {{$page.user.firstname}} {{$page.user.lastname}} 
                                                     <!--<span class=" font-normal text-xs ">sent you friend request.</span> -->
                                                     </p>
@@ -109,8 +109,8 @@
                                                     <img :src="'http://127.0.0.1:8000/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
                                                 </div>
                                                 <div class=" pl-1 text-left pr-0.5  ">
-                                                    <p class=" float-left text-gray-700 text-sm "> 
-                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class=" text-xs pl-0.5"> {{ (notification.type=='c')? " commented on your" :" reacted to your" }} post. </span>
+                                                    <p class=" float-left text-gray-700 text-sm font-bold "> 
+                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class=" font-normal text-xs pl-0.5"> {{ (notification.type=='c')? " commented on your" :" reacted to your" }} post. </span>
                                                     </p>
                                                     <p class=" text-xs "> {{ notification.created_at }} </p>
                                                     
