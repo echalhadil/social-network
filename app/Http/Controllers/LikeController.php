@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationEvent;
 use App\Models\Like;
+use App\Models\Notification;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,17 +40,44 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        //find the post
-        
-        $post = Post::find($request->id);
+        try {   
+             //find the post
+            $post = Post::find($request->id);
 
-        // like it
-        $like  = $post ->likes()->create([
-            'user_id' => Auth::id(),
-            ]);
+            // like it
+            $like  = $post ->likes()->create([
+                'user_id' => Auth::id(),
+                ]);
 
-        // return the like back
-        return response() -> json($like);
+            // return the like back
+            return response() -> json($like);
+
+
+
+
+            
+
+        } catch (\Throwable $th) { 
+            return response() -> json($th);
+        }
+        finally{
+            $post = Post::find($request->id);
+            if((int) Auth::id()!= (int) $post->user_id){
+
+                $notification = new Notification();
+                $notification->maker_id = Auth::id();
+                $notification->target_id = $post->user_id;
+                $notification->type = 'r';
+                $notification->post_id = $post->id;
+                $notification->save();
+                $notification->maker = $notification->maker;
+                $notification->target = $notification->target;
+
+                // event(new CommentEvent($notification));
+                event( new NotificationEvent($notification) );
+            
+            }
+        }
     }
 
     /**

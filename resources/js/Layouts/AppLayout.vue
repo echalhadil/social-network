@@ -87,12 +87,12 @@
                                                 </div>
                                                 <div class=" pl-1 text-left  ">
                                                     <p class=" float-left text-gray-700 text-sm "> 
-                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class=" text-xs pl-1 lowercase"> {{ (notification.type=='c')? " commented on your" :" liked your" }} post. </span>
+                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class=" text-xs pl-0.5"> {{ (notification.type=='c')? " commented on your" :" reacted to your" }} post. </span>
                                                     </p>
                                                     <p class=" text-xs "> {{ notification.created_at }} </p>
                                                     
                                                 </div>
-                                                <div v-if="!notification.readed" class="">
+                                                <div v-if="!notification.readed" class=" ml-auto">
                                                    <i class="fa fa-circle text-indigo-500 fa-xs" aria-hidden="true" ></i>
                                                 </div>
                                            </div>

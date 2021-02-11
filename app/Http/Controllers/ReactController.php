@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationEvent;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\React;
 use Illuminate\Http\Request;
@@ -64,16 +66,38 @@ class ReactController extends Controller
         }
         else{
 
+            try {
+                // react it
+                $react  = $post ->reacts()->create([
+                    'user_id' => Auth::id(),
+                    'type' => $request -> type,
+                    ]);
+                $react -> user = Auth::user();
 
-        // react it
-        $react  = $post ->reacts()->create([
-            'user_id' => Auth::id(),
-            'type' => $request -> type,
-            ]);
-        $react -> user = Auth::user();
+                // return the like back
+                return response() -> json($react);  
+            } catch (\Throwable $th) {
+                return response() -> json($th);  
+            }
 
-        // return the like back
-        return response() -> json($react);
+            finally{
+
+                if((int) Auth::id()!= (int) $post->user_id){
+
+                    $notification = new Notification();
+                    $notification->maker_id = Auth::id();
+                    $notification->target_id = $post->user_id;
+                    $notification->type = 'r';
+                    $notification->post_id = $post->id;
+                    $notification->save();
+                    $notification->maker = $notification->maker;
+                    $notification->target = $notification->target;
+
+                    // event(new CommentEvent($notification));
+                    event( new NotificationEvent($notification) );
+                
+                }
+            }
         }
     }
 
