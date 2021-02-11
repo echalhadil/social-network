@@ -50,3 +50,9 @@ Route::resource('notifications', NotificationController::class);
 // update profile picture 
 Route::post('profiles/{id}/updateprofilepicture',[ProfileController::class,'updateProfilePicture']);
 Route::post('profiles/{id}/deleteprofilepicture',[ProfileController::class,'deleteProfilePicture']);
+
+
+
+
+//update notification status 
+Route::get('seenotifications',[NotificationController::class,'seeNotifications']);

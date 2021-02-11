@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -23,6 +24,7 @@ Broadcast::channel('comment-channel', function($user){
 
 
 
-Broadcast::channel('notification-channel', function(){
-    return true;
+Broadcast::channel('notification-channel-.{target_id}', function($notification, $target_id){
+    return $target_id === Auth::id();
+    
 });

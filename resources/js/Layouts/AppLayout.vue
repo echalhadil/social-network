@@ -55,13 +55,13 @@
 
                             <!--notifications -->
                             <div class="cursor-pointer hover:text-indigo-700 mx-auto">
-                            
+                                <div v-if="user_id = $page.user.id"></div>
                                 <jet-dropdown align="right" width="72">
                                     <template #trigger>
-                                         <i class="far fa-bell" aria-hidden="true">
-                                         <b v-if="notifications.length!=0" class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full ">
+                                         <i v-on:click="seeNotifications" class="far fa-bell" aria-hidden="true">
+                                         <b v-if="newNotifications!=0 " class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full ">
                                         
-                                         {{ (notifications.length>9)? '9+':notifications.length}}
+                                         {{ (newNotifications>9)? '9+':newNotifications}}
                                          </b>
                                          </i>
                                     </template>
@@ -91,6 +91,9 @@
                                                     </p>
                                                     <p class=" text-xs "> {{ notification.created_at }} </p>
                                                     
+                                                </div>
+                                                <div v-if="!notification.readed" class="">
+                                                   <i class="fa fa-circle text-indigo-500 fa-xs" aria-hidden="true" ></i>
                                                 </div>
                                            </div>
                                         </div>
@@ -369,7 +372,8 @@
             return {
                 showingNavigationDropdown: false,
                 notifications:[],
-                d:[],
+                newNotifications:0,
+                user_id:'',
             }
         },
 
@@ -393,24 +397,53 @@
                 .then(response => {
                     console.table(response.data)
                     this.notifications = response.data;
+                    this.newNotifications = response.data.filter(n => n.seen === 0 ).length;
+
+                    console.log(this.newNotifications)
+
                     
                 }).catch(err => {
                     console.table(err)
                 });
             },
+
+            playSound () {
+                var soundurl = "https://assets.mixkit.co/sfx/preview/mixkit-home-standard-ding-dong-109.mp3";
+                var audio = new Audio(soundurl);
+                audio.play();
+            },
+            seeNotifications(){
+                if(this.newNotifications!=0){
+                    this.newNotifications=0;
+                    axios.get('/seenotifications')
+                        .then(response => {
+                            console.log(response);
+                        })
+                        .catch(err =>{
+                            console.log(err)
+                        })
+                }
+            },
        
 
+        },
+        computed: {
+            countNewMessages(){
+             
+            }
         },
         mounted() {
          
             this.getNotifications();
 
-            Echo.channel('notification-channel')
+            Echo.channel('notification-channel-'+this.user_id)
                 .listen('.NotificationEvent', (data) => {
 
                     let notification = data.notification
                     console.table(notification);
                     this.notifications.push(notification);
+                    this.newNotifications++;
+                    this.playSound();
                 });
         },
        
@@ -424,7 +457,7 @@
 <style>
 
 
- .dropdown::-webkit-scrollbar {
+    .dropdown::-webkit-scrollbar {
         width: 3px;
         }
 

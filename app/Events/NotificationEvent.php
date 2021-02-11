@@ -21,10 +21,13 @@ class NotificationEvent implements ShouldBroadcastNow
      * @return void
      */
     public $notification ;
+    public int $target_id;
     public function __construct(Notification $notification)
     {
         //
         $this->notification = $notification;
+        $this->target_id = $this->notification->target_id;
+
     }
 
     /**
@@ -35,7 +38,7 @@ class NotificationEvent implements ShouldBroadcastNow
     public function broadcastOn()
     {
         // return new PrivateChannel('comment-channel');
-        return new Channel('notification-channel');
+        return new Channel('notification-channel-'.$this->target_id);
     }
 
     public function broadcastAs()

@@ -90,4 +90,14 @@ class NotificationController extends Controller
     {
         //
     }
+
+
+
+    public function seeNotifications()
+    {
+        Notification::where('target_id', Auth::id())
+            ->update(['seen' => 1]);
+            
+        return response() ->json(true);
+    }
 }
