@@ -6,59 +6,64 @@
             <div class="w-11/12 bg-white mx-auto mt-6 shadow rounded-lg">
                 <!-- cover -->
                 <div class=" w-full h-64 ">
-                    <div v-if="$page.user.id == $page.profiler.id" class="target rounded-full border -mb-9 mr-2 mt-2 text-black float-right hover:bg-gray-50  hover:text-gray-800 cursor-pointer bg-white relative top-0 ">
-                        <i class="fal fa-pencil p-1" aria-hidden="true"></i>
-                        <!--cover option -->
-                        <div class=" border border-grey-100 hidden  -ml-15 px-3 p-2 capitalize text-gray-800  dropdown-menu  absolute bg-white rounded ">
-                            <div  class="0 hover:text-indigo-500 flex py-1">
-                                <i class="fal fa-pencil pr-2" aria-hidden="true"></i>
-                                <p class=" "> edit </p>
+                    
+                    <jet-dropdown align="right" width="44" class="float-right -mb-9 mr-2 mt-2 border hover:bg-gray-50 hover:text-indigo-500 cursor-pointer text-black rounded-full bg-white">
+                        <template #trigger >
+                            <div v-if="$page.profiler.id != $page.user.id">
+                                <i class="fal fa-plus py-1 px-2" aria-hidden="true"></i>
+                                <i class="fal fa-check py-1 px-2 text-indigo-500" aria-hidden="true"></i>
+                                <i class="fal fa-minus py-1 px-2" aria-hidden="true"></i>
+                                <i class="fal fa-times py-1 px-2" aria-hidden="true"></i>
                             </div>
 
-                                <div @click="removecover" class=" hover:text-indigo-500 flex py-1">
-                                <i class="fal fa-trash pr-2" aria-hidden="true"></i>
-                                <p  class="">remove </p>
+                            <div v-if="$page.profiler.id == $page.user.id">
+                                <i class="fal fa-pencil p-1" aria-hidden="true"></i>
                             </div>
-                        </div>
-                        <!--cover option -->
-                        
-                    </div>
+                          
+                        </template>
 
-                    <div v-if="$page.user.id != $page.profiler.id" class="target rounded-full border -mb-9 mr-2 mt-2 text-black float-right hover:bg-gray-50 hover:text-indigo-500 cursor-pointer bg-white relative top-0 ">
-                        <i class="fal fa-plus py-1 px-2" aria-hidden="true"></i>
-                        <i class="fal fa-check py-1 px-2 text-indigo-500" aria-hidden="true"></i>
-                        <i class="fal fa-minus py-1 px-2" aria-hidden="true"></i>
-                        <i class="fal fa-times py-1 px-2" aria-hidden="true"></i>
+                        <template #content >
+                            
+                            <!--cover option -->
+                            <div v-if="$page.profiler.id != $page.user.id" class="border border-grey-100 py-1 -my-1 capitalize text-gray-800 bg-white rounded ">
+                                <div  class="hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1">
+                                    <i class="fal fa-plus pr-2 my-auto" aria-hidden="true"></i>
+                                    <p class=" "> add friend </p>
+                                </div>
+                                <div  class="hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1">
+                                    <i class="fal fa-minus pr-2 my-auto" aria-hidden="true"></i>
+                                    <p class=" "> unfriend </p>
+                                </div>
 
+                                <div class=" hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1">
+                                    <i class="fal fa-times pr-2 my-auto" aria-hidden="true"></i>
+                                    <p class=" "> Cancel request </p>
+                                </div>
 
-                        <!--cover option -->
-                        <div class=" border border-grey-100 hidden  -ml-15 px-3 p-2 capitalize text-gray-800  dropdown-menu  absolute bg-white rounded ">
-                            <div  class="hover:text-indigo-500 flex py-1">
-                                <i class="fal fa-plus pr-2 my-auto" aria-hidden="true"></i>
-                                <p class=" "> add friend </p>
+                                <div class=" hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1">
+                                    <i class="fal fa-check pr-2 my-auto" aria-hidden="true"></i>
+                                    <p class=" "> confirm </p>
+                                </div>
+                                <div class=" hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1">
+                                    <i class="fal fa-times pr-2 my-auto" aria-hidden="true"></i>
+                                    <p class=" "> delete</p>
+                                </div>
                             </div>
-                            <div  class=" hover:text-indigo-500 flex py-1">
-                                <i class="fal fa-minus pr-2 my-auto" aria-hidden="true"></i>
-                                <p class=" "> unfriend </p>
-                            </div>
+                            <div v-if="$page.profiler.id == $page.user.id" class="border border-grey-100 py-1 -my-1 capitalize text-gray-800 bg-white rounded ">
+                                <div class="hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1">
+                                    <i class="fal fa-pencil pr-2 my-auto" aria-hidden="true"></i>
+                                    <p class=" "> edit cover </p>
+                                </div>
 
-                            <div class=" hover:text-indigo-500 flex py-1">
-                                <i class="fal fa-times pr-2 my-auto" aria-hidden="true"></i>
-                                <p class=" "> Cancel request </p>
+                                <div @click="removecover" class="hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1">
+                                    <i class="fal fa-trash pr-2 my-auto" aria-hidden="true"></i>
+                                    <p  class="">remove cover</p>
+                                </div>
                             </div>
+                            <!--cover option -->      
+                        </template>
+                    </jet-dropdown>
 
-                            <div class=" hover:text-indigo-500 flex py-1">
-                                <i class="fal fa-check pr-2 my-auto" aria-hidden="true"></i>
-                                <p class=" "> confirm </p>
-                            </div>
-                            <div class=" hover:text-indigo-500 flex py-1">
-                                <i class="fal fa-times pr-2 my-auto" aria-hidden="true"></i>
-                                <p class=" "> delete</p>
-                            </div>
-                        </div>
-                        <!--cover option -->
-                        
-                    </div>
                     <img class="w-full rounded-lg h-full object-cover   p-1 " src="https://i.pinimg.com/564x/d8/5f/45/d85f454c5884b1a0acbe576574f4b840.jpg"  />
                    
                 </div>
@@ -66,7 +71,7 @@
                 <div class=" w-full  ">
                     <div class=" w-36 h-36  mx-auto -mt-20 bg-transparent ">
                         <img class=" w-full h-full object-cover shadow-lg bg-transparent  rounded-full " 
-                        :src="'http://127.0.0.1:8000/'+$page.profiler.picture" /> 
+                        :src="'/'+$page.profiler.picture" /> 
                         
                         <update-profile-picture 
                         v-if="$page.user.id == $page.profiler.id" 
@@ -137,6 +142,7 @@
                 </div>
             </div>
 
+            
             <!-- ---------------------------------------------------------------------------------------------------------- -->
             <div :class="timelineClasses">
                 
@@ -196,7 +202,7 @@
                                 <div v-for="comment in post.comments" :key="comment.id" class=" pb-2 flex">
                                     <div class="pr-1">
                                         <img class=" h-11 w-11 rounded-full object-cover  " 
-                                        :src="'http://127.0.0.1:8000/'+comment.user.picture">
+                                        :src="'/'+comment.user.picture">
                                     </div>
                                     <div class=" pl-1  w-11/12 ">
                                         <p class=" capitalize font-semibold text-sm "> 
@@ -244,7 +250,7 @@
                 <div class=" w-full mx-auto bg-white shadow rounded-lg p-2">
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class=" shadow-lg rounded-md bg-gray-50 p-1 " v-for="post in posts" :key="post.id" v-if="post.picture!=null" >
-                            <img class=" rounded-lg w-full h-60 object-contain " :src="'http://127.0.0.1:8000/'+post.picture" />
+                            <img class=" rounded-lg w-full h-60 object-contain " :src="'/'+post.picture" />
                         </div>
                     </div>
                 </div>
@@ -260,7 +266,7 @@
                     <div class="grid  grid-cols-1 md:grid-cols-3  gap-4">
                         <div class=" flex shadow rounded-lg p-1 bg-gray-50  " v-for="post in posts" :key="post.id" v-if="post.picture!=null" >
                             <div class=" md:w-28 w-24 h-24 md:h-28 " >
-                                <img class=" rounded-lg w-full h-full object-cover " :src="'http://127.0.0.1:8000/'+post.picture" />
+                                <img class=" rounded-lg w-full h-full object-cover " :src="'/'+post.picture" />
                             </div>
                             <div class="pl-2 py-2 my-auto ">
                                 <p class=" font-semibold " > echalh adil  </p> 
@@ -297,7 +303,7 @@
 
  <!-- ---------------------------------------------------------------------------------------------------------- -->
 
-            <div :class="settingsClasses" >
+            <div :class="settingsClasses">
                 <div v-if="$page.profiler.id==$page.user.id" class=" w-full mx-auto bg-white shadow rounded-lg p-2">
                     <update-profile-information-form  :user="$page.user" />
                     <update-password-form class=" mt-6 " />
@@ -346,6 +352,9 @@
 
     // iport sweet alert
     import swal from 'sweetalert';
+    import JetDropdown from '@/Jetstream/Dropdown'
+
+    
 
     export default {
         // props: ['sessions'],
@@ -359,6 +368,8 @@
             PostPicture,
             DeleteUserForm,
             UpdateProfilePicture,
+            JetDropdown,
+          
             // JetSectionBorder,
             // LogoutOtherBrowserSessionsForm,
             // TwoFactorAuthenticationForm,
