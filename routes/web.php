@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FriendController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,12 +45,17 @@ Route::resource('comments', CommentController::class);
 Route::resource('reacts', ReactController::class);
 Route::resource('profiles', ProfileController::class);
 Route::resource('notifications', NotificationController::class);
+Route::resource('friends', FriendController::class);
+
+
 
 
 
 // update profile picture 
 Route::post('profiles/{id}/updateprofilepicture',[ProfileController::class,'updateProfilePicture']);
 Route::post('profiles/{id}/deleteprofilepicture',[ProfileController::class,'deleteProfilePicture']);
+
+Route::get('profiles/{id}/posts',[ProfileController::class,'posts']);
 
 
 

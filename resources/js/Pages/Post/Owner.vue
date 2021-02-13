@@ -25,7 +25,7 @@
                 <li v-if="isowner" @click="deletepost" class="p-2 hover:text-indigo-500 cursor-pointer" > 
                     <i class="fal fa-trash-alt pr-1" aria-hidden="true"></i> delete post
                 </li>
-                <li class="p-2 hover:text-indigo-500 cursor-pointer" > 
+                <li v-if="!route().current('profiles.show') " class="p-2 hover:text-indigo-500 cursor-pointer" > 
                     <i class="fal fa-user pr-1" aria-hidden="true"></i> view profile
                 </li>
             </div>

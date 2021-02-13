@@ -62,6 +62,22 @@ class ProfileController extends Controller
         if($user)
         {
             $user -> posts = $user -> posts;
+        foreach ($user -> posts as $post) {
+            $post-> user = $post -> user;
+
+           $post->comments = $post -> comments;
+
+           foreach ($post->comments as $comment) {
+               $comment -> user = $comment -> user;
+           }
+
+           $post->reacts = $post -> reacts;
+           foreach ($post->reacts as $react) {
+                $react -> user = $react -> user;
+            }
+
+        }
+           
             
             return Inertia::render('Profile/Main')->with('profiler',$user);
             
@@ -138,5 +154,27 @@ class ProfileController extends Controller
         $user -> save();
 
         return response() -> json($user -> picture);
+    }
+
+    public function posts($id){
+        $user= User::find($id);
+        $user -> posts = $user -> posts;
+        foreach ($user -> posts as $post) {
+            $post-> user = $post -> user;
+
+           $post->comments = $post -> comments;
+
+           foreach ($post->comments as $comment) {
+               $comment -> user = $comment -> user;
+           }
+
+           $post->reacts = $post -> reacts;
+           foreach ($post->reacts as $react) {
+                $react -> user = $react -> user;
+            }
+
+        }
+
+        return response() ->json($user->posts);
     }
 }

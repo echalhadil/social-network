@@ -75,4 +75,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function notifications() { return $this->hasMany('App\Models\Notification','target_id');}
 
+
+
+    // friends
+    public function friendsFromMe()         { return $this->hasMany('App\Models\Friend','from_id');}
+    public function friendsToMe()         { return $this->hasMany('App\Models\Friend','to_id');}
+
+
+
 }
