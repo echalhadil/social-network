@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\FriendRequest;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -19,9 +20,13 @@ class FriendRequestEvent
      *
      * @return void
      */
-    public function __construct()
+    public $friendRequest;
+    public int $target_id;
+    public function __construct(FriendRequest $friendRequest)
     {
-        //
+        $this->friendRequest = $friendRequest;
+        $this->target_id = $friendRequest->to_id;
+
     }
 
     /**
@@ -31,6 +36,12 @@ class FriendRequestEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('friend-request-channel-'.$this->target_id);
     }
+
+    public function broadcastAs()
+    {
+        return 'FriendRequestEvent';   
+    }
+    
 }

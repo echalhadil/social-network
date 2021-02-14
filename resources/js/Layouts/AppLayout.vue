@@ -49,14 +49,14 @@
                                             <p class=" mb-7 mt-3 text-sm  ">No Requests</p>
                                         </div>
 
-                                        <div v-if="notifications.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
-                                            <div v-for="notification in notifications" :key="notification.id" class="p-2 capitalize flex hover:bg-gray-100 rounded-md ">
+                                        <div v-if="friendsRequest.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
+                                            <div v-for="friendRequest in friendsRequest" :key="friendRequest.id" class="p-2 capitalize flex hover:bg-gray-100 rounded-md ">
                                                 <div class=" h-13 w-13">
-                                                    <img :src="'http://127.0.0.1:8000/'+$page.user.picture" class=" h-12 w-12 rounded-full " >
+                                                    <img :src="'http://127.0.0.1:8000/'+friendRequest.maker.picture" class=" h-12 w-12 rounded-full " >
                                                 </div>
                                                 <div class=" pl-1 text-left pr-0.5  ">
                                                     <p class=" text-sm text-gray-700 font-bold "> 
-                                                    {{$page.user.firstname}} {{$page.user.lastname}} 
+                                                    {{friendRequest.maker.firstname}} {{friendRequest.maker.lastname}} 
                                                     <!--<span class=" font-normal text-xs ">sent you friend request.</span> -->
                                                     </p>
                                                 
@@ -356,7 +356,9 @@
             return {
                 showingNavigationDropdown: false,
                 notifications:[],
+                friendsRequest:[],
                 newNotifications:0,
+                newFriendrequest:0,
                 user_id:'',
 
             }
@@ -409,6 +411,13 @@
                         })
                 }
             },
+
+            getFriendsRequest(){
+                axios.get(route('friendrequests.index'))
+                    .then( response => { this.friendsRequest = response.data})
+                    .catch(err =>{console.log([err])
+                    })
+            }
        
 
         },
@@ -420,6 +429,7 @@
         mounted() {
          
             this.getNotifications();
+            this.getFriendsRequest();
 
             Echo.channel('notification-channel-'+this.user_id)
                 .listen('.NotificationEvent', (data) => {
@@ -428,6 +438,16 @@
                     console.table(notification);
                     this.notifications.unshift(notification);
                     this.newNotifications++;
+                    this.playSound();
+                });
+
+            Echo.channel('friend-request-channel-'+this.user_id)
+                .listen('.FriendRequestEvent', (data) => {
+
+                    let friendRequest = data.friendreqest
+                    console.table(friendRequest);
+                    this.friendsRequest.unshift(friendRequest);
+
                     this.playSound();
                 });
         },

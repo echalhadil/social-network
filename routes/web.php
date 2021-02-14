@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\FriendRequestController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactController;
+use App\Models\FriendRequest;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -46,6 +48,8 @@ Route::resource('reacts', ReactController::class);
 Route::resource('profiles', ProfileController::class);
 Route::resource('notifications', NotificationController::class);
 Route::resource('friends', FriendController::class);
+Route::resource('friendrequests', FriendRequestController::class);
+
 
 
 
