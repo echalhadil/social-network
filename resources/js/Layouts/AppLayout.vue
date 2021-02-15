@@ -358,7 +358,7 @@
                 notifications:[],
                 friendsRequest:[],
                 newNotifications:0,
-                newFriendrequest:0,
+                newFriendRequest:0,
                 user_id:'',
 
             }
