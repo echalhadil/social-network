@@ -60,6 +60,8 @@ Route::post('profiles/{id}/updateprofilepicture',[ProfileController::class,'upda
 Route::post('profiles/{id}/deleteprofilepicture',[ProfileController::class,'deleteProfilePicture']);
 
 Route::get('profiles/{id}/posts',[ProfileController::class,'posts']);
+Route::get('profiles/{id}/friends',[ProfileController::class,'friends']);
+
 
 
 

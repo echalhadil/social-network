@@ -177,4 +177,20 @@ class ProfileController extends Controller
 
         return response() ->json($user->posts);
     }
+
+
+    public function friends($id){
+        $user= User::find($id);
+        $friends = array();
+        $friends1= $user -> friendsFromMe;
+        $friends2= $user -> friendstoMe;
+        foreach ($friends1 as $friend) {
+            $friends[] = User::find($friend -> to_id);
+        }
+        foreach ($friends2 as $friend) {
+            $friends[] = User::find($friend -> from_id);
+        }
+
+        return response() ->json($friends);
+    }
 }

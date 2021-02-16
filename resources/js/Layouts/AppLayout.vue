@@ -44,7 +44,7 @@
 
                                         <div class="border-t border-gray-100"></div>
 
-                                        <div v-if="false" class="px-4 text-gray-400 text-center ">
+                                        <div v-if="friendsRequest.length == 0" class="px-4 text-gray-400 text-center ">
                                             <i class="fa mt-7 fa-3x fa-user-times" aria-hidden="true"></i>
                                             <p class=" mb-7 mt-3 text-sm  ">No Requests</p>
                                         </div>
@@ -61,8 +61,8 @@
                                                     </p>
                                                 
                                                     <div class=" text-sm">
-                                                        <button class="capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white ">confirm</button>
-                                                        <button class="capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 ">delete</button>
+                                                        <button @click="confirmFriendRequest(friendRequest)" class="capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white ">confirm</button>
+                                                        <button @click="deletFriendRequest(friendRequest.id)" class="capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 ">delete</button>
 
                                                     </div>
                                                 </div>
@@ -110,7 +110,13 @@
                                                 </div>
                                                 <div class=" pl-1 text-left pr-0.5  ">
                                                     <p class=" float-left text-gray-700 text-sm font-bold "> 
-                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} <span class=" font-normal text-xs pl-0.5"> {{ (notification.type=='c')? " commented on your" :" reacted to your" }} post. </span>
+                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} 
+                                                    <span class=" font-normal text-xs pl-0.5">
+                                                        {{ (notification.type=='c')? " commented on your post.":""}} 
+                                                        {{ (notification.type=='r')?" reacted to your post.":"" }} 
+                                                        {{ (notification.type=='f')?" accepted your friend request.":"" }} 
+                                                        
+                                                     </span>
                                                     </p>
                                                     <p class=" text-xs "> {{ notification.created_at }} </p>
                                                     
@@ -417,6 +423,37 @@
                     .then( response => { this.friendsRequest = response.data})
                     .catch(err =>{console.log([err])
                     })
+            },
+            deletFriendRequest(id){
+                
+                axios.delete('/friendrequests/'+id)
+                    .then(
+                        response =>
+                        {   console.log(response.data);
+                            this.friendsRequest = this.friendsRequest.filter(fr => fr.id !=id)
+                        }
+                    )
+                    .catch(
+                        err =>
+                        {
+                            console.log(err)
+                        }
+                    )
+            },
+            confirmFriendRequest(friendrequest){
+                axios.post('/friends/',friendrequest)
+                    .then(
+                        response =>
+                        {   console.log(response.data);
+                            this.friendsRequest = this.friendsRequest.filter(fr => fr.id !=friendrequest.id)
+                        }
+                    )
+                    .catch(
+                        err =>
+                        {
+                            console.log(err)
+                        }
+                    )
             }
        
 

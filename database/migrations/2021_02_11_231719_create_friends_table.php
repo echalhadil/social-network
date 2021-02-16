@@ -18,6 +18,9 @@ class CreateFriendsTable extends Migration
             $table->foreignId('from_id');
             $table->foreignId('to_id');
             $table->timestamps();
+
+            $table->foreign('from_id')->references('id')->on('users');
+            $table->foreign('to_id')->references('id')->on('users');
         });
     }
 

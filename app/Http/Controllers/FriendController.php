@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationEvent;
 use App\Models\Friend;
+use App\Models\FriendRequest;
+use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -57,27 +60,34 @@ class FriendController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        
-        $request -> from_id;
-        $request -> to_id;
-        $exist = Friend::where('from_id',$request->from_id)
-            ->where('to_id',$request->to_id)
-            ->get();
-        if(!$exist)
-        {
-            $exist = Friend::where('to_id',$request->from_id)
-            ->where('from_id',$request->to_id)
-            ->get();
-            if(!$exist)
-            {   $user = User::find(Auth::id());
-                $user ->  friendsFromMe() -> create([
-                    'to_id' => $request->to_id,
-                ]);
-                return response() ->json(true);
-        
+        $friendRequest = FriendRequest::find($request->id);
+        $friendRequest -> delete();
+        try {
+            if(!Friend::where('from_id',$request->from_id)->where('to_id',$request->to_id)->first()
+            &&
+            !Friend::where('to_id',$request->from_id)->where('from_id',$request->to_id)->first())
+            {
+                $friend = new Friend();
+                $friend->from_id = $request->from_id;
+                $friend->to_id = $request->to_id;
+                $friend->save();
             }
+            return response()->json(true);
 
+        } 
+        catch (\Throwable $th) {
+            return response() -> json($th);
+        }
+        finally{
+            $notification = new Notification(); 
+            $notification->maker_id = $request->to_id;
+            $notification->target_id = $request->from_id;
+            $notification->type = 'f';
+            $notification->save();
+            $notification->maker = $notification->maker;
+            $notification->target = $notification->target;
+
+            event( new NotificationEvent($notification) );
         }
 
 

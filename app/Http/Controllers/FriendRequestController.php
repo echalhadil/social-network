@@ -88,8 +88,14 @@ class FriendRequestController extends Controller
      * @param  \App\Models\FriendRequest  $friendRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FriendRequest $friendRequest)
+    public function destroy( $id)
     {
-        //
+        try {
+            $friendRequest = FriendRequest::find($id);
+            $friendRequest -> delete();
+            return response() ->json(true);
+        } catch (\Throwable $th) {
+            return $th;
+        }    
     }
 }

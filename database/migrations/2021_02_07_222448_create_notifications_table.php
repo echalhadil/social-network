@@ -17,7 +17,7 @@ class CreateNotificationsTable extends Migration
             $table->id();
             $table->foreignId('maker_id');
             $table->foreignId('target_id');
-            $table->foreignId('post_id');
+            $table->foreignId('post_id')->nullable();
             $table->char('type') -> nullable();  //comment 'c' or react 'r'
             $table->boolean('seen')->default(0); // if the notification seen
             $table->boolean('readed')->default(0); //if this preticular notification has been readed 

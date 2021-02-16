@@ -12,7 +12,7 @@
 
                     </div>
 
-                    <div class="target ml-auto my-auto bg-indigo-500 cursor-pointer hover:bg-indigo-400 rounded text-white p-2 ">
+                    <div v-if="friend.id != $page.user.id" class="target ml-auto my-auto bg-indigo-500 cursor-pointer hover:bg-indigo-400 rounded text-white p-2 ">
                         <p class=" font-semibold " > friends  </p> 
                         <!--friendship option -->
                         <div class=" border border-grey-100 mt-2 px-3 p-2 capitalize text-gray-800  dropdown-menu hidden absolute bg-white rounded ">
@@ -72,7 +72,7 @@ export default {
             });
         },
         getFriends(){
-            axios.get( route('friends.index'))
+            axios.get(window.location.href.split('/').pop()+'/friends')
                 .then(response => 
                 {
                     this.friends = _.uniqBy(response.data, 'id');
