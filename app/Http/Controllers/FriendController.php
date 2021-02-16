@@ -61,7 +61,11 @@ class FriendController extends Controller
     public function store(Request $request)
     {
         $friendRequest = FriendRequest::find($request->id);
+        if($friendRequest)
         $friendRequest -> delete();
+        $friendRequest = FriendRequest::where('from_id',$request->from_id)->where('to_id',$request->to_id)->first();
+        if($friendRequest)
+            $friendRequest -> delete();
         try {
             if(!Friend::where('from_id',$request->from_id)->where('to_id',$request->to_id)->first()
             &&
@@ -133,11 +137,17 @@ class FriendController extends Controller
      * @param  \App\Models\Friend  $friend
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Friend $friend)
+    public function destroy($friend_id)
     {
         //
-        $post = Friend::find($friend->id);
-        $post -> delete();
+        $exist = Friend::where('from_id',$friend_id)->where('to_id',Auth::id())->first();
+        if($exist)
+            $exist->delete();
+        else{
+            $exist = Friend::where('to_id',$friend_id)->where('from_id',Auth::id())->first();
+            if($exist)
+            $exist->delete();
+        }
         
         return response() ->json(true);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\CommentEvent;
 use App\Models\User;
+use App\Models\FriendRequest;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,53 @@ class ProfileController extends Controller
             
 
 
+    }
+
+    public function youSentRequest($id)
+    {
+       
+         
+        $youRecivedRequest = false;
+        if(FriendRequest::where('to_id',$id)->where('from_id',Auth::id())->first())
+                $youRecivedRequest = true;
+
+        return response() ->json($youRecivedRequest);
+    }
+
+    public function youRecivedRequest($id)
+    {
+
+        $youSentRequest = false; //you sent a friendship request 
+        if(FriendRequest::where('from_id',$id)->where('to_id',Auth::id())->first())
+            $youSentRequest = true; // yes we are in friend request;
+
+        return response() ->json($youSentRequest);
+            
+    }
+
+    public function areFriends($id)
+    {
+        $areFriends = false;
+        foreach($this->friends($id) as $friend)
+                {
+                    if((int)$friend->id =(int) Auth::id())
+                        $areFriends = true;
+                }
+
+        return response() ->json( $areFriends);
+            
+    }
+
+    public function deleteRequest($from_id)
+    {
+        $fr = FriendRequest::where('from_id',Auth::id())->where('to_id',$from_id)->first();
+        if($fr)
+            $fr->delete();
+        $fr = FriendRequest::where('to_id',Auth::id())->where('from_id',$from_id)->first();
+            if($fr)
+                $fr->delete();
+        
+        return response() -> json(true);
     }
 
     /**
@@ -191,6 +239,6 @@ class ProfileController extends Controller
             $friends[] = User::find($friend -> from_id);
         }
 
-        return response() ->json($friends);
+        return $friends;
     }
 }

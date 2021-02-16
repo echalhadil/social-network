@@ -33,7 +33,12 @@
                             <div class=" cursor-pointer hover:text-indigo-700 mx-auto">
                                 <jet-dropdown align="left" width="72">
                                     <template #trigger>
-                                        <i class=" far fa-user-friends"></i>
+                                        <i class=" far fa-user-friends">
+                                        <b v-if="newFriendRequest!=0 " class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full ">
+                                        
+                                         {{ (newFriendRequest>9)? '9+':newFriendRequest}}
+                                         </b>
+                                        </i>
                                     </template>
 
                                     <template #content>
@@ -51,9 +56,9 @@
 
                                         <div v-if="friendsRequest.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
                                             <div v-for="friendRequest in friendsRequest" :key="friendRequest.id" class="p-2 capitalize flex hover:bg-gray-100 rounded-md ">
-                                                <div class=" h-13 w-13">
-                                                    <img :src="'http://127.0.0.1:8000/'+friendRequest.maker.picture" class=" h-12 w-12 rounded-full " >
-                                                </div>
+                                                <inertia-link :href="'profiles/'+friendRequest.maker.id" class=" h-13 w-13">
+                                                    <img :src="'/'+friendRequest.maker.picture" class=" h-12 w-12 rounded-full " >
+                                                </inertia-link>
                                                 <div class=" pl-1 text-left pr-0.5  ">
                                                     <p class=" text-sm text-gray-700 font-bold "> 
                                                     {{friendRequest.maker.firstname}} {{friendRequest.maker.lastname}} 
@@ -420,8 +425,11 @@
 
             getFriendsRequest(){
                 axios.get(route('friendrequests.index'))
-                    .then( response => { this.friendsRequest = response.data})
-                    .catch(err =>{console.log([err])
+                    .then( response => { 
+                        this.friendsRequest = response.data
+                         this.newFriendRequest = response.data.filter(fr => fr.seen === 0 ).length;
+                        })
+                    .catch(err =>{console.log(err)
                     })
             },
             deletFriendRequest(id){
@@ -481,7 +489,7 @@
             Echo.channel('friend-request-channel-'+this.user_id)
                 .listen('.FriendRequestEvent', (data) => {
 
-                    let friendRequest = data.friendreqest
+                    let friendRequest = data.friendrequest
                     console.table(friendRequest);
                     this.friendsRequest.unshift(friendRequest);
 

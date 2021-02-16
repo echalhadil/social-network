@@ -62,6 +62,11 @@ Route::post('profiles/{id}/deleteprofilepicture',[ProfileController::class,'dele
 Route::get('profiles/{id}/posts',[ProfileController::class,'posts']);
 Route::get('profiles/{id}/friends',[ProfileController::class,'friends']);
 
+Route::get('profiles/{id}/arefriends',[ProfileController::class,'areFriends']);
+Route::get('profiles/{id}/yourecivedrequest',[ProfileController::class,'youRecivedRequest']);
+Route::get('profiles/{id}/yousentrequest',[ProfileController::class,'youSentRequest']);
+Route::get('profiles/{id}/deleterequest',[ProfileController::class,'deleteRequest']);
+
 
 
 

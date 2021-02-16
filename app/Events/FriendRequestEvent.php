@@ -8,10 +8,11 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FriendRequestEvent
+class FriendRequestEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,12 +21,12 @@ class FriendRequestEvent
      *
      * @return void
      */
-    public $friendRequest;
+    public $friendrequest;
     public int $target_id;
-    public function __construct(FriendRequest $friendRequest)
+    public function __construct(FriendRequest $friendrequest)
     {
-        $this->friendRequest = $friendRequest;
-        $this->target_id = $friendRequest->to_id;
+        $this->friendrequest = $friendrequest;
+        $this->target_id = $friendrequest->to_id;
 
     }
 
@@ -36,7 +37,7 @@ class FriendRequestEvent
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('friend-request-channel-'.$this->target_id);
+        return new Channel('friend-request-channel-'.$this->target_id);
     }
 
     public function broadcastAs()

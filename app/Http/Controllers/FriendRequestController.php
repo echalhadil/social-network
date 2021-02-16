@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\FriendRequestEvent;
 use App\Models\FriendRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,6 +47,16 @@ class FriendRequestController extends Controller
     public function store(Request $request)
     {
         //
+        $friendrequest = new FriendRequest();
+        $friendrequest -> from_id = Auth::id();
+        $friendrequest -> to_id = $request->to_id;
+        $friendrequest -> save();
+
+        $friendrequest->maker = User::find($friendrequest -> from_id);
+        
+        event( new FriendRequestEvent($friendrequest) );
+
+        return response() -> json(true);
     }
 
     /**
