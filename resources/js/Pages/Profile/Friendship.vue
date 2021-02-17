@@ -172,16 +172,28 @@ export default {
 
         status(){
             axios.get(this.profilerid+'/arefriends')
-                .then(res => {this.areFriends = res.data})
+                .then(
+                    res => 
+                    {
+                        this.areFriends = res.data
+                        if(!this.areFriends)
+                            axios.get(this.profilerid+'/yousentrequest')
+                                .then(
+                                    res => 
+                                    {
+                                        this.youSentRequest = res.data
+                                        if(!this.youSentRequest)
+                                            axios.get(this.profilerid+'/yourecivedrequest')
+                                                .then(res => {this.youRecivedRequest = res.data})
+                                                .catch(err =>{console.log(err)})
+                                        })
+                                .catch(err =>{console.log(err)})
+                    })
                 .catch(err =>{console.log(err)})
 
-            axios.get(this.profilerid+'/yousentrequest')
-                .then(res => {this.youSentRequest = res.data})
-                .catch(err =>{console.log(err)})
+            
 
-            axios.get(this.profilerid+'/yourecivedrequest')
-                .then(res => {this.youRecivedRequest = res.data})
-                .catch(err =>{console.log(err)})
+            
         }
         
     },
