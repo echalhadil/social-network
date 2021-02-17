@@ -54,6 +54,7 @@
                                             <p class=" mb-7 mt-3 text-sm  ">No Requests</p>
                                         </div>
 
+
                                         <div v-if="friendsRequest.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
                                             <div v-for="friendRequest in friendsRequest" :key="friendRequest.id" class="p-2 capitalize flex hover:bg-gray-100 rounded-md ">
                                                 <inertia-link :href="'profiles/'+friendRequest.maker.id" class=" h-13 w-13">
