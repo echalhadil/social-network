@@ -35,7 +35,7 @@
             </div>
             <div v-if="comments.length>0" class="list-none dropdown-menu hidden absolute bg-gray-800 w-40 rounded text-white p-2">
                 
-                <li v-for="comment in whoCommented" ::key="comment.id" class="hover:text-gray-300" > 
+                <li v-for="comment in whoCommented" :key="comment.id" class="hover:text-gray-300" > 
                     {{ comment.user.firstname }} {{ comment.user.lastname }}  
                 </li>
 

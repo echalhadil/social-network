@@ -58,7 +58,7 @@
                         <p class=" capitalize text-sm text-cool-gray-600  ">
                         {{comment.text}}
                         <span class="px-1 text-xl font-bold " >.</span>
-                        <span class=" text-teal-400">{{ comment.created_at }}</span>
+                        <span class=" text-teal-400">{{ comment.timeago }}</span>
                         </p>
                     </div>
                 </div>

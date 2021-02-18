@@ -3168,6 +3168,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3239,8 +3251,35 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(route('friendrequests.index')).then(function (response) {
         _this2.friendsRequest = response.data;
+        _this2.newFriendRequest = response.data.filter(function (fr) {
+          return fr.seen === 0;
+        }).length;
       })["catch"](function (err) {
-        console.log([err]);
+        console.log(err);
+      });
+    },
+    deletFriendRequest: function deletFriendRequest(id) {
+      var _this3 = this;
+
+      axios["delete"]('/friendrequests/' + id).then(function (response) {
+        console.log(response.data);
+        _this3.friendsRequest = _this3.friendsRequest.filter(function (fr) {
+          return fr.id != id;
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    confirmFriendRequest: function confirmFriendRequest(friendrequest) {
+      var _this4 = this;
+
+      axios.post('/friends/', friendrequest).then(function (response) {
+        console.log(response.data);
+        _this4.friendsRequest = _this4.friendsRequest.filter(function (fr) {
+          return fr.id != friendrequest.id;
+        });
+      })["catch"](function (err) {
+        console.log(err);
       });
     }
   },
@@ -3248,7 +3287,7 @@ __webpack_require__.r(__webpack_exports__);
     countNewMessages: function countNewMessages() {}
   },
   mounted: function mounted() {
-    var _this3 = this;
+    var _this5 = this;
 
     this.getNotifications();
     this.getFriendsRequest();
@@ -3256,19 +3295,19 @@ __webpack_require__.r(__webpack_exports__);
       var notification = data.notification;
       console.table(notification);
 
-      _this3.notifications.unshift(notification);
+      _this5.notifications.unshift(notification);
 
-      _this3.newNotifications++;
+      _this5.newNotifications++;
 
-      _this3.playSound();
+      _this5.playSound();
     });
     Echo.channel('friend-request-channel-' + this.user_id).listen('.FriendRequestEvent', function (data) {
-      var friendRequest = data.friendreqest;
+      var friendRequest = data.friendrequest;
       console.table(friendRequest);
 
-      _this3.friendsRequest.unshift(friendRequest);
+      _this5.friendsRequest.unshift(friendRequest);
 
-      _this3.playSound();
+      _this5.playSound();
     });
   }
 });
@@ -4746,7 +4785,7 @@ __webpack_require__.r(__webpack_exports__);
     getFriends: function getFriends() {
       var _this2 = this;
 
-      axios.get(route('friends.index')).then(function (response) {
+      axios.get(window.location.href.split('/').pop() + '/friends').then(function (response) {
         _this2.friends = _.uniqBy(response.data, 'id');
         console.table(_this2.friends);
       })["catch"](function (err) {
@@ -4756,6 +4795,184 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getFriends();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Profile/Friendship.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Profile/Friendship.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ['profilerid'],
+  data: function data() {
+    return {
+      areFriends: false,
+      youSentRequest: false,
+      youRecivedRequest: false
+    };
+  },
+  methods: {
+    sendFriendRequest: function sendFriendRequest(to_id) {
+      var _this = this;
+
+      axios.post('/friendrequests', {
+        to_id: to_id
+      }).then(function (response) {
+        console.log(response.data);
+        _this.youSentRequest = true;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    unfriend: function unfriend(friend_id) {
+      var _this2 = this;
+
+      sweetalert__WEBPACK_IMPORTED_MODULE_1___default()({
+        title: "Are you sure?",
+        text: "Once you unfriend, you will not be able to see they posts!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          axios["delete"]('/friends/' + friend_id).then(function (response) {
+            _this2.areFriends = false;
+            console.log(response.data);
+            console.log(areFriends);
+            sweetalert__WEBPACK_IMPORTED_MODULE_1___default()("You Unfriend successfuly!", {
+              icon: "success"
+            });
+          })["catch"](function (err) {
+            console.log(err);
+          });
+        }
+      });
+    },
+    confirmReq: function confirmReq(user_id) {
+      var _this3 = this;
+
+      axios.post('/friends/', {
+        from_id: this.profilerid,
+        to_id: user_id
+      }).then(function (response) {
+        console.log(response.data);
+        _this3.areFriends = true;
+        _this3.youRecivedRequest = false;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deleteReq: function deleteReq() {
+      var _this4 = this;
+
+      axios.get(this.profilerid + '/deleterequest').then(function (response) {
+        console.log(response.data);
+        _this4.youRecivedRequest = false;
+        _this4.youSentRequest = false;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    status: function status() {
+      var _this5 = this;
+
+      axios.get(this.profilerid + '/arefriends').then(function (res) {
+        _this5.areFriends = res.data;
+        if (!_this5.areFriends) axios.get(_this5.profilerid + '/yousentrequest').then(function (res) {
+          _this5.youSentRequest = res.data;
+          if (!_this5.youSentRequest) axios.get(_this5.profilerid + '/yourecivedrequest').then(function (res) {
+            _this5.youRecivedRequest = res.data;
+          })["catch"](function (err) {
+            console.log(err);
+          });
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.status();
   }
 });
 
@@ -4934,67 +5151,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
-/* harmony import */ var _Timeline__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Timeline */ "./resources/js/Pages/Profile/Timeline.vue");
-/* harmony import */ var _Friends__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Friends */ "./resources/js/Pages/Profile/Friends.vue");
-/* harmony import */ var _Pictures__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Pictures */ "./resources/js/Pages/Profile/Pictures.vue");
-/* harmony import */ var _Settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Settings */ "./resources/js/Pages/Profile/Settings.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _Friendship__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Friendship */ "./resources/js/Pages/Profile/Friendship.vue");
+/* harmony import */ var _Timeline__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Timeline */ "./resources/js/Pages/Profile/Timeline.vue");
+/* harmony import */ var _Friends__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Friends */ "./resources/js/Pages/Profile/Friends.vue");
+/* harmony import */ var _Pictures__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Pictures */ "./resources/js/Pages/Profile/Pictures.vue");
+/* harmony import */ var _Settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Settings */ "./resources/js/Pages/Profile/Settings.vue");
 //
 //
 //
@@ -5129,16 +5290,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   // props: ['sessions'],
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     UpdateProfilePicture: _UpdateProfilePicture__WEBPACK_IMPORTED_MODULE_1__["default"],
     JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Timeline: _Timeline__WEBPACK_IMPORTED_MODULE_4__["default"],
-    Friends: _Friends__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Pictures: _Pictures__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Settings: _Settings__WEBPACK_IMPORTED_MODULE_7__["default"] // JetSectionBorder,
+    Friendship: _Friendship__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Timeline: _Timeline__WEBPACK_IMPORTED_MODULE_5__["default"],
+    Friends: _Friends__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Pictures: _Pictures__WEBPACK_IMPORTED_MODULE_7__["default"],
+    Settings: _Settings__WEBPACK_IMPORTED_MODULE_8__["default"] // JetSectionBorder,
     // LogoutOtherBrowserSessionsForm,
     // TwoFactorAuthenticationForm,
 
@@ -5220,7 +5383,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     deleteProfilePicture: function deleteProfilePicture(user, picture) {
       user.picture = picture;
-    }
+    } // friendship stuff
+
   },
   mounted: function mounted() {}
 });
@@ -58943,9 +59107,32 @@ var render = function() {
                               key: "trigger",
                               fn: function() {
                                 return [
-                                  _c("i", {
-                                    staticClass: " far fa-user-friends"
-                                  })
+                                  _c(
+                                    "i",
+                                    { staticClass: " far fa-user-friends" },
+                                    [
+                                      _vm.newFriendRequest != 0
+                                        ? _c(
+                                            "b",
+                                            {
+                                              staticClass:
+                                                " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                    \n                                     " +
+                                                  _vm._s(
+                                                    _vm.newFriendRequest > 9
+                                                      ? "9+"
+                                                      : _vm.newFriendRequest
+                                                  ) +
+                                                  "\n                                     "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
                                 ]
                               },
                               proxy: true
@@ -58971,8 +59158,30 @@ var render = function() {
                                     staticClass: "border-t border-gray-100"
                                   }),
                                   _vm._v(" "),
-                                  false
-                                    ? undefined
+                                  _vm.friendsRequest.length == 0
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "px-4 text-gray-400 text-center "
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fa mt-7 fa-3x fa-user-times",
+                                            attrs: { "aria-hidden": "true" }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                " mb-7 mt-3 text-sm  "
+                                            },
+                                            [_vm._v("No Requests")]
+                                          )
+                                        ]
+                                      )
                                     : _vm._e(),
                                   _vm._v(" "),
                                   _vm.friendsRequest.length > 0
@@ -58994,15 +59203,22 @@ var render = function() {
                                             },
                                             [
                                               _c(
-                                                "div",
-                                                { staticClass: " h-13 w-13" },
+                                                "inertia-link",
+                                                {
+                                                  staticClass: " h-13 w-13",
+                                                  attrs: {
+                                                    href:
+                                                      "profiles/" +
+                                                      friendRequest.maker.id
+                                                  }
+                                                },
                                                 [
                                                   _c("img", {
                                                     staticClass:
                                                       " h-12 w-12 rounded-full ",
                                                     attrs: {
                                                       src:
-                                                        "http://127.0.0.1:8000/" +
+                                                        "/" +
                                                         friendRequest.maker
                                                           .picture
                                                     }
@@ -59048,7 +59264,16 @@ var render = function() {
                                                         "button",
                                                         {
                                                           staticClass:
-                                                            "capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white "
+                                                            "capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white ",
+                                                          on: {
+                                                            click: function(
+                                                              $event
+                                                            ) {
+                                                              return _vm.confirmFriendRequest(
+                                                                friendRequest
+                                                              )
+                                                            }
+                                                          }
                                                         },
                                                         [_vm._v("confirm")]
                                                       ),
@@ -59057,7 +59282,16 @@ var render = function() {
                                                         "button",
                                                         {
                                                           staticClass:
-                                                            "capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 "
+                                                            "capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 ",
+                                                          on: {
+                                                            click: function(
+                                                              $event
+                                                            ) {
+                                                              return _vm.deletFriendRequest(
+                                                                friendRequest.id
+                                                              )
+                                                            }
+                                                          }
                                                         },
                                                         [_vm._v("delete")]
                                                       )
@@ -59065,7 +59299,8 @@ var render = function() {
                                                   )
                                                 ]
                                               )
-                                            ]
+                                            ],
+                                            1
                                           )
                                         }),
                                         0
@@ -59240,7 +59475,7 @@ var render = function() {
                                                             notification.maker
                                                               .lastname
                                                           ) +
-                                                          " "
+                                                          " \n                                                "
                                                       ),
                                                       _c(
                                                         "span",
@@ -59250,14 +59485,28 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            " " +
+                                                            "\n                                                    " +
                                                               _vm._s(
                                                                 notification.type ==
                                                                   "c"
-                                                                  ? " commented on your"
-                                                                  : " reacted to your"
+                                                                  ? " commented on your post."
+                                                                  : ""
                                                               ) +
-                                                              " post. "
+                                                              " \n                                                    " +
+                                                              _vm._s(
+                                                                notification.type ==
+                                                                  "r"
+                                                                  ? " reacted to your post."
+                                                                  : ""
+                                                              ) +
+                                                              " \n                                                    " +
+                                                              _vm._s(
+                                                                notification.type ==
+                                                                  "f"
+                                                                  ? " accepted your friend request."
+                                                                  : ""
+                                                              ) +
+                                                              " \n                                                    \n                                                 "
                                                           )
                                                         ]
                                                       )
@@ -62032,66 +62281,75 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "target ml-auto my-auto bg-indigo-500 cursor-pointer hover:bg-indigo-400 rounded text-white p-2 "
-                      },
-                      [
-                        _c("p", { staticClass: " font-semibold " }, [
-                          _vm._v(" friends  ")
-                        ]),
-                        _vm._v(" "),
-                        _c(
+                    friend.id != _vm.$page.user.id
+                      ? _c(
                           "div",
                           {
                             staticClass:
-                              " border border-grey-100 mt-2 px-3 p-2 capitalize text-gray-800  dropdown-menu hidden absolute bg-white rounded "
+                              "target ml-auto my-auto bg-indigo-500 cursor-pointer hover:bg-indigo-400 rounded text-white p-2 "
                           },
                           [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "0 hover:text-indigo-500 flex py-2",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.unfriend(friend)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fal fa-user-minus pr-2"
-                                }),
-                                _vm._v(" "),
-                                _c("p", { staticClass: " " }, [
-                                  _vm._v(" unfriend ")
-                                ])
-                              ]
-                            ),
+                            _c("p", { staticClass: " font-semibold " }, [
+                              _vm._v(" friends  ")
+                            ]),
                             _vm._v(" "),
                             _c(
                               "div",
                               {
-                                staticClass: " hover:text-indigo-500 flex py-2"
+                                staticClass:
+                                  " border border-grey-100 mt-2 px-3 p-2 capitalize text-gray-800  dropdown-menu hidden absolute bg-white rounded "
                               },
                               [
-                                _c("i", { staticClass: "fal fa-user pr-2" }),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "0 hover:text-indigo-500 flex py-2",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.unfriend(friend)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fal fa-user-minus pr-2"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: " " }, [
+                                      _vm._v(" unfriend ")
+                                    ])
+                                  ]
+                                ),
                                 _vm._v(" "),
                                 _c(
-                                  "inertia-link",
-                                  { attrs: { href: "/profiles/" + friend.id } },
-                                  [_vm._v(" view profile ")]
+                                  "div",
+                                  {
+                                    staticClass:
+                                      " hover:text-indigo-500 flex py-2"
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fal fa-user pr-2"
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "inertia-link",
+                                      {
+                                        attrs: {
+                                          href: "/profiles/" + friend.id
+                                        }
+                                      },
+                                      [_vm._v(" view profile ")]
+                                    )
+                                  ],
+                                  1
                                 )
-                              ],
-                              1
+                              ]
                             )
                           ]
                         )
-                      ]
-                    )
+                      : _vm._e()
                   ]
                 )
               }),
@@ -62121,6 +62379,286 @@ var render = function() {
         )
       : _vm._e()
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Profile/Friendship.vue?vue&type=template&id=4962a8ee&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Profile/Friendship.vue?vue&type=template&id=4962a8ee& ***!
+  \****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("jet-dropdown", {
+        staticClass:
+          "float-right -mb-9 mr-2 mt-2 border hover:bg-gray-50 hover:text-indigo-500 cursor-pointer text-black rounded-full bg-white",
+        attrs: { align: "right", width: "44" },
+        scopedSlots: _vm._u([
+          {
+            key: "trigger",
+            fn: function() {
+              return [
+                _vm.$page.profiler.id != _vm.$page.user.id
+                  ? _c("div", [
+                      !_vm.areFriends &&
+                      !_vm.youSentRequest &&
+                      !_vm.youRecivedRequest
+                        ? _c("i", {
+                            staticClass: "fal fa-plus py-1 px-2",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.areFriends
+                        ? _c("i", {
+                            staticClass:
+                              "fal fa-check py-1 px-2 text-indigo-500",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.youSentRequest
+                        ? _c("i", {
+                            staticClass: "fal fa-minus py-1 px-2",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.youRecivedRequest
+                        ? _c("i", {
+                            staticClass: "fal fa-times py-1 px-2",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.$page.profiler.id == _vm.$page.user.id
+                  ? _c("div", [
+                      _c("i", {
+                        staticClass: "fal fa-pencil p-1",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ])
+                  : _vm._e()
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "content",
+            fn: function() {
+              return [
+                _vm.$page.profiler.id != _vm.$page.user.id
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "border border-grey-100 py-1 -my-1 capitalize text-gray-800 bg-white rounded "
+                      },
+                      [
+                        !_vm.areFriends &&
+                        !_vm.youSentRequest &&
+                        !_vm.youRecivedRequest
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.sendFriendRequest(
+                                      _vm.$page.profiler.id
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fal fa-plus pr-2 my-auto",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v(" "),
+                                _c("p", { staticClass: " " }, [
+                                  _vm._v(" add friend ")
+                                ])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.areFriends
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.unfriend(_vm.$page.profiler.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fal fa-minus pr-2 my-auto",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v(" "),
+                                _c("p", { staticClass: " " }, [
+                                  _vm._v(" unfriend ")
+                                ])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.youSentRequest
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  " hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteReq()
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fal fa-times pr-2 my-auto",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v(" "),
+                                _c("p", { staticClass: " " }, [
+                                  _vm._v(" Cancel request ")
+                                ])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.youRecivedRequest
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  " hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.confirmReq(_vm.$page.user.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fal fa-check pr-2 my-auto",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v(" "),
+                                _c("p", { staticClass: " " }, [
+                                  _vm._v(" confirm ")
+                                ])
+                              ]
+                            )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.youRecivedRequest
+                          ? _c(
+                              "div",
+                              {
+                                staticClass:
+                                  " hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteReq()
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fal fa-times pr-2 my-auto",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v(" "),
+                                _c("p", { staticClass: " " }, [
+                                  _vm._v(" delete")
+                                ])
+                              ]
+                            )
+                          : _vm._e()
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.$page.profiler.id == _vm.$page.user.id
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "border border-grey-100 py-1 -my-1 capitalize text-gray-800 bg-white rounded "
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1"
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fal fa-pencil pr-2 my-auto",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(" "),
+                            _c("p", { staticClass: " " }, [
+                              _vm._v(" edit cover ")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1",
+                            on: { click: _vm.removecover }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "fal fa-trash pr-2 my-auto",
+                              attrs: { "aria-hidden": "true" }
+                            }),
+                            _vm._v(" "),
+                            _c("p", {}, [_vm._v("remove cover")])
+                          ]
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -62483,217 +63021,12 @@ var render = function() {
               "div",
               { staticClass: " w-full h-64 " },
               [
-                _c("jet-dropdown", {
-                  staticClass:
-                    "float-right -mb-9 mr-2 mt-2 border hover:bg-gray-50 hover:text-indigo-500 cursor-pointer text-black rounded-full bg-white",
-                  attrs: { align: "right", width: "44" },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "trigger",
-                      fn: function() {
-                        return [
-                          _vm.$page.profiler.id != _vm.$page.user.id
-                            ? _c("div", [
-                                _c("i", {
-                                  staticClass: "fal fa-plus py-1 px-2",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(" "),
-                                _c("i", {
-                                  staticClass:
-                                    "fal fa-check py-1 px-2 text-indigo-500",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(" "),
-                                _c("i", {
-                                  staticClass: "fal fa-minus py-1 px-2",
-                                  attrs: { "aria-hidden": "true" }
-                                }),
-                                _vm._v(" "),
-                                _c("i", {
-                                  staticClass: "fal fa-times py-1 px-2",
-                                  attrs: { "aria-hidden": "true" }
-                                })
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.$page.profiler.id == _vm.$page.user.id
-                            ? _c("div", [
-                                _c("i", {
-                                  staticClass: "fal fa-pencil p-1",
-                                  attrs: { "aria-hidden": "true" }
-                                })
-                              ])
-                            : _vm._e()
-                        ]
-                      },
-                      proxy: true
-                    },
-                    {
-                      key: "content",
-                      fn: function() {
-                        return [
-                          _vm.$page.profiler.id != _vm.$page.user.id
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "border border-grey-100 py-1 -my-1 capitalize text-gray-800 bg-white rounded "
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1"
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass: "fal fa-plus pr-2 my-auto",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: " " }, [
-                                        _vm._v(" add friend ")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1"
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fal fa-minus pr-2 my-auto",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: " " }, [
-                                        _vm._v(" unfriend ")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        " hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1"
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fal fa-times pr-2 my-auto",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: " " }, [
-                                        _vm._v(" Cancel request ")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        " hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1"
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fal fa-check pr-2 my-auto",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: " " }, [
-                                        _vm._v(" confirm ")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        " hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1"
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fal fa-times pr-2 my-auto",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: " " }, [
-                                        _vm._v(" delete")
-                                      ])
-                                    ]
-                                  )
-                                ]
-                              )
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.$page.profiler.id == _vm.$page.user.id
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "border border-grey-100 py-1 -my-1 capitalize text-gray-800 bg-white rounded "
-                                },
-                                [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1"
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fal fa-pencil pr-2 my-auto",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", { staticClass: " " }, [
-                                        _vm._v(" edit cover ")
-                                      ])
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "hover:text-indigo-500 hover:bg-cool-gray-100 flex px-3 rounded-md py-1",
-                                      on: { click: _vm.removecover }
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fal fa-trash pr-2 my-auto",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c("p", {}, [_vm._v("remove cover")])
-                                    ]
-                                  )
-                                ]
-                              )
-                            : _vm._e()
-                        ]
-                      },
-                      proxy: true
-                    }
-                  ])
+                _c("friendship", {
+                  attrs: { profilerid: _vm.$page.profiler.id }
                 }),
                 _vm._v(" "),
                 _c("img", {
-                  staticClass: "w-full rounded-lg h-full object-cover   p-1 ",
+                  staticClass: "w-full rounded-lg h-full object-cover p-1 ",
                   attrs: {
                     src:
                       "https://i.pinimg.com/564x/d8/5f/45/d85f454c5884b1a0acbe576574f4b840.jpg"
@@ -62730,11 +63063,11 @@ var render = function() {
               _c("div", { staticClass: " text-center p-2 " }, [
                 _c("p", { staticClass: " text-2xl capitalize font-bold " }, [
                   _vm._v(
-                    "\n                           " +
+                    "\n                        " +
                       _vm._s(_vm.$page.profiler.firstname) +
                       " " +
                       _vm._s(_vm.$page.profiler.lastname) +
-                      " \n                       "
+                      " \n                    "
                   )
                 ])
               ])
@@ -79210,6 +79543,8 @@ var map = {
 	"./Profile/DeleteUserForm.vue": "./resources/js/Pages/Profile/DeleteUserForm.vue",
 	"./Profile/Friends": "./resources/js/Pages/Profile/Friends.vue",
 	"./Profile/Friends.vue": "./resources/js/Pages/Profile/Friends.vue",
+	"./Profile/Friendship": "./resources/js/Pages/Profile/Friendship.vue",
+	"./Profile/Friendship.vue": "./resources/js/Pages/Profile/Friendship.vue",
 	"./Profile/LogoutOtherBrowserSessionsForm": "./resources/js/Pages/Profile/LogoutOtherBrowserSessionsForm.vue",
 	"./Profile/LogoutOtherBrowserSessionsForm.vue": "./resources/js/Pages/Profile/LogoutOtherBrowserSessionsForm.vue",
 	"./Profile/Main": "./resources/js/Pages/Profile/Main.vue",
@@ -80218,6 +80553,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friends_vue_vue_type_template_id_30962e14___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friends_vue_vue_type_template_id_30962e14___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Profile/Friendship.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/Pages/Profile/Friendship.vue ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Friendship_vue_vue_type_template_id_4962a8ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Friendship.vue?vue&type=template&id=4962a8ee& */ "./resources/js/Pages/Profile/Friendship.vue?vue&type=template&id=4962a8ee&");
+/* harmony import */ var _Friendship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Friendship.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Profile/Friendship.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Friendship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Friendship_vue_vue_type_template_id_4962a8ee___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Friendship_vue_vue_type_template_id_4962a8ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Profile/Friendship.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Profile/Friendship.vue?vue&type=script&lang=js&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/Pages/Profile/Friendship.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Friendship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Friendship.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Profile/Friendship.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Friendship_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Profile/Friendship.vue?vue&type=template&id=4962a8ee&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/Pages/Profile/Friendship.vue?vue&type=template&id=4962a8ee& ***!
+  \**********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friendship_vue_vue_type_template_id_4962a8ee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Friendship.vue?vue&type=template&id=4962a8ee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Profile/Friendship.vue?vue&type=template&id=4962a8ee&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friendship_vue_vue_type_template_id_4962a8ee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friendship_vue_vue_type_template_id_4962a8ee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

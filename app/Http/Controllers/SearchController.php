@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Notification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
-class NotificationController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +16,10 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::where('target_id',Auth::id())
-        ->get();
-        foreach ($notifications as $notification) {
-            $notification-> target = $notification -> target;
-            $notification-> maker = $notification -> maker;
-            $notification->timeago = $notification->getTimeAgo($notification->created_at);
-        }
+        $users = User::all();
 
-        return response() -> json($notifications);
+        return Inertia::render('Result/Main')->with('results',$users);
+        
     }
 
     /**
@@ -50,10 +46,10 @@ class NotificationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Notification $notification)
+    public function show($id)
     {
         //
     }
@@ -61,10 +57,10 @@ class NotificationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Notification $notification)
+    public function edit($id)
     {
         //
     }
@@ -73,10 +69,10 @@ class NotificationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Notification $notification)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -84,21 +80,11 @@ class NotificationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Notification  $notification
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Notification $notification)
+    public function destroy($id)
     {
         //
-    }
-
-
-
-    public function seeNotifications()
-    {
-        Notification::where('target_id', Auth::id())
-            ->update(['seen' => 1]);
-            
-        return response() ->json(true);
     }
 }

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Post as GlobalPost;
-use Illuminate\Http\UploadedFile;
 
 class PostController extends Controller
 {
@@ -29,11 +26,15 @@ class PostController extends Controller
 
         foreach ($posts as $post) {
             $post-> user = $post -> user;
+            $post-> timeago = $post->getTimeAgo($post-> created_at);
+            // $post -> created_at = $post -> created_at ->diffForHumans();
 
            $post->comments = $post -> comments;
 
            foreach ($post->comments as $comment) {
                $comment -> user = $comment -> user;
+               $comment-> timeago = $post->getTimeAgo($post-> created_at);
+
            }
 
            $post->reacts = $post -> reacts;
@@ -84,7 +85,7 @@ class PostController extends Controller
             'text' => $request ->text,
             'picture' => $picture,
         ]);
-
+        $post-> timeago = $post->getTimeAgo($post-> created_at);
         $post -> user = $user;
         $post -> reacts = array();
         $post -> comments = array();

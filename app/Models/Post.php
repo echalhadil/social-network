@@ -40,4 +40,12 @@ class Post extends Model
     public function user()      {return $this->belongsTo('App\Models\User');}
 
 
+    public function getTimeAgo($carbonObject) {
+        return str_ireplace(
+            [' seconds', ' second', ' minutes', ' minute', ' hours', ' hour', ' days', ' day', ' weeks', ' week','ago'], 
+            ['s', 's', 'm', 'm', 'h', 'h', 'd', 'd', 'w', 'w',''], 
+            $carbonObject->diffForHumans()
+        );
+    }
+    
 }

@@ -19,7 +19,9 @@
                             </jet-nav-link>
                             -->
                          
-                            <input placeholder="type here to search..." 
+                            <input 
+                            v-on:keyup.enter="search" 
+                            placeholder="type here to search..." 
                             class="focus:outline-none focus:ring-2 focus:border-indigo-500  bg-gray-100 ml-auto h-12 capitalize my-auto w-10/12 border-blue-100 border-2 rounded-lg " type="text" />
                         </div>
 
@@ -124,7 +126,7 @@
                                                         
                                                      </span>
                                                     </p>
-                                                    <p class=" text-xs "> {{ notification.created_at }} </p>
+                                                    <p class=" text-xs "> {{ notification.timeago }} </p>
                                                     
                                                 </div>
                                                 <div v-if="!notification.readed" class=" ml-auto">
@@ -433,6 +435,7 @@
                     .catch(err =>{console.log(err)
                     })
             },
+            
             deletFriendRequest(id){
                 
                 axios.delete('/friendrequests/'+id)
@@ -449,6 +452,7 @@
                         }
                     )
             },
+
             confirmFriendRequest(friendrequest){
                 axios.post('/friends/',friendrequest)
                     .then(
@@ -463,6 +467,10 @@
                             console.log(err)
                         }
                     )
+            },
+
+            search(){
+                window.location = '/';
             }
        
 
@@ -493,6 +501,7 @@
                     let friendRequest = data.friendrequest
                     console.table(friendRequest);
                     this.friendsRequest.unshift(friendRequest);
+                    newFriendRequest++;
 
                     this.playSound();
                 });

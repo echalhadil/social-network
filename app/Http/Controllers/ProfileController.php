@@ -204,16 +204,21 @@ class ProfileController extends Controller
         return response() -> json($user -> picture);
     }
 
+
+
     public function posts($id){
         $user= User::find($id);
         $user -> posts = $user -> posts;
         foreach ($user -> posts as $post) {
             $post-> user = $post -> user;
+            $post-> timeago = $post->getTimeAgo($post-> created_at);
 
            $post->comments = $post -> comments;
 
+
            foreach ($post->comments as $comment) {
                $comment -> user = $comment -> user;
+               $comment-> timeago = $post->getTimeAgo($comment-> created_at);
            }
 
            $post->reacts = $post -> reacts;

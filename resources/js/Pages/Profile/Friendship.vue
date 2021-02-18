@@ -169,6 +169,22 @@ export default {
                         }
                     )
         },
+        removecover(){
+            swal({
+                title: "Are you sure?",
+                text: "Once you unfriend, you will not be able to see they posts!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                })
+                .then((willDelete) => {
+                if (willDelete) {
+                    swal("You Unfriend successfuly!", {
+                    icon: "success",
+                    });
+                }
+            });
+        },
 
         status(){
             axios.get(this.profilerid+'/arefriends')

@@ -1,6 +1,6 @@
 <template>
 
-    <div class=" px-1 pt-2 text-gray-500 ">
+    <div class=" px-1 pt-2 text-gray-500">
         {{ text }}
     </div>
     
@@ -9,7 +9,6 @@
 <script>
 export default {
     
-
     props:['text'],
     methods: {
         viewMore(){

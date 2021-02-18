@@ -11,7 +11,7 @@
         <!-- post owner full name -->
         <div class="pl-2 my-auto w-7/12"> 
             <inertia-link :href="'http://127.0.0.1:8000/profiles/'+post.user.id" class="text-base font-bold capitalize">{{post.user.firstname}} {{post.user.lastname}}</inertia-link>
-            <p class="text-teal-400 lowercase text-xs">{{ post.created_at}}</p>
+            <p class="text-teal-400 lowercase text-xs">{{ post.timeago}}</p>
         </div>
         <!-- post owner full name -->
 

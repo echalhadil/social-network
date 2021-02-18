@@ -120,18 +120,17 @@ export default {
                 buttons: true,
                 }).then((value) => {
                 // if (!value) throw null;
-        
-                post.text = document.querySelector(".swal-content__input").value;
+                if(post.text!==document.querySelector(".swal-content__input").value)
+               {post.text = document.querySelector(".swal-content__input").value;
 
-                 axios.put('posts/'+post.id,post)
-                .then( response =>{
-                    console.log(response.data)
-                } )
-                .catch(error =>{
-                    console.log(response.error)
-                });
-                post.text = text
-                alert("you entered: " + text);
+                        axios.put('/posts/'+post.id,post)
+                        .then( response =>{
+                            console.log(response.data)
+                        } )
+                        .catch(error =>{
+                            console.log(response.error)
+                        });
+               }
             });
             
 

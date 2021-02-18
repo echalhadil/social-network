@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactController;
+use App\Http\Controllers\SearchController;
 use App\Models\FriendRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,9 @@ Route::resource('profiles', ProfileController::class);
 Route::resource('notifications', NotificationController::class);
 Route::resource('friends', FriendController::class);
 Route::resource('friendrequests', FriendRequestController::class);
+Route::resource('results', SearchController::class);
+
+
 
 
 

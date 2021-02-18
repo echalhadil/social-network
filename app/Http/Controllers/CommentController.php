@@ -43,12 +43,14 @@ class CommentController extends Controller
     {    
         try {   
             //create post's comment
-            $comment = Post::find($request -> post_id) 
+            $post = Post::find($request -> post_id);
+            $comment = $post 
                         -> comments() 
                         -> create([
                             'text'      => $request -> text,
                             'user_id'   => Auth::id(),
                         ]);
+            $comment ->timeago = $post->getTimeAgo($comment->created_at);
 
             //get post user 
             $comment -> user = $comment -> user;

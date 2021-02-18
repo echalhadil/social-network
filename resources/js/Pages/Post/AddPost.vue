@@ -157,7 +157,16 @@ export default {
                                 type:true,
                                 content:"your post has been published .",
                                 visible:true,
+
                             }
+                            setTimeout(() => {
+                                this.message={
+                                    type:true,
+                                    content:"your post has been published .",
+                                    visible:false,
+
+                                }
+                            }, 4000)
                         })
                         .catch(error => {
                             console.log(error)
