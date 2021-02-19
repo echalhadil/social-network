@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommentEvent;
 use App\Models\User;
 use App\Models\FriendRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia as Inertia;

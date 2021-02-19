@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\CommentEvent;
 use App\Events\NotificationEvent;
 use App\Models\Comment;
 use App\Models\Notification;
