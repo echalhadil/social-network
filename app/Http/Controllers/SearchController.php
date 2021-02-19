@@ -52,6 +52,12 @@ class SearchController extends Controller
     public function show($id)
     {
         //
+        $results=User::where('email','like', '%' . $id . '%' )
+            ->orWhere('username', 'like', '%' . $id . '%')
+            ->orWhere('firstname', 'like', '%' . $id . '%')
+            ->orWhere('lastname', 'like', '%' . $id . '%')->get();
+        
+            return response()-> json($results);
     }
 
     /**
