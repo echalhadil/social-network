@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\Auth;
@@ -49,15 +50,23 @@ class SearchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($query)
     {
         //
-        $results=User::where('email','like', '%' . $id . '%' )
-            ->orWhere('username', 'like', '%' . $id . '%')
-            ->orWhere('firstname', 'like', '%' . $id . '%')
-            ->orWhere('lastname', 'like', '%' . $id . '%')->get();
+        $users = User::where('email','like', '%' . $query . '%' )
+            ->orWhere('username', 'like', '%' . $query . '%')
+            ->orWhere('firstname', 'like', '%' . $query . '%')
+            ->orWhere('lastname', 'like', '%' . $query . '%')->get();
         
-            return response()-> json($results);
+        $posts = Post::where('text','like', '%' . $query . '%' )
+                    ->get();
+        foreach ($posts as $post) {
+            $post->user = $post->user;
+            $post->timeago  = $post->getTimeAgo($post->created_at);
+        }
+        
+            return Inertia::render('Result/Main')->with('users',$users)->with('posts',$posts);
+            
     }
 
     /**
