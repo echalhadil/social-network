@@ -77,3 +77,9 @@ Route::get('profiles/{id}/deleterequest',[ProfileController::class,'deleteReques
 
 //update notification status 
 Route::get('seenotifications',[NotificationController::class,'seeNotifications']);
+
+
+//messenger 
+Route::middleware(['auth:sanctum', 'verified'])->get('/messenger', function () {
+    return Inertia\Inertia::render('Messenger/Main');
+})->name('dashboard');
