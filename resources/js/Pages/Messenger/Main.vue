@@ -123,23 +123,28 @@
 
 
                 </div>
-                
-
-                <div class="p-2  bg-white ">
-                    <input 
-                    type="text" 
-                    placeholder="type a message text" 
-                    class="focus:outline-none focus:ring-2 focus:border-indigo-500 ml-auto bg-white h-10 w-full border-gray-300 border rounded-sm "
-                       
-                    />
-                </div>
-                
+            
                 <send-message />
 
                 
             </div>
 
-            <div class="w-1/4  h-40 bg-green-500 invisible sm:visible">
+            <div class="w-1/4 mx-2  invisible sm:visible">
+                <div class="p-2 bg-white w-full rounded-lg">
+                    <div class="  ">
+                        <img src="https://i.pinimg.com/564x/8c/1c/ec/8c1cec6ab839e0266066407528d12d69.jpg"
+                        class="mx-auto h-28 w-28 object-cover rounded-full " />
+                    </div>
+                    <div class=" text-center mt-1">
+                        <p class=" text-xl font-bold "> Echalh Adil </p>
+                        <p class=" text-md  "> @echalhadil </p>
+                    </div>
+
+                    <div class="flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500">
+                        <i class=" ml-auto fal fa-user my-auto" aria-hidden="true"></i>
+                        <p class="my-auto mr-auto ml-1 capitalize  "> view profile </p>
+                    </div>
+                </div>
             </div>
             
         </div>
