@@ -15,7 +15,13 @@ class CreateConversationsTable extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('from_id');
+            $table->foreignId('to_id');
+            $table->text('last_message');
             $table->timestamps();
+
+            $table->foreign('from_id')->references('id')->on('users');
+            $table->foreign('to_id')->references('id')->on('users');
         });
     }
 
