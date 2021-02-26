@@ -328,7 +328,7 @@
 
 
         <!--notification stuff -->
-        <!--
+
         <div  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
             <div class=" px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md ">
                 <div class=" h-12 w-12">
@@ -346,7 +346,7 @@
                 </div>
             </div>
         </div>
-        -->
+
     </div>
 </template>
 

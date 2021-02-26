@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Conversation extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = [
+        
+        'from_id',
+        'to_id',
+        'last_message',
+
+    ];
 }

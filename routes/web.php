@@ -59,6 +59,7 @@ Route::resource('results', SearchController::class);
 
 
 
+
 // update profile picture 
 Route::post('profiles/{id}/updateprofilepicture',[ProfileController::class,'updateProfilePicture']);
 Route::post('profiles/{id}/deleteprofilepicture',[ProfileController::class,'deleteProfilePicture']);
