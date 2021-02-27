@@ -21,14 +21,13 @@ class ConversationController extends Controller
         $c = Conversation::all();
         foreach ($c as $conversation) {
             $conversation->timeago = $conversation->getTimeAgo($conversation->created_at);
-            if($conversation->from_id == Auth::id())
+            if ($conversation->from_id == Auth::id())
                 $conversation->friend = User::find($conversation->to_id);
             else
                 $conversation->friend = User::find($conversation->from_id);
-            
         }
 
-        return response() -> json($c);
+        return response()->json($c);
     }
 
     /**
@@ -63,23 +62,18 @@ class ConversationController extends Controller
         //
 
         $conversation = Conversation::find($id);
-        if($conversation){
+        if ($conversation) {
             $conversation->messages = $conversation->messages;
 
-            if($conversation->from_id == Auth::id())
+            if ($conversation->from_id == Auth::id())
                 $conversation->friend = User::find($conversation->to_id);
             else
                 $conversation->friend = User::find($conversation->from_id);
-            
-                return Inertia::render('Messenger/Main')->with("id",$id);
-            
-            
 
-        }
-        else
+            return Inertia::render('Messenger/Main')->with("id", $id);
+        } else
 
-        return response()->json("error conversation not found");
-         
+            return response()->json("error conversation not found");
     }
 
     /**

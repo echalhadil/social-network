@@ -25,28 +25,24 @@ class PostController extends Controller
         $posts = Post::all();
 
         foreach ($posts as $post) {
-            $post-> user = $post -> user;
-            $post-> timeago = $post->getTimeAgo($post-> created_at);
+            $post->user = $post->user;
+            $post->timeago = $post->getTimeAgo($post->created_at);
             // $post -> created_at = $post -> created_at ->diffForHumans();
 
-           $post->comments = $post -> comments;
+            $post->comments = $post->comments;
 
-           foreach ($post->comments as $comment) {
-               $comment -> user = $comment -> user;
-               $comment-> timeago = $post->getTimeAgo($post-> created_at);
+            foreach ($post->comments as $comment) {
+                $comment->user = $comment->user;
+                $comment->timeago = $post->getTimeAgo($post->created_at);
+            }
 
-           }
-
-           $post->reacts = $post -> reacts;
-           foreach ($post->reacts as $react) {
-            $react -> user = $react -> user;
+            $post->reacts = $post->reacts;
+            foreach ($post->reacts as $react) {
+                $react->user = $react->user;
+            }
         }
 
-        }
-
-        return response() -> json($posts);
-       
-        
+        return response()->json($posts);
     }
 
     /**
@@ -68,31 +64,31 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //rules 
-        if($request->text=='')
-        $request->validate([
-            'picture' =>'file|image',
-        ]);
-       
-        if($request ->hasFile('picture'))
-        $picture = $request->file('picture')->store('images/posts');
-        else
-        $picture=$request->picture;
+        if ($request->text == '')
+            $request->validate([
+                'picture' => 'file|image',
+            ]);
 
-        
+        if ($request->hasFile('picture'))
+            $picture = $request->file('picture')->store('images/posts');
+        else
+            $picture = $request->picture;
+
+
         $user = User::find(Auth::id());
 
-         $post = $user -> posts() -> create([
-            'text' => $request ->text,
+        $post = $user->posts()->create([
+            'text' => $request->text,
             'picture' => $picture,
         ]);
-        $post-> timeago = $post->getTimeAgo($post-> created_at);
-        $post -> user = $user;
-        $post -> reacts = array();
-        $post -> comments = array();
+        $post->timeago = $post->getTimeAgo($post->created_at);
+        $post->user = $user;
+        $post->reacts = array();
+        $post->comments = array();
 
 
 
-        return response() -> json( $post );
+        return response()->json($post);
     }
 
     /**
@@ -104,16 +100,15 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
-        $post -> user = $post -> user ;
-        $post -> reacts = $post -> reacts ;
-        $comments = $post -> comments = $post -> comments ;
+        $post->user = $post->user;
+        $post->reacts = $post->reacts;
+        $comments = $post->comments = $post->comments;
 
         foreach ($comments as $comment) {
-            $comment ->user = $comment ->user ;
+            $comment->user = $comment->user;
         }
 
-        return response() -> json($post);
-
+        return response()->json($post);
     }
 
     /**
@@ -139,12 +134,11 @@ class PostController extends Controller
     {
 
         $post  = Post::find($post->id);
-        $post -> text  = $request->text ;
-        $post -> save();
-    
+        $post->text  = $request->text;
+        $post->save();
 
-        return response() -> json(true);
 
+        return response()->json(true);
     }
 
     /**
@@ -157,10 +151,10 @@ class PostController extends Controller
     {
         //
         $post = Post::find($post->id);
-        $post -> comments() -> delete();
-        $post -> reacts() -> delete();
-        $post -> delete();
+        $post->comments()->delete();
+        $post->reacts()->delete();
+        $post->delete();
 
-        return response() -> json("ok");
+        return response()->json("ok");
     }
 }

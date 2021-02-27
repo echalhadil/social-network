@@ -40,29 +40,22 @@ class LikeController extends Controller
      */
     public function store(Request $request)
     {
-        try {   
-             //find the post
+        try {
+            //find the post
             $post = Post::find($request->id);
 
             // like it
-            $like  = $post ->likes()->create([
+            $like  = $post->likes()->create([
                 'user_id' => Auth::id(),
-                ]);
+            ]);
 
             // return the like back
-            return response() -> json($like);
-
-
-
-
-            
-
-        } catch (\Throwable $th) { 
-            return response() -> json($th);
-        }
-        finally{
+            return response()->json($like);
+        } catch (\Throwable $th) {
+            return response()->json($th);
+        } finally {
             $post = Post::find($request->id);
-            if((int) Auth::id()!= (int) $post->user_id){
+            if ((int) Auth::id() != (int) $post->user_id) {
 
                 $notification = new Notification();
                 $notification->maker_id = Auth::id();
@@ -74,8 +67,7 @@ class LikeController extends Controller
                 $notification->target = $notification->target;
 
                 // event(new CommentEvent($notification));
-                event( new NotificationEvent($notification) );
-            
+                event(new NotificationEvent($notification));
             }
         }
     }
@@ -125,9 +117,7 @@ class LikeController extends Controller
         //find the like
         $like = Like::find($like->id);
 
-         // delete the like .
-        return response() -> json($like -> delete());
-
-        
+        // delete the like .
+        return response()->json($like->delete());
     }
 }

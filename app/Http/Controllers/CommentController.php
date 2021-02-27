@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\NotificationEvent;
 use App\Models\Comment;
 use App\Models\Notification;
-use App\Models\Post ;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,42 +39,39 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {    
-        try {   
+    {
+        try {
             //create post's comment
-            $post = Post::find($request -> post_id);
-            $comment = $post 
-                        -> comments() 
-                        -> create([
-                            'text'      => $request -> text,
-                            'user_id'   => Auth::id(),
-                        ]);
-            $comment ->timeago = $post->getTimeAgo($comment->created_at);
+            $post = Post::find($request->post_id);
+            $comment = $post
+                ->comments()
+                ->create([
+                    'text'      => $request->text,
+                    'user_id'   => Auth::id(),
+                ]);
+            $comment->timeago = $post->getTimeAgo($comment->created_at);
 
             //get post user 
-            $comment -> user = $comment -> user;
+            $comment->user = $comment->user;
 
-            return response() -> json($comment);
+            return response()->json($comment);
+        } catch (\Throwable $th) {
+            return response()->json($th);
+        } finally {
+            $p = Post::find($request->post_id);
+            if ((int) Auth::id() != (int) $p->user_id) {
 
-        } catch (\Throwable $th) { 
-            return response() -> json($th);
-        }
-        finally{
-            $p = Post::find($request -> post_id);
-            if((int) Auth::id()!= (int) $p->user_id){
+                $notification = new Notification();
+                $notification->maker_id = Auth::id();
+                $notification->target_id = $p->user_id;
+                $notification->type = 'c';
+                $notification->post_id = $request->post_id;
+                $notification->save();
+                $notification->maker = $notification->maker;
+                $notification->target = $notification->target;
 
-            $notification = new Notification();
-            $notification->maker_id = Auth::id();
-            $notification->target_id = $p->user_id;
-            $notification->type = 'c';
-            $notification->post_id = $request->post_id;
-            $notification->save();
-            $notification->maker = $notification->maker;
-            $notification->target = $notification->target;
-
-            // event(new CommentEvent($notification));
-            event( new NotificationEvent($notification) );
-            
+                // event(new CommentEvent($notification));
+                event(new NotificationEvent($notification));
             }
         }
     }
@@ -122,8 +119,8 @@ class CommentController extends Controller
     public function destroy(Comment $comment)
     {
         //
-        $comment -> delete();
+        $comment->delete();
 
-        return response() -> json("ok");
+        return response()->json("ok");
     }
 }

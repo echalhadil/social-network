@@ -19,8 +19,7 @@ class SearchController extends Controller
     {
         $users = User::all();
 
-        return Inertia::render('Result/Main')->with('results',$users);
-        
+        return Inertia::render('Result/Main')->with('results', $users);
     }
 
     /**
@@ -53,20 +52,19 @@ class SearchController extends Controller
     public function show($query)
     {
         //
-        $users = User::where('email','like', '%' . $query . '%' )
+        $users = User::where('email', 'like', '%' . $query . '%')
             ->orWhere('username', 'like', '%' . $query . '%')
             ->orWhere('firstname', 'like', '%' . $query . '%')
             ->orWhere('lastname', 'like', '%' . $query . '%')->get();
-        
-        $posts = Post::where('text','like', '%' . $query . '%' )
-                    ->get();
+
+        $posts = Post::where('text', 'like', '%' . $query . '%')
+            ->get();
         foreach ($posts as $post) {
             $post->user = $post->user;
             $post->timeago  = $post->getTimeAgo($post->created_at);
         }
-        
-            return Inertia::render('Result/Main')->with('users',$users)->with('posts',$posts);
-            
+
+        return Inertia::render('Result/Main')->with('users', $users)->with('posts', $posts);
     }
 
     /**

@@ -15,15 +15,15 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::where('target_id',Auth::id())
-        ->get();
+        $notifications = Notification::where('target_id', Auth::id())
+            ->get();
         foreach ($notifications as $notification) {
-            $notification-> target = $notification -> target;
-            $notification-> maker = $notification -> maker;
+            $notification->target = $notification->target;
+            $notification->maker = $notification->maker;
             $notification->timeago = $notification->getTimeAgo($notification->created_at);
         }
 
-        return response() -> json($notifications);
+        return response()->json($notifications);
     }
 
     /**
@@ -98,7 +98,7 @@ class NotificationController extends Controller
     {
         Notification::where('target_id', Auth::id())
             ->update(['seen' => 1]);
-            
-        return response() ->json(true);
+
+        return response()->json(true);
     }
 }

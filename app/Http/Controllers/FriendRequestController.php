@@ -18,14 +18,13 @@ class FriendRequestController extends Controller
     public function index()
     {
         //
-        $friendsRequests = FriendRequest::where('to_id',Auth::id())
-        ->get();
-        foreach($friendsRequests as $friendRequest){
+        $friendsRequests = FriendRequest::where('to_id', Auth::id())
+            ->get();
+        foreach ($friendsRequests as $friendRequest) {
             $friendRequest->maker = User::find($friendRequest->from_id);
         }
 
-        return response() -> json($friendsRequests);
-
+        return response()->json($friendsRequests);
     }
 
     /**
@@ -48,15 +47,15 @@ class FriendRequestController extends Controller
     {
         //
         $friendrequest = new FriendRequest();
-        $friendrequest -> from_id = Auth::id();
-        $friendrequest -> to_id = $request->to_id;
-        $friendrequest -> save();
+        $friendrequest->from_id = Auth::id();
+        $friendrequest->to_id = $request->to_id;
+        $friendrequest->save();
 
-        $friendrequest->maker = User::find($friendrequest -> from_id);
-        
-        event( new FriendRequestEvent($friendrequest) );
+        $friendrequest->maker = User::find($friendrequest->from_id);
 
-        return response() -> json(true);
+        event(new FriendRequestEvent($friendrequest));
+
+        return response()->json(true);
     }
 
     /**
@@ -99,14 +98,14 @@ class FriendRequestController extends Controller
      * @param  \App\Models\FriendRequest  $friendRequest
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy($id)
     {
         try {
             $friendRequest = FriendRequest::find($id);
-            $friendRequest -> delete();
-            return response() ->json(true);
+            $friendRequest->delete();
+            return response()->json(true);
         } catch (\Throwable $th) {
             return $th;
-        }    
+        }
     }
 }

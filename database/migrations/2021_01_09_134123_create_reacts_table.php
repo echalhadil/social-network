@@ -15,7 +15,6 @@ class CreateReactsTable extends Migration
     {
         Schema::create('reacts', function (Blueprint $table) {
             $table->id();
-            
             $table->foreignId('user_id');
             $table->foreignId('post_id');
             $table->string('type');
@@ -23,7 +22,6 @@ class CreateReactsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('post_id')->references('id')->on('posts');
-
         });
     }
 

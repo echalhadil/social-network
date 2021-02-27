@@ -28,14 +28,14 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        
+
         'email',
         'password',
         'username',
         'firstname',
-        'lastname', 
+        'lastname',
         'picture',
-  
+
     ];
 
     /**
@@ -69,18 +69,27 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
 
-  
-    
-    public function posts()         { return $this->hasMany('App\Models\Post');}
 
-    public function notifications() { return $this->hasMany('App\Models\Notification','target_id');}
+
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany('App\Models\Notification', 'target_id');
+    }
 
 
 
     // friends
-    public function friendsFromMe()         { return $this->hasMany('App\Models\Friend','from_id');}
-    public function friendsToMe()         { return $this->hasMany('App\Models\Friend','to_id');}
-
-
-
+    public function friendsFromMe()
+    {
+        return $this->hasMany('App\Models\Friend', 'from_id');
+    }
+    public function friendsToMe()
+    {
+        return $this->hasMany('App\Models\Friend', 'to_id');
+    }
 }

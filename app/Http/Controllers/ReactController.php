@@ -47,42 +47,36 @@ class ReactController extends Controller
         $post = Post::find($request->post_id);
 
         // search if exist
-        $exist = React::where('user_id',Auth::id())
-            ->where('post_id',$request->post_id)
+        $exist = React::where('user_id', Auth::id())
+            ->where('post_id', $request->post_id)
             ->first();
 
-        if($exist)
-        {
-            if($request -> type =="unlike")
-                $this -> destroy($exist);
-            else if($exist->type!= $request -> type )
-            {
+        if ($exist) {
+            if ($request->type == "unlike")
+                $this->destroy($exist);
+            else if ($exist->type != $request->type) {
                 $react = React::find($exist->id);
-                $react -> type = $request -> type;
-                $react -> save();
-                return response() -> json('update');
+                $react->type = $request->type;
+                $react->save();
+                return response()->json('update');
             }
-                
-        }
-        else{
+        } else {
 
             try {
                 // react it
-                $react  = $post ->reacts()->create([
+                $react  = $post->reacts()->create([
                     'user_id' => Auth::id(),
-                    'type' => $request -> type,
-                    ]);
-                $react -> user = Auth::user();
+                    'type' => $request->type,
+                ]);
+                $react->user = Auth::user();
 
                 // return the like back
-                return response() -> json($react);  
+                return response()->json($react);
             } catch (\Throwable $th) {
-                return response() -> json($th);  
-            }
+                return response()->json($th);
+            } finally {
 
-            finally{
-
-                if((int) Auth::id()!= (int) $post->user_id){
+                if ((int) Auth::id() != (int) $post->user_id) {
 
                     $notification = new Notification();
                     $notification->maker_id = Auth::id();
@@ -94,8 +88,7 @@ class ReactController extends Controller
                     $notification->target = $notification->target;
 
                     // event(new CommentEvent($notification));
-                    event( new NotificationEvent($notification) );
-                
+                    event(new NotificationEvent($notification));
                 }
             }
         }
@@ -143,10 +136,10 @@ class ReactController extends Controller
      */
     public function destroy(React $react)
     {
-         //find the like
-         $react = React::find($react->id);
-         
-         // delete the like .
-        return response() -> json($react -> delete());
+        //find the like
+        $react = React::find($react->id);
+
+        // delete the like .
+        return response()->json($react->delete());
     }
 }

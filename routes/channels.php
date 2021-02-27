@@ -18,18 +18,16 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
-Broadcast::channel('comment-channel', function($user){
+Broadcast::channel('comment-channel', function ($user) {
     return true;
 });
 
 
 
-Broadcast::channel('notification-channel-.{target_id}', function($notification, $target_id){
+Broadcast::channel('notification-channel-.{target_id}', function ($notification, $target_id) {
     return $target_id === Auth::id();
-    
 });
 
-Broadcast::channel('friend-request-channel-.{target_id}', function($friendreqest, $target_id){
+Broadcast::channel('friend-request-channel-.{target_id}', function ($friendreqest, $target_id) {
     return $target_id === Auth::id();
-    
 });

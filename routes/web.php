@@ -63,23 +63,23 @@ Route::resource('conversations', ConversationController::class);
 
 
 // update profile picture 
-Route::post('profiles/{id}/updateprofilepicture',[ProfileController::class,'updateProfilePicture']);
-Route::post('profiles/{id}/deleteprofilepicture',[ProfileController::class,'deleteProfilePicture']);
+Route::post('profiles/{id}/updateprofilepicture', [ProfileController::class, 'updateProfilePicture']);
+Route::post('profiles/{id}/deleteprofilepicture', [ProfileController::class, 'deleteProfilePicture']);
 
-Route::get('profiles/{id}/posts',[ProfileController::class,'posts']);
-Route::get('profiles/{id}/friends',[ProfileController::class,'friends']);
+Route::get('profiles/{id}/posts', [ProfileController::class, 'posts']);
+Route::get('profiles/{id}/friends', [ProfileController::class, 'friends']);
 
-Route::get('profiles/{id}/arefriends',[ProfileController::class,'areFriends']);
-Route::get('profiles/{id}/yourecivedrequest',[ProfileController::class,'youRecivedRequest']);
-Route::get('profiles/{id}/yousentrequest',[ProfileController::class,'youSentRequest']);
-Route::get('profiles/{id}/deleterequest',[ProfileController::class,'deleteRequest']);
+Route::get('profiles/{id}/arefriends', [ProfileController::class, 'areFriends']);
+Route::get('profiles/{id}/yourecivedrequest', [ProfileController::class, 'youRecivedRequest']);
+Route::get('profiles/{id}/yousentrequest', [ProfileController::class, 'youSentRequest']);
+Route::get('profiles/{id}/deleterequest', [ProfileController::class, 'deleteRequest']);
 
 
 
 
 
 //update notification status 
-Route::get('seenotifications',[NotificationController::class,'seeNotifications']);
+Route::get('seenotifications', [NotificationController::class, 'seeNotifications']);
 
 
 //messenger 

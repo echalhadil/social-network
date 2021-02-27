@@ -22,24 +22,24 @@ class FriendController extends Controller
         //
         $user = User::find(Auth::id());
         $friends = array();
-        $friendships1 = $user -> friendsFromMe;
-        $friendships2 = $user -> friendsToMe;
+        $friendships1 = $user->friendsFromMe;
+        $friendships2 = $user->friendsToMe;
 
         foreach ($friendships1 as $friendship) {
-            if($friendship ->from_id == $user->id)
+            if ($friendship->from_id == $user->id)
                 $friends[] = User::find($friendship->to_id);
             else
                 $friends[] = User::find($friendship->from_id);
         }
 
         foreach ($friendships2 as $friendship) {
-            if($friendship ->from_id == $user->id)
+            if ($friendship->from_id == $user->id)
                 $friends[] = User::find($friendship->to_id);
             else
                 $friends[] = User::find($friendship->from_id);
         }
 
-        return response() ->json($friends);
+        return response()->json($friends);
     }
 
     /**
@@ -61,29 +61,27 @@ class FriendController extends Controller
     public function store(Request $request)
     {
         $friendRequest = FriendRequest::find($request->id);
-        if($friendRequest)
-        $friendRequest -> delete();
-        $friendRequest = FriendRequest::where('from_id',$request->from_id)->where('to_id',$request->to_id)->first();
-        if($friendRequest)
-            $friendRequest -> delete();
+        if ($friendRequest)
+            $friendRequest->delete();
+        $friendRequest = FriendRequest::where('from_id', $request->from_id)->where('to_id', $request->to_id)->first();
+        if ($friendRequest)
+            $friendRequest->delete();
         try {
-            if(!Friend::where('from_id',$request->from_id)->where('to_id',$request->to_id)->first()
-            &&
-            !Friend::where('to_id',$request->from_id)->where('from_id',$request->to_id)->first())
-            {
+            if (
+                !Friend::where('from_id', $request->from_id)->where('to_id', $request->to_id)->first()
+                &&
+                !Friend::where('to_id', $request->from_id)->where('from_id', $request->to_id)->first()
+            ) {
                 $friend = new Friend();
                 $friend->from_id = $request->from_id;
                 $friend->to_id = $request->to_id;
                 $friend->save();
             }
             return response()->json(true);
-
-        } 
-        catch (\Throwable $th) {
-            return response() -> json($th);
-        }
-        finally{
-            $notification = new Notification(); 
+        } catch (\Throwable $th) {
+            return response()->json($th);
+        } finally {
+            $notification = new Notification();
             $notification->maker_id = $request->to_id;
             $notification->target_id = $request->from_id;
             $notification->type = 'f';
@@ -91,10 +89,8 @@ class FriendController extends Controller
             $notification->maker = $notification->maker;
             $notification->target = $notification->target;
 
-            event( new NotificationEvent($notification) );
+            event(new NotificationEvent($notification));
         }
-
-
     }
 
     /**
@@ -140,15 +136,15 @@ class FriendController extends Controller
     public function destroy($friend_id)
     {
         //
-        $exist = Friend::where('from_id',$friend_id)->where('to_id',Auth::id())->first();
-        if($exist)
+        $exist = Friend::where('from_id', $friend_id)->where('to_id', Auth::id())->first();
+        if ($exist)
             $exist->delete();
-        else{
-            $exist = Friend::where('to_id',$friend_id)->where('from_id',Auth::id())->first();
-            if($exist)
-            $exist->delete();
+        else {
+            $exist = Friend::where('to_id', $friend_id)->where('from_id', Auth::id())->first();
+            if ($exist)
+                $exist->delete();
         }
-        
-        return response() ->json(true);
+
+        return response()->json(true);
     }
 }

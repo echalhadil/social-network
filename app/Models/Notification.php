@@ -11,11 +11,11 @@ class Notification extends Model
     use HasFactory;
 
     protected $fillable = [
-        'maker_id', 
-        'target_id', 
+        'maker_id',
+        'target_id',
         'type',
         'post_id',
-        
+
     ];
 
     /**
@@ -28,20 +28,26 @@ class Notification extends Model
     {
         return $date->format('Y-m-d H:i:s');
     }
-    
+
 
     // return Notification maker
-    public function maker()  {return $this->belongsTo('App\Models\User');}
+    public function maker()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
     // return Notification target
-    public function target()     {return $this->belongsTo('App\Models\User' );}
+    public function target()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 
-    public function getTimeAgo($carbonObject) {
+    public function getTimeAgo($carbonObject)
+    {
         return str_ireplace(
-            [' seconds', ' second', ' minutes', ' minute', ' hours', ' hour', ' days', ' day', ' weeks', ' week','ago'], 
-            ['s', 's', 'm', 'm', 'h', 'h', 'd', 'd', 'w', 'w',''], 
+            [' seconds', ' second', ' minutes', ' minute', ' hours', ' hour', ' days', ' day', ' weeks', ' week', 'ago'],
+            ['s', 's', 'm', 'm', 'h', 'h', 'd', 'd', 'w', 'w', ''],
             $carbonObject->diffForHumans()
         );
     }
-
 }
