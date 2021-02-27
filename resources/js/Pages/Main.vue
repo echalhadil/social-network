@@ -92,7 +92,7 @@
                     </div>
                     <hr class=" w-10/12 mx-auto ">
                     <div class=" flex pt-3  ">
-                        <inertia-link :href="'http://127.0.0.1:8000/profiles/'+$page.user.id" class="p-2 w-1/2 text-center hover:bg-gray-100 rounded hover:text-indigo-500 cursor-pointer" > 
+                        <inertia-link :href="'/profiles/'+$page.user.id" class="p-2 w-1/2 text-center hover:bg-gray-100 rounded hover:text-indigo-500 cursor-pointer" > 
                             <i class="fal fa-user pr-1 " aria-hidden="true"></i>  profile
                         </inertia-link>
                         <div class="p-2 text-center  w-1/2 hover:bg-gray-100 rounded  hover:text-indigo-500 cursor-pointer" > 

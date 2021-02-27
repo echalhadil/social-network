@@ -113,13 +113,13 @@
                                         <div v-if="notifications.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
                                           
                                            <div v-for="notification in notifications" :key="notification.id" class=" p-2 capitalize flex hover:bg-gray-100 rounded-md ">
-                                                <div class=" h-13 w-13">
+                                                <div class=" w-1/4">
                                                     <img :src="'/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
                                                 </div>
                                                 <div class=" pl-1 text-left pr-0.5  ">
-                                                    <p class=" float-left text-gray-700 text-sm font-bold "> 
+                                                    <p class=" float-left text-gray-700 text-xs font-bold "> 
                                                     {{notification.maker.firstname}} {{notification.maker.lastname}} 
-                                                    <span class=" font-normal text-xs pl-0.5">
+                                                    <span class=" font-normal text-xs ">
                                                         {{ (notification.type=='c')? " commented on your post.":""}} 
                                                         {{ (notification.type=='r')?" reacted to your post.":"" }} 
                                                         {{ (notification.type=='f')?" accepted your friend request.":"" }} 

@@ -6,6 +6,7 @@ use App\Models\Conversation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia as Inertia;
 
 class ConversationController extends Controller
 {
@@ -70,7 +71,9 @@ class ConversationController extends Controller
             else
                 $conversation->friend = User::find($conversation->from_id);
             
-            return response()->json($conversation);
+                return Inertia::render('Messenger/Main')->with("id",$id);
+            
+            
 
         }
         else

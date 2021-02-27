@@ -4051,123 +4051,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4180,7 +4063,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get(route('conversations.index')).then(function (res) {
-        _this.conversations = _.orderBy(res.data, ['updated_at'], ['desc']); // this.loading = false;
+        _this.conversations = _.orderBy(res.data, ['updated_at'], ['desc']);
+        _this.loading = false;
       })["catch"](function (err) {
         console.log(err);
       });
@@ -60408,7 +60292,7 @@ var render = function() {
                                             [
                                               _c(
                                                 "div",
-                                                { staticClass: " h-13 w-13" },
+                                                { staticClass: " w-1/4" },
                                                 [
                                                   _c("img", {
                                                     staticClass:
@@ -60434,7 +60318,7 @@ var render = function() {
                                                     "p",
                                                     {
                                                       staticClass:
-                                                        " float-left text-gray-700 text-sm font-bold "
+                                                        " float-left text-gray-700 text-xs font-bold "
                                                     },
                                                     [
                                                       _vm._v(
@@ -60454,7 +60338,7 @@ var render = function() {
                                                         "span",
                                                         {
                                                           staticClass:
-                                                            " font-normal text-xs pl-0.5"
+                                                            " font-normal text-xs "
                                                         },
                                                         [
                                                           _vm._v(
@@ -62081,10 +61965,7 @@ var render = function() {
                     {
                       staticClass:
                         "p-2 w-1/2 text-center hover:bg-gray-100 rounded hover:text-indigo-500 cursor-pointer",
-                      attrs: {
-                        href:
-                          "http://127.0.0.1:8000/profiles/" + _vm.$page.user.id
-                      }
+                      attrs: { href: "/profiles/" + _vm.$page.user.id }
                     },
                     [
                       _c("i", {
@@ -62145,36 +62026,19 @@ var render = function() {
     "div",
     { staticClass: "px-2 overflow-auto h-full conv" },
     [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _vm._m(2),
-      _vm._v(" "),
-      _vm._m(3),
-      _vm._v(" "),
-      _vm._m(4),
-      _vm._v(" "),
-      _vm._m(5),
-      _vm._v(" "),
-      _vm._m(6),
-      _vm._v(" "),
       _vm.loading
         ? _c(
             "div",
             _vm._l([1, 2], function(item) {
               return _c(
                 "div",
-                {
-                  staticClass:
-                    "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white flex rounded"
-                },
+                { staticClass: "mt-2 px-1 py-2 w-full bg-white flex rounded" },
                 [
-                  _vm._m(7, true),
+                  _vm._m(0, true),
                   _vm._v(" "),
-                  _vm._m(8, true),
+                  _vm._m(1, true),
                   _vm._v(" "),
-                  _vm._m(9, true)
+                  _vm._m(2, true)
                 ]
               )
             }),
@@ -62183,369 +62047,88 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.conversations, function(conversation) {
-        return _c(
-          "div",
-          {
-            key: _vm.conversations.id,
-            staticClass:
-              "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-          },
-          [
-            _c("div", { staticClass: " p-1 " }, [
-              _c("img", {
-                staticClass: " h-14 w-14 object-cover rounded-full",
-                attrs: { src: "/" + conversation.friend.picture }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "my-auto w-4/5" }, [
-              _c("p", { staticClass: " capitalize font-semibold " }, [
-                _vm._v(
-                  " " +
-                    _vm._s(conversation.friend.firstname) +
-                    " " +
-                    _vm._s(conversation.friend.lastname) +
-                    " "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "flex " }, [
-                _c("p", { staticClass: "text-sm truncate" }, [
-                  _vm._v(" " + _vm._s(conversation.friend.last_message) + " .")
+        return !_vm.loading
+          ? _c(
+              "inertia-link",
+              {
+                key: conversation.id,
+                staticClass:
+                  "mt-2 cursor-pointer group shadow px-1 py-2 w-full flex rounded",
+                class: {
+                  "bg-white hover:bg-gray-50": conversation.id != _vm.$page.id,
+                  "bg-indigo-500 hover:bg-indigo-600":
+                    conversation.id == _vm.$page.id
+                },
+                attrs: { href: "/conversations/" + conversation.id }
+              },
+              [
+                _c("div", { staticClass: " p-1 " }, [
+                  _c("img", {
+                    staticClass: " h-14 w-14 object-cover rounded-full",
+                    attrs: { src: "/" + conversation.friend.picture }
+                  })
                 ]),
                 _vm._v(" "),
                 _c(
-                  "span",
-                  { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
-                  [_vm._v(_vm._s(conversation.timeago))]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(10, true)
-          ]
-        )
+                  "div",
+                  {
+                    staticClass: "my-auto w-3/4",
+                    class: { "text-white": conversation.id == _vm.$page.id }
+                  },
+                  [
+                    _c("p", { staticClass: " capitalize font-semibold " }, [
+                      _vm._v(
+                        " " +
+                          _vm._s(conversation.friend.firstname) +
+                          " " +
+                          _vm._s(conversation.friend.lastname) +
+                          " "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex " }, [
+                      _c("p", { staticClass: "text-sm truncate" }, [
+                        _vm._v(
+                          " " + _vm._s(conversation.friend.last_message) + " ."
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass: "pl-1 my-auto  text-xs",
+                          class: {
+                            "text-white": conversation.id == _vm.$page.id,
+                            "text-blue-700": conversation.id != _vm.$page.id
+                          }
+                        },
+                        [_vm._v(_vm._s(conversation.timeago))]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: " ml-auto mr-2" }, [
+                  _c("i", {
+                    staticClass: "fa fa-ellipsis-h",
+                    class: {
+                      "hover:text-gray-700 text-gray-600":
+                        conversation.id != _vm.$page.id,
+                      "hover:text-gray-50 text-white":
+                        conversation.id == _vm.$page.id
+                    },
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ])
+              ]
+            )
+          : _vm._e()
       })
     ],
     2
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "mt-2 shadow cursor-pointer px-1 py-2 w-full bg-indigo-500 hover:bg-indigo-600 flex rounded"
-      },
-      [
-        _c("div", { staticClass: " p-1 " }, [
-          _c("img", {
-            staticClass: " h-14 w-14 object-cover rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-auto text-white w-9/12" }, [
-          _c("p", { staticClass: " capitalize font-semibold " }, [
-            _vm._v("Echalh Adil")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " flex" }, [
-            _c("p", { staticClass: "text-sm truncate " }, [
-              _vm._v("lorem upsum dolor lorem upsum dolor lorem upsum dolor ")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pl-1 my-auto text-white text-xs " }, [
-              _vm._v("16m")
-            ])
-          ])
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-      },
-      [
-        _c("div", { staticClass: " p-1 " }, [
-          _c("img", {
-            staticClass: " h-14 w-14 object-cover rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-auto w-4/5" }, [
-          _c("p", { staticClass: " capitalize font-semibold " }, [
-            _vm._v("Echalh Adil")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex " }, [
-            _c("p", { staticClass: "text-sm truncate" }, [
-              _vm._v("lorem upsum dolor .")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
-              _vm._v("16m")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: " ml-auto mr-2" }, [
-          _c("i", {
-            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-      },
-      [
-        _c("div", { staticClass: " p-1 " }, [
-          _c("img", {
-            staticClass: " h-14 w-14 object-cover rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-auto w-4/5" }, [
-          _c("p", { staticClass: " capitalize font-semibold " }, [
-            _vm._v("Echalh Adil")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex " }, [
-            _c("p", { staticClass: "text-sm truncate" }, [
-              _vm._v("lorem upsum dolor .")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
-              _vm._v("16m")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: " ml-auto mr-2" }, [
-          _c("i", {
-            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-      },
-      [
-        _c("div", { staticClass: " p-1 " }, [
-          _c("img", {
-            staticClass: " h-14 w-14 object-cover rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-auto w-4/5" }, [
-          _c("p", { staticClass: " capitalize font-semibold " }, [
-            _vm._v("Echalh Adil")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex " }, [
-            _c("p", { staticClass: "text-sm truncate" }, [
-              _vm._v("lorem upsum dolor .")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
-              _vm._v("16m")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: " ml-auto mr-2" }, [
-          _c("i", {
-            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-      },
-      [
-        _c("div", { staticClass: " p-1 " }, [
-          _c("img", {
-            staticClass: " h-14 w-14 object-cover rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-auto w-4/5" }, [
-          _c("p", { staticClass: " capitalize font-semibold " }, [
-            _vm._v("Echalh Adil")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex " }, [
-            _c("p", { staticClass: "text-sm truncate" }, [
-              _vm._v("lorem upsum dolor .")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
-              _vm._v("16m")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: " ml-auto mr-2" }, [
-          _c("i", {
-            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-      },
-      [
-        _c("div", { staticClass: " p-1 " }, [
-          _c("img", {
-            staticClass: " h-14 w-14 object-cover rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-auto w-4/5" }, [
-          _c("p", { staticClass: " capitalize font-semibold " }, [
-            _vm._v("Echalh Adil")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex " }, [
-            _c("p", { staticClass: "text-sm truncate" }, [
-              _vm._v("lorem upsum dolor .")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
-              _vm._v("16m")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: " ml-auto mr-2" }, [
-          _c("i", {
-            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-      },
-      [
-        _c("div", { staticClass: " p-1 " }, [
-          _c("img", {
-            staticClass: " h-14 w-14 object-cover rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-            }
-          })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-auto w-4/5" }, [
-          _c("p", { staticClass: " capitalize font-semibold " }, [
-            _vm._v("Echalh Adil")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "flex " }, [
-            _c("p", { staticClass: "text-sm truncate" }, [
-              _vm._v("lorem upsum dolor .")
-            ]),
-            _vm._v(" "),
-            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
-              _vm._v("16m")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: " ml-auto mr-2" }, [
-          _c("i", {
-            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -62580,17 +62163,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: " ml-auto mr-2" }, [
       _c("div", {
         staticClass: "rounded-full w-4 h-2 bg-gray-100",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: " ml-auto mr-2" }, [
-      _c("i", {
-        staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
         attrs: { "aria-hidden": "true" }
       })
     ])
