@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\FriendRequestController;
 use App\Http\Controllers\NotificationController;
@@ -51,6 +52,7 @@ Route::resource('notifications', NotificationController::class);
 Route::resource('friends', FriendController::class);
 Route::resource('friendrequests', FriendRequestController::class);
 Route::resource('results', SearchController::class);
+Route::resource('conversations', ConversationController::class);
 
 
 

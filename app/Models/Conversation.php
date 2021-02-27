@@ -17,4 +17,16 @@ class Conversation extends Model
         'last_message',
 
     ];
+
+    public function getTimeAgo($carbonObject) {
+        return str_ireplace(
+            [' seconds', ' second', ' minutes', ' minute', ' hours', ' hour', ' days', ' day', ' weeks', ' week','ago'], 
+            ['s', 's', 'm', 'm', 'h', 'h', 'd', 'd', 'w', 'w',''], 
+            $carbonObject->diffForHumans()
+        );
+    }
+
+    // returs all conversation's messages
+    public function messages()  {return $this->hasMany('App\Models\Message');}
+
 }

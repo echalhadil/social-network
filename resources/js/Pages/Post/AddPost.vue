@@ -11,7 +11,7 @@
                 <div class="pr-3">
                     <img 
                     class="rounded-full w-16 h-16 " 
-                    :src="'http://127.0.0.1:8000/'+$page.user.picture" />
+                    :src="'/'+$page.user.picture" />
                 </div>
 
                 <div @click="openModal" class="my-auto cursor-pointer capitalize font-light text-gray-700">
@@ -47,7 +47,7 @@
                     <div class="pr-3">
                         <img 
                         class="rounded-full w-16 h-16 " 
-                        :src="'http://127.0.0.1:8000/'+$page.user.picture" />
+                        :src="'/'+$page.user.picture" />
                     </div>
 
                     <input type="text" v-model="post.text" class="my-auto border-red-600  w-5/6 h-14 capitalize font-light text-gray-700" placeholder="write somthing here ..." />

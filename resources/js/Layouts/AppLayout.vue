@@ -114,7 +114,7 @@
                                           
                                            <div v-for="notification in notifications" :key="notification.id" class=" p-2 capitalize flex hover:bg-gray-100 rounded-md ">
                                                 <div class=" h-13 w-13">
-                                                    <img :src="'http://127.0.0.1:8000/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
+                                                    <img :src="'/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
                                                 </div>
                                                 <div class=" pl-1 text-left pr-0.5  ">
                                                     <p class=" float-left text-gray-700 text-sm font-bold "> 
@@ -241,7 +241,7 @@
                 <div class="pt-4 pb-1 border-t border-gray-200">
                     <div class="flex items-center px-4">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" :src="$page.user.profile_photo_url" :alt="$page.user.name" />
+                            <img class="h-10 w-10 rounded-full" :src="'/'+$page.user.picture" :alt="$page.user.name" />
                         </div>
 
                         <div class="ml-3">
@@ -328,7 +328,7 @@
 
 
         <!--notification stuff -->
-
+<!--
         <div  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
             <div class=" px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md ">
                 <div class=" h-12 w-12">
@@ -346,7 +346,7 @@
                 </div>
             </div>
         </div>
-
+-->
     </div>
 </template>
 

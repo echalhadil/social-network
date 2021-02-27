@@ -3953,6 +3953,246 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      conversations: [],
+      loading: true
+    };
+  },
+  methods: {
+    getConversations: function getConversations() {
+      var _this = this;
+
+      axios.get(route('conversations.index')).then(function (res) {
+        _this.conversations = _.orderBy(res.data, ['updated_at'], ['desc']); // this.loading = false;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getConversations();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Main.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Main.vue?vue&type=script&lang=js& ***!
@@ -4118,6 +4358,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4127,6 +4415,68 @@ __webpack_require__.r(__webpack_exports__);
     Conversations: _Conversations__WEBPACK_IMPORTED_MODULE_1__["default"],
     SendMessage: _SendMessage__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Message.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['message']
 });
 
 /***/ }),
@@ -6830,7 +7180,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n\n", ""]);
+exports.push([module.i, ".conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n\n\n", ""]);
 
 // exports
 
@@ -6849,7 +7199,26 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".regular-conversations-height{\n  height: calc(100vh - 190px);\n}\n.regular-messages-height{\n  height: calc(100vh - 230px);\n}\n.messages::-webkit-scrollbar {\n  width: 5px;\n}\n.messages::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.messages::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.messages::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n\n\n", ""]);
+exports.push([module.i, ".regular-conversations-height{\n  height: calc(100vh - 190px);\n}\n.regular-messages-height{\n  height: calc(100vh - 230px);\n}\n.messages::-webkit-scrollbar {\n  width: 5px;\n}\n.messages::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.messages::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.messages::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n", ""]);
 
 // exports
 
@@ -53576,6 +53945,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Post/Main.vue?vue&type=style&index=0&lang=css&":
 /*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Post/Main.vue?vue&type=style&index=0&lang=css& ***!
@@ -59694,13 +60093,13 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                    \n                                     " +
+                                                "\n                                        \n                                         " +
                                                   _vm._s(
                                                     _vm.newFriendRequest > 9
                                                       ? "9+"
                                                       : _vm.newFriendRequest
                                                   ) +
-                                                  "\n                                     "
+                                                  "\n                                         "
                                               )
                                             ]
                                           )
@@ -59723,7 +60122,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        Friendship Requests\n                                    "
+                                        "\n                                            Friendship Requests\n                                        "
                                       )
                                     ]
                                   ),
@@ -59815,7 +60214,7 @@ var render = function() {
                                                     },
                                                     [
                                                       _vm._v(
-                                                        " \n                                                " +
+                                                        " \n                                                    " +
                                                           _vm._s(
                                                             friendRequest.maker
                                                               .firstname
@@ -59825,7 +60224,7 @@ var render = function() {
                                                             friendRequest.maker
                                                               .lastname
                                                           ) +
-                                                          " \n                                                "
+                                                          " \n                                                    "
                                                       )
                                                     ]
                                                   ),
@@ -59925,13 +60324,13 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                    \n                                     " +
+                                                "\n                                        \n                                         " +
                                                   _vm._s(
                                                     _vm.newNotifications > 9
                                                       ? "9+"
                                                       : _vm.newNotifications
                                                   ) +
-                                                  "\n                                     "
+                                                  "\n                                         "
                                               )
                                             ]
                                           )
@@ -59954,7 +60353,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        Notifications\n                                    "
+                                        "\n                                            Notifications\n                                        "
                                       )
                                     ]
                                   ),
@@ -60016,7 +60415,7 @@ var render = function() {
                                                       " h-12 w-12 rounded-full ",
                                                     attrs: {
                                                       src:
-                                                        "http://127.0.0.1:8000/" +
+                                                        "/" +
                                                         notification.maker
                                                           .picture
                                                     }
@@ -60039,7 +60438,7 @@ var render = function() {
                                                     },
                                                     [
                                                       _vm._v(
-                                                        " \n                                                " +
+                                                        " \n                                                    " +
                                                           _vm._s(
                                                             notification.maker
                                                               .firstname
@@ -60049,7 +60448,7 @@ var render = function() {
                                                             notification.maker
                                                               .lastname
                                                           ) +
-                                                          " \n                                                "
+                                                          " \n                                                    "
                                                       ),
                                                       _c(
                                                         "span",
@@ -60059,28 +60458,28 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                                                    " +
+                                                            "\n                                                        " +
                                                               _vm._s(
                                                                 notification.type ==
                                                                   "c"
                                                                   ? " commented on your post."
                                                                   : ""
                                                               ) +
-                                                              " \n                                                    " +
+                                                              " \n                                                        " +
                                                               _vm._s(
                                                                 notification.type ==
                                                                   "r"
                                                                   ? " reacted to your post."
                                                                   : ""
                                                               ) +
-                                                              " \n                                                    " +
+                                                              " \n                                                        " +
                                                               _vm._s(
                                                                 notification.type ==
                                                                   "f"
                                                                   ? " accepted your friend request."
                                                                   : ""
                                                               ) +
-                                                              " \n                                                    \n                                                 "
+                                                              " \n                                                        \n                                                     "
                                                           )
                                                         ]
                                                       )
@@ -60170,7 +60569,7 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                        Conversations\n                                    "
+                                        "\n                                            Conversations\n                                        "
                                       )
                                     ]
                                   ),
@@ -60232,7 +60631,7 @@ var render = function() {
                                   "button",
                                   {
                                     staticClass:
-                                      "flex h-7 w-7 text-sm border-2 border-transparent rounded-full focus:outline-none\n                                 hover:text-indigo-700 focus:text-indigo-100 transition duration-150 ease-in-out",
+                                      "flex h-7 w-7 text-sm border-2 border-transparent rounded-full focus:outline-none\n                                     hover:text-indigo-700 focus:text-indigo-100 transition duration-150 ease-in-out",
                                     class: {
                                       "border-gray-500": !_vm
                                         .route()
@@ -60269,7 +60668,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    Manage Account\n                                "
+                                      "\n                                        Manage Account\n                                    "
                                     )
                                   ]
                                 ),
@@ -60283,7 +60682,7 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n                                    Profile\n                                "
+                                      "\n                                        Profile\n                                    "
                                     )
                                   ]
                                 ),
@@ -60308,7 +60707,7 @@ var render = function() {
                                       { attrs: { as: "button" } },
                                       [
                                         _vm._v(
-                                          "\n                                        Logout\n                                    "
+                                          "\n                                            Logout\n                                        "
                                         )
                                       ]
                                     )
@@ -60408,7 +60807,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    Dashboard\n                "
+                        "\n                        Dashboard\n                    "
                       )
                     ]
                   )
@@ -60422,7 +60821,7 @@ var render = function() {
                     _c("img", {
                       staticClass: "h-10 w-10 rounded-full",
                       attrs: {
-                        src: _vm.$page.user.profile_photo_url,
+                        src: "/" + _vm.$page.user.picture,
                         alt: _vm.$page.user.name
                       }
                     })
@@ -60457,7 +60856,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                        Profile\n                    "
+                          "\n                            Profile\n                        "
                         )
                       ]
                     ),
@@ -60473,7 +60872,7 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                        API Tokens\n                    "
+                              "\n                            API Tokens\n                        "
                             )
                           ]
                         )
@@ -60496,7 +60895,7 @@ var render = function() {
                           { attrs: { as: "button" } },
                           [
                             _vm._v(
-                              "\n                            Logout\n                        "
+                              "\n                                Logout\n                            "
                             )
                           ]
                         )
@@ -60518,7 +60917,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                            Manage Team\n                        "
+                                "\n                                Manage Team\n                            "
                               )
                             ]
                           ),
@@ -60536,7 +60935,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                            Team Settings\n                        "
+                                "\n                                Team Settings\n                            "
                               )
                             ]
                           ),
@@ -60551,7 +60950,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                            Create New Team\n                        "
+                                "\n                                Create New Team\n                            "
                               )
                             ]
                           ),
@@ -60568,7 +60967,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                            Switch Teams\n                        "
+                                "\n                                Switch Teams\n                            "
                               )
                             ]
                           ),
@@ -61742,312 +62141,458 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    { staticClass: "px-2 overflow-auto h-full conv" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _vm._m(3),
+      _vm._v(" "),
+      _vm._m(4),
+      _vm._v(" "),
+      _vm._m(5),
+      _vm._v(" "),
+      _vm._m(6),
+      _vm._v(" "),
+      _vm.loading
+        ? _c(
+            "div",
+            _vm._l([1, 2], function(item) {
+              return _c(
+                "div",
+                {
+                  staticClass:
+                    "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white flex rounded"
+                },
+                [
+                  _vm._m(7, true),
+                  _vm._v(" "),
+                  _vm._m(8, true),
+                  _vm._v(" "),
+                  _vm._m(9, true)
+                ]
+              )
+            }),
+            0
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.conversations, function(conversation) {
+        return _c(
+          "div",
+          {
+            key: _vm.conversations.id,
+            staticClass:
+              "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
+          },
+          [
+            _c("div", { staticClass: " p-1 " }, [
+              _c("img", {
+                staticClass: " h-14 w-14 object-cover rounded-full",
+                attrs: { src: "/" + conversation.friend.picture }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "my-auto w-4/5" }, [
+              _c("p", { staticClass: " capitalize font-semibold " }, [
+                _vm._v(
+                  " " +
+                    _vm._s(conversation.friend.firstname) +
+                    " " +
+                    _vm._s(conversation.friend.lastname) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex " }, [
+                _c("p", { staticClass: "text-sm truncate" }, [
+                  _vm._v(" " + _vm._s(conversation.friend.last_message) + " .")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
+                  [_vm._v(_vm._s(conversation.timeago))]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(10, true)
+          ]
+        )
+      })
+    ],
+    2
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "px-2 overflow-auto h-full conv" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "mt-2 shadow cursor-pointer px-1 py-2 w-full bg-indigo-500 hover:bg-indigo-600 flex rounded"
-        },
-        [
-          _c("div", { staticClass: " p-1 " }, [
-            _c("img", {
-              staticClass: " h-14 w-14 object-cover rounded-full",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-              }
-            })
+    return _c(
+      "div",
+      {
+        staticClass:
+          "mt-2 shadow cursor-pointer px-1 py-2 w-full bg-indigo-500 hover:bg-indigo-600 flex rounded"
+      },
+      [
+        _c("div", { staticClass: " p-1 " }, [
+          _c("img", {
+            staticClass: " h-14 w-14 object-cover rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-auto text-white w-9/12" }, [
+          _c("p", { staticClass: " capitalize font-semibold " }, [
+            _vm._v("Echalh Adil")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "my-auto text-white w-4/5" }, [
-            _c("p", { staticClass: " capitalize font-semibold " }, [
-              _vm._v("Echalh Adil")
+          _c("div", { staticClass: " flex" }, [
+            _c("p", { staticClass: "text-sm truncate " }, [
+              _vm._v("lorem upsum dolor lorem upsum dolor lorem upsum dolor ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: " flex" }, [
-              _c("p", { staticClass: "text-sm truncate " }, [
-                _vm._v("lorem upsum dolor lorem upsum dolor lorem upsum dolor ")
-              ]),
-              _vm._v(" "),
-              _c("span", { staticClass: "pl-1 my-auto text-white text-xs " }, [
-                _vm._v("16m")
-              ])
+            _c("span", { staticClass: "pl-1 my-auto text-white text-xs " }, [
+              _vm._v("16m")
             ])
           ])
-        ]
-      ),
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
+      },
+      [
+        _c("div", { staticClass: " p-1 " }, [
+          _c("img", {
+            staticClass: " h-14 w-14 object-cover rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-auto w-4/5" }, [
+          _c("p", { staticClass: " capitalize font-semibold " }, [
+            _vm._v("Echalh Adil")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex " }, [
+            _c("p", { staticClass: "text-sm truncate" }, [
+              _vm._v("lorem upsum dolor .")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
+              _vm._v("16m")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: " ml-auto mr-2" }, [
+          _c("i", {
+            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
+      },
+      [
+        _c("div", { staticClass: " p-1 " }, [
+          _c("img", {
+            staticClass: " h-14 w-14 object-cover rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-auto w-4/5" }, [
+          _c("p", { staticClass: " capitalize font-semibold " }, [
+            _vm._v("Echalh Adil")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex " }, [
+            _c("p", { staticClass: "text-sm truncate" }, [
+              _vm._v("lorem upsum dolor .")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
+              _vm._v("16m")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: " ml-auto mr-2" }, [
+          _c("i", {
+            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
+      },
+      [
+        _c("div", { staticClass: " p-1 " }, [
+          _c("img", {
+            staticClass: " h-14 w-14 object-cover rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-auto w-4/5" }, [
+          _c("p", { staticClass: " capitalize font-semibold " }, [
+            _vm._v("Echalh Adil")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex " }, [
+            _c("p", { staticClass: "text-sm truncate" }, [
+              _vm._v("lorem upsum dolor .")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
+              _vm._v("16m")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: " ml-auto mr-2" }, [
+          _c("i", {
+            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
+      },
+      [
+        _c("div", { staticClass: " p-1 " }, [
+          _c("img", {
+            staticClass: " h-14 w-14 object-cover rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-auto w-4/5" }, [
+          _c("p", { staticClass: " capitalize font-semibold " }, [
+            _vm._v("Echalh Adil")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex " }, [
+            _c("p", { staticClass: "text-sm truncate" }, [
+              _vm._v("lorem upsum dolor .")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
+              _vm._v("16m")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: " ml-auto mr-2" }, [
+          _c("i", {
+            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
+      },
+      [
+        _c("div", { staticClass: " p-1 " }, [
+          _c("img", {
+            staticClass: " h-14 w-14 object-cover rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-auto w-4/5" }, [
+          _c("p", { staticClass: " capitalize font-semibold " }, [
+            _vm._v("Echalh Adil")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex " }, [
+            _c("p", { staticClass: "text-sm truncate" }, [
+              _vm._v("lorem upsum dolor .")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
+              _vm._v("16m")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: " ml-auto mr-2" }, [
+          _c("i", {
+            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
+      },
+      [
+        _c("div", { staticClass: " p-1 " }, [
+          _c("img", {
+            staticClass: " h-14 w-14 object-cover rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "my-auto w-4/5" }, [
+          _c("p", { staticClass: " capitalize font-semibold " }, [
+            _vm._v("Echalh Adil")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "flex " }, [
+            _c("p", { staticClass: "text-sm truncate" }, [
+              _vm._v("lorem upsum dolor .")
+            ]),
+            _vm._v(" "),
+            _c("span", { staticClass: "pl-1 my-auto text-blue-700 text-xs" }, [
+              _vm._v("16m")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: " ml-auto mr-2" }, [
+          _c("i", {
+            staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: " p-1 " }, [
+      _c("div", { staticClass: " h-14 w-14 rounded-full loading " })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "my-auto w-4/5" }, [
+      _c("div", {
+        staticClass:
+          " capitalize font-semibold rounded-full  w-28  h-5 loading "
+      }),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-        },
-        [
-          _c("div", { staticClass: " p-1 " }, [
-            _c("img", {
-              staticClass: " h-14 w-14 object-cover rounded-full",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "my-auto w-4/5" }, [
-            _c("p", { staticClass: " capitalize font-semibold " }, [
-              _vm._v("Echalh Adil")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex " }, [
-              _c("p", { staticClass: "text-sm truncate" }, [
-                _vm._v("lorem upsum dolor .")
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
-                [_vm._v("16m")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " ml-auto mr-2" }, [
-            _c("i", {
-              staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-              attrs: { "aria-hidden": "true" }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-        },
-        [
-          _c("div", { staticClass: " p-1 " }, [
-            _c("img", {
-              staticClass: " h-14 w-14 object-cover rounded-full",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "my-auto w-4/5" }, [
-            _c("p", { staticClass: " capitalize font-semibold " }, [
-              _vm._v("Echalh Adil")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex " }, [
-              _c("p", { staticClass: "text-sm truncate" }, [
-                _vm._v("lorem upsum dolor .")
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
-                [_vm._v("16m")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " ml-auto mr-2" }, [
-            _c("i", {
-              staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-              attrs: { "aria-hidden": "true" }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-        },
-        [
-          _c("div", { staticClass: " p-1 " }, [
-            _c("img", {
-              staticClass: " h-14 w-14 object-cover rounded-full",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "my-auto w-4/5" }, [
-            _c("p", { staticClass: " capitalize font-semibold " }, [
-              _vm._v("Echalh Adil")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex " }, [
-              _c("p", { staticClass: "text-sm truncate" }, [
-                _vm._v("lorem upsum dolor .")
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
-                [_vm._v("16m")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " ml-auto mr-2" }, [
-            _c("i", {
-              staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-              attrs: { "aria-hidden": "true" }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-        },
-        [
-          _c("div", { staticClass: " p-1 " }, [
-            _c("img", {
-              staticClass: " h-14 w-14 object-cover rounded-full",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "my-auto w-4/5" }, [
-            _c("p", { staticClass: " capitalize font-semibold " }, [
-              _vm._v("Echalh Adil")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex " }, [
-              _c("p", { staticClass: "text-sm truncate" }, [
-                _vm._v("lorem upsum dolor .")
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
-                [_vm._v("16m")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " ml-auto mr-2" }, [
-            _c("i", {
-              staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-              attrs: { "aria-hidden": "true" }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-        },
-        [
-          _c("div", { staticClass: " p-1 " }, [
-            _c("img", {
-              staticClass: " h-14 w-14 object-cover rounded-full",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "my-auto w-4/5" }, [
-            _c("p", { staticClass: " capitalize font-semibold " }, [
-              _vm._v("Echalh Adil")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex " }, [
-              _c("p", { staticClass: "text-sm truncate" }, [
-                _vm._v("lorem upsum dolor .")
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
-                [_vm._v("16m")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " ml-auto mr-2" }, [
-            _c("i", {
-              staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-              attrs: { "aria-hidden": "true" }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "mt-2 cursor-pointer group shadow px-1 py-2 w-full bg-white hover:bg-gray-50 flex rounded"
-        },
-        [
-          _c("div", { staticClass: " p-1 " }, [
-            _c("img", {
-              staticClass: " h-14 w-14 object-cover rounded-full",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/2e/d5/af/2ed5af0670efb58ffe9aff43a3f24bdc.jpg"
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "my-auto w-4/5" }, [
-            _c("p", { staticClass: " capitalize font-semibold " }, [
-              _vm._v("Echalh Adil")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex " }, [
-              _c("p", { staticClass: "text-sm truncate" }, [
-                _vm._v("lorem upsum dolor .")
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "pl-1 my-auto text-blue-700 text-xs" },
-                [_vm._v("16m")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " ml-auto mr-2" }, [
-            _c("i", {
-              staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
-              attrs: { "aria-hidden": "true" }
-            })
-          ])
-        ]
-      )
+      _c("div", { staticClass: "flex mt-1 " }, [
+        _c("div", { staticClass: " w-3/4 my-auto h-3 loading rounded-full" }),
+        _vm._v(" "),
+        _c("span", {
+          staticClass: "ml-1 my-auto h-3 w-1/6 rounded-full loading text-xs"
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: " ml-auto mr-2" }, [
+      _c("div", {
+        staticClass: "rounded-full w-4 h-2 bg-gray-100",
+        attrs: { "aria-hidden": "true" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: " ml-auto mr-2" }, [
+      _c("i", {
+        staticClass: "hover:text-gray-700 fa fa-ellipsis-h text-gray-600",
+        attrs: { "aria-hidden": "true" }
+      })
     ])
   }
 ]
@@ -62073,7 +62618,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("app-layout", [
-    _c("div", { staticClass: " flex mt-6 mx-3   " }, [
+    _c("div", { staticClass: "flex mt-6 mx-3 " }, [
       _c(
         "div",
         {
@@ -62102,7 +62647,8 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: " w-2/4 regular-messages-height invisible sm:visible  "
+          staticClass:
+            " regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
         },
         [
           _c(
@@ -62135,6 +62681,65 @@ var render = function() {
             "div",
             { staticClass: " w-full h-full messages overflow-auto mt-3 " },
             [
+              _c("div", [
+                _c("div", { staticClass: "p-2 flex" }, [
+                  _c("div", { staticClass: "h-10 w-10 rounded-full loading" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-2 w-3/4" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          " shadow p-2 loading rounded-t-lg rounded-r-lg h-20 w-full "
+                      },
+                      [_c("div", { staticClass: "text-gray-700 text-sm" })]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "capitalize mt-1" }, [
+                      _c("div", {
+                        staticClass: "w-9 h-3 rounded-full loading "
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "my-auto mx-auto loading w-4 h-2 rounded-full "
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "p-2 flex" }, [
+                  _c("div", {
+                    staticClass: "my-auto ml-auto loading w-4 h-2 rounded-full "
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "ml-auto w-3/4 " }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "ml-auto p-2 shadow loading h-20 rounded-t-lg rounded-l-lg w-full "
+                      },
+                      [_c("div", { staticClass: "text-white text-sm" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "w-3/4 ml-auto capitalize mt-1" },
+                      [
+                        _c("div", {
+                          staticClass:
+                            "float-right w-9 h-3 rounded-full loading "
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", {
+                    staticClass: "h-10 w-10 rounded-full ml-2 loading"
+                  })
+                ])
+              ]),
+              _vm._v(" "),
               _c("div", { staticClass: "p-2 flex" }, [
                 _c("img", {
                   staticClass: "h-10 w-10 rounded-full",
@@ -62314,7 +62919,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "w-1/4 mx-2  invisible sm:visible" }, [
+      _c("div", { staticClass: "mx-2 w-0 invisible sm:w-1/4 sm:visible" }, [
         _c("div", { staticClass: "p-2 bg-white w-full rounded-lg" }, [
           _c("div", { staticClass: "  " }, [
             _c("img", {
@@ -62354,6 +62959,118 @@ var render = function() {
         ])
       ])
     ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=template&id=45b90112&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Message.vue?vue&type=template&id=45b90112& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "p-2 flex" }, [
+    _vm.$page.user.id != _vm.message.from_id
+      ? _c("img", {
+          staticClass: "h-10 w-10 rounded-full",
+          attrs: {
+            src:
+              "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
+          }
+        })
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$page.user.id != _vm.message.from_id
+      ? _c("div", { staticClass: "ml-2 w-3/4" }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                " shadow p-2 bg-white rounded-t-lg rounded-r-lg  w-full "
+            },
+            [
+              _c("p", { staticClass: "text-gray-700 text-sm" }, [
+                _vm._v(
+                  "\n            " + _vm._s(_vm.message.text) + "\n            "
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "capitalize mt-1" }, [
+            _c("p", { staticClass: " text-xs text-gray-500 " }, [
+              _vm._v("sent " + _vm._s(_vm.message.timeago) + " ago. ")
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$page.user.id != _vm.message.from_id
+      ? _c("div", { staticClass: "my-auto ml-auto text-gray-600 mr-auto " }, [
+          _c("i", {
+            staticClass: "fa fa-ellipsis-h",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$page.user.id == _vm.message.from_id
+      ? _c("div", { staticClass: "my-auto ml-auto text-gray-600" }, [
+          _c("i", {
+            staticClass: " ml-auto fa fa-ellipsis-h",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$page.user.id == _vm.message.from_id
+      ? _c("div", { staticClass: "ml-auto w-3/4 " }, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "ml-auto p-2 shadow bg-indigo-500 rounded-t-lg rounded-l-lg  w-full "
+            },
+            [
+              _c("p", { staticClass: "text-white text-sm" }, [
+                _vm._v(
+                  "\n            " + _vm._s(_vm.message.text) + "\n            "
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "w-3/4 ml-auto capitalize mt-1" }, [
+            _c("p", { staticClass: "float-right text-xs text-gray-500 " }, [
+              _vm._v("sent " + _vm._s(_vm.message.timeago) + " ago.")
+            ])
+          ])
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.$page.user.id == _vm.message.from_id
+      ? _c("img", {
+          staticClass: "h-10 w-10 rounded-full ml-2",
+          attrs: {
+            src:
+              "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
+          }
+        })
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -62490,9 +63207,7 @@ var render = function() {
             _c("div", { staticClass: "pr-3" }, [
               _c("img", {
                 staticClass: "rounded-full w-16 h-16 ",
-                attrs: {
-                  src: "http://127.0.0.1:8000/" + _vm.$page.user.picture
-                }
+                attrs: { src: "/" + _vm.$page.user.picture }
               })
             ]),
             _vm._v(" "),
@@ -62551,9 +63266,7 @@ var render = function() {
               _c("div", { staticClass: "pr-3" }, [
                 _c("img", {
                   staticClass: "rounded-full w-16 h-16 ",
-                  attrs: {
-                    src: "http://127.0.0.1:8000/" + _vm.$page.user.picture
-                  }
+                  attrs: { src: "/" + _vm.$page.user.picture }
                 })
               ]),
               _vm._v(" "),
@@ -62980,12 +63693,12 @@ var render = function() {
         "inertia-link",
         {
           staticClass: " pr-1",
-          attrs: { href: "http://127.0.0.1:8000/profiles/" + _vm.post.user.id }
+          attrs: { href: "/profiles/" + _vm.post.user.id }
         },
         [
           _c("img", {
             staticClass: "w-13 h-13 object-cover rounded-full ",
-            attrs: { src: "http://127.0.0.1:8000/" + _vm.post.user.picture }
+            attrs: { src: "/" + _vm.post.user.picture }
           })
         ]
       ),
@@ -62998,9 +63711,7 @@ var render = function() {
             "inertia-link",
             {
               staticClass: "text-base font-bold capitalize",
-              attrs: {
-                href: "http://127.0.0.1:8000/profiles/" + _vm.post.user.id
-              }
+              attrs: { href: "/" + _vm.post.user.id }
             },
             [
               _vm._v(
@@ -63111,7 +63822,7 @@ var render = function() {
   return _c("div", { staticClass: "p-1 pt-2" }, [
     _c("img", {
       staticClass: "rounded-sm h-96 object-contain w-full cursor-pointer",
-      attrs: { src: "http://127.0.0.1:8000/" + _vm.src }
+      attrs: { src: "/" + _vm.src }
     })
   ])
 }
@@ -81605,17 +82316,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Conversations.vue?vue&type=template&id=2c9de69b& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=template&id=2c9de69b&");
-/* harmony import */ var _Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Conversations.vue?vue&type=style&index=0&lang=css& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Conversations.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Conversations.vue?vue&type=style&index=0&lang=css& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -81629,6 +82342,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/Pages/Messenger/Conversations.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Conversations.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
@@ -81826,17 +82553,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
-var script = {}
+/* harmony import */ var _Message_vue_vue_type_template_id_45b90112___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Message.vue?vue&type=template&id=45b90112& */ "./resources/js/Pages/Messenger/Message.vue?vue&type=template&id=45b90112&");
+/* harmony import */ var _Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Message.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Messenger/Message.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Message.vue?vue&type=style&index=0&lang=css& */ "./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
-  script,
-  render,
-  staticRenderFns,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Message_vue_vue_type_template_id_45b90112___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Message_vue_vue_type_template_id_45b90112___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -81844,8 +82576,58 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/Pages/Messenger/Message.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Messenger/Message.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/Pages/Messenger/Message.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css& ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Messenger/Message.vue?vue&type=template&id=45b90112&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Pages/Messenger/Message.vue?vue&type=template&id=45b90112& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_template_id_45b90112___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Message.vue?vue&type=template&id=45b90112& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Message.vue?vue&type=template&id=45b90112&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_template_id_45b90112___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Message_vue_vue_type_template_id_45b90112___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 

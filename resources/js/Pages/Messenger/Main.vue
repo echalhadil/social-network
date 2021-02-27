@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class=" flex mt-6 mx-3   ">
+        <div class="flex mt-6 mx-3 ">
             <div class=" mx-auto w-full sm:w-1/4 regular-conversations-height  ">
 
                 <div class="w-full p-2" >
@@ -19,7 +19,7 @@
                 <conversations />
             </div>
 
-            <div class=" w-2/4 regular-messages-height invisible sm:visible  ">
+            <div class=" regular-messages-height w-0 invisible sm:w-2/4 sm:visible  ">
                 <div class=" w-full px-2 py-3 bg-white flex shadow-lg">
                     <div class=" pr-1 "> 
                         <img src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg" 
@@ -33,6 +33,50 @@
                 </div>
 
                 <div class=" w-full h-full messages overflow-auto mt-3 ">
+
+                    <!-- loading for message -->
+                    <div>
+
+                        <div class="p-2 flex">
+                            <div class="h-10 w-10 rounded-full loading"></div>
+                            <div class="ml-2 w-3/4">
+                                <div class=" shadow p-2 loading rounded-t-lg rounded-r-lg h-20 w-full ">
+                                    <div class="text-gray-700 text-sm">
+                                    </div>
+                                    
+                                </div>
+                                <div class="capitalize mt-1">
+                                    <div class="w-9 h-3 rounded-full loading "> </div>
+                                </div>
+                            </div>
+                            <div class="my-auto mx-auto loading w-4 h-2 rounded-full ">
+
+                            </div>
+                            
+                        </div>
+
+                        <div class="p-2 flex">
+
+                            <div class="my-auto ml-auto loading w-4 h-2 rounded-full ">
+                            </div>
+                            
+                            <div class="ml-auto w-3/4 ">       
+
+                                <div class="ml-auto p-2 shadow loading h-20 rounded-t-lg rounded-l-lg w-full ">
+                                    <div class="text-white text-sm"></div>
+                                    
+                                </div>
+                                <div class="w-3/4 ml-auto capitalize mt-1">
+                                    <div class="float-right w-9 h-3 rounded-full loading "></div>
+                                </div>
+
+                            </div>
+
+                            <div class="h-10 w-10 rounded-full ml-2 loading"></div>
+                            
+                        </div>
+
+                    </div>
 
 
                     <div class="p-2 flex">
@@ -53,6 +97,10 @@
                         </div>
                         
                     </div>
+
+                    
+
+
 
                     <div class="p-2 flex">
 
@@ -129,7 +177,7 @@
                 
             </div>
 
-            <div class="w-1/4 mx-2  invisible sm:visible">
+            <div class="mx-2 w-0 invisible sm:w-1/4 sm:visible">
                 <div class="p-2 bg-white w-full rounded-lg">
                     <div class="  ">
                         <img src="https://i.pinimg.com/564x/8c/1c/ec/8c1cec6ab839e0266066407528d12d69.jpg"
@@ -192,6 +240,20 @@ export default {
     .messages::-webkit-scrollbar-thumb:hover {
         background: #e5e8ef;
         }
+
+
+    .loading{
+        background: linear-gradient(to right, #e5e7eb , #e3e3e3);
+        animation: mymove 1s infinite;
+    }
+    @keyframes mymove {
+    0% {background: linear-gradient(to right, #e5e7eb , #e3e3e3);}
+
+    50% {background: linear-gradient(to right, #e3e3e3 , #e3e3e3);}
+
+
+    100% {background: linear-gradient(to left, #e5e7eb , #e3e3e3);}
+    }
 
     
 </style>

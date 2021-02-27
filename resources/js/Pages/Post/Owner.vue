@@ -1,16 +1,16 @@
 <template>
     <div class=" w-full flex p-1 " >
         <!-- post owner picture -->
-        <inertia-link :href="'http://127.0.0.1:8000/profiles/'+post.user.id" class=" pr-1">
+        <inertia-link :href="'/profiles/'+post.user.id" class=" pr-1">
             <img 
                 class="w-13 h-13 object-cover rounded-full " 
-                :src="'http://127.0.0.1:8000/'+post.user.picture" >
+                :src="'/'+post.user.picture" >
         </inertia-link>
         <!-- post owner picture -->
 
         <!-- post owner full name -->
         <div class="pl-2 my-auto w-7/12"> 
-            <inertia-link :href="'http://127.0.0.1:8000/profiles/'+post.user.id" class="text-base font-bold capitalize">{{post.user.firstname}} {{post.user.lastname}}</inertia-link>
+            <inertia-link :href="'/'+post.user.id" class="text-base font-bold capitalize">{{post.user.firstname}} {{post.user.lastname}}</inertia-link>
             <p class="text-teal-400 lowercase text-xs">{{ post.timeago}}</p>
         </div>
         <!-- post owner full name -->
