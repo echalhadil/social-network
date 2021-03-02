@@ -44,17 +44,23 @@
                     :key="comment.id"
                     class="comments pb-2 flex"
                 >
-                    <div class="pr-1">
+                    <inertia-link
+                        :href="'/profiles/' + comment.user.id"
+                        class="pr-1"
+                    >
                         <img
                             class=" h-11 w-11 rounded-full object-cover  "
                             :src="'/' + comment.user.picture"
                         />
-                    </div>
-                    <div class=" pl-1  w-11/12 ">
-                        <p class=" capitalize font-semibold text-sm ">
+                    </inertia-link>
+                    <div clafss=" pl-1  w-11/12 ">
+                        <inertia-link
+                            :href="'/profiles/' + comment.user.id"
+                            class=" capitalize font-semibold text-sm "
+                        >
                             {{ comment.user.firstname }}
                             {{ comment.user.firstname }}
-                        </p>
+                        </inertia-link>
                         <p class=" capitalize text-sm text-cool-gray-600  ">
                             {{ comment.text }}
                             <span class="px-1 text-xl font-bold ">.</span>

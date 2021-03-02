@@ -12,7 +12,7 @@
         <!-- post owner full name -->
         <div class="pl-2 my-auto w-7/12">
             <inertia-link
-                :href="'/' + post.user.id"
+                :href="'/profiles/' + post.user.id"
                 class="text-base font-bold capitalize"
                 >{{ post.user.firstname }}
                 {{ post.user.lastname }}</inertia-link
