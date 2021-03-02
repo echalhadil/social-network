@@ -132,13 +132,13 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        if ($post->user_id == Auth::id()) {
+            $post  = Post::find($post->id);
+            $post->text  = $request->text;
+            $post->save();
 
-        $post  = Post::find($post->id);
-        $post->text  = $request->text;
-        $post->save();
-
-
-        return response()->json(true);
+            return response()->json(true);
+        }
     }
 
     /**
@@ -149,12 +149,14 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
-        $post = Post::find($post->id);
-        $post->comments()->delete();
-        $post->reacts()->delete();
-        $post->delete();
+        
+        if ($post->user_id == Auth::id()) {
+            $post = Post::find($post->id);
+            $post->comments()->delete();
+            $post->reacts()->delete();
+            $post->delete();
 
-        return response()->json("ok");
+            return response()->json("ok");
+        }
     }
 }

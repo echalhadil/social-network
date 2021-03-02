@@ -55,63 +55,29 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        //
-
         $user = User::find($id);
 
-        if ($user) {
-            $user->posts = $user->posts;
-            foreach ($user->posts as $post) {
-                $post->user = $post->user;
-
-                $post->comments = $post->comments;
-
-                foreach ($post->comments as $comment) {
-                    $comment->user = $comment->user;
-                }
-
-                $post->reacts = $post->reacts;
-                foreach ($post->reacts as $react) {
-                    $react->user = $react->user;
-                }
-            }
-
-
-            return Inertia::render('Profile/Main')->with('profiler', $user);
-        } else
-            return Inertia::render('Main');
+        return $user ?  Inertia::render('Profile/Main')->with('profiler', $user) : Inertia::render('Main');
     }
 
     public function youSentRequest($id)
     {
-
-
-        $youRecivedRequest = false;
-        if (FriendRequest::where('to_id', $id)->where('from_id', Auth::id())->first())
-            $youRecivedRequest = true;
-
-        return response()->json($youRecivedRequest);
+        return response()->json(FriendRequest::where('to_id', $id)->where('from_id', Auth::id())->first() ? true : false);
     }
 
     public function youRecivedRequest($id)
     {
-
-        $youSentRequest = false; //you sent a friendship request 
-        if (FriendRequest::where('from_id', $id)->where('to_id', Auth::id())->first())
-            $youSentRequest = true; // yes we are in friend request;
-
-        return response()->json($youSentRequest);
+        return response()->json(FriendRequest::where('from_id', $id)->where('to_id', Auth::id())->first() ? true : false);
     }
 
     public function areFriends($id)
     {
-        $areFriends = false;
         foreach ($this->friends($id) as $friend) {
             if ((int)$friend->id = (int) Auth::id())
-                $areFriends = true;
+                return response()->json(true);
         }
 
-        return response()->json($areFriends);
+        return response()->json(false);
     }
 
     public function deleteRequest($from_id)
@@ -124,6 +90,12 @@ class ProfileController extends Controller
             $fr->delete();
 
         return response()->json(true);
+
+
+        // $fr = FriendRequest::where('from_id', Auth::id())->where('to_id', $from_id)->first() || FriendRequest::where('to_id', Auth::id())->where('from_id', $from_id)->first();
+        // $fr->delete();
+        // return response()->json(true);
+
     }
 
     /**

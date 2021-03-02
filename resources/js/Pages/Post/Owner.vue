@@ -46,13 +46,13 @@
                     <i class="fal fa-trash-alt pr-1" aria-hidden="true"></i>
                     delete post
                 </li>
-                <li
+                <inertia-link :href="'/profiles/'+post.user.id"
                     v-if="!route().current('profiles.show')"
                     class="p-2 hover:text-indigo-500 cursor-pointer"
                 >
-                    <i class="fal fa-user pr-1" aria-hidden="true"></i> view
-                    profile
-                </li>
+                    <i class="fal fa-user pr-1" aria-hidden="true"></i> 
+                    view profile
+                </inertia-link>
             </div>
         </div>
         <!-- post options -->
