@@ -6,6 +6,7 @@ use App\Models\Conversation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Inertia\Inertia as Inertia;
 
 class ConversationController extends Controller
@@ -70,7 +71,7 @@ class ConversationController extends Controller
             else
                 $conversation->friend = User::find($conversation->from_id);
 
-            return Inertia::render('Messenger/Main')->with("id", $id)->with("friend",$conversation->friend);
+            return Inertia::render('Messenger/Main')->with("id", $id)->with("friend", $conversation->friend);
         } else
 
             return response()->json("error conversation not found");
@@ -110,14 +111,15 @@ class ConversationController extends Controller
         //
     }
 
-    public function messages($id){
+    public function messages($id)
+    {
 
         $c = Conversation::find($id);
-          
-        foreach ($c->messages as $message ) {
+
+        foreach ($c->messages as $message) {
             $message->timeago = $message->created_at->shortRelativeDiffForHumans();
+            $message->text = Crypt::decryptString($message->text);
         }
         return response()->json($c->messages);
-
     }
 }

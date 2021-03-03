@@ -6,6 +6,7 @@ use App\Models\Conversation;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class MessageController extends Controller
 {
@@ -43,11 +44,11 @@ class MessageController extends Controller
         $request->conversation_id;
 
         $request->validate([
-            "text" =>"required",
+            "text" => "required",
         ]);
 
         $message = new Message();
-        $message->text = $request->text;
+        $message->text = Crypt::encryptString($request->text);
         $message->conversation_id = $request->conversation_id;
         $message->from_id = Auth::id();
         $message->save();
@@ -55,8 +56,11 @@ class MessageController extends Controller
         $message->timeago = $message->created_at->shortRelativeDiffForHumans();
 
         $c = Conversation::find($request->conversation_id);
-        $c ->last_message =  $request->text;
+        $c->last_message =  Crypt::encryptString($request->text);
         $c->save();
+
+
+        $message->text = Crypt::decryptString($message->text);
 
         return response()->json($message);
     }
