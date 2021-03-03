@@ -58,7 +58,7 @@
                 </p>
                 <div class="flex ">
                     <p class="text-sm truncate">
-                        {{ conversation.friend.last_message }} .
+                        {{ conversation.last_message }} .
                     </p>
                     <span
                         class="pl-1 my-auto  text-xs"

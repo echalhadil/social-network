@@ -70,7 +70,7 @@ class ConversationController extends Controller
             else
                 $conversation->friend = User::find($conversation->from_id);
 
-            return Inertia::render('Messenger/Main')->with("id", $id);
+            return Inertia::render('Messenger/Main')->with("id", $id)->with("friend",$conversation->friend);
         } else
 
             return response()->json("error conversation not found");
@@ -108,5 +108,16 @@ class ConversationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function messages($id){
+
+        $c = Conversation::find($id);
+          
+        foreach ($c->messages as $message ) {
+            $message->timeago = $message->created_at->shortRelativeDiffForHumans();
+        }
+        return response()->json($c->messages);
+
     }
 }

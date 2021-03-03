@@ -22,22 +22,11 @@
             <div
                 class=" regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
             >
-                <div class=" w-full px-2 py-3 bg-white flex shadow-lg">
-                    <div class=" pr-1 ">
-                        <img
-                            src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                            class="w-10 h-10 rounded-full"
-                        />
-                    </div>
-                    <div class=" capitalize my-auto ">
-                        <p class=" font-bold text-lg ">Echalh Adil</p>
-                        <p class=" text-sm text-gray-500 ">online</p>
-                    </div>
-                </div>
+                <friend />
 
                 <div class=" w-full h-full messages overflow-auto mt-3 ">
                     <!-- loading for message -->
-                    <div>
+                    <div v-if="loading">
                         <div class="p-2 flex">
                             <div class="h-10 w-10 rounded-full loading"></div>
                             <div class="ml-2 w-3/4">
@@ -80,152 +69,30 @@
                             ></div>
                         </div>
                     </div>
-
-                    <div class="p-2 flex">
-                        <img
-                            src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                            class="h-10 w-10 rounded-full"
-                        />
-                        <div class="ml-2 w-3/4">
-                            <div
-                                class=" shadow p-2 bg-white rounded-t-lg rounded-r-lg  w-full "
-                            >
-                                <p class="text-gray-700 text-sm">
-                                    Un texte est une série orale ou écrite de
-                                    mots perçus comme constituant un ensemble
-                                    cohérent, porteur de sens et utilisant les
-                                    structures propres à une langue. Un texte
-                                    n'a pas de longueur déterminée sauf dans le
-                                    cas de poèmes à forme fixe comme le sonnet
-                                    ou le haïku.
-                                </p>
-                            </div>
-                            <div class="capitalize mt-1">
-                                <p class=" text-xs text-gray-500 ">
-                                    sent 1s ago.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="my-auto ml-auto text-gray-600 mr-auto ">
-                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                        </div>
-                    </div>
-
-                    <div class="p-2 flex">
-                        <div class="my-auto ml-auto text-gray-600">
-                            <i
-                                class=" ml-auto fa fa-ellipsis-h"
-                                aria-hidden="true"
-                            ></i>
-                        </div>
-
-                        <div class="ml-auto w-3/4 ">
-                            <div
-                                class="ml-auto p-2 shadow bg-indigo-500 rounded-t-lg rounded-l-lg  w-full "
-                            >
-                                <p class="text-white text-sm">
-                                    Un texte est une série orale ou écrite de
-                                    mots perçus comme constituant un ensemble
-                                    cohérent, porteur de sens et utilisant les
-                                    structures propres à une langue. Un texte
-                                    n'a pas de longueur déterminée sauf dans le
-                                    cas de poèmes à forme fixe comme le sonnet
-                                    ou le haïku.
-                                </p>
-                            </div>
-                            <div class="w-3/4 ml-auto capitalize mt-1">
-                                <p class="float-right text-xs text-gray-500 ">
-                                    sent 1s ago.
-                                </p>
-                            </div>
-                        </div>
-
-                        <img
-                            src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                            class="h-10 w-10 rounded-full ml-2"
-                        />
-                    </div>
-
-                    <div class="p-2 flex">
-                        <img
-                            src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                            class="h-10 w-10 rounded-full"
-                        />
-                        <div class="ml-2 w-3/4">
-                            <div
-                                class=" shadow p-2 bg-white rounded-t-lg rounded-r-lg  w-full "
-                            >
-                                <p class="text-gray-700 text-sm">
-                                    Un texte est une série orale ou écrite de
-                                    mots perçus comme constituant un ensemble
-                                    cohérent, porteur de sens et utilisant les
-                                    structures propres à une langue. Un texte
-                                    n'a pas de longueur déterminée sauf dans le
-                                    cas de poèmes à forme fixe comme le sonnet
-                                    ou le haïku.
-                                </p>
-                            </div>
-                            <div class="capitalize mt-1">
-                                <p class=" text-xs text-gray-500 ">
-                                    sent 1s ago.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="my-auto ml-auto text-gray-600 mr-auto ">
-                            <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-                        </div>
-                    </div>
-
-                    <div class="p-2 flex">
-                        <div class="my-auto ml-auto text-gray-600">
-                            <i
-                                class=" ml-auto fa fa-ellipsis-h"
-                                aria-hidden="true"
-                            ></i>
-                        </div>
-
-                        <div class="ml-auto w-3/4 ">
-                            <div
-                                class="ml-auto p-2 shadow bg-indigo-500 rounded-t-lg rounded-l-lg  w-full "
-                            >
-                                <p class="text-white text-sm">
-                                    Un texte est une série orale ou écrite de
-                                    mots perçus comme constituant un ensemble
-                                    cohérent, porteur de sens et utilisant les
-                                    structures propres à une langue. Un texte
-                                    n'a pas de longueur déterminée sauf dans le
-                                    cas de poèmes à forme fixe comme le sonnet
-                                    ou le haïku.
-                                </p>
-                            </div>
-                            <div class="w-3/4 ml-auto capitalize mt-1">
-                                <p class="float-right text-xs text-gray-500 ">
-                                    sent 1s ago.
-                                </p>
-                            </div>
-                        </div>
-
-                        <img
-                            src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                            class="h-10 w-10 rounded-full ml-2"
-                        />
-                    </div>
+                    <message
+                        v-for="message in messages"
+                        :key="message.id"
+                        :message="message"
+                    />
                 </div>
 
-                <send-message />
+                <send-message @send-message="sendMessage" />
             </div>
 
             <div class="mx-2 w-0 invisible sm:w-1/4 sm:visible">
                 <div class="p-2 bg-white w-full rounded-lg">
                     <div class="  ">
                         <img
-                            src="https://i.pinimg.com/564x/8c/1c/ec/8c1cec6ab839e0266066407528d12d69.jpg"
+                            :src="'/' + $page.friend.picture"
                             class="mx-auto h-28 w-28 object-cover rounded-full "
                         />
                     </div>
                     <div class=" text-center mt-1">
-                        <p class=" text-xl font-bold ">Echalh Adil</p>
-                        <p class=" text-md  ">@echalhadil</p>
+                        <p class=" text-xl font-bold ">
+                            {{ $page.friend.firstname }}
+                            {{ $page.friend.lastname }}
+                        </p>
+                        <p class=" text-md  ">@ {{ $page.friend.username }}</p>
                     </div>
 
                     <div
@@ -249,34 +116,54 @@
 import AppLayout from "@/Layouts/AppLayout";
 import Conversations from "./Conversations";
 import SendMessage from "./SendMessage";
+import Message from "./Message";
+import Friend from "./Friend";
 
 export default {
     components: {
         AppLayout,
         Conversations,
-        SendMessage
+        SendMessage,
+        Friend,
+        Message
     },
     data() {
         return {
-            messages: []
+            messages: [],
+            loading: true
         };
     },
     methods: {
         getMessages() {
             axios
-                .get("messages")
+                .get(window.location.href.split("/").pop() + "/messages")
                 .then(res => {
                     this.messages = _.orderBy(
                         res.data,
                         ["created_at"],
                         ["asc"]
                     );
+                    this.loading = false;
                 })
 
                 .catch(err => {
                     console.log(err);
                 });
+        },
+        sendMessage(text, conversation_id) {
+            let message = { text, conversation_id };
+            axios
+                .post("/messages", message)
+                .then(res => {
+                    this.messages.push(res.data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
+    },
+    mounted() {
+        this.getMessages();
     }
 };
 </script>

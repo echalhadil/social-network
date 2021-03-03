@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\FriendRequestController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,8 @@ Route::resource('friends', FriendController::class);
 Route::resource('friendrequests', FriendRequestController::class);
 Route::resource('results', SearchController::class);
 Route::resource('conversations', ConversationController::class);
+Route::resource('messages', MessageController::class);
+
 
 
 
@@ -86,3 +89,7 @@ Route::get('seenotifications', [NotificationController::class, 'seeNotifications
 Route::middleware(['auth:sanctum', 'verified'])->get('/messenger', function () {
     return Inertia\Inertia::render('Messenger/Main');
 })->name('dashboard');
+
+Route::get('conversations/{id}/messages', [ConversationController::class, 'messages']);
+
+

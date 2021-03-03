@@ -145,11 +145,9 @@ class ProfileController extends Controller
             $user->save();
 
             return response()->json($user->picture);
-        } else return response()->json(false);
+        } else
+            return response()->json(false);
     }
-
-
-
 
 
     public function deleteProfilePicture($id)
