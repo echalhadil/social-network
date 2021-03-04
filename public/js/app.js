@@ -3182,6 +3182,247 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3200,31 +3441,31 @@ __webpack_require__.r(__webpack_exports__);
       showingNavigationDropdown: false,
       notifications: [],
       friendsRequest: [],
+      conversations: [],
       newNotifications: 0,
       newFriendRequest: 0,
-      user_id: ''
+      user_id: ""
     };
   },
   methods: {
     switchToTeam: function switchToTeam(team) {
-      this.$inertia.put(route('current-team.update'), {
-        'team_id': team.id
+      this.$inertia.put(route("current-team.update"), {
+        team_id: team.id
       }, {
         preserveState: false
       });
     },
     logout: function logout() {
-      axios.post(route('logout').url()).then(function (response) {
-        window.location = '/';
+      axios.post(route("logout").url()).then(function (response) {
+        window.location = "/";
       });
     },
     getNotifications: function getNotifications() {
       var _this = this;
 
-      axios.get(route('notifications.index').url()).then(function (response) {
+      axios.get(route("notifications.index").url()).then(function (response) {
         console.table(response.data);
-        _this.notifications = _.orderBy(response.data, ['created_at'], ['desc']);
-        ;
+        _this.notifications = _.orderBy(response.data, ["created_at"], ["desc"]);
         _this.newNotifications = response.data.filter(function (n) {
           return n.seen === 0;
         }).length;
@@ -3241,7 +3482,7 @@ __webpack_require__.r(__webpack_exports__);
     seeNotifications: function seeNotifications() {
       if (this.newNotifications != 0) {
         this.newNotifications = 0;
-        axios.get('/seenotifications').then(function (response) {
+        axios.get("/seenotifications").then(function (response) {
           console.log(response);
         })["catch"](function (err) {
           console.log(err);
@@ -3251,7 +3492,7 @@ __webpack_require__.r(__webpack_exports__);
     getFriendsRequest: function getFriendsRequest() {
       var _this2 = this;
 
-      axios.get(route('friendrequests.index')).then(function (response) {
+      axios.get(route("friendrequests.index")).then(function (response) {
         _this2.friendsRequest = response.data;
         _this2.newFriendRequest = response.data.filter(function (fr) {
           return fr.seen === 0;
@@ -3263,7 +3504,7 @@ __webpack_require__.r(__webpack_exports__);
     deletFriendRequest: function deletFriendRequest(id) {
       var _this3 = this;
 
-      axios["delete"]('/friendrequests/' + id).then(function (response) {
+      axios["delete"]("/friendrequests/" + id).then(function (response) {
         console.log(response.data);
         _this3.friendsRequest = _this3.friendsRequest.filter(function (fr) {
           return fr.id != id;
@@ -3275,7 +3516,7 @@ __webpack_require__.r(__webpack_exports__);
     confirmFriendRequest: function confirmFriendRequest(friendrequest) {
       var _this4 = this;
 
-      axios.post('/friends/', friendrequest).then(function (response) {
+      axios.post("/friends/", friendrequest).then(function (response) {
         console.log(response.data);
         _this4.friendsRequest = _this4.friendsRequest.filter(function (fr) {
           return fr.id != friendrequest.id;
@@ -3285,36 +3526,46 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     search: function search() {
-      window.location = '/';
+      window.location = "/";
+    },
+    getConversations: function getConversations() {
+      var _this5 = this;
+
+      axios.get("/conversations").then(function (res) {
+        _this5.conversations = _.orderBy(res.data, ["updated_at"], ["desc"]);
+      })["catch"](function (err) {
+        console.log(err);
+      });
     }
   },
   computed: {
     countNewMessages: function countNewMessages() {}
   },
   mounted: function mounted() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.getNotifications();
     this.getFriendsRequest();
-    Echo.channel('notification-channel-' + this.user_id).listen('.NotificationEvent', function (data) {
+    this.getConversations();
+    Echo.channel("notification-channel-" + this.user_id).listen(".NotificationEvent", function (data) {
       var notification = data.notification;
       console.table(notification);
 
-      _this5.notifications.unshift(notification);
+      _this6.notifications.unshift(notification);
 
-      _this5.newNotifications++;
+      _this6.newNotifications++;
 
-      _this5.playSound();
+      _this6.playSound();
     });
-    Echo.channel('friend-request-channel-' + this.user_id).listen('.FriendRequestEvent', function (data) {
+    Echo.channel("friend-request-channel-" + this.user_id).listen(".FriendRequestEvent", function (data) {
       var friendRequest = data.friendrequest;
       console.table(friendRequest);
 
-      _this5.friendsRequest.unshift(friendRequest);
+      _this6.friendsRequest.unshift(friendRequest);
 
-      newFriendRequest++;
+      _this6.newFriendRequest++;
 
-      _this5.playSound();
+      _this6.playSound();
     });
   }
 });
@@ -3813,6 +4064,50 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  // import post owner
 
@@ -3864,7 +4159,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.posts = _this.posts.filter(function (p) {
             return p.id = !post.id;
           });
-          axios["delete"]('posts/' + id).then(function (response) {
+          axios["delete"]("posts/" + id).then(function (response) {
             console.log(response.data);
           })["catch"](function (error) {
             console.log(error);
@@ -3873,7 +4168,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editPost: function editPost(post) {
-      console.log('edited');
+      console.log("edited");
       sweetalert__WEBPACK_IMPORTED_MODULE_6___default()({
         text: "Edit post :",
         content: {
@@ -3888,7 +4183,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (value) {
         // if (!value) throw null;
         post.text = document.querySelector(".swal-content__input").value;
-        axios.put('posts/' + post.id, post).then(function (response) {
+        axios.put("posts/" + post.id, post).then(function (response) {
           console.log(response.data);
         })["catch"](function (error) {
           console.log(response.error);
@@ -3904,8 +4199,8 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this2 = this;
 
-      axios.get('/posts').then(function (response) {
-        _this2.posts = _.orderBy(response.data, ['id'], ['desc']);
+      axios.get("/posts").then(function (response) {
+        _this2.posts = _.orderBy(response.data, ["id"], ["desc"]);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -3916,7 +4211,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.comment.text != null) {
         try {
           this.comment.post_id = post.id;
-          axios.post('/comments', this.comment).then(function (Response) {
+          axios.post("/comments", this.comment).then(function (Response) {
             post.comments.push(Response.data);
             _this3.comment = {
               text: null,
@@ -3928,8 +4223,6 @@ __webpack_require__.r(__webpack_exports__);
         } catch (error) {
           console.log(error);
         }
-
-        ;
       }
     },
     isReacted: function isReacted(post, user) {
@@ -4051,6 +4344,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4062,8 +4390,8 @@ __webpack_require__.r(__webpack_exports__);
     getConversations: function getConversations() {
       var _this = this;
 
-      axios.get(route('conversations.index')).then(function (res) {
-        _this.conversations = _.orderBy(res.data, ['updated_at'], ['desc']);
+      axios.get(route("conversations.index")).then(function (res) {
+        _this.conversations = _.orderBy(res.data, ["updated_at"], ["desc"]);
         _this.loading = false;
       })["catch"](function (err) {
         console.log(err);
@@ -4089,6 +4417,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
 /* harmony import */ var _Conversations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Conversations */ "./resources/js/Pages/Messenger/Conversations.vue");
 /* harmony import */ var _SendMessage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SendMessage */ "./resources/js/Pages/Messenger/SendMessage.vue");
+/* harmony import */ var _Message__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Message */ "./resources/js/Pages/Messenger/Message.vue");
+/* harmony import */ var _Friend__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Friend */ "./resources/js/Pages/Messenger/Friend.vue");
 //
 //
 //
@@ -4203,93 +4533,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 
 
@@ -4297,7 +4542,43 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     Conversations: _Conversations__WEBPACK_IMPORTED_MODULE_1__["default"],
-    SendMessage: _SendMessage__WEBPACK_IMPORTED_MODULE_2__["default"]
+    SendMessage: _SendMessage__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Friend: _Friend__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Message: _Message__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    return {
+      messages: [],
+      loading: true
+    };
+  },
+  methods: {
+    getMessages: function getMessages() {
+      var _this = this;
+
+      axios.get(window.location.href.split("/").pop() + "/messages").then(function (res) {
+        _this.messages = _.orderBy(res.data, ["created_at"], ["asc"]);
+        _this.loading = false;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    sendMessage: function sendMessage(text, conversation_id) {
+      var _this2 = this;
+
+      var message = {
+        text: text,
+        conversation_id: conversation_id
+      };
+      axios.post("/messages", message).then(function (res) {
+        _this2.messages.push(res.data);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getMessages();
   }
 });
 
@@ -4359,8 +4640,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['message']
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/SendMessage.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/SendMessage.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      text: ''
+    };
+  },
+  methods: {
+    sendMessage: function sendMessage(conversation_id) {
+      if (this.text != '') this.$emit('send-message', this.text, conversation_id);
+      this.text = '';
+    }
+  }
 });
 
 /***/ }),
@@ -4380,17 +4705,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      newComment: ''
+      newComment: ""
     };
   },
   methods: {
     addComment: function addComment() {
       if (this.newComment != "") {
         alert(this.newComment);
-        this.newComment = '';
+        this.newComment = "";
       }
     }
   }
@@ -4508,18 +4839,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      modalClasses: 'opacity-0 pointer-events-none fixed w-full h-screen top-0 left-0 flex items-center justify-center',
+      modalClasses: "opacity-0 pointer-events-none fixed w-full h-screen top-0 left-0 flex items-center justify-center",
       post: {
-        text: '',
-        picture: ''
+        text: "",
+        picture: ""
       },
-      preview_image: '',
+      preview_image: "",
       message: {
         type: true,
-        content: '',
+        content: "",
         visible: false
       }
     };
@@ -4530,18 +4915,18 @@ __webpack_require__.r(__webpack_exports__);
     },
     closeModal: function closeModal() {
       this.modalClasses = "opacity-0 pointer-events-none fixed w-full h-screen top-0 left-0 flex items-center justify-center";
-      this.preview_image = '';
+      this.preview_image = "";
       this.post = {
-        text: '',
-        picture: ''
+        text: "",
+        picture: ""
       };
     },
     uploadfile: function uploadfile() {
       var _this = this;
 
       var reader = new FileReader();
-      reader.readAsDataURL(document.getElementById('input-image').files[0]);
-      this.post.picture = document.getElementById('input-image').files[0];
+      reader.readAsDataURL(document.getElementById("input-image").files[0]);
+      this.post.picture = document.getElementById("input-image").files[0];
 
       reader.onload = function () {
         _this.preview_image = reader.result;
@@ -4550,19 +4935,19 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost() {
       var _this2 = this;
 
-      if (this.preview_image != '' || this.post.text != '') {
+      if (this.preview_image != "" || this.post.text != "") {
         var formData = new FormData();
-        formData.set('text', this.post.text);
-        formData.append('picture', this.post.picture);
-        axios.post('/posts', formData, {
+        formData.set("text", this.post.text);
+        formData.append("picture", this.post.picture);
+        axios.post("/posts", formData, {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": "multipart/form-data"
           }
         }).then(function (Response) {
           // this.posts.unshift(Response.data);
           _this2.closeModal();
 
-          _this2.$emit('add-post', Response.data);
+          _this2.$emit("add-post", Response.data);
 
           _this2.message = {
             type: true,
@@ -4618,8 +5003,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['comments']
+  props: ["comments"]
 });
 
 /***/ }),
@@ -4637,6 +5029,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Text__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Text */ "./resources/js/Pages/Post/Text.vue");
 /* harmony import */ var _Picture__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Picture */ "./resources/js/Pages/Post/Picture.vue");
 /* harmony import */ var _React__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./React */ "./resources/js/Pages/Post/React.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4751,7 +5151,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.comment.text != null) {
         this.comment.post_id = this.post.id; //    this.$emit('add-comment',[this.post,this.comment]);
 
-        axios.post('/comments', this.comment).then(function (Response) {
+        axios.post("/comments", this.comment).then(function (Response) {
           _this.comment = {
             text: null,
             post_id: null
@@ -4765,10 +5165,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     deletePost: function deletePost(post) {
-      this.$emit('delete-post', post);
+      this.$emit("delete-post", post);
     },
     editPost: function editPost(post) {
-      this.$emit('edit-post', post);
+      this.$emit("edit-post", post);
     },
     isReacted: function isReacted(post, user) {
       return post.reacts.filter(function (react) {
@@ -4846,20 +5246,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     // user,
     post: Object,
     isowner: Boolean,
-    modalClasses: 'opacity-0 pointer-events-none fixed w-full h-screen absolute top-0 left-0 flex items-center justify-center'
+    modalClasses: "opacity-0 pointer-events-none fixed w-full h-screen absolute top-0 left-0 flex items-center justify-center"
   },
   methods: {
     deletepost: function deletepost() {
-      this.$emit('delete-post', this.post);
+      this.$emit("delete-post", this.post);
     },
     editpost: function editpost() {
-      this.$emit('edit-post', this.post);
+      this.$emit("edit-post", this.post);
     }
   }
 });
@@ -4875,6 +5289,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -4945,8 +5362,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['comments', 'reacts', 'post', 'userid', 'isReacted'],
+  props: ["comments", "reacts", "post", "userid", "isReacted"],
   data: function data() {
     return {
       currentreaction: "/img/react/like.png"
@@ -4964,19 +5434,19 @@ __webpack_require__.r(__webpack_exports__);
       });
 
       if (this.isReacted && type == "unlike") {
-        axios["delete"]('/reacts/' + react[0].id).then(function (response) {
+        axios["delete"]("/reacts/" + react[0].id).then(function (response) {
           console.log(response);
 
-          _this.$emit('unreact', react[0], _this.post);
+          _this.$emit("unreact", react[0], _this.post);
         })["catch"](function (error) {
           console.log(error);
         });
-      } else if ((!this.isReacted || type != react[0].type) && type != "unlike") axios.post('/reacts', {
+      } else if ((!this.isReacted || type != react[0].type) && type != "unlike") axios.post("/reacts", {
         post_id: post_id,
         type: type
       }).then(function (response) {
         console.log(response.data);
-        if (response.data != "update") _this.$emit('react', response.data, _this.post);
+        if (response.data != "update") _this.$emit("react", response.data, _this.post);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -4999,7 +5469,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     whoCommented: function whoCommented() {
-      return _.uniqBy(this.post.comments, 'user.id');
+      return _.uniqBy(this.post.comments, "user.id");
     }
   },
   mounted: function mounted() {
@@ -5024,10 +5494,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['text'],
+  props: ["text"],
   methods: {
     viewMore: function viewMore() {}
   }
@@ -5105,6 +5573,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5124,10 +5613,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       confirmingUserDeletion: false,
       form: this.$inertia.form({
-        '_method': 'DELETE',
-        password: ''
+        _method: "DELETE",
+        password: ""
       }, {
-        bag: 'deleteUser'
+        bag: "deleteUser"
       })
     };
   },
@@ -5135,7 +5624,7 @@ __webpack_require__.r(__webpack_exports__);
     confirmUserDeletion: function confirmUserDeletion() {
       var _this = this;
 
-      this.form.password = '';
+      this.form.password = "";
       this.confirmingUserDeletion = true;
       setTimeout(function () {
         _this.$refs.password.focus();
@@ -5144,7 +5633,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteUser: function deleteUser() {
       var _this2 = this;
 
-      this.form.post(route('current-user.destroy'), {
+      this.form.post(route("current-user.destroy"), {
         preserveScroll: true
       }).then(function (response) {
         if (!_this2.form.hasErrors()) {
@@ -5345,13 +5834,85 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: ['profilerid'],
+  props: ["profilerid"],
   data: function data() {
     return {
       areFriends: false,
@@ -5363,7 +5924,7 @@ __webpack_require__.r(__webpack_exports__);
     sendFriendRequest: function sendFriendRequest(to_id) {
       var _this = this;
 
-      axios.post('/friendrequests', {
+      axios.post("/friendrequests", {
         to_id: to_id
       }).then(function (response) {
         console.log(response.data);
@@ -5383,7 +5944,7 @@ __webpack_require__.r(__webpack_exports__);
         dangerMode: true
       }).then(function (willDelete) {
         if (willDelete) {
-          axios["delete"]('/friends/' + friend_id).then(function (response) {
+          axios["delete"]("/friends/" + friend_id).then(function (response) {
             _this2.areFriends = false;
             console.log(response.data);
             console.log(areFriends);
@@ -5399,7 +5960,7 @@ __webpack_require__.r(__webpack_exports__);
     confirmReq: function confirmReq(user_id) {
       var _this3 = this;
 
-      axios.post('/friends/', {
+      axios.post("/friends/", {
         from_id: this.profilerid,
         to_id: user_id
       }).then(function (response) {
@@ -5413,7 +5974,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteReq: function deleteReq() {
       var _this4 = this;
 
-      axios.get(this.profilerid + '/deleterequest').then(function (response) {
+      axios.get(this.profilerid + "/deleterequest").then(function (response) {
         console.log(response.data);
         _this4.youRecivedRequest = false;
         _this4.youSentRequest = false;
@@ -5439,11 +6000,11 @@ __webpack_require__.r(__webpack_exports__);
     status: function status() {
       var _this5 = this;
 
-      axios.get(this.profilerid + '/arefriends').then(function (res) {
+      axios.get(this.profilerid + "/arefriends").then(function (res) {
         _this5.areFriends = res.data;
-        if (!_this5.areFriends) axios.get(_this5.profilerid + '/yousentrequest').then(function (res) {
+        if (!_this5.areFriends) axios.get(_this5.profilerid + "/yousentrequest").then(function (res) {
           _this5.youSentRequest = res.data;
-          if (!_this5.youSentRequest) axios.get(_this5.profilerid + '/yourecivedrequest').then(function (res) {
+          if (!_this5.youSentRequest) axios.get(_this5.profilerid + "/yourecivedrequest").then(function (res) {
             _this5.youRecivedRequest = res.data;
           })["catch"](function (err) {
             console.log(err);
@@ -5763,6 +6324,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  // import JetSectionBorder from '@/Jetstream/SectionBorder'
 // import LogoutOtherBrowserSessionsForm from './LogoutOtherBrowserSessionsForm'
 // import TwoFactorAuthenticationForm from './TwoFactorAuthenticationForm'
@@ -5798,39 +6377,39 @@ __webpack_require__.r(__webpack_exports__);
         text: null,
         post_id: null
       },
-      timelineClasses: 'w-11/12 mx-auto mt-6 flex rounded-lg capitalize',
-      friendsClasses: 'w-11/12 min-h-screen mx-auto hidden mt-6 rounded-lg capitalize',
-      picturesClasses: 'w-11/12 min-h-screen mx-auto hidden mt-6 rounded-lg capitalize',
-      settingsClasses: 'w-11/12 min-h-screen mx-auto hidden mt-6 rounded-lg capitalize',
-      currentsection: 'timeline'
+      timelineClasses: "w-11/12 mx-auto mt-6 flex rounded-lg capitalize",
+      friendsClasses: "w-11/12 min-h-screen mx-auto hidden mt-6 rounded-lg capitalize",
+      picturesClasses: "w-11/12 min-h-screen mx-auto hidden mt-6 rounded-lg capitalize",
+      settingsClasses: "w-11/12 min-h-screen mx-auto hidden mt-6 rounded-lg capitalize",
+      currentsection: "timeline"
     };
   },
   methods: {
     show: function show(section) {
       this.currentsection = section;
 
-      if (section == 'timeline') {
-        this.timelineClasses = 'w-11/12 mx-auto mt-6 flex rounded-lg capitalize';
-        this.friendsClasses = 'w-11/12  mx-auto hidden mt-6 rounded-lg capitalize';
+      if (section == "timeline") {
+        this.timelineClasses = "w-11/12 mx-auto mt-6 flex rounded-lg capitalize";
+        this.friendsClasses = "w-11/12  mx-auto hidden mt-6 rounded-lg capitalize";
         this.settingsClasses = this.picturesClasses = this.friendsClasses;
       }
 
-      if (section == 'pictures') {
-        this.timelineClasses = 'w-11/12 mx-auto hidden mt-6 rounded-lg capitalize';
+      if (section == "pictures") {
+        this.timelineClasses = "w-11/12 mx-auto hidden mt-6 rounded-lg capitalize";
         this.settingsClasses = this.friendsClasses = this.timelineClasses;
-        this.picturesClasses = 'w-11/12 min-h-screen mx-auto flex mt-6 rounded-lg capitalize';
+        this.picturesClasses = "w-11/12 min-h-screen mx-auto flex mt-6 rounded-lg capitalize";
       }
 
-      if (section == 'friends') {
-        this.timelineClasses = 'w-11/12 mx-auto hidden mt-6 rounded-lg capitalize';
-        this.friendsClasses = 'w-11/12 min-h-screen mx-auto flex mt-6 rounded-lg capitalize';
+      if (section == "friends") {
+        this.timelineClasses = "w-11/12 mx-auto hidden mt-6 rounded-lg capitalize";
+        this.friendsClasses = "w-11/12 min-h-screen mx-auto flex mt-6 rounded-lg capitalize";
         this.picturesClasses = this.settingsClasses = this.timelineClasses;
       }
 
-      if (section == 'settings') {
-        this.timelineClasses = 'w-11/12 mx-auto hidden mt-6 rounded-lg capitalize';
+      if (section == "settings") {
+        this.timelineClasses = "w-11/12 mx-auto hidden mt-6 rounded-lg capitalize";
         this.friendsClasses = this.picturesClasses = this.timelineClasses;
-        this.settingsClasses = 'w-11/12 min-h-screen mx-auto flex mt-6 rounded-lg capitalize';
+        this.settingsClasses = "w-11/12 min-h-screen mx-auto flex mt-6 rounded-lg capitalize";
       }
     },
     removecover: function removecover() {
@@ -5901,8 +6480,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['picturesClasses', 'posts'],
+  props: ["picturesClasses", "posts"],
   computed: {
     postHasPic: function postHasPic() {
       return this.posts.filter(function (p) {
@@ -5939,11 +6531,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['settingsClasses'],
+  props: ["settingsClasses"],
   components: {
     DeleteUserForm: _DeleteUserForm__WEBPACK_IMPORTED_MODULE_1__["default"],
     UpdatePasswordForm: _UpdatePasswordForm__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -6007,6 +6604,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -6015,7 +6615,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['sessions'],
+  props: ["sessions"],
   components: {
     AppLayout: _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__["default"],
     DeleteUserForm: _DeleteUserForm__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -6096,11 +6696,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['timelineClasses'],
+  props: ["timelineClasses"],
   components: {
     AddPost: _Pages_Post_AddPost__WEBPACK_IMPORTED_MODULE_0__["default"],
     Post: _Pages_Post_Main__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -6140,7 +6750,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.posts = _this.posts.filter(function (p) {
             return p.id = !post.id;
           });
-          axios["delete"]('/posts/' + id).then(function (response) {
+          axios["delete"]("/posts/" + id).then(function (response) {
             console.log(response.data);
           })["catch"](function (error) {
             console.log(error);
@@ -6149,7 +6759,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editPost: function editPost(post) {
-      console.log('edited');
+      console.log("edited");
       sweetalert__WEBPACK_IMPORTED_MODULE_1___default()({
         text: "Edit post :",
         content: {
@@ -6165,7 +6775,7 @@ __webpack_require__.r(__webpack_exports__);
         // if (!value) throw null;
         if (post.text !== document.querySelector(".swal-content__input").value) {
           post.text = document.querySelector(".swal-content__input").value;
-          axios.put('/posts/' + post.id, post).then(function (response) {
+          axios.put("/posts/" + post.id, post).then(function (response) {
             console.log(response.data);
           })["catch"](function (error) {
             console.log(response.error);
@@ -6179,7 +6789,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.comment.text != null) {
         this.comment.post_id = this.post.id; //    this.$emit('add-comment',[this.post,this.comment]);
 
-        axios.post('/comments', this.comment).then(function (Response) {
+        axios.post("/comments", this.comment).then(function (Response) {
           _this2.comment = {
             text: null,
             post_id: null
@@ -6208,9 +6818,9 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this3 = this;
 
-      axios.get(window.location.href.split('/').pop() + '/posts').then(function (response) {
+      axios.get(window.location.href.split("/").pop() + "/posts").then(function (response) {
         // console.table(response.data)
-        _this3.posts = _.orderBy(response.data, ['id'], ['desc']);
+        _this3.posts = _.orderBy(response.data, ["id"], ["desc"]);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -6774,6 +7384,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6791,15 +7448,15 @@ __webpack_require__.r(__webpack_exports__);
     JetInputError: _Jetstream_InputError__WEBPACK_IMPORTED_MODULE_4__["default"],
     JetSecondaryButton: _Jetstream_SecondaryButton__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
-  props: ['user'],
+  props: ["user"],
   data: function data() {
     return {
       confirmingUserDeletion: false,
-      picture: '',
-      preview_image: '',
+      picture: "",
+      preview_image: "",
       message: {
-        type: 'success',
-        content: 'profile picture has been updated successfuly!',
+        type: "success",
+        content: "profile picture has been updated successfuly!",
         visible: false
       }
     };
@@ -6812,8 +7469,8 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var reader = new FileReader();
-      reader.readAsDataURL(document.getElementById('input-profile-picture').files[0]);
-      this.picture = document.getElementById('input-profile-picture').files[0];
+      reader.readAsDataURL(document.getElementById("input-profile-picture").files[0]);
+      this.picture = document.getElementById("input-profile-picture").files[0];
 
       reader.onload = function () {
         _this.preview_image = reader.result;
@@ -6823,21 +7480,21 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       var formData = new FormData();
-      formData.set('user_id', this.user.id);
-      formData.append('picture', this.picture);
-      axios.post(this.user.id + '/updateprofilepicture', formData, {
+      formData.set("user_id", this.user.id);
+      formData.append("picture", this.picture);
+      axios.post(this.user.id + "/updateprofilepicture", formData, {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          "Content-Type": "multipart/form-data"
         }
       }).then(function (response) {
-        _this2.$emit('update-profile-picture', _this2.user, response.data);
+        _this2.$emit("update-profile-picture", _this2.user, response.data);
 
         _this2.message = {
-          type: 'success',
-          content: 'profile picture has been updated successfuly!',
+          type: "success",
+          content: "profile picture has been updated successfuly!",
           visible: true
         };
-        _this2.preview_image = '';
+        _this2.preview_image = "";
         setTimeout(function () {
           _this2.confirmingUserDeletion = false;
           _this2.message.visible = false;
@@ -6845,11 +7502,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
         _this2.message = {
-          type: 'error',
-          content: 'something wrong please try again!',
+          type: "error",
+          content: "something wrong please try again!",
           visible: true
         };
-        _this2.preview_image = '';
+        _this2.preview_image = "";
       });
     },
     deleteProfilePicture: function deleteProfilePicture() {
@@ -6863,10 +7520,10 @@ __webpack_require__.r(__webpack_exports__);
         dangerMode: true
       }).then(function (willDelete) {
         if (willDelete) {
-          axios.post(_this3.user.id + '/deleteprofilepicture').then(function (response) {
+          axios.post(_this3.user.id + "/deleteprofilepicture").then(function (response) {
             console.log(response.data);
 
-            _this3.$emit('delete-profile-picture', _this3.user, response.data);
+            _this3.$emit("delete-profile-picture", _this3.user, response.data);
 
             sweetalert__WEBPACK_IMPORTED_MODULE_6___default()("You Unfriend successfuly!", {
               icon: "success"
@@ -7005,6 +7662,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -7026,7 +7746,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n\n\n", ""]);
+exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n", ""]);
 
 // exports
 
@@ -7045,7 +7765,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".comments::-webkit-scrollbar {\n  width: 3px;\n}\n.comments::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.comments::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.comments::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.comments{\n  max-height: 12rem;\n}\n\n\n", ""]);
+exports.push([module.i, ".comments::-webkit-scrollbar {\n  width: 3px;\n}\n.comments::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.comments::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.comments::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.comments {\n  max-height: 12rem;\n}\r\n", ""]);
 
 // exports
 
@@ -7064,7 +7784,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n\n\n", ""]);
+exports.push([module.i, ".conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -7083,7 +7803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".regular-conversations-height{\n  height: calc(100vh - 190px);\n}\n.regular-messages-height{\n  height: calc(100vh - 230px);\n}\n.messages::-webkit-scrollbar {\n  width: 5px;\n}\n.messages::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.messages::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.messages::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n\n\n", ""]);
+exports.push([module.i, ".regular-conversations-height {\n  height: calc(100vh - 190px);\n}\n.regular-messages-height {\n  height: calc(100vh - 230px);\n}\n.messages::-webkit-scrollbar {\n  width: 5px;\n}\n.messages::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.messages::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.messages::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -7102,7 +7822,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n", ""]);
+exports.push([module.i, ".loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n.max-width{\n  max-width:75%;\n}\n", ""]);
 
 // exports
 
@@ -7121,7 +7841,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".comments::-webkit-scrollbar {\n  width: 3px;\n}\n.comments::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.comments::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.comments::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.comments{\n  max-height: 12rem;\n}\n\n", ""]);
+exports.push([module.i, ".comments::-webkit-scrollbar {\n  width: 3px;\n}\n.comments::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.comments::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.comments::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.comments {\n  max-height: 12rem;\n}\r\n", ""]);
 
 // exports
 
@@ -7140,7 +7860,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".likes:hover .dropdown-menu{\n  display:block;\n}\n.comments:hover .dropdown-menu{\n  display:block;\n}\n.react:hover .dropdown-menu{\n  display:flex;\n}\n.option:hover .dropdown-menu{\n  display:block;\n}\n\n", ""]);
+exports.push([module.i, ".likes:hover .dropdown-menu {\n  display: block;\n}\n.comments:hover .dropdown-menu {\n  display: block;\n}\n.react:hover .dropdown-menu {\n  display: flex;\n}\n.option:hover .dropdown-menu {\n  display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -7178,7 +7898,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".target:hover .dropdown-menu{\n  display:block;\n}\n\n\n", ""]);
+exports.push([module.i, ".target:hover .dropdown-menu {\n  display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -7197,7 +7917,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".target:hover .dropdown-menu{\n  display:block;\n}\n\n\n", ""]);
+exports.push([module.i, ".target:hover .dropdown-menu {\n  display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -7216,7 +7936,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".target:hover .dropdown-menu{\n  display:block;\n}\n\n\n", ""]);
+exports.push([module.i, ".target:hover .dropdown-menu {\n  display: block;\n}\r\n", ""]);
 
 // exports
 
@@ -59977,13 +60697,13 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                        \n                                         " +
+                                                "\n                                                " +
                                                   _vm._s(
                                                     _vm.newFriendRequest > 9
                                                       ? "9+"
                                                       : _vm.newFriendRequest
                                                   ) +
-                                                  "\n                                         "
+                                                  "\n                                            "
                                               )
                                             ]
                                           )
@@ -60035,7 +60755,11 @@ var render = function() {
                                               staticClass:
                                                 " mb-7 mt-3 text-sm  "
                                             },
-                                            [_vm._v("No Requests")]
+                                            [
+                                              _vm._v(
+                                                "\n                                                No Requests\n                                            "
+                                              )
+                                            ]
                                           )
                                         ]
                                       )
@@ -60098,17 +60822,17 @@ var render = function() {
                                                     },
                                                     [
                                                       _vm._v(
-                                                        " \n                                                    " +
+                                                        "\n                                                        " +
                                                           _vm._s(
                                                             friendRequest.maker
                                                               .firstname
                                                           ) +
-                                                          " " +
+                                                          "\n                                                        " +
                                                           _vm._s(
                                                             friendRequest.maker
                                                               .lastname
                                                           ) +
-                                                          " \n                                                    "
+                                                          "\n                                                        "
                                                       )
                                                     ]
                                                   ),
@@ -60132,7 +60856,11 @@ var render = function() {
                                                             }
                                                           }
                                                         },
-                                                        [_vm._v("confirm")]
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                            confirm\n                                                        "
+                                                          )
+                                                        ]
                                                       ),
                                                       _vm._v(" "),
                                                       _c(
@@ -60150,7 +60878,11 @@ var render = function() {
                                                             }
                                                           }
                                                         },
-                                                        [_vm._v("delete")]
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                            delete\n                                                        "
+                                                          )
+                                                        ]
                                                       )
                                                     ]
                                                   )
@@ -60208,13 +60940,13 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                        \n                                         " +
+                                                "\n                                                " +
                                                   _vm._s(
                                                     _vm.newNotifications > 9
                                                       ? "9+"
                                                       : _vm.newNotifications
                                                   ) +
-                                                  "\n                                         "
+                                                  "\n                                            "
                                               )
                                             ]
                                           )
@@ -60266,7 +60998,11 @@ var render = function() {
                                               staticClass:
                                                 " mb-7 mt-3 text-sm  "
                                             },
-                                            [_vm._v("No Notifications")]
+                                            [
+                                              _vm._v(
+                                                "\n                                                No Notifications\n                                            "
+                                              )
+                                            ]
                                           )
                                         ]
                                       )
@@ -60322,17 +61058,17 @@ var render = function() {
                                                     },
                                                     [
                                                       _vm._v(
-                                                        " \n                                                    " +
+                                                        "\n                                                        " +
                                                           _vm._s(
                                                             notification.maker
                                                               .firstname
                                                           ) +
-                                                          " " +
+                                                          "\n                                                        " +
                                                           _vm._s(
                                                             notification.maker
                                                               .lastname
                                                           ) +
-                                                          " \n                                                    "
+                                                          "\n                                                        "
                                                       ),
                                                       _c(
                                                         "span",
@@ -60342,28 +61078,28 @@ var render = function() {
                                                         },
                                                         [
                                                           _vm._v(
-                                                            "\n                                                        " +
+                                                            "\n                                                            " +
                                                               _vm._s(
                                                                 notification.type ==
                                                                   "c"
                                                                   ? " commented on your post."
                                                                   : ""
                                                               ) +
-                                                              " \n                                                        " +
+                                                              "\n                                                            " +
                                                               _vm._s(
                                                                 notification.type ==
                                                                   "r"
                                                                   ? " reacted to your post."
                                                                   : ""
                                                               ) +
-                                                              " \n                                                        " +
+                                                              "\n                                                            " +
                                                               _vm._s(
                                                                 notification.type ==
                                                                   "f"
                                                                   ? " accepted your friend request."
                                                                   : ""
                                                               ) +
-                                                              " \n                                                        \n                                                     "
+                                                              "\n                                                        "
                                                           )
                                                         ]
                                                       )
@@ -60377,11 +61113,11 @@ var render = function() {
                                                     },
                                                     [
                                                       _vm._v(
-                                                        " " +
+                                                        "\n                                                        " +
                                                           _vm._s(
                                                             notification.timeago
                                                           ) +
-                                                          " "
+                                                          "\n                                                    "
                                                       )
                                                     ]
                                                   )
@@ -60462,26 +61198,42 @@ var render = function() {
                                     staticClass: "border-t border-gray-100"
                                   }),
                                   _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "px-4 text-gray-400 text-center "
-                                    },
-                                    [
-                                      _c("i", {
-                                        staticClass:
-                                          "fa mt-7 fa-3x fa-comment-alt-slash",
-                                        attrs: { "aria-hidden": "true" }
-                                      }),
-                                      _vm._v(" "),
-                                      _c(
-                                        "p",
-                                        { staticClass: " mb-7 mt-3 text-sm  " },
-                                        [_vm._v("No Conversations")]
+                                  true
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "px-4 text-gray-400 text-center "
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fa mt-7 fa-3x fa-comment-alt-slash",
+                                            attrs: { "aria-hidden": "true" }
+                                          }),
+                                          _vm._v(" "),
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                " mb-7 mt-3 text-sm  "
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                                No Conversations\n                                            "
+                                              )
+                                            ]
+                                          )
+                                        ]
                                       )
-                                    ]
-                                  )
+                                    : undefined,
+                                  _vm._v(" "),
+                                  _vm.conversations.length > 0
+                                    ? _c("div", {
+                                        staticClass:
+                                          "px-4 text-gray-400 text-center "
+                                      })
+                                    : _vm._e()
                                 ]
                               },
                               proxy: true
@@ -60715,13 +61467,25 @@ var render = function() {
                     _c(
                       "div",
                       { staticClass: "font-medium text-base text-gray-800" },
-                      [_vm._v(_vm._s(_vm.$page.user.name))]
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.$page.user.name) +
+                            "\n                            "
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "font-medium text-sm text-gray-500" },
-                      [_vm._v(_vm._s(_vm.$page.user.email))]
+                      [
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.$page.user.email) +
+                            "\n                            "
+                        )
+                      ]
                     )
                   ])
                 ]),
@@ -61783,9 +62547,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        " \n                                " +
+                                        "\n                                    " +
                                           _vm._s(comment.user.firstname) +
-                                          " " +
+                                          "\n                                    " +
                                           _vm._s(comment.user.firstname) +
                                           "\n                                "
                                       )
@@ -61800,9 +62564,9 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\n                                " +
+                                        "\n                                    " +
                                           _vm._s(comment.text) +
-                                          "\n                                "
+                                          "\n                                    "
                                       ),
                                       _c(
                                         "span",
@@ -61889,7 +62653,9 @@ var render = function() {
                 },
                 [
                   _c("p", { staticClass: " mt-32 capitalize text-5xl " }, [
-                    _vm._v(" Aucune publication")
+                    _vm._v(
+                      "\n                    Aucune publication\n                "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("i", {
@@ -61929,7 +62695,7 @@ var render = function() {
                   { staticClass: " text-center mx-auto font-bold text-3xl " },
                   [
                     _vm._v(
-                      " \n                    " +
+                      "\n                        " +
                         _vm._s(_vm.$page.user.firstname) +
                         " " +
                         _vm._s(_vm.$page.user.lastname) +
@@ -61946,9 +62712,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      " \n                    @" +
+                      "\n                        @" +
                         _vm._s(_vm.$page.user.username) +
-                        " \n                    "
+                        "\n                    "
                     )
                   ]
                 )
@@ -61972,7 +62738,9 @@ var render = function() {
                         staticClass: "fal fa-user pr-1 ",
                         attrs: { "aria-hidden": "true" }
                       }),
-                      _vm._v("  profile\n                    ")
+                      _vm._v(
+                        "\n                        profile\n                    "
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -61987,7 +62755,9 @@ var render = function() {
                         staticClass: "fal fa-cog pr-1",
                         attrs: { "aria-hidden": "true" }
                       }),
-                      _vm._v("  settings\n                    ")
+                      _vm._v(
+                        "\n                        settings\n                    "
+                      )
                     ]
                   )
                 ],
@@ -62078,18 +62848,20 @@ var render = function() {
                   [
                     _c("p", { staticClass: " capitalize font-semibold " }, [
                       _vm._v(
-                        " " +
+                        "\n                " +
                           _vm._s(conversation.friend.firstname) +
-                          " " +
+                          "\n                " +
                           _vm._s(conversation.friend.lastname) +
-                          " "
+                          "\n            "
                       )
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "flex " }, [
                       _c("p", { staticClass: "text-sm truncate" }, [
                         _vm._v(
-                          " " + _vm._s(conversation.friend.last_message) + " ."
+                          "\n                    " +
+                            _vm._s(conversation.last_message) +
+                            " .\n                "
                         )
                       ]),
                       _vm._v(" "),
@@ -62174,6 +62946,55 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Friend.vue?vue&type=template&id=1401ec3a&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Friend.vue?vue&type=template&id=1401ec3a& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: " w-full px-2 py-3 bg-white flex shadow-lg" },
+    [
+      _c("div", { staticClass: " pr-1 " }, [
+        _c("img", {
+          staticClass: "w-10 h-10 rounded-full my-auto",
+          attrs: { src: "/" + _vm.$page.friend.picture }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: " capitalize my-auto " }, [
+        _c("p", { staticClass: " font-bold text-lg " }, [
+          _vm._v(
+            "\n            " +
+              _vm._s(_vm.$page.friend.firstname) +
+              " " +
+              _vm._s(_vm.$page.friend.lastname) +
+              "\n        "
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: " text-sm text-gray-500 " }, [_vm._v("online")])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Main.vue?vue&type=template&id=625c06be&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Main.vue?vue&type=template&id=625c06be& ***!
@@ -62199,7 +63020,7 @@ var render = function() {
         [
           _c("div", { staticClass: "w-full p-2" }, [
             _c("p", { staticClass: "capitalize text-lg font-semibold" }, [
-              _vm._v(" conversation")
+              _vm._v("conversation")
             ])
           ]),
           _vm._v(" "),
@@ -62223,270 +63044,88 @@ var render = function() {
             " regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
         },
         [
-          _c(
-            "div",
-            { staticClass: " w-full px-2 py-3 bg-white flex shadow-lg" },
-            [
-              _c("div", { staticClass: " pr-1 " }, [
-                _c("img", {
-                  staticClass: "w-10 h-10 rounded-full",
-                  attrs: {
-                    src:
-                      "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: " capitalize my-auto " }, [
-                _c("p", { staticClass: " font-bold text-lg " }, [
-                  _vm._v(" Echalh Adil ")
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: " text-sm text-gray-500 " }, [
-                  _vm._v("online")
-                ])
-              ])
-            ]
-          ),
+          _c("friend"),
           _vm._v(" "),
           _c(
             "div",
             { staticClass: " w-full h-full messages overflow-auto mt-3 " },
             [
-              _c("div", [
-                _c("div", { staticClass: "p-2 flex" }, [
-                  _c("div", { staticClass: "h-10 w-10 rounded-full loading" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ml-2 w-3/4" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          " shadow p-2 loading rounded-t-lg rounded-r-lg h-20 w-full "
-                      },
-                      [_c("div", { staticClass: "text-gray-700 text-sm" })]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "capitalize mt-1" }, [
+              _vm.loading
+                ? _c("div", [
+                    _c("div", { staticClass: "p-2 flex" }, [
                       _c("div", {
-                        staticClass: "w-9 h-3 rounded-full loading "
+                        staticClass: "h-10 w-10 rounded-full loading"
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ml-2 w-3/4" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              " shadow p-2 loading rounded-t-lg rounded-r-lg h-20 w-full "
+                          },
+                          [_c("div", { staticClass: "text-gray-700 text-sm" })]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "capitalize mt-1" }, [
+                          _c("div", {
+                            staticClass: "w-9 h-3 rounded-full loading "
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {
+                        staticClass:
+                          "my-auto mx-auto loading w-4 h-2 rounded-full "
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "p-2 flex" }, [
+                      _c("div", {
+                        staticClass:
+                          "my-auto ml-auto loading w-4 h-2 rounded-full "
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ml-auto w-3/4 " }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "ml-auto p-2 shadow loading h-20 rounded-t-lg rounded-l-lg w-full "
+                          },
+                          [_c("div", { staticClass: "text-white text-sm" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "w-3/4 ml-auto capitalize mt-1" },
+                          [
+                            _c("div", {
+                              staticClass:
+                                "float-right w-9 h-3 rounded-full loading "
+                            })
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", {
+                        staticClass: "h-10 w-10 rounded-full ml-2 loading"
                       })
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {
-                    staticClass: "my-auto mx-auto loading w-4 h-2 rounded-full "
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "p-2 flex" }, [
-                  _c("div", {
-                    staticClass: "my-auto ml-auto loading w-4 h-2 rounded-full "
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ml-auto w-3/4 " }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "ml-auto p-2 shadow loading h-20 rounded-t-lg rounded-l-lg w-full "
-                      },
-                      [_c("div", { staticClass: "text-white text-sm" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "w-3/4 ml-auto capitalize mt-1" },
-                      [
-                        _c("div", {
-                          staticClass:
-                            "float-right w-9 h-3 rounded-full loading "
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {
-                    staticClass: "h-10 w-10 rounded-full ml-2 loading"
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "p-2 flex" }, [
-                _c("img", {
-                  staticClass: "h-10 w-10 rounded-full",
-                  attrs: {
-                    src:
-                      "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "ml-2 w-3/4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        " shadow p-2 bg-white rounded-t-lg rounded-r-lg  w-full "
-                    },
-                    [
-                      _c("p", { staticClass: "text-gray-700 text-sm" }, [
-                        _vm._v(
-                          "Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku.\n                            "
-                        )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "capitalize mt-1" }, [
-                    _c("p", { staticClass: " text-xs text-gray-500 " }, [
-                      _vm._v("sent 1s ago. ")
-                    ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "my-auto ml-auto text-gray-600 mr-auto " },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-ellipsis-h",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                )
-              ]),
+                : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "p-2 flex" }, [
-                _c("div", { staticClass: "my-auto ml-auto text-gray-600" }, [
-                  _c("i", {
-                    staticClass: " ml-auto fa fa-ellipsis-h",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "ml-auto w-3/4 " }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "ml-auto p-2 shadow bg-indigo-500 rounded-t-lg rounded-l-lg  w-full "
-                    },
-                    [
-                      _c("p", { staticClass: "text-white text-sm" }, [
-                        _vm._v(
-                          "Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku.\n                            "
-                        )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "w-3/4 ml-auto capitalize mt-1" }, [
-                    _c(
-                      "p",
-                      { staticClass: "float-right text-xs text-gray-500 " },
-                      [_vm._v("sent 1s ago. ")]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "h-10 w-10 rounded-full ml-2",
-                  attrs: {
-                    src:
-                      "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                  }
+              _vm._l(_vm.messages, function(message) {
+                return _c("message", {
+                  key: message.id,
+                  attrs: { message: message }
                 })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "p-2 flex" }, [
-                _c("img", {
-                  staticClass: "h-10 w-10 rounded-full",
-                  attrs: {
-                    src:
-                      "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "ml-2 w-3/4" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        " shadow p-2 bg-white rounded-t-lg rounded-r-lg  w-full "
-                    },
-                    [
-                      _c("p", { staticClass: "text-gray-700 text-sm" }, [
-                        _vm._v(
-                          "Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku.\n                            "
-                        )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "capitalize mt-1" }, [
-                    _c("p", { staticClass: " text-xs text-gray-500 " }, [
-                      _vm._v("sent 1s ago. ")
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "my-auto ml-auto text-gray-600 mr-auto " },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-ellipsis-h",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "p-2 flex" }, [
-                _c("div", { staticClass: "my-auto ml-auto text-gray-600" }, [
-                  _c("i", {
-                    staticClass: " ml-auto fa fa-ellipsis-h",
-                    attrs: { "aria-hidden": "true" }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "ml-auto w-3/4 " }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "ml-auto p-2 shadow bg-indigo-500 rounded-t-lg rounded-l-lg  w-full "
-                    },
-                    [
-                      _c("p", { staticClass: "text-white text-sm" }, [
-                        _vm._v(
-                          "Un texte est une série orale ou écrite de mots perçus comme constituant un ensemble cohérent, porteur de sens et utilisant les structures propres à une langue. Un texte n'a pas de longueur déterminée sauf dans le cas de poèmes à forme fixe comme le sonnet ou le haïku.\n                            "
-                        )
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "w-3/4 ml-auto capitalize mt-1" }, [
-                    _c(
-                      "p",
-                      { staticClass: "float-right text-xs text-gray-500 " },
-                      [_vm._v("sent 1s ago. ")]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "h-10 w-10 rounded-full ml-2",
-                  attrs: {
-                    src:
-                      "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                  }
-                })
-              ])
-            ]
+              })
+            ],
+            2
           ),
           _vm._v(" "),
-          _c("send-message")
+          _c("send-message", { on: { "send-message": _vm.sendMessage } })
         ],
         1
       ),
@@ -62496,19 +63135,24 @@ var render = function() {
           _c("div", { staticClass: "  " }, [
             _c("img", {
               staticClass: "mx-auto h-28 w-28 object-cover rounded-full ",
-              attrs: {
-                src:
-                  "https://i.pinimg.com/564x/8c/1c/ec/8c1cec6ab839e0266066407528d12d69.jpg"
-              }
+              attrs: { src: "/" + _vm.$page.friend.picture }
             })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: " text-center mt-1" }, [
             _c("p", { staticClass: " text-xl font-bold " }, [
-              _vm._v(" Echalh Adil ")
+              _vm._v(
+                "\n                        " +
+                  _vm._s(_vm.$page.friend.firstname) +
+                  "\n                        " +
+                  _vm._s(_vm.$page.friend.lastname) +
+                  "\n                    "
+              )
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: " text-md  " }, [_vm._v(" @echalhadil ")])
+            _c("p", { staticClass: " text-md  " }, [
+              _vm._v("@ " + _vm._s(_vm.$page.friend.username))
+            ])
           ]),
           _vm._v(" "),
           _c(
@@ -62524,7 +63168,9 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("p", { staticClass: "my-auto mr-auto ml-1 capitalize  " }, [
-                _vm._v(" view profile ")
+                _vm._v(
+                  "\n                        view profile\n                    "
+                )
               ])
             ]
           )
@@ -62555,93 +63201,107 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-2 flex" }, [
-    _vm.$page.user.id != _vm.message.from_id
-      ? _c("img", {
-          staticClass: "h-10 w-10 rounded-full",
-          attrs: {
-            src:
-              "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-          }
-        })
-      : _vm._e(),
+  return _c("div", { staticClass: "p-2 " }, [
+    _c("div", { staticClass: "flex" }, [
+      _vm.$page.user.id != _vm.message.from_id
+        ? _c("img", {
+            staticClass: "h-10 w-10 rounded-full",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.$page.user.id != _vm.message.from_id
+        ? _c("div", { staticClass: " flex  w-full" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  " shadow p-2 mx-2 bg-white rounded-t-lg rounded-r-lg max-width "
+              },
+              [
+                _c("p", { staticClass: "text-gray-700 px-2 text-sm" }, [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.message.text) +
+                      "\n                "
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _vm.$page.user.id != _vm.message.from_id
+              ? _c("div", { staticClass: "my-auto text-gray-500 mr-auto " }, [
+                  _c("i", {
+                    staticClass: "fa fa-ellipsis-h",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ])
+              : _vm._e()
+          ])
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _vm.$page.user.id != _vm.message.from_id
-      ? _c("div", { staticClass: "ml-2 w-3/4" }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                " shadow p-2 bg-white rounded-t-lg rounded-r-lg  w-full "
-            },
-            [
-              _c("p", { staticClass: "text-gray-700 text-sm" }, [
-                _vm._v(
-                  "\n            " + _vm._s(_vm.message.text) + "\n            "
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "capitalize mt-1" }, [
-            _c("p", { staticClass: " text-xs text-gray-500 " }, [
-              _vm._v("sent " + _vm._s(_vm.message.timeago) + " ago. ")
-            ])
+      ? _c("div", { staticClass: "capitalize ml-12 mt-1" }, [
+          _c("p", { staticClass: " text-xs text-gray-500 " }, [
+            _vm._v(_vm._s(_vm.message.timeago) + ". ")
           ])
         ])
       : _vm._e(),
     _vm._v(" "),
-    _vm.$page.user.id != _vm.message.from_id
-      ? _c("div", { staticClass: "my-auto ml-auto text-gray-600 mr-auto " }, [
-          _c("i", {
-            staticClass: "fa fa-ellipsis-h",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.$page.user.id == _vm.message.from_id
-      ? _c("div", { staticClass: "my-auto ml-auto text-gray-600" }, [
-          _c("i", {
-            staticClass: " ml-auto fa fa-ellipsis-h",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.$page.user.id == _vm.message.from_id
-      ? _c("div", { staticClass: "ml-auto w-3/4 " }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "ml-auto p-2 shadow bg-indigo-500 rounded-t-lg rounded-l-lg  w-full "
-            },
-            [
-              _c("p", { staticClass: "text-white text-sm" }, [
-                _vm._v(
-                  "\n            " + _vm._s(_vm.message.text) + "\n            "
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "w-3/4 ml-auto capitalize mt-1" }, [
-            _c("p", { staticClass: "float-right text-xs text-gray-500 " }, [
-              _vm._v("sent " + _vm._s(_vm.message.timeago) + " ago.")
-            ])
+    _c("div", { staticClass: "flex w-full" }, [
+      _vm.$page.user.id == _vm.message.from_id
+        ? _c("div", { staticClass: " ml-auto my-auto text-gray-400" }, [
+            _c("i", {
+              staticClass: " ml-auto my-auto fa fa-ellipsis-h",
+              attrs: { "aria-hidden": "true" }
+            })
           ])
-        ])
-      : _vm._e(),
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.$page.user.id == _vm.message.from_id
+        ? _c("div", { staticClass: "my-auto mx-2 flex max-width" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "ml-auto my-auto p-2 shadow bg-indigo-500 rounded-t-lg rounded-l-lg "
+              },
+              [
+                _c("p", { staticClass: "text-white text-sm" }, [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.message.text) +
+                      "\n                "
+                  )
+                ])
+              ]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.$page.user.id == _vm.message.from_id
+        ? _c("img", {
+            staticClass: "h-10 w-10 rounded-full ",
+            attrs: {
+              src:
+                "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
+            }
+          })
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _vm.$page.user.id == _vm.message.from_id
-      ? _c("img", {
-          staticClass: "h-10 w-10 rounded-full ml-2",
-          attrs: {
-            src:
-              "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-          }
-        })
+      ? _c("div", { staticClass: "w-full ml-auto capitalize mt-1" }, [
+          _c(
+            "span",
+            { staticClass: "float-right text-xs text-gray-500 mr-12" },
+            [_vm._v(_vm._s(_vm.message.timeago) + ".")]
+          )
+        ])
       : _vm._e()
   ])
 }
@@ -62667,22 +63327,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "p-2  bg-white " }, [
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.text,
+          expression: "text"
+        }
+      ],
+      staticClass:
+        "focus:outline-none focus:ring-2 focus:border-indigo-500 ml-auto bg-white h-10 w-full border-gray-300 border rounded-sm ",
+      attrs: { type: "text", placeholder: "type a message text" },
+      domProps: { value: _vm.text },
+      on: {
+        keyup: function($event) {
+          if (
+            !$event.type.indexOf("key") &&
+            _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+          ) {
+            return null
+          }
+          return _vm.sendMessage(_vm.$page.id)
+        },
+        input: function($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.text = $event.target.value
+        }
+      }
+    })
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "p-2  bg-white " }, [
-      _c("input", {
-        staticClass:
-          "focus:outline-none focus:ring-2 focus:border-indigo-500 ml-auto bg-white h-10 w-full border-gray-300 border rounded-sm ",
-        attrs: { type: "text", placeholder: "type a message text" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -62765,7 +63444,7 @@ var render = function() {
     { staticClass: "md:w-9/12 mt-4 mx-auto rounded-xl p-2 shadow bg-white" },
     [
       _c("div", { staticClass: " capitalize text-2xl pl-3 mb-2 " }, [
-        _vm._v("\n    Add post\n    ")
+        _vm._v("\n        Add post\n    ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: " border-t-2 border-gray-100" }, [
@@ -62811,7 +63490,7 @@ var render = function() {
               _c("i", { staticClass: "my-auto fal fa-image" }),
               _vm._v(" "),
               _c("p", { staticClass: " capitalize my-auto ml-1" }, [
-                _vm._v(" Photo ")
+                _vm._v("Photo")
               ])
             ]
           )
@@ -62915,7 +63594,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: { click: _vm.closeModal }
                 },
-                [_vm._v(" cancel ")]
+                [_vm._v("\n                    cancel\n                ")]
               ),
               _vm._v(" "),
               _c(
@@ -62926,7 +63605,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: { click: _vm.addPost }
                 },
-                [_vm._v("post")]
+                [_vm._v("\n                    post\n                ")]
               )
             ])
           ]
@@ -62994,7 +63673,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "p-1" }, [
       _c("p", { staticClass: " text-3xl capitalize text-gray-800 " }, [
-        _vm._v(" Create post ")
+        _vm._v("\n                    Create post\n                ")
       ])
     ])
   },
@@ -63012,9 +63691,7 @@ var staticRenderFns = [
       [
         _c("i", { staticClass: "my-auto fal fa-image" }),
         _vm._v(" "),
-        _c("p", { staticClass: " capitalize my-auto ml-1" }, [
-          _vm._v(" Photo ")
-        ])
+        _c("p", { staticClass: " capitalize my-auto ml-1" }, [_vm._v("Photo")])
       ]
     )
   }
@@ -63048,7 +63725,9 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("p", { staticClass: "my-auto hover:text-cool-gray-500 " }, [
-        _vm._v(_vm._s(_vm.comments.length) + " comments")
+        _vm._v(
+          "\n            " + _vm._s(_vm.comments.length) + " comments\n        "
+        )
       ])
     ]),
     _vm._v(" "),
@@ -63065,11 +63744,11 @@ var render = function() {
               { key: comment.id, staticClass: "hover:text-gray-300" },
               [
                 _vm._v(
-                  " \n            " +
+                  "\n            " +
                     _vm._s(comment.user.firstname) +
                     " " +
                     _vm._s(comment.user.lastname) +
-                    "  \n        "
+                    "\n        "
                 )
               ]
             )
@@ -63150,48 +63829,66 @@ var render = function() {
               "div",
               { key: comment.id, staticClass: "comments pb-2 flex" },
               [
-                _c("div", { staticClass: "pr-1" }, [
-                  _c("img", {
-                    staticClass: " h-11 w-11 rounded-full object-cover  ",
-                    attrs: { src: "/" + comment.user.picture }
-                  })
-                ]),
+                _c(
+                  "inertia-link",
+                  {
+                    staticClass: "pr-1",
+                    attrs: { href: "/profiles/" + comment.user.id }
+                  },
+                  [
+                    _c("img", {
+                      staticClass: " h-11 w-11 rounded-full object-cover  ",
+                      attrs: { src: "/" + comment.user.picture }
+                    })
+                  ]
+                ),
                 _vm._v(" "),
-                _c("div", { staticClass: " pl-1  w-11/12 " }, [
-                  _c(
-                    "p",
-                    { staticClass: " capitalize font-semibold text-sm " },
-                    [
-                      _vm._v(
-                        " \n                    " +
-                          _vm._s(comment.user.firstname) +
-                          " " +
-                          _vm._s(comment.user.firstname) +
-                          "\n                    "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    { staticClass: " capitalize text-sm text-cool-gray-600  " },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(comment.text) +
-                          "\n                    "
-                      ),
-                      _c("span", { staticClass: "px-1 text-xl font-bold " }, [
-                        _vm._v(".")
-                      ]),
-                      _vm._v(" "),
-                      _c("span", { staticClass: " text-teal-400" }, [
-                        _vm._v(_vm._s(comment.timeago))
-                      ])
-                    ]
-                  )
-                ])
-              ]
+                _c(
+                  "div",
+                  { attrs: { clafss: " pl-1  w-11/12 " } },
+                  [
+                    _c(
+                      "inertia-link",
+                      {
+                        staticClass: " capitalize font-semibold text-sm ",
+                        attrs: { href: "/profiles/" + comment.user.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(comment.user.firstname) +
+                            "\n                        " +
+                            _vm._s(comment.user.firstname) +
+                            "\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      {
+                        staticClass: " capitalize text-sm text-cool-gray-600  "
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(comment.text) +
+                            "\n                        "
+                        ),
+                        _c("span", { staticClass: "px-1 text-xl font-bold " }, [
+                          _vm._v(".")
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: " text-teal-400" }, [
+                          _vm._v(_vm._s(comment.timeago))
+                        ])
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
             )
           }),
           0
@@ -63283,12 +63980,12 @@ var render = function() {
             "inertia-link",
             {
               staticClass: "text-base font-bold capitalize",
-              attrs: { href: "/" + _vm.post.user.id }
+              attrs: { href: "/profiles/" + _vm.post.user.id }
             },
             [
               _vm._v(
                 _vm._s(_vm.post.user.firstname) +
-                  " " +
+                  "\n            " +
                   _vm._s(_vm.post.user.lastname)
               )
             ]
@@ -63327,7 +64024,7 @@ var render = function() {
                       staticClass: "fal fa-pencil pr-1",
                       attrs: { "aria-hidden": "true" }
                     }),
-                    _vm._v(" edit post\n            ")
+                    _vm._v(" edit\n                post\n            ")
                   ]
                 )
               : _vm._e(),
@@ -63344,25 +64041,29 @@ var render = function() {
                       staticClass: "fal fa-trash-alt pr-1",
                       attrs: { "aria-hidden": "true" }
                     }),
-                    _vm._v(" delete post\n            ")
+                    _vm._v("\n                delete post\n            ")
                   ]
                 )
               : _vm._e(),
             _vm._v(" "),
             !_vm.route().current("profiles.show")
               ? _c(
-                  "li",
-                  { staticClass: "p-2 hover:text-indigo-500 cursor-pointer" },
+                  "inertia-link",
+                  {
+                    staticClass: "p-2 hover:text-indigo-500 cursor-pointer",
+                    attrs: { href: "/profiles/" + _vm.post.user.id }
+                  },
                   [
                     _c("i", {
                       staticClass: "fal fa-user pr-1",
                       attrs: { "aria-hidden": "true" }
                     }),
-                    _vm._v(" view profile\n            ")
+                    _vm._v(" \n                view profile\n            ")
                   ]
                 )
               : _vm._e()
-          ]
+          ],
+          1
         )
       ])
     ],
@@ -63524,7 +64225,7 @@ var render = function() {
                 { key: react.id, staticClass: "hover:text-gray-300" },
                 [
                   _vm._v(
-                    " \n                " +
+                    "\n                " +
                       _vm._s(react.user.firstname) +
                       " " +
                       _vm._s(react.user.lastname) +
@@ -63546,7 +64247,11 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("p", { staticClass: "my-auto hover:text-cool-gray-500 " }, [
-          _vm._v(_vm._s(_vm.comments.length) + " comments")
+          _vm._v(
+            "\n                " +
+              _vm._s(_vm.comments.length) +
+              " comments\n            "
+          )
         ])
       ]),
       _vm._v(" "),
@@ -63563,11 +64268,11 @@ var render = function() {
                 { key: comment.id, staticClass: "hover:text-gray-300" },
                 [
                   _vm._v(
-                    " \n                " +
+                    "\n                " +
                       _vm._s(comment.user.firstname) +
                       " " +
                       _vm._s(comment.user.lastname) +
-                      "  \n            "
+                      "\n            "
                   )
                 ]
               )
@@ -63648,7 +64353,7 @@ var render = function() {
           return [
             _c("div", { staticClass: "max-w-xl text-sm text-gray-600" }, [
               _vm._v(
-                "\n            Once your account is deleted, all of its resources and data will be permanently deleted.\n            "
+                "\n            Once your account is deleted, all of its resources and data will\n            be permanently deleted.\n            "
               )
             ]),
             _vm._v(" "),
@@ -63693,7 +64398,7 @@ var render = function() {
                   fn: function() {
                     return [
                       _vm._v(
-                        "\n                Are you sure you want to delete your account? Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.\n\n                "
+                        "\n                Are you sure you want to delete your account? Once your\n                account is deleted, all of its resources and data will be\n                permanently deleted. Please enter your password to confirm\n                you would like to permanently delete your account.\n\n                "
                       ),
                       _c(
                         "div",
@@ -64108,7 +64813,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("p", { staticClass: " " }, [
-                                  _vm._v(" add friend ")
+                                  _vm._v("add friend")
                                 ])
                               ]
                             )
@@ -64133,7 +64838,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("p", { staticClass: " " }, [
-                                  _vm._v(" unfriend ")
+                                  _vm._v("unfriend")
                                 ])
                               ]
                             )
@@ -64158,7 +64863,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("p", { staticClass: " " }, [
-                                  _vm._v(" Cancel request ")
+                                  _vm._v("Cancel request")
                                 ])
                               ]
                             )
@@ -64183,7 +64888,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("p", { staticClass: " " }, [
-                                  _vm._v(" confirm ")
+                                  _vm._v("confirm")
                                 ])
                               ]
                             )
@@ -64208,7 +64913,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("p", { staticClass: " " }, [
-                                  _vm._v(" delete")
+                                  _vm._v("delete")
                                 ])
                               ]
                             )
@@ -64238,7 +64943,7 @@ var render = function() {
                             }),
                             _vm._v(" "),
                             _c("p", { staticClass: " " }, [
-                              _vm._v(" edit cover ")
+                              _vm._v("edit cover")
                             ])
                           ]
                         ),
@@ -64677,9 +65382,9 @@ var render = function() {
                   _vm._v(
                     "\n                        " +
                       _vm._s(_vm.$page.profiler.firstname) +
-                      " " +
+                      "\n                        " +
                       _vm._s(_vm.$page.profiler.lastname) +
-                      " \n                    "
+                      "\n                    "
                   )
                 ])
               ])
@@ -64713,7 +65418,7 @@ var render = function() {
               [
                 _c("i", { staticClass: "fal fa-stream fa-2x" }),
                 _vm._v(" "),
-                _c("p", [_vm._v(" timeline")])
+                _c("p", [_vm._v("timeline")])
               ]
             ),
             _vm._v(" "),
@@ -64739,7 +65444,7 @@ var render = function() {
                   attrs: { "aria-hidden": "true" }
                 }),
                 _vm._v(" "),
-                _c("p", [_vm._v(" friends")])
+                _c("p", [_vm._v("friends")])
               ]
             ),
             _vm._v(" "),
@@ -64762,7 +65467,7 @@ var render = function() {
               [
                 _c("i", { staticClass: "fal fa-images fa-2x  " }),
                 _vm._v(" "),
-                _c("p", [_vm._v(" pictures")])
+                _c("p", [_vm._v("pictures")])
               ]
             ),
             _vm._v(" "),
@@ -64794,11 +65499,11 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _vm.$page.profiler.id == _vm.$page.user.id
-                  ? _c("p", [_vm._v(" settings")])
+                  ? _c("p", [_vm._v("settings")])
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.$page.profiler.id != _vm.$page.user.id
-                  ? _c("p", [_vm._v(" about")])
+                  ? _c("p", [_vm._v("about")])
                   : _vm._e()
               ]
             )
@@ -64888,7 +65593,7 @@ var render = function() {
           },
           [
             _c("p", { staticClass: " mt-32 capitalize text-5xl " }, [
-              _vm._v(" no pictures")
+              _vm._v("no pictures")
             ]),
             _vm._v(" "),
             _c("i", {
@@ -65095,7 +65800,9 @@ var render = function() {
               _c("i", { staticClass: "fas  fa-stream  " }),
               _vm._v(" "),
               _c("p", [
-                _vm._v(_vm._s(_vm.posts.length) + " post"),
+                _vm._v(
+                  "\n                    " + _vm._s(_vm.posts.length) + " post"
+                ),
                 _c("span", { staticClass: " lowercase " }, [_vm._v("(s)")])
               ])
             ]
@@ -65111,7 +65818,11 @@ var render = function() {
               _c("i", { staticClass: "fas  fa-images  " }),
               _vm._v(" "),
               _c("p", [
-                _vm._v(_vm._s(_vm.countPictures) + " picture"),
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(_vm.countPictures) +
+                    " picture"
+                ),
                 _c("span", { staticClass: " lowercase " }, [_vm._v("(s)")])
               ])
             ]
@@ -65150,7 +65861,7 @@ var render = function() {
               },
               [
                 _c("p", { staticClass: " mt-32 capitalize text-5xl " }, [
-                  _vm._v(" Aucune publication")
+                  _vm._v("Aucune publication")
                 ]),
                 _vm._v(" "),
                 _c("i", {
@@ -65178,7 +65889,7 @@ var staticRenderFns = [
       [
         _c("i", { staticClass: "fas fa-users    " }),
         _vm._v(" "),
-        _c("p", [_vm._v("10 friends  ")])
+        _c("p", [_vm._v("10 friends")])
       ]
     )
   }
@@ -65964,7 +66675,7 @@ var render = function() {
                     attrs: { "aria-hidden": "true" }
                   }),
                   _vm._v(" "),
-                  _c("p", { staticClass: " " }, [_vm._v(" edit ")])
+                  _c("p", { staticClass: " " }, [_vm._v("edit")])
                 ]
               ),
               _vm._v(" "),
@@ -65981,7 +66692,7 @@ var render = function() {
                         attrs: { "aria-hidden": "true" }
                       }),
                       _vm._v(" "),
-                      _c("p", {}, [_vm._v("remove ")])
+                      _c("p", {}, [_vm._v("remove")])
                     ]
                   )
                 : _vm._e()
@@ -66025,7 +66736,7 @@ var render = function() {
                       _c("i", { staticClass: "my-auto fal fa-image" }),
                       _vm._v(" "),
                       _c("p", { staticClass: " capitalize my-auto ml-1" }, [
-                        _vm._v(" Photo ")
+                        _vm._v("Photo")
                       ])
                     ]
                   ),
@@ -66184,7 +66895,7 @@ var render = function() {
         { staticClass: " fixed h-screen bg-white w-1/4 pt-3 mr-auto shadow " },
         [
           _c("div", { staticClass: "ml-3 capitalize font-semibold my-2 " }, [
-            _c("p", [_vm._v(" filters")])
+            _c("p", [_vm._v("filters")])
           ]),
           _vm._v(" "),
           _c(
@@ -66211,7 +66922,7 @@ var render = function() {
               _c(
                 "p",
                 { staticClass: "pl-2 my-auto text-lg capitalize font-bold " },
-                [_vm._v("all")]
+                [_vm._v("\n                    all\n                ")]
               )
             ]
           ),
@@ -66240,7 +66951,7 @@ var render = function() {
               _c(
                 "p",
                 { staticClass: "pl-2 my-auto text-lg capitalize font-bold " },
-                [_vm._v("users")]
+                [_vm._v("\n                    users\n                ")]
               )
             ]
           ),
@@ -66269,7 +66980,7 @@ var render = function() {
               _c(
                 "p",
                 { staticClass: "pl-2 my-auto text-lg capitalize font-bold " },
-                [_vm._v("posts")]
+                [_vm._v("\n                    posts\n                ")]
               )
             ]
           )
@@ -66315,7 +67026,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          " \n                        " +
+                          "\n                        " +
                             _vm._s(user.firstname) +
                             " " +
                             _vm._s(user.lastname) +
@@ -66332,7 +67043,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          " \n                        @" +
+                          "\n                        @" +
                             _vm._s(user.username) +
                             "\n                    "
                         )
@@ -66383,7 +67094,7 @@ var render = function() {
                                 }),
                                 _vm._v(" "),
                                 _c("p", { staticClass: " " }, [
-                                  _vm._v(" unfriend ")
+                                  _vm._v("unfriend")
                                 ])
                               ]
                             ),
@@ -66397,7 +67108,7 @@ var render = function() {
                               [
                                 _c("i", { staticClass: "fal fa-user pr-2" }),
                                 _vm._v(" "),
-                                _c("p", [_vm._v(" view profile ")])
+                                _c("p", [_vm._v("view profile")])
                               ]
                             )
                           ],
@@ -66437,9 +67148,11 @@ var render = function() {
                     [
                       _c("p", { staticClass: "font-semibold " }, [
                         _vm._v(
-                          _vm._s(post.user.firstname) +
-                            " " +
-                            _vm._s(post.user.lastname)
+                          "\n                            " +
+                            _vm._s(post.user.firstname) +
+                            "\n                            " +
+                            _vm._s(post.user.lastname) +
+                            "\n                        "
                         )
                       ]),
                       _vm._v(" "),
@@ -66464,12 +67177,16 @@ var render = function() {
                 _c("div", { staticClass: " mt-3 flex " }, [
                   _c("div", { staticClass: "flex ml-2 text-sm w-5/6 " }, [
                     _c("p", { staticClass: "pr-2 text-green-600" }, [
-                      _vm._v(" " + _vm._s(post.timeago) + ". ")
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(post.timeago) +
+                          ".\n                        "
+                      )
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: " " }, [
                       _vm._v(
-                        "\n                        " +
+                        "\n                            " +
                           _vm._s(post.text) +
                           "\n                        "
                       )
@@ -66493,7 +67210,7 @@ var render = function() {
                 staticClass:
                   " w-2/3 font-semibold capitalize mx-auto border-b-2 text-lg "
               },
-              [_vm._v(" end of results ")]
+              [_vm._v("\n                    end of results\n                ")]
             )
           ])
         ],
@@ -81974,17 +82691,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-var render, staticRenderFns
+/* harmony import */ var _Friend_vue_vue_type_template_id_1401ec3a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Friend.vue?vue&type=template&id=1401ec3a& */ "./resources/js/Pages/Messenger/Friend.vue?vue&type=template&id=1401ec3a&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 var script = {}
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
   script,
-  render,
-  staticRenderFns,
+  _Friend_vue_vue_type_template_id_1401ec3a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Friend_vue_vue_type_template_id_1401ec3a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -81992,8 +82710,28 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+/* hot reload */
+if (false) { var api; }
 component.options.__file = "resources/js/Pages/Messenger/Friend.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Messenger/Friend.vue?vue&type=template&id=1401ec3a&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/Pages/Messenger/Friend.vue?vue&type=template&id=1401ec3a& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friend_vue_vue_type_template_id_1401ec3a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Friend.vue?vue&type=template&id=1401ec3a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Friend.vue?vue&type=template&id=1401ec3a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friend_vue_vue_type_template_id_1401ec3a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Friend_vue_vue_type_template_id_1401ec3a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -82213,15 +82951,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SendMessage_vue_vue_type_template_id_1c6dba2c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SendMessage.vue?vue&type=template&id=1c6dba2c& */ "./resources/js/Pages/Messenger/SendMessage.vue?vue&type=template&id=1c6dba2c&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _SendMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SendMessage.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Messenger/SendMessage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SendMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _SendMessage_vue_vue_type_template_id_1c6dba2c___WEBPACK_IMPORTED_MODULE_0__["render"],
   _SendMessage_vue_vue_type_template_id_1c6dba2c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -82235,6 +82975,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/Pages/Messenger/SendMessage.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Messenger/SendMessage.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/Pages/Messenger/SendMessage.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./SendMessage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/SendMessage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SendMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

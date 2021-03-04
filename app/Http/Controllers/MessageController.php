@@ -48,19 +48,20 @@ class MessageController extends Controller
         ]);
 
         $message = new Message();
-        $message->text = Crypt::encryptString($request->text);
+        $message->text = $request->text;
+        // $message->text = Crypt::encrypt($request->text);
         $message->conversation_id = $request->conversation_id;
         $message->from_id = Auth::id();
         $message->save();
 
         $message->timeago = $message->created_at->shortRelativeDiffForHumans();
+        // $message->text = Crypt::decrypt($message->text);
 
         $c = Conversation::find($request->conversation_id);
-        $c->last_message =  Crypt::encryptString($request->text);
+        $c->last_message =  $request->text;
         $c->save();
 
 
-        $message->text = Crypt::decryptString($message->text);
 
         return response()->json($message);
     }

@@ -4,18 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 class Conversation extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
 
         'from_id',
         'to_id',
-        'last_message',
+       
 
+    ];
+    protected $encryptable = [
+        'last_message',
     ];
 
     public function getTimeAgo($carbonObject)

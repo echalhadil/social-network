@@ -8,203 +8,402 @@
                         <!-- Logo -->
                         <div class="flex-shrink-0 flex items-center">
                             <inertia-link :href="route('main')">
-                                <jet-application-mark class="block h-9 w-auto" />
+                                <jet-application-mark
+                                    class="block h-9 w-auto"
+                                />
                             </inertia-link>
                         </div>
 
                         <!-- Navigation Links -->
-                        <div class="hidden  w-1/2 space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <div
+                            class="hidden  w-1/2 space-x-8 sm:-my-px sm:ml-10 sm:flex"
+                        >
                             <!--<jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                 Dashboard
                             </jet-nav-link>
                             -->
-                         
-                            <input 
-                            v-on:keyup.enter="search" 
-                            placeholder="type here to search..." 
-                            class="focus:outline-none focus:ring-2 focus:border-indigo-500  bg-gray-100 ml-auto h-12 capitalize my-auto w-10/12 border-blue-100 border-2 rounded-lg " type="text" />
+
+                            <input
+                                v-on:keyup.enter="search"
+                                placeholder="type here to search..."
+                                class="focus:outline-none focus:ring-2 focus:border-indigo-500  bg-gray-100 ml-auto h-12 capitalize my-auto w-10/12 border-blue-100 border-2 rounded-lg "
+                                type="text"
+                            />
                         </div>
 
-                        <div class="flex-shrink-0 flex text-indigo-500 md:ml-auto mx-auto md:w-1/3 w-2/3 items-center">
-                           
-                            <inertia-link :href="route('main')" :class="{'border-indigo-500 border-b ':route().current('main')}" class=" cursor-pointer hover:text-indigo-700  mx-auto">
+                        <div
+                            class="flex-shrink-0 flex text-indigo-500 md:ml-auto mx-auto md:w-1/3 w-2/3 items-center"
+                        >
+                            <inertia-link
+                                :href="route('main')"
+                                :class="{
+                                    'border-indigo-500 border-b ': route().current(
+                                        'main'
+                                    )
+                                }"
+                                class=" cursor-pointer hover:text-indigo-700  mx-auto"
+                            >
                                 <i class="far fa-home" aria-hidden="true"></i>
                             </inertia-link>
 
                             <!--friends request -->
-                            <div class=" cursor-pointer hover:text-indigo-700 mx-auto">
+                            <div
+                                class=" cursor-pointer hover:text-indigo-700 mx-auto"
+                            >
                                 <jet-dropdown align="left" width="72">
                                     <template #trigger>
                                         <i class=" far fa-user-friends">
-                                        <b v-if="newFriendRequest!=0 " class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full ">
-                                        
-                                         {{ (newFriendRequest>9)? '9+':newFriendRequest}}
-                                         </b>
+                                            <b
+                                                v-if="newFriendRequest != 0"
+                                                class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                                            >
+                                                {{
+                                                    newFriendRequest > 9
+                                                        ? "9+"
+                                                        : newFriendRequest
+                                                }}
+                                            </b>
                                         </i>
                                     </template>
 
                                     <template #content>
-                                        
-                                        <div class="block px-4 py-2 text-sm text-gray-400">
+                                        <div
+                                            class="block px-4 py-2 text-sm text-gray-400"
+                                        >
                                             Friendship Requests
                                         </div>
 
-                                        <div class="border-t border-gray-100"></div>
+                                        <div
+                                            class="border-t border-gray-100"
+                                        ></div>
 
-                                        <div v-if="friendsRequest.length == 0" class="px-4 text-gray-400 text-center ">
-                                            <i class="fa mt-7 fa-3x fa-user-times" aria-hidden="true"></i>
-                                            <p class=" mb-7 mt-3 text-sm  ">No Requests</p>
+                                        <div
+                                            v-if="friendsRequest.length == 0"
+                                            class="px-4 text-gray-400 text-center "
+                                        >
+                                            <i
+                                                class="fa mt-7 fa-3x fa-user-times"
+                                                aria-hidden="true"
+                                            ></i>
+                                            <p class=" mb-7 mt-3 text-sm  ">
+                                                No Requests
+                                            </p>
                                         </div>
 
-
-                                        <div v-if="friendsRequest.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
-                                            <div v-for="friendRequest in friendsRequest" :key="friendRequest.id" class="p-2 capitalize flex hover:bg-gray-100 rounded-md ">
-                                                <inertia-link :href="'profiles/'+friendRequest.maker.id" class=" h-13 w-13">
-                                                    <img :src="'/'+friendRequest.maker.picture" class=" h-12 w-12 rounded-full " >
+                                        <div
+                                            v-if="friendsRequest.length > 0"
+                                            class="dropdown  overflow-auto h-64 text-gray-400 text-center "
+                                        >
+                                            <div
+                                                v-for="friendRequest in friendsRequest"
+                                                :key="friendRequest.id"
+                                                class="p-2 capitalize flex hover:bg-gray-100 rounded-md "
+                                            >
+                                                <inertia-link
+                                                    :href="
+                                                        'profiles/' +
+                                                            friendRequest.maker
+                                                                .id
+                                                    "
+                                                    class=" h-13 w-13"
+                                                >
+                                                    <img
+                                                        :src="
+                                                            '/' +
+                                                                friendRequest
+                                                                    .maker
+                                                                    .picture
+                                                        "
+                                                        class=" h-12 w-12 rounded-full "
+                                                    />
                                                 </inertia-link>
-                                                <div class=" pl-1 text-left pr-0.5  ">
-                                                    <p class=" text-sm text-gray-700 font-bold "> 
-                                                    {{friendRequest.maker.firstname}} {{friendRequest.maker.lastname}} 
-                                                    <!--<span class=" font-normal text-xs ">sent you friend request.</span> -->
+                                                <div
+                                                    class=" pl-1 text-left pr-0.5  "
+                                                >
+                                                    <p
+                                                        class=" text-sm text-gray-700 font-bold "
+                                                    >
+                                                        {{
+                                                            friendRequest.maker
+                                                                .firstname
+                                                        }}
+                                                        {{
+                                                            friendRequest.maker
+                                                                .lastname
+                                                        }}
+                                                        <!--<span class=" font-normal text-xs ">sent you friend request.</span> -->
                                                     </p>
-                                                
-                                                    <div class=" text-sm">
-                                                        <button @click="confirmFriendRequest(friendRequest)" class="capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white ">confirm</button>
-                                                        <button @click="deletFriendRequest(friendRequest.id)" class="capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 ">delete</button>
 
+                                                    <div class=" text-sm">
+                                                        <button
+                                                            @click="
+                                                                confirmFriendRequest(
+                                                                    friendRequest
+                                                                )
+                                                            "
+                                                            class="capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white "
+                                                        >
+                                                            confirm
+                                                        </button>
+                                                        <button
+                                                            @click="
+                                                                deletFriendRequest(
+                                                                    friendRequest.id
+                                                                )
+                                                            "
+                                                            class="capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 "
+                                                        >
+                                                            delete
+                                                        </button>
                                                     </div>
                                                 </div>
-
-                                           </div>
-                                         
+                                            </div>
                                         </div>
-
-                                    
                                     </template>
                                 </jet-dropdown>
                             </div>
 
                             <!--notifications -->
-                            <div class="cursor-pointer hover:text-indigo-700 mx-auto">
-                                <div v-if="user_id = $page.user.id"></div>
+                            <div
+                                class="cursor-pointer hover:text-indigo-700 mx-auto"
+                            >
+                                <div v-if="(user_id = $page.user.id)"></div>
                                 <jet-dropdown align="right" width="72">
                                     <template #trigger>
-                                         <i v-on:click="seeNotifications" class="far fa-bell" aria-hidden="true">
-                                         <b v-if="newNotifications!=0 " class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full ">
-                                        
-                                         {{ (newNotifications>9)? '9+':newNotifications}}
-                                         </b>
-                                         </i>
+                                        <i
+                                            v-on:click="seeNotifications"
+                                            class="far fa-bell"
+                                            aria-hidden="true"
+                                        >
+                                            <b
+                                                v-if="newNotifications != 0"
+                                                class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                                            >
+                                                {{
+                                                    newNotifications > 9
+                                                        ? "9+"
+                                                        : newNotifications
+                                                }}
+                                            </b>
+                                        </i>
                                     </template>
 
                                     <template #content>
-                                        
-                                        <div class="block px-4 py-2 text-sm text-gray-400">
+                                        <div
+                                            class="block px-4 py-2 text-sm text-gray-400"
+                                        >
                                             Notifications
                                         </div>
 
-                                        <div class="border-t border-gray-100"></div>
+                                        <div
+                                            class="border-t border-gray-100"
+                                        ></div>
                                         <!-- no notifications -->
-                                        <div v-if="notifications.length === 0" class="px-4 text-gray-400 text-center ">
-                                            <i class="fa mt-7 fa-3x fa-bell-slash" aria-hidden="true"></i>
-                                            <p class=" mb-7 mt-3 text-sm  ">No Notifications</p>
+                                        <div
+                                            v-if="notifications.length === 0"
+                                            class="px-4 text-gray-400 text-center "
+                                        >
+                                            <i
+                                                class="fa mt-7 fa-3x fa-bell-slash"
+                                                aria-hidden="true"
+                                            ></i>
+                                            <p class=" mb-7 mt-3 text-sm  ">
+                                                No Notifications
+                                            </p>
                                         </div>
 
-                                        <div v-if="notifications.length > 0" class="dropdown  overflow-auto h-64 text-gray-400 text-center ">
-                                          
-                                           <div v-for="notification in notifications" :key="notification.id" class=" p-2 capitalize flex hover:bg-gray-100 rounded-md ">
+                                        <div
+                                            v-if="notifications.length > 0"
+                                            class="dropdown  overflow-auto h-64 text-gray-400 text-center "
+                                        >
+                                            <div
+                                                v-for="notification in notifications"
+                                                :key="notification.id"
+                                                class=" p-2 capitalize flex hover:bg-gray-100 rounded-md "
+                                            >
                                                 <div class=" w-1/4">
-                                                    <img :src="'/'+notification.maker.picture" class=" h-12 w-12 rounded-full " >
+                                                    <img
+                                                        :src="
+                                                            '/' +
+                                                                notification
+                                                                    .maker
+                                                                    .picture
+                                                        "
+                                                        class=" h-12 w-12 rounded-full "
+                                                    />
                                                 </div>
-                                                <div class=" pl-1 text-left pr-0.5  ">
-                                                    <p class=" float-left text-gray-700 text-xs font-bold "> 
-                                                    {{notification.maker.firstname}} {{notification.maker.lastname}} 
-                                                    <span class=" font-normal text-xs ">
-                                                        {{ (notification.type=='c')? " commented on your post.":""}} 
-                                                        {{ (notification.type=='r')?" reacted to your post.":"" }} 
-                                                        {{ (notification.type=='f')?" accepted your friend request.":"" }} 
-                                                        
-                                                     </span>
+                                                <div
+                                                    class=" pl-1 text-left pr-0.5  "
+                                                >
+                                                    <p
+                                                        class=" float-left text-gray-700 text-xs font-bold "
+                                                    >
+                                                        {{
+                                                            notification.maker
+                                                                .firstname
+                                                        }}
+                                                        {{
+                                                            notification.maker
+                                                                .lastname
+                                                        }}
+                                                        <span
+                                                            class=" font-normal text-xs "
+                                                        >
+                                                            {{
+                                                                notification.type ==
+                                                                "c"
+                                                                    ? " commented on your post."
+                                                                    : ""
+                                                            }}
+                                                            {{
+                                                                notification.type ==
+                                                                "r"
+                                                                    ? " reacted to your post."
+                                                                    : ""
+                                                            }}
+                                                            {{
+                                                                notification.type ==
+                                                                "f"
+                                                                    ? " accepted your friend request."
+                                                                    : ""
+                                                            }}
+                                                        </span>
                                                     </p>
-                                                    <p class=" text-xs "> {{ notification.timeago }} </p>
-                                                    
+                                                    <p class=" text-xs ">
+                                                        {{
+                                                            notification.timeago
+                                                        }}
+                                                    </p>
                                                 </div>
-                                                <div v-if="!notification.readed" class=" ml-auto">
-                                                   <i class="fa fa-circle text-indigo-500 fa-xs" aria-hidden="true" ></i>
+                                                <div
+                                                    v-if="!notification.readed"
+                                                    class=" ml-auto"
+                                                >
+                                                    <i
+                                                        class="fa fa-circle text-indigo-500 fa-xs"
+                                                        aria-hidden="true"
+                                                    ></i>
                                                 </div>
-                                           </div>
+                                            </div>
                                         </div>
-
-                                    
                                     </template>
                                 </jet-dropdown>
                             </div>
 
                             <!--messages -->
-                            <div class="cursor-pointer hover:text-indigo-700 mx-auto ">
-                                
+                            <div
+                                class="cursor-pointer hover:text-indigo-700 mx-auto "
+                            >
                                 <jet-dropdown align="right" width="64">
                                     <template #trigger>
-                                        <i class="far fa-envelope" aria-hidden="true"></i>
+                                        <i
+                                            class="far fa-envelope"
+                                            aria-hidden="true"
+                                        ></i>
                                     </template>
 
                                     <template #content>
-                                        
-                                        <div class="block px-4 py-2 text-sm text-gray-400">
+                                        <div
+                                            class="block px-4 py-2 text-sm text-gray-400"
+                                        >
                                             Conversations
                                         </div>
 
-                                        <div class="border-t border-gray-100"></div>
-                                        <div class="px-4 text-gray-400 text-center ">
-                                            <i class="fa mt-7 fa-3x fa-comment-alt-slash" aria-hidden="true"></i>
-                                            <p class=" mb-7 mt-3 text-sm  ">No Conversations</p>
+                                        <div
+                                            class="border-t border-gray-100"
+                                        ></div>
+                                        <div
+                                            v-if="conversations.length == 0"
+                                            class="px-4 text-gray-400 text-center "
+                                        >
+                                            <i
+                                                class="fa mt-7 fa-3x fa-comment-alt-slash"
+                                                aria-hidden="true"
+                                            ></i>
+                                            <p class=" mb-7 mt-3 text-sm  ">
+                                                No Conversations
+                                            </p>
                                         </div>
 
-                                    
+                                        <div
+                                            v-if="conversations.length > 0"
+                                            class="px-4 text-gray-400 text-center "
+                                        >
+                                            <div
+                                                v-for="conversation in conversations"
+                                                :key="conversation.id"
+                                                class=" p-2 flex "
+                                            >
+                                                <div>
+                                                    <img
+                                                        class=" h-10 w-10 "
+                                                        :src="
+                                                            '/' +
+                                                                conversation
+                                                                    .friend
+                                                                    .picture
+                                                        "
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <p>
+                                                        {{
+                                                            conversation.last_message
+                                                        }}
+                                                    </p>
+                                                    <p>
+                                                        {{
+                                                            conversation.timeago
+                                                        }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </template>
                                 </jet-dropdown>
                             </div>
-                      
                         </div>
-                        
-                        
-
                     </div>
-
-                   
 
                     <!-- Settings Dropdown -->
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <div class="ml-3 relative">
                             <jet-dropdown align="right" width="48">
                                 <template #trigger>
-                                    <button 
-                                    class="flex h-7 w-7 text-sm border-2 border-transparent rounded-full focus:outline-none
+                                    <button
+                                        class="flex h-7 w-7 text-sm border-2 border-transparent rounded-full focus:outline-none
                                      hover:text-indigo-700 focus:text-indigo-100 transition duration-150 ease-in-out"
-                                    :class="{
-                                        'border-gray-500':!route().current('profiles.show'),
-                                        'border-indigo-500':route().current('profiles.show')
-                                    }"
-                                     >
-                                        <img  class=" w-6 h-6 rounded-full object-cover" 
-                                        :src="'/'+$page.user.picture" :alt="$page.user.name" />
+                                        :class="{
+                                            'border-gray-500': !route().current(
+                                                'profiles.show'
+                                            ),
+                                            'border-indigo-500': route().current(
+                                                'profiles.show'
+                                            )
+                                        }"
+                                    >
+                                        <img
+                                            class=" w-6 h-6 rounded-full object-cover"
+                                            :src="'/' + $page.user.picture"
+                                            :alt="$page.user.name"
+                                        />
                                     </button>
-
-
                                 </template>
 
                                 <template #content>
                                     <!-- Account Management -->
-                                    <div class="block px-4 py-2 text-xs text-gray-400">
+                                    <div
+                                        class="block px-4 py-2 text-xs text-gray-400"
+                                    >
                                         Manage Account
                                     </div>
 
-                                    <jet-dropdown-link :href="'/profiles/'+$page.user.id">
+                                    <jet-dropdown-link
+                                        :href="'/profiles/' + $page.user.id"
+                                    >
                                         Profile
                                     </jet-dropdown-link>
                                     <div class="border-t border-gray-100"></div>
-
-                                   
 
                                     <!-- Authentication -->
                                     <form @submit.prevent="logout">
@@ -219,10 +418,38 @@
 
                     <!-- Hamburger -->
                     <div class="-mr-2 flex items-center sm:hidden">
-                        <button @click="showingNavigationDropdown = ! showingNavigationDropdown" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                <path :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <button
+                            @click="
+                                showingNavigationDropdown = !showingNavigationDropdown
+                            "
+                            class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                        >
+                            <svg
+                                class="h-6 w-6"
+                                stroke="currentColor"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    :class="{
+                                        hidden: showingNavigationDropdown,
+                                        'inline-flex': !showingNavigationDropdown
+                                    }"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                                <path
+                                    :class="{
+                                        hidden: !showingNavigationDropdown,
+                                        'inline-flex': showingNavigationDropdown
+                                    }"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
                             </svg>
                         </button>
                     </div>
@@ -230,9 +457,18 @@
             </div>
 
             <!-- Responsive Navigation Menu -->
-            <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
+            <div
+                :class="{
+                    block: showingNavigationDropdown,
+                    hidden: !showingNavigationDropdown
+                }"
+                class="sm:hidden"
+            >
                 <div class="pt-2 pb-3 space-y-1">
-                    <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
+                    <jet-responsive-nav-link
+                        :href="route('dashboard')"
+                        :active="route().current('dashboard')"
+                    >
                         Dashboard
                     </jet-responsive-nav-link>
                 </div>
@@ -241,21 +477,36 @@
                 <div class="pt-4 pb-1 border-t border-gray-200">
                     <div class="flex items-center px-4">
                         <div class="flex-shrink-0">
-                            <img class="h-10 w-10 rounded-full" :src="'/'+$page.user.picture" :alt="$page.user.name" />
+                            <img
+                                class="h-10 w-10 rounded-full"
+                                :src="'/' + $page.user.picture"
+                                :alt="$page.user.name"
+                            />
                         </div>
 
                         <div class="ml-3">
-                            <div class="font-medium text-base text-gray-800">{{ $page.user.name }}</div>
-                            <div class="font-medium text-sm text-gray-500">{{ $page.user.email }}</div>
+                            <div class="font-medium text-base text-gray-800">
+                                {{ $page.user.name }}
+                            </div>
+                            <div class="font-medium text-sm text-gray-500">
+                                {{ $page.user.email }}
+                            </div>
                         </div>
                     </div>
 
                     <div class="mt-3 space-y-1">
-                        <jet-responsive-nav-link :href="route('profile.show')" :active="route().current('profile.show')">
+                        <jet-responsive-nav-link
+                            :href="route('profile.show')"
+                            :active="route().current('profile.show')"
+                        >
                             Profile
                         </jet-responsive-nav-link>
 
-                        <jet-responsive-nav-link :href="route('api-tokens.index')" :active="route().current('api-tokens.index')" v-if="$page.jetstream.hasApiFeatures">
+                        <jet-responsive-nav-link
+                            :href="route('api-tokens.index')"
+                            :active="route().current('api-tokens.index')"
+                            v-if="$page.jetstream.hasApiFeatures"
+                        >
                             API Tokens
                         </jet-responsive-nav-link>
 
@@ -275,11 +526,19 @@
                             </div>
 
                             <!-- Team Settings -->
-                            <jet-responsive-nav-link :href="route('teams.show', $page.user.current_team)" :active="route().current('teams.show')">
+                            <jet-responsive-nav-link
+                                :href="
+                                    route('teams.show', $page.user.current_team)
+                                "
+                                :active="route().current('teams.show')"
+                            >
                                 Team Settings
                             </jet-responsive-nav-link>
 
-                            <jet-responsive-nav-link :href="route('teams.create')" :active="route().current('teams.create')">
+                            <jet-responsive-nav-link
+                                :href="route('teams.create')"
+                                :active="route().current('teams.create')"
+                            >
                                 Create New Team
                             </jet-responsive-nav-link>
 
@@ -291,10 +550,30 @@
                             </div>
 
                             <template v-for="team in $page.user.all_teams">
-                                <form @submit.prevent="switchToTeam(team)" :key="team.id">
+                                <form
+                                    @submit.prevent="switchToTeam(team)"
+                                    :key="team.id"
+                                >
                                     <jet-responsive-nav-link as="button">
                                         <div class="flex items-center">
-                                            <svg v-if="team.id == $page.user.current_team_id" class="mr-2 h-5 w-5 text-green-400" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                            <svg
+                                                v-if="
+                                                    team.id ==
+                                                        $page.user
+                                                            .current_team_id
+                                                "
+                                                class="mr-2 h-5 w-5 text-green-400"
+                                                fill="none"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                ></path>
+                                            </svg>
                                             <div>{{ team.name }}</div>
                                         </div>
                                     </jet-responsive-nav-link>
@@ -320,15 +599,10 @@
         </main>
 
         <!-- Modal Portal -->
-        <portal-target name="modal" multiple>
-        </portal-target>
-
-
-
-
+        <portal-target name="modal" multiple> </portal-target>
 
         <!--notification stuff -->
-<!--
+        <!--
         <div  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
             <div class=" px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md ">
                 <div class=" h-12 w-12">
@@ -351,187 +625,201 @@
 </template>
 
 <script>
-    import JetApplicationMark from '@/Jetstream/ApplicationMark'
-    import JetDropdown from '@/Jetstream/Dropdown'
-    import JetDropdownLink from '@/Jetstream/DropdownLink'
-    import JetNavLink from '@/Jetstream/NavLink'
-    import JetResponsiveNavLink from '@/Jetstream/ResponsiveNavLink'
+import JetApplicationMark from "@/Jetstream/ApplicationMark";
+import JetDropdown from "@/Jetstream/Dropdown";
+import JetDropdownLink from "@/Jetstream/DropdownLink";
+import JetNavLink from "@/Jetstream/NavLink";
+import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink";
 
-    export default {
-        components: {
-            JetApplicationMark,
-            JetDropdown,
-            JetDropdownLink,
-            JetNavLink,
-            JetResponsiveNavLink,
-        },
-       
-        data() {
-            return {
-                showingNavigationDropdown: false,
-                notifications:[],
-                friendsRequest:[],
-                newNotifications:0,
-                newFriendRequest:0,
-                user_id:'',
+export default {
+    components: {
+        JetApplicationMark,
+        JetDropdown,
+        JetDropdownLink,
+        JetNavLink,
+        JetResponsiveNavLink
+    },
 
-            }
-        },
+    data() {
+        return {
+            showingNavigationDropdown: false,
+            notifications: [],
+            friendsRequest: [],
+            conversations: [],
+            newNotifications: 0,
+            newFriendRequest: 0,
+            user_id: ""
+        };
+    },
 
-        methods: {
-            switchToTeam(team) {
-                this.$inertia.put(route('current-team.update'), {
-                    'team_id': team.id
-                }, {
+    methods: {
+        switchToTeam(team) {
+            this.$inertia.put(
+                route("current-team.update"),
+                {
+                    team_id: team.id
+                },
+                {
                     preserveState: false
-                })
-            },
-
-            logout() {
-                axios.post(route('logout').url()).then(response => {
-                    window.location = '/';
-                })
-            },
-
-            getNotifications(){
-                axios.get(route('notifications.index').url())
-                .then(response => {
-                    console.table(response.data)
-                    this.notifications = _.orderBy(response.data, ['created_at'], ['desc']);;
-                    this.newNotifications = response.data.filter(n => n.seen === 0 ).length;
-
-                    console.log(this.newNotifications)
-
-                    
-                }).catch(err => {
-                    console.table(err)
-                });
-            },
-
-            playSound () {
-                var soundurl = "https://assets.mixkit.co/sfx/preview/mixkit-home-standard-ding-dong-109.mp3";
-                var audio = new Audio(soundurl);
-                audio.play();
-            },
-            seeNotifications(){
-                if(this.newNotifications!=0){
-                    this.newNotifications=0;
-                    axios.get('/seenotifications')
-                        .then(response => {
-                            console.log(response);
-                        })
-                        .catch(err =>{
-                            console.log(err)
-                        })
                 }
-            },
+            );
+        },
 
-            getFriendsRequest(){
-                axios.get(route('friendrequests.index'))
-                    .then( response => { 
-                        this.friendsRequest = response.data
-                         this.newFriendRequest = response.data.filter(fr => fr.seen === 0 ).length;
-                        })
-                    .catch(err =>{console.log(err)
+        logout() {
+            axios.post(route("logout").url()).then(response => {
+                window.location = "/";
+            });
+        },
+
+        getNotifications() {
+            axios
+                .get(route("notifications.index").url())
+                .then(response => {
+                    console.table(response.data);
+                    this.notifications = _.orderBy(
+                        response.data,
+                        ["created_at"],
+                        ["desc"]
+                    );
+                    this.newNotifications = response.data.filter(
+                        n => n.seen === 0
+                    ).length;
+
+                    console.log(this.newNotifications);
+                })
+                .catch(err => {
+                    console.table(err);
+                });
+        },
+
+        playSound() {
+            var soundurl =
+                "https://assets.mixkit.co/sfx/preview/mixkit-home-standard-ding-dong-109.mp3";
+            var audio = new Audio(soundurl);
+            audio.play();
+        },
+        seeNotifications() {
+            if (this.newNotifications != 0) {
+                this.newNotifications = 0;
+                axios
+                    .get("/seenotifications")
+                    .then(response => {
+                        console.log(response);
                     })
-            },
-            
-            deletFriendRequest(id){
-                
-                axios.delete('/friendrequests/'+id)
-                    .then(
-                        response =>
-                        {   console.log(response.data);
-                            this.friendsRequest = this.friendsRequest.filter(fr => fr.id !=id)
-                        }
-                    )
-                    .catch(
-                        err =>
-                        {
-                            console.log(err)
-                        }
-                    )
-            },
-
-            confirmFriendRequest(friendrequest){
-                axios.post('/friends/',friendrequest)
-                    .then(
-                        response =>
-                        {   console.log(response.data);
-                            this.friendsRequest = this.friendsRequest.filter(fr => fr.id !=friendrequest.id)
-                        }
-                    )
-                    .catch(
-                        err =>
-                        {
-                            console.log(err)
-                        }
-                    )
-            },
-
-            search(){
-                window.location = '/';
-            }
-       
-
-        },
-        computed: {
-            countNewMessages(){
-             
+                    .catch(err => {
+                        console.log(err);
+                    });
             }
         },
-        mounted() {
-         
-            this.getNotifications();
-            this.getFriendsRequest();
 
-            Echo.channel('notification-channel-'+this.user_id)
-                .listen('.NotificationEvent', (data) => {
-
-                    let notification = data.notification
-                    console.table(notification);
-                    this.notifications.unshift(notification);
-                    this.newNotifications++;
-                    this.playSound();
-                });
-
-            Echo.channel('friend-request-channel-'+this.user_id)
-                .listen('.FriendRequestEvent', (data) => {
-
-                    let friendRequest = data.friendrequest
-                    console.table(friendRequest);
-                    this.friendsRequest.unshift(friendRequest);
-                    newFriendRequest++;
-
-                    this.playSound();
+        getFriendsRequest() {
+            axios
+                .get(route("friendrequests.index"))
+                .then(response => {
+                    this.friendsRequest = response.data;
+                    this.newFriendRequest = response.data.filter(
+                        fr => fr.seen === 0
+                    ).length;
+                })
+                .catch(err => {
+                    console.log(err);
                 });
         },
-       
+
+        deletFriendRequest(id) {
+            axios
+                .delete("/friendrequests/" + id)
+                .then(response => {
+                    console.log(response.data);
+                    this.friendsRequest = this.friendsRequest.filter(
+                        fr => fr.id != id
+                    );
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+
+        confirmFriendRequest(friendrequest) {
+            axios
+                .post("/friends/", friendrequest)
+                .then(response => {
+                    console.log(response.data);
+                    this.friendsRequest = this.friendsRequest.filter(
+                        fr => fr.id != friendrequest.id
+                    );
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
+
+        search() {
+            window.location = "/";
+        },
+        getConversations() {
+            axios
+                .get("/conversations")
+                .then(res => {
+                    this.conversations = _.orderBy(
+                        res.data,
+                        ["updated_at"],
+                        ["desc"]
+                    );
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    },
+    computed: {
+        countNewMessages() {}
+    },
+    mounted() {
+        this.getNotifications();
+        this.getFriendsRequest();
+        this.getConversations();
+
+        Echo.channel("notification-channel-" + this.user_id).listen(
+            ".NotificationEvent",
+            data => {
+                let notification = data.notification;
+                console.table(notification);
+                this.notifications.unshift(notification);
+                this.newNotifications++;
+                this.playSound();
+            }
+        );
+
+        Echo.channel("friend-request-channel-" + this.user_id).listen(
+            ".FriendRequestEvent",
+            data => {
+                let friendRequest = data.friendrequest;
+                console.table(friendRequest);
+                this.friendsRequest.unshift(friendRequest);
+                this.newFriendRequest++;
+
+                this.playSound();
+            }
+        );
     }
-   
-
+};
 </script>
 
-
-
 <style>
+.dropdown::-webkit-scrollbar {
+    width: 3px;
+}
 
+.dropdown::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
 
-    .dropdown::-webkit-scrollbar {
-        width: 3px;
-        }
+.dropdown::-webkit-scrollbar-thumb {
+    background: #cfd0d1;
+}
 
-    .dropdown::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        }
-
-    .dropdown::-webkit-scrollbar-thumb {
-        background: #cfd0d1;
-        }
-
-    .dropdown::-webkit-scrollbar-thumb:hover {
-        background: #555;
-        }
-    
-
+.dropdown::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 </style>

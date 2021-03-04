@@ -21,7 +21,8 @@ class ConversationController extends Controller
         //
         $c = Conversation::all();
         foreach ($c as $conversation) {
-            $conversation->timeago = $conversation->getTimeAgo($conversation->created_at);
+            $conversation->timeago = $conversation->getTimeAgo($conversation->updated_at);
+            // $conversation->las_message = Crypt::decryptString($conversation->last_message);
             if ($conversation->from_id == Auth::id())
                 $conversation->friend = User::find($conversation->to_id);
             else
@@ -118,7 +119,7 @@ class ConversationController extends Controller
 
         foreach ($c->messages as $message) {
             $message->timeago = $message->created_at->shortRelativeDiffForHumans();
-            $message->text = Crypt::decryptString($message->text);
+            // $message->text = Crypt::decryptString($message->text);
         }
         return response()->json($c->messages);
     }
