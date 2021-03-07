@@ -19,14 +19,20 @@
                 <conversations />
             </div>
 
-            <div v-if="route().current(
-                                        'Messenger.index'
-                                    )"
+            <div
                 class=" regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
             >
-                <friend />
+                <div v-if="route().current('messenger')" class=" relative text-center top-1/2 -translate-y-3/5 text-gray-500 my-auto ">
+                    
+                    <i class="fab fa-pushed fa-6x" aria-hidden="true"></i>
+                    <p class="mt-1 text-xl font-semibold capitalize"> start conversation </p>
+                </div>
+                <friend v-if="!route().current('messenger')" />
 
-                <div class=" w-full h-full messages overflow-auto mt-3 ">
+                <div
+                    v-if="!route().current('messenger')"
+                    class=" w-full h-full messages overflow-auto mt-3 "
+                >
                     <!-- loading for message -->
                     <div v-if="loading">
                         <div class="p-2 flex">
@@ -72,32 +78,65 @@
                         </div>
                     </div>
                     <message
+                        v-if="!route().current('messenger')"
                         v-for="message in messages"
                         :key="message.id"
                         :message="message"
                     />
+                    <div v-if="!loading && messages.length == 0" class=" relative text-center mt-8 -translate-y-3/5 text-gray-500 my-auto ">
+                    
+                    <i class="fab fa-pushed fa-6x" aria-hidden="true"></i>
+                    <p class="mt-1 text-xl font-semibold capitalize"> start conversation </p>
+                </div>
                 </div>
 
-                <send-message @send-message="sendMessage" />
+                <send-message
+                    v-if="!route().current('messenger')"
+                    @send-message="sendMessage"
+                />
+
+
+                
+
             </div>
 
             <div class="mx-2 w-0 invisible sm:w-1/4 sm:visible">
                 <div class="p-2 bg-white w-full rounded-lg">
-                    <div class="  ">
+                    <div class=" ">
                         <img
-                            :src="'/' + $page.friend.picture"
+                            :src="
+                                route().current('messenger')
+                                    ?'/' +  $page.user.picture
+                                    :'/' +  $page.friend.picture
+                            "
                             class="mx-auto h-28 w-28 object-cover rounded-full "
                         />
                     </div>
                     <div class=" text-center mt-1">
                         <p class=" text-xl font-bold ">
-                            {{ $page.friend.firstname }}
-                            {{ $page.friend.lastname }}
+                            {{
+                                route().current("messenger")
+                                    ? $page.user.firstname
+                                    : $page.friend.firstname
+                            }}
+                            {{
+                                route().current("messenger")
+                                    ? $page.user.lastname
+                                    : $page.friend.lastname
+                            }}
                         </p>
-                        <p class=" text-md  ">@ {{ $page.friend.username }}</p>
+                        <p class=" text-md  ">
+                            @{{
+                                route().current("messenger")
+                                    ? $page.user.username
+                                    : $page.friend.username
+                            }}
+                        </p>
                     </div>
 
-                    <div
+                    <inertia-link :href="route().current("messenger")
+                                    ? '/profiles/'+ $page.user.id
+                                    : '/profiles/'+ $page.friend.id  "
                         class="flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500"
                     >
                         <i
@@ -107,7 +146,7 @@
                         <p class="my-auto mr-auto ml-1 capitalize  ">
                             view profile
                         </p>
-                    </div>
+                    </inertia-link>
                 </div>
             </div>
         </div>
@@ -137,6 +176,7 @@ export default {
     },
     methods: {
         getMessages() {
+            if( !route().current('messenger') )
             axios
                 .get(window.location.href.split("/").pop() + "/messages")
                 .then(res => {

@@ -88,7 +88,7 @@ Route::get('seenotifications', [NotificationController::class, 'seeNotifications
 //messenger 
 Route::middleware(['auth:sanctum', 'verified'])->get('/messenger', function () {
     return Inertia\Inertia::render('Messenger/Main');
-})->name('dashboard');
+})->name('messenger');
 
 Route::get('conversations/{id}/messages', [ConversationController::class, 'messages']);
 

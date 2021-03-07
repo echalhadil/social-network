@@ -28,6 +28,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.1",
+        "@fortawesome/free-solid-svg-icons": "^5.15.2",
         "@tailwindcss/forms": "^0.2.1",
         "laravel-echo": "^1.10.0",
         "pusher-js": "^7.0.3",

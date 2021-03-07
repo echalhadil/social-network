@@ -3423,6 +3423,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4533,6 +4572,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4556,7 +4636,7 @@ __webpack_require__.r(__webpack_exports__);
     getMessages: function getMessages() {
       var _this = this;
 
-      axios.get(window.location.href.split("/").pop() + "/messages").then(function (res) {
+      if (!route().current('messenger')) axios.get(window.location.href.split("/").pop() + "/messages").then(function (res) {
         _this.messages = _.orderBy(res.data, ["created_at"], ["asc"]);
         _this.loading = false;
       })["catch"](function (err) {
@@ -61163,7 +61243,7 @@ var render = function() {
                       },
                       [
                         _c("jet-dropdown", {
-                          attrs: { align: "right", width: "64" },
+                          attrs: { align: "right", width: "72" },
                           scopedSlots: _vm._u([
                             {
                               key: "trigger",
@@ -61198,7 +61278,7 @@ var render = function() {
                                     staticClass: "border-t border-gray-100"
                                   }),
                                   _vm._v(" "),
-                                  true
+                                  _vm.conversations.length == 0
                                     ? _c(
                                         "div",
                                         {
@@ -61226,13 +61306,120 @@ var render = function() {
                                           )
                                         ]
                                       )
-                                    : undefined,
+                                    : _vm._e(),
                                   _vm._v(" "),
                                   _vm.conversations.length > 0
-                                    ? _c("div", {
-                                        staticClass:
-                                          "px-4 text-gray-400 text-center "
-                                      })
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            " text-gray-400 text-sm  "
+                                        },
+                                        _vm._l(_vm.conversations, function(
+                                          conversation
+                                        ) {
+                                          return _c(
+                                            "div",
+                                            {
+                                              key: conversation.id,
+                                              staticClass:
+                                                " p-2 flex hover:bg-gray-100 "
+                                            },
+                                            [
+                                              _c("div", [
+                                                _c("img", {
+                                                  staticClass:
+                                                    " h-12 w-12 rounded-full mr-1 my-auto ",
+                                                  attrs: {
+                                                    src:
+                                                      "/" +
+                                                      conversation.friend
+                                                        .picture
+                                                  }
+                                                })
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                { staticClass: "my-auto" },
+                                                [
+                                                  _c(
+                                                    "p",
+                                                    {
+                                                      staticClass:
+                                                        " font-bold text-gray-800 "
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          conversation.friend
+                                                            .firstname
+                                                        ) +
+                                                          " " +
+                                                          _vm._s(
+                                                            conversation.friend
+                                                              .lastname
+                                                          ) +
+                                                          " "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "p",
+                                                    {
+                                                      staticClass:
+                                                        "text-xs truncate  text-gray-500"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                                        " +
+                                                          _vm._s(
+                                                            conversation.last_message
+                                                          ) +
+                                                          " . \n                                                        "
+                                                      ),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          staticClass:
+                                                            " text-gray-400 text-xs "
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                        " +
+                                                              _vm._s(
+                                                                conversation.timeago
+                                                              ) +
+                                                              "\n                                                        "
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              true
+                                                ? _c(
+                                                    "div",
+                                                    {
+                                                      staticClass:
+                                                        "ml-auto my-auto"
+                                                    },
+                                                    [
+                                                      _c("i", {
+                                                        staticClass:
+                                                          "fa fa-circle text-indigo-500 fa-xs    "
+                                                      })
+                                                    ]
+                                                  )
+                                                : undefined
+                                            ]
+                                          )
+                                        }),
+                                        0
+                                      )
                                     : _vm._e()
                                 ]
                               },
@@ -63044,98 +63231,159 @@ var render = function() {
             " regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
         },
         [
-          _c("friend"),
+          _vm.route().current("messenger")
+            ? _c(
+                "div",
+                {
+                  staticClass:
+                    " relative text-center top-1/2 -translate-y-3/5 text-gray-500 my-auto "
+                },
+                [
+                  _c("i", {
+                    staticClass: "fab fa-pushed fa-6x",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "p",
+                    { staticClass: "mt-1 text-xl font-semibold capitalize" },
+                    [_vm._v(" start conversation ")]
+                  )
+                ]
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: " w-full h-full messages overflow-auto mt-3 " },
-            [
-              _vm.loading
-                ? _c("div", [
-                    _c("div", { staticClass: "p-2 flex" }, [
-                      _c("div", {
-                        staticClass: "h-10 w-10 rounded-full loading"
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ml-2 w-3/4" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              " shadow p-2 loading rounded-t-lg rounded-r-lg h-20 w-full "
-                          },
-                          [_c("div", { staticClass: "text-gray-700 text-sm" })]
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "capitalize mt-1" }, [
+          !_vm.route().current("messenger") ? _c("friend") : _vm._e(),
+          _vm._v(" "),
+          !_vm.route().current("messenger")
+            ? _c(
+                "div",
+                { staticClass: " w-full h-full messages overflow-auto mt-3 " },
+                [
+                  _vm.loading
+                    ? _c("div", [
+                        _c("div", { staticClass: "p-2 flex" }, [
                           _c("div", {
-                            staticClass: "w-9 h-3 rounded-full loading "
+                            staticClass: "h-10 w-10 rounded-full loading"
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "ml-2 w-3/4" }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  " shadow p-2 loading rounded-t-lg rounded-r-lg h-20 w-full "
+                              },
+                              [
+                                _c("div", {
+                                  staticClass: "text-gray-700 text-sm"
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "capitalize mt-1" }, [
+                              _c("div", {
+                                staticClass: "w-9 h-3 rounded-full loading "
+                              })
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass:
+                              "my-auto mx-auto loading w-4 h-2 rounded-full "
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "p-2 flex" }, [
+                          _c("div", {
+                            staticClass:
+                              "my-auto ml-auto loading w-4 h-2 rounded-full "
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "ml-auto w-3/4 " }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "ml-auto p-2 shadow loading h-20 rounded-t-lg rounded-l-lg w-full "
+                              },
+                              [_c("div", { staticClass: "text-white text-sm" })]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "w-3/4 ml-auto capitalize mt-1" },
+                              [
+                                _c("div", {
+                                  staticClass:
+                                    "float-right w-9 h-3 rounded-full loading "
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass: "h-10 w-10 rounded-full ml-2 loading"
                           })
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", {
-                        staticClass:
-                          "my-auto mx-auto loading w-4 h-2 rounded-full "
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "p-2 flex" }, [
-                      _c("div", {
-                        staticClass:
-                          "my-auto ml-auto loading w-4 h-2 rounded-full "
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "ml-auto w-3/4 " }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "ml-auto p-2 shadow loading h-20 rounded-t-lg rounded-l-lg w-full "
-                          },
-                          [_c("div", { staticClass: "text-white text-sm" })]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "w-3/4 ml-auto capitalize mt-1" },
-                          [
-                            _c("div", {
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm._l(_vm.messages, function(message) {
+                    return !_vm.route().current("messenger")
+                      ? _c("message", {
+                          key: message.id,
+                          attrs: { message: message }
+                        })
+                      : _vm._e()
+                  }),
+                  _vm._v(" "),
+                  !_vm.loading && _vm.messages.length == 0
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            " relative text-center mt-8 -translate-y-3/5 text-gray-500 my-auto "
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fab fa-pushed fa-6x",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "p",
+                            {
                               staticClass:
-                                "float-right w-9 h-3 rounded-full loading "
-                            })
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", {
-                        staticClass: "h-10 w-10 rounded-full ml-2 loading"
-                      })
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm._l(_vm.messages, function(message) {
-                return _c("message", {
-                  key: message.id,
-                  attrs: { message: message }
-                })
-              })
-            ],
-            2
-          ),
+                                "mt-1 text-xl font-semibold capitalize"
+                            },
+                            [_vm._v(" start conversation ")]
+                          )
+                        ]
+                      )
+                    : _vm._e()
+                ],
+                2
+              )
+            : _vm._e(),
           _vm._v(" "),
-          _c("send-message", { on: { "send-message": _vm.sendMessage } })
+          !_vm.route().current("messenger")
+            ? _c("send-message", { on: { "send-message": _vm.sendMessage } })
+            : _vm._e()
         ],
         1
       ),
       _vm._v(" "),
       _c("div", { staticClass: "mx-2 w-0 invisible sm:w-1/4 sm:visible" }, [
         _c("div", { staticClass: "p-2 bg-white w-full rounded-lg" }, [
-          _c("div", { staticClass: "  " }, [
+          _c("div", { staticClass: " " }, [
             _c("img", {
               staticClass: "mx-auto h-28 w-28 object-cover rounded-full ",
-              attrs: { src: "/" + _vm.$page.friend.picture }
+              attrs: {
+                src: _vm.route().current("messenger")
+                  ? "/" + _vm.$page.user.picture
+                  : "/" + _vm.$page.friend.picture
+              }
             })
           ]),
           _vm._v(" "),
@@ -63143,37 +63391,47 @@ var render = function() {
             _c("p", { staticClass: " text-xl font-bold " }, [
               _vm._v(
                 "\n                        " +
-                  _vm._s(_vm.$page.friend.firstname) +
+                  _vm._s(
+                    _vm.route().current("messenger")
+                      ? _vm.$page.user.firstname
+                      : _vm.$page.friend.firstname
+                  ) +
                   "\n                        " +
-                  _vm._s(_vm.$page.friend.lastname) +
+                  _vm._s(
+                    _vm.route().current("messenger")
+                      ? _vm.$page.user.lastname
+                      : _vm.$page.friend.lastname
+                  ) +
                   "\n                    "
               )
             ]),
             _vm._v(" "),
             _c("p", { staticClass: " text-md  " }, [
-              _vm._v("@ " + _vm._s(_vm.$page.friend.username))
+              _vm._v(
+                "\n                        @" +
+                  _vm._s(
+                    _vm.route().current("messenger")
+                      ? _vm.$page.user.username
+                      : _vm.$page.friend.username
+                  ) +
+                  "\n                    "
+              )
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500"
-            },
-            [
-              _c("i", {
-                staticClass: " ml-auto fal fa-user my-auto",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v(" "),
-              _c("p", { staticClass: "my-auto mr-auto ml-1 capitalize  " }, [
-                _vm._v(
-                  "\n                        view profile\n                    "
-                )
-              ])
-            ]
-          )
+          _vm._v(
+            "\")\n                                ? '/profiles/'+ $page.user.id\n                                : '/profiles/'+ $page.friend.id  \"\n                    class=\"flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500\"\n                >\n                    "
+          ),
+          _c("i", {
+            staticClass: " ml-auto fal fa-user my-auto",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "my-auto mr-auto ml-1 capitalize  " }, [
+            _vm._v(
+              "\n                        view profile\n                    "
+            )
+          ])
         ])
       ])
     ])
