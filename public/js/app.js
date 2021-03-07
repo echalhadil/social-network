@@ -4735,8 +4735,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['message']
+  props: ["message"]
 });
 
 /***/ }),
@@ -7909,7 +7930,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".loading{\n  background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb , #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3 , #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb , #e3e3e3);\n}\n}\n.max-width{\n  max-width:75%;\n}\n", ""]);
+exports.push([module.i, ".loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n.max-width {\n  max-width: 75%;\n}\r\n", ""]);
 
 // exports
 
@@ -63490,7 +63511,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-2 " }, [
+  return _c("div", { staticClass: "p-2 mt-3" }, [
     _c("div", { staticClass: "flex" }, [
       _vm.$page.user.id != _vm.message.from_id
         ? _c("img", {
@@ -63513,7 +63534,7 @@ var render = function() {
               [
                 _c("p", { staticClass: "text-gray-700 px-2 text-sm" }, [
                   _vm._v(
-                    "\n                " +
+                    "\n                    " +
                       _vm._s(_vm.message.text) +
                       "\n                "
                   )
@@ -63536,7 +63557,7 @@ var render = function() {
     _vm.$page.user.id != _vm.message.from_id
       ? _c("div", { staticClass: "capitalize ml-12 mt-1" }, [
           _c("p", { staticClass: " text-xs text-gray-500 " }, [
-            _vm._v(_vm._s(_vm.message.timeago) + ". ")
+            _vm._v(_vm._s(_vm.message.timeago) + ".")
           ])
         ])
       : _vm._e(),
@@ -63562,7 +63583,7 @@ var render = function() {
               [
                 _c("p", { staticClass: "text-white text-sm" }, [
                   _vm._v(
-                    "\n                " +
+                    "\n                    " +
                       _vm._s(_vm.message.text) +
                       "\n                "
                   )
