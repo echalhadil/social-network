@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia as Inertia;
 
 class ConversationController extends Controller
@@ -19,7 +20,15 @@ class ConversationController extends Controller
     public function index()
     {
         //
-        $c = Conversation::all();
+        // $c = Conversation::all();
+        // $c = Conversation::cursor()->filter(function ($conversation) {
+
+        // return $conversation->from_id === auth::id() ;
+        // });
+        // $c = User::find(Auth::id())->friendsFromMe()->orWhere->friendsToMe()->get();
+        $c = Conversation::where('from_id', Auth::id())
+                    ->orWhere('to_id',  Auth::id())
+                    ->get();
         foreach ($c as $conversation) {
             $conversation->timeago = $conversation->getTimeAgo($conversation->updated_at);
             // $conversation->las_message = Crypt::decryptString($conversation->last_message);
@@ -64,7 +73,7 @@ class ConversationController extends Controller
         //
 
         $conversation = Conversation::find($id);
-        if ($conversation) {
+        if ($conversation && (Auth::id() == $conversation->from_id || Auth::id() == $conversation->to_id)) {
             $conversation->messages = $conversation->messages;
 
             if ($conversation->from_id == Auth::id())
@@ -75,7 +84,8 @@ class ConversationController extends Controller
             return Inertia::render('Messenger/Main')->with("id", $id)->with("friend", $conversation->friend);
         } else
 
-            return response()->json("error conversation not found");
+            // return response()->json("error conversation not found");
+            abort(404);
     }
 
     /**
@@ -115,12 +125,15 @@ class ConversationController extends Controller
     public function messages($id)
     {
 
-        $c = Conversation::find($id);
-
-        foreach ($c->messages as $message) {
-            $message->timeago = $message->created_at->shortRelativeDiffForHumans();
-            // $message->text = Crypt::decryptString($message->text);
-        }
-        return response()->json($c->messages);
+        $conversation = Conversation::find($id);
+        if ($conversation && (Auth::id() == $conversation->from_id || Auth::id() == $conversation->to_id)) {
+      
+           foreach ($conversation->messages as $message) {
+                $message->timeago = $message->created_at->shortRelativeDiffForHumans();
+                // $message->text = Crypt::decryptString($message->text);
+            }
+        return response()->json($conversation->messages);
+    }
+    abort(404);
     }
 }
