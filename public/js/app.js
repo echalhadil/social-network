@@ -4613,6 +4613,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4636,7 +4643,7 @@ __webpack_require__.r(__webpack_exports__);
     getMessages: function getMessages() {
       var _this = this;
 
-      if (!route().current('messenger')) axios.get(window.location.href.split("/").pop() + "/messages").then(function (res) {
+      if (!route().current("messenger")) axios.get(window.location.href.split("/").pop() + "/messages").then(function (res) {
         _this.messages = _.orderBy(res.data, ["created_at"], ["asc"]);
         _this.loading = false;
       })["catch"](function (err) {
@@ -63247,7 +63254,11 @@ var render = function() {
                   _c(
                     "p",
                     { staticClass: "mt-1 text-xl font-semibold capitalize" },
-                    [_vm._v(" start conversation ")]
+                    [
+                      _vm._v(
+                        "\n                    start conversation\n                "
+                      )
+                    ]
                   )
                 ]
               )
@@ -63357,7 +63368,11 @@ var render = function() {
                               staticClass:
                                 "mt-1 text-xl font-semibold capitalize"
                             },
-                            [_vm._v(" start conversation ")]
+                            [
+                              _vm._v(
+                                "\n                        start conversation\n                    "
+                              )
+                            ]
                           )
                         ]
                       )
@@ -63375,64 +63390,80 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("div", { staticClass: "mx-2 w-0 invisible sm:w-1/4 sm:visible" }, [
-        _c("div", { staticClass: "p-2 bg-white w-full rounded-lg" }, [
-          _c("div", { staticClass: " " }, [
-            _c("img", {
-              staticClass: "mx-auto h-28 w-28 object-cover rounded-full ",
-              attrs: {
-                src: _vm.route().current("messenger")
-                  ? "/" + _vm.$page.user.picture
-                  : "/" + _vm.$page.friend.picture
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: " text-center mt-1" }, [
-            _c("p", { staticClass: " text-xl font-bold " }, [
-              _vm._v(
-                "\n                        " +
-                  _vm._s(
-                    _vm.route().current("messenger")
-                      ? _vm.$page.user.firstname
-                      : _vm.$page.friend.firstname
-                  ) +
-                  "\n                        " +
-                  _vm._s(
-                    _vm.route().current("messenger")
-                      ? _vm.$page.user.lastname
-                      : _vm.$page.friend.lastname
-                  ) +
-                  "\n                    "
-              )
+        _c(
+          "div",
+          { staticClass: "p-2 bg-white w-full rounded-lg" },
+          [
+            _c("div", { staticClass: " " }, [
+              _c("img", {
+                staticClass: "mx-auto h-28 w-28 object-cover rounded-full ",
+                attrs: {
+                  src: _vm.route().current("messenger")
+                    ? "/" + _vm.$page.user.picture
+                    : "/" + _vm.$page.friend.picture
+                }
+              })
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: " text-md  " }, [
-              _vm._v(
-                "\n                        @" +
-                  _vm._s(
-                    _vm.route().current("messenger")
-                      ? _vm.$page.user.username
-                      : _vm.$page.friend.username
-                  ) +
-                  "\n                    "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._v(
-            "\")\n                                ? '/profiles/'+ $page.user.id\n                                : '/profiles/'+ $page.friend.id  \"\n                    class=\"flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500\"\n                >\n                    "
-          ),
-          _c("i", {
-            staticClass: " ml-auto fal fa-user my-auto",
-            attrs: { "aria-hidden": "true" }
-          }),
-          _vm._v(" "),
-          _c("p", { staticClass: "my-auto mr-auto ml-1 capitalize  " }, [
-            _vm._v(
-              "\n                        view profile\n                    "
+            _c("div", { staticClass: " text-center mt-1" }, [
+              _c("p", { staticClass: " text-xl font-bold " }, [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(
+                      _vm.route().current("messenger")
+                        ? _vm.$page.user.firstname
+                        : _vm.$page.friend.firstname
+                    ) +
+                    "\n                        " +
+                    _vm._s(
+                      _vm.route().current("messenger")
+                        ? _vm.$page.user.lastname
+                        : _vm.$page.friend.lastname
+                    ) +
+                    "\n                    "
+                )
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: " text-md  " }, [
+                _vm._v(
+                  "\n                        @" +
+                    _vm._s(
+                      _vm.route().current("messenger")
+                        ? _vm.$page.user.username
+                        : _vm.$page.friend.username
+                    ) +
+                    "\n                    "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "inertia-link",
+              {
+                staticClass:
+                  "flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500",
+                attrs: {
+                  href: _vm.route().current("messenger")
+                    ? "/profiles/" + _vm.$page.user.id
+                    : "/profiles/" + _vm.$page.friend.id
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: " ml-auto fal fa-user my-auto",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" "),
+                _c("p", { staticClass: "my-auto mr-auto ml-1 capitalize  " }, [
+                  _vm._v(
+                    "\n                        view profile\n                    "
+                  )
+                ])
+              ]
             )
-          ])
-        ])
+          ],
+          1
+        )
       ])
     ])
   ])

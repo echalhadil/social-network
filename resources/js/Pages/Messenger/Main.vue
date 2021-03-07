@@ -22,10 +22,14 @@
             <div
                 class=" regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
             >
-                <div v-if="route().current('messenger')" class=" relative text-center top-1/2 -translate-y-3/5 text-gray-500 my-auto ">
-                    
+                <div
+                    v-if="route().current('messenger')"
+                    class=" relative text-center top-1/2 -translate-y-3/5 text-gray-500 my-auto "
+                >
                     <i class="fab fa-pushed fa-6x" aria-hidden="true"></i>
-                    <p class="mt-1 text-xl font-semibold capitalize"> start conversation </p>
+                    <p class="mt-1 text-xl font-semibold capitalize">
+                        start conversation
+                    </p>
                 </div>
                 <friend v-if="!route().current('messenger')" />
 
@@ -83,21 +87,21 @@
                         :key="message.id"
                         :message="message"
                     />
-                    <div v-if="!loading && messages.length == 0" class=" relative text-center mt-8 -translate-y-3/5 text-gray-500 my-auto ">
-                    
-                    <i class="fab fa-pushed fa-6x" aria-hidden="true"></i>
-                    <p class="mt-1 text-xl font-semibold capitalize"> start conversation </p>
-                </div>
+                    <div
+                        v-if="!loading && messages.length == 0"
+                        class=" relative text-center mt-8 -translate-y-3/5 text-gray-500 my-auto "
+                    >
+                        <i class="fab fa-pushed fa-6x" aria-hidden="true"></i>
+                        <p class="mt-1 text-xl font-semibold capitalize">
+                            start conversation
+                        </p>
+                    </div>
                 </div>
 
                 <send-message
                     v-if="!route().current('messenger')"
                     @send-message="sendMessage"
                 />
-
-
-                
-
             </div>
 
             <div class="mx-2 w-0 invisible sm:w-1/4 sm:visible">
@@ -106,8 +110,8 @@
                         <img
                             :src="
                                 route().current('messenger')
-                                    ?'/' +  $page.user.picture
-                                    :'/' +  $page.friend.picture
+                                    ? '/' + $page.user.picture
+                                    : '/' + $page.friend.picture
                             "
                             class="mx-auto h-28 w-28 object-cover rounded-full "
                         />
@@ -134,9 +138,12 @@
                         </p>
                     </div>
 
-                    <inertia-link :href="route().current("messenger")
-                                    ? '/profiles/'+ $page.user.id
-                                    : '/profiles/'+ $page.friend.id  "
+                    <inertia-link
+                        :href="
+                            route().current('messenger')
+                                ? '/profiles/' + $page.user.id
+                                : '/profiles/' + $page.friend.id
+                        "
                         class="flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500"
                     >
                         <i
@@ -176,21 +183,21 @@ export default {
     },
     methods: {
         getMessages() {
-            if( !route().current('messenger') )
-            axios
-                .get(window.location.href.split("/").pop() + "/messages")
-                .then(res => {
-                    this.messages = _.orderBy(
-                        res.data,
-                        ["created_at"],
-                        ["asc"]
-                    );
-                    this.loading = false;
-                })
+            if (!route().current("messenger"))
+                axios
+                    .get(window.location.href.split("/").pop() + "/messages")
+                    .then(res => {
+                        this.messages = _.orderBy(
+                            res.data,
+                            ["created_at"],
+                            ["asc"]
+                        );
+                        this.loading = false;
+                    })
 
-                .catch(err => {
-                    console.log(err);
-                });
+                    .catch(err => {
+                        console.log(err);
+                    });
         },
         sendMessage(text, conversation_id) {
             let message = { text, conversation_id };
