@@ -19,7 +19,9 @@
                 <conversations />
             </div>
 
-            <div
+            <div v-if="route().current(
+                                        'Messenger.index'
+                                    )"
                 class=" regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
             >
                 <friend />

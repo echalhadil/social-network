@@ -294,7 +294,7 @@
                             <div
                                 class="cursor-pointer hover:text-indigo-700 mx-auto "
                             >
-                                <jet-dropdown align="right" width="64">
+                                <jet-dropdown align="right" width="72">
                                     <template #trigger>
                                         <i
                                             class="far fa-envelope"
@@ -327,16 +327,16 @@
 
                                         <div
                                             v-if="conversations.length > 0"
-                                            class="px-4 text-gray-400 text-center "
+                                            class=" text-gray-400 text-sm  "
                                         >
                                             <div
                                                 v-for="conversation in conversations"
                                                 :key="conversation.id"
-                                                class=" p-2 flex "
+                                                class=" p-2 flex hover:bg-gray-100 "
                                             >
                                                 <div>
                                                     <img
-                                                        class=" h-10 w-10 "
+                                                        class=" h-12 w-12 rounded-full mr-1 my-auto "
                                                         :src="
                                                             '/' +
                                                                 conversation
@@ -345,17 +345,23 @@
                                                         "
                                                     />
                                                 </div>
-                                                <div>
-                                                    <p>
+                                                <div class="my-auto">
+                                                    <p class=" font-bold text-gray-800 ">{{conversation.friend.firstname}} {{conversation.friend.lastname}} </p>
+                                                    <p class="text-xs truncate  text-gray-500">
                                                         {{
                                                             conversation.last_message
-                                                        }}
-                                                    </p>
-                                                    <p>
+                                                        }} . 
+                                                        <span class=" text-gray-400 text-xs ">
                                                         {{
                                                             conversation.timeago
                                                         }}
+                                                        </span>
                                                     </p>
+                                                   
+                                                </div>
+                                                <div v-if="true" class="ml-auto my-auto">
+                                                
+                                                    <i class="fa fa-circle text-indigo-500 fa-xs    "></i>
                                                 </div>
                                             </div>
                                         </div>

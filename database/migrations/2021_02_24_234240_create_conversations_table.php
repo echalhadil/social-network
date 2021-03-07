@@ -18,6 +18,9 @@ class CreateConversationsTable extends Migration
             $table->foreignId('from_id');
             $table->foreignId('to_id');
             $table->text('last_message');
+            $table->boolean('seen')->default(0); // if the all messages have been seen
+            $table->boolean('readed')->default(0); //if this conversation has been readed 
+            
             $table->timestamps();
 
             $table->foreign('from_id')->references('id')->on('users');
