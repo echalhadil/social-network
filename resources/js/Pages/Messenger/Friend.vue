@@ -1,6 +1,9 @@
 <template>
     <div class=" w-full px-2 py-3 bg-white flex shadow-lg">
-        <div class=" pr-1 ">
+        <inertia-link href="/messenger" class=" text-gray-500 sm:w-0 my-auto p-1 visible sm:invisible ">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </inertia-link>
+        <div class=" pr-1 my-auto ">
             <img
                 :src="'/' + $page.friend.picture"
                 class="w-10 h-10 rounded-full my-auto"

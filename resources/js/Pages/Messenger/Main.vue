@@ -1,26 +1,11 @@
 <template>
     <app-layout>
         <div class="flex mt-6 mx-3 ">
+            <conversations />
             <div
-                class=" mx-auto w-full sm:w-1/4 regular-conversations-height  "
-            >
-                <div class="w-full p-2">
-                    <p class="capitalize text-lg font-semibold">conversation</p>
-                </div>
-
-                <div class="px-2 py-1">
-                    <input
-                        type="text"
-                        placeholder="Search Here"
-                        class="focus:outline-none focus:ring-2 focus:border-indigo-500 ml-auto bg-transparent h-10 capitalize w-full border-gray-300 border rounded-md "
-                    />
-                </div>
-
-                <conversations />
-            </div>
-
-            <div
-                class=" regular-messages-height w-0 invisible sm:w-2/4 sm:visible  "
+                class=" regular-messages-height w-0  sm:w-2/4 sm:visible  "
+                :class="{ 'invisible':route().current('messenger') ,
+                'w-full':!route().current('messenger') }"
             >
                 <div
                     v-if="route().current('messenger')"
