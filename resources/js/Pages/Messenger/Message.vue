@@ -1,5 +1,5 @@
 <template>
-    <div class="p-2 mt-3">
+    <div class="p-2 mt-1">
         <!-- recive message -->
         <div class="flex">
             <img

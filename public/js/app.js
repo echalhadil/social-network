@@ -4632,6 +4632,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4665,7 +4666,7 @@ __webpack_require__.r(__webpack_exports__);
           el.scrollIntoView({
             behavior: "smooth"
           });
-        }, 3000);
+        }, 1000);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -4679,13 +4680,14 @@ __webpack_require__.r(__webpack_exports__);
       };
       axios.post("/messages", message).then(function (res) {
         _this2.messages.push(res.data);
+
+        var el = _this2.$el.getElementsByClassName("bottom")[0];
+
+        el.scrollIntoView({
+          behavior: "smooth"
+        });
       })["catch"](function (err) {
         console.log(err);
-      });
-      var el = this.$el.getElementsByClassName("bottom")[0]; // container.scrollTop = container.scrollHeight;
-
-      el.scrollIntoView({
-        behavior: "smooth"
       });
     }
   },
@@ -61422,7 +61424,7 @@ var render = function() {
                                                     "p",
                                                     {
                                                       staticClass:
-                                                        "text-xs truncate  text-gray-500"
+                                                        "text-xs truncate float-left  text-gray-500"
                                                     },
                                                     [
                                                       _vm._v(
@@ -61430,13 +61432,13 @@ var render = function() {
                                                           _vm._s(
                                                             conversation.last_message
                                                           ) +
-                                                          " . \n                                                        "
+                                                          " .\n                                                        "
                                                       ),
                                                       _c(
                                                         "span",
                                                         {
                                                           staticClass:
-                                                            " text-gray-400 text-xs "
+                                                            " float-right ml-1 text-gray-400 text-xs "
                                                         },
                                                         [
                                                           _vm._v(
@@ -63464,8 +63466,6 @@ var render = function() {
                         : _vm._e()
                     }),
                     _vm._v(" "),
-                    _c("div", { staticClass: "bottom mb-2" }),
-                    _vm._v(" "),
                     !_vm.loading && _vm.messages.length == 0
                       ? _c(
                           "div",
@@ -63493,7 +63493,9 @@ var render = function() {
                             )
                           ]
                         )
-                      : _vm._e()
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "bottom mb-16" })
                   ],
                   2
                 )
@@ -63613,7 +63615,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-2 mt-3" }, [
+  return _c("div", { staticClass: "p-2 mt-1" }, [
     _c("div", { staticClass: "flex" }, [
       _vm.$page.user.id != _vm.message.from_id
         ? _c("img", {

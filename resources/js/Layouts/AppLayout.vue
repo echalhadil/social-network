@@ -347,11 +347,11 @@
                                                 </div>
                                                 <div class="my-auto">
                                                     <p class=" font-bold text-gray-800 ">{{conversation.friend.firstname}} {{conversation.friend.lastname}} </p>
-                                                    <p class="text-xs truncate  text-gray-500">
+                                                    <p class="text-xs truncate float-left  text-gray-500">
                                                         {{
                                                             conversation.last_message
-                                                        }} . 
-                                                        <span class=" text-gray-400 text-xs ">
+                                                        }} .
+                                                        <span class=" float-right ml-1 text-gray-400 text-xs ">
                                                         {{
                                                             conversation.timeago
                                                         }}

@@ -74,8 +74,7 @@
                         :key="message.id"
                         :message="message"
                     />
-                    <div class="bottom mb-2"></div>
-
+                    
                     <div
                         v-if="!loading && messages.length == 0"
                         class=" relative text-center mt-8 -translate-y-3/5 text-gray-500 my-auto "
@@ -85,6 +84,8 @@
                             start conversation
                         </p>
                     </div>
+
+                    <div class="bottom mb-16"></div>
                 </div>
 
                 <send-message
@@ -185,7 +186,7 @@ export default {
                         var el = this.$el.getElementsByClassName("bottom")[0];
                         setTimeout(function() {
                             el.scrollIntoView({ behavior: "smooth" });
-                        }, 3000);
+                        }, 1000);
                     })
 
                     .catch(err => {
@@ -198,13 +199,12 @@ export default {
                 .post("/messages", message)
                 .then(res => {
                     this.messages.push(res.data);
+                    var el = this.$el.getElementsByClassName("bottom")[0];
+                    el.scrollIntoView({ behavior: "smooth" });
                 })
                 .catch(err => {
                     console.log(err);
                 });
-            var el = this.$el.getElementsByClassName("bottom")[0];
-            // container.scrollTop = container.scrollHeight;
-            el.scrollIntoView({ behavior: "smooth" });
         }
     },
     mounted() {
