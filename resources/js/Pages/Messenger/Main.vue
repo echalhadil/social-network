@@ -4,8 +4,10 @@
             <conversations />
             <div
                 class=" regular-messages-height w-0  sm:w-2/4 sm:visible  "
-                :class="{ 'invisible':route().current('messenger') ,
-                'w-full':!route().current('messenger') }"
+                :class="{
+                    invisible: route().current('messenger'),
+                    'w-full': !route().current('messenger')
+                }"
             >
                 <div
                     v-if="route().current('messenger')"
@@ -72,6 +74,8 @@
                         :key="message.id"
                         :message="message"
                     />
+                    <div class="bottom mb-2"></div>
+
                     <div
                         v-if="!loading && messages.length == 0"
                         class=" relative text-center mt-8 -translate-y-3/5 text-gray-500 my-auto "
@@ -178,6 +182,10 @@ export default {
                             ["asc"]
                         );
                         this.loading = false;
+                        var el = this.$el.getElementsByClassName("bottom")[0];
+                        setTimeout(function() {
+                            el.scrollIntoView({ behavior: "smooth" });
+                        }, 3000);
                     })
 
                     .catch(err => {
@@ -194,6 +202,9 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
+            var el = this.$el.getElementsByClassName("bottom")[0];
+            // container.scrollTop = container.scrollHeight;
+            el.scrollIntoView({ behavior: "smooth" });
         }
     },
     mounted() {

@@ -4628,6 +4628,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -4654,6 +4658,14 @@ __webpack_require__.r(__webpack_exports__);
       if (!route().current("messenger")) axios.get(window.location.href.split("/").pop() + "/messages").then(function (res) {
         _this.messages = _.orderBy(res.data, ["created_at"], ["asc"]);
         _this.loading = false;
+
+        var el = _this.$el.getElementsByClassName("bottom")[0];
+
+        setTimeout(function () {
+          el.scrollIntoView({
+            behavior: "smooth"
+          });
+        }, 3000);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -4669,6 +4681,11 @@ __webpack_require__.r(__webpack_exports__);
         _this2.messages.push(res.data);
       })["catch"](function (err) {
         console.log(err);
+      });
+      var el = this.$el.getElementsByClassName("bottom")[0]; // container.scrollTop = container.scrollHeight;
+
+      el.scrollIntoView({
+        behavior: "smooth"
       });
     }
   },
@@ -63018,9 +63035,10 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: " mx-auto w-0   sm:w-1/4 regular-conversations-height  ",
+      staticClass:
+        " mx-auto w-0 sm:visible  sm:w-1/4 regular-conversations-height  ",
       class: {
-        invisible: !_vm.route().current("messenger"),
+        "invisible sm:visible": !_vm.route().current("messenger"),
         "w-full": _vm.route().current("messenger")
       }
     },
@@ -63445,6 +63463,8 @@ var render = function() {
                           })
                         : _vm._e()
                     }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "bottom mb-2" }),
                     _vm._v(" "),
                     !_vm.loading && _vm.messages.length == 0
                       ? _c(
