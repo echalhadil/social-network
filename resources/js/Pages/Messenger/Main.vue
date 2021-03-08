@@ -171,6 +171,7 @@ export default {
             loading: true
         };
     },
+    
     methods: {
         getMessages() {
             if (!route().current("messenger"))
@@ -186,7 +187,7 @@ export default {
                         var el = this.$el.getElementsByClassName("bottom")[0];
                         setTimeout(function() {
                             el.scrollIntoView({ behavior: "smooth" });
-                        }, 1000);
+                        }, 500);
                     })
 
                     .catch(err => {

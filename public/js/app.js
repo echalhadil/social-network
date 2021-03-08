@@ -4437,27 +4437,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       conversations: [],
+      mainConversations: [],
       loading: true,
       searchValue: ""
     };
+  },
+  watch: {
+    searchValue: _.debounce(function () {
+      this.search();
+    }, 200)
   },
   methods: {
     getConversations: function getConversations() {
       var _this = this;
 
       axios.get(route("conversations.index")).then(function (res) {
-        _this.conversations = _.orderBy(res.data, ["updated_at"], ["desc"]);
+        _this.mainConversations = _this.conversations = _.orderBy(res.data, ["updated_at"], ["desc"]);
         _this.loading = false;
       })["catch"](function (err) {
         console.log(err);
       });
     },
     search: function search() {
-      console.table(_.includes(_.toString(this.conversations[0].firstname), this.searchValue));
+      var v = this.searchValue.toLowerCase();
+      this.mainConversations = _.filter(this.conversations, function (o) {
+        return _.includes(o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase() + " " + o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.firstname.toLowerCase() + " " + o.friend.lastname.toLowerCase(), v);
+      });
+      console.table(this.mainConversations);
     }
   },
   mounted: function mounted() {
@@ -4666,7 +4679,7 @@ __webpack_require__.r(__webpack_exports__);
           el.scrollIntoView({
             behavior: "smooth"
           });
-        }, 1000);
+        }, 500);
       })["catch"](function (err) {
         console.log(err);
       });
@@ -63062,15 +63075,6 @@ var render = function() {
           attrs: { type: "text", placeholder: "Search Here" },
           domProps: { value: _vm.searchValue },
           on: {
-            keyup: function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
-              }
-              return _vm.search($event)
-            },
             input: function($event) {
               if ($event.target.composing) {
                 return
@@ -63107,7 +63111,7 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
-          _vm._l(_vm.conversations, function(conversation) {
+          _vm._l(_vm.mainConversations, function(conversation) {
             return !_vm.loading
               ? _c(
                   "inertia-link",

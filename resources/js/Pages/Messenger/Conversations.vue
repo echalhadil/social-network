@@ -1,7 +1,11 @@
 <template>
-    <div class=" mx-auto w-0 sm:visible  sm:w-1/4 regular-conversations-height  "
-    :class="{ 'invisible sm:visible':!route().current('messenger') ,
-                'w-full':route().current('messenger') }">
+    <div
+        class=" mx-auto w-0 sm:visible  sm:w-1/4 regular-conversations-height  "
+        :class="{
+            'invisible sm:visible': !route().current('messenger'),
+            'w-full': route().current('messenger')
+        }"
+    >
         <div class="w-full p-2">
             <p class="capitalize text-lg font-semibold">conversation</p>
         </div>
@@ -9,7 +13,6 @@
         <div class="px-2 py-1">
             <input
                 v-model="searchValue"
-                v-on:keyup.enter="search"
                 type="text"
                 placeholder="Search Here"
                 class="focus:outline-none focus:ring-2 focus:border-indigo-500 ml-auto bg-transparent h-10 capitalize w-full border-gray-300 border rounded-md "
@@ -50,7 +53,7 @@
 
             <inertia-link
                 v-if="!loading"
-                v-for="conversation in conversations"
+                v-for="conversation in mainConversations"
                 :key="conversation.id"
                 :href="'/conversations/' + conversation.id"
                 class="mt-2 cursor-pointer group shadow px-1 py-2 w-full flex rounded"
@@ -146,16 +149,22 @@ export default {
     data() {
         return {
             conversations: [],
+            mainConversations:[],
             loading: true,
             searchValue: "",
         };
+    },
+    watch: {
+    searchValue: _.debounce(function() {
+      this.search();
+    }, 200),
     },
     methods: {
         getConversations() {
             axios
                 .get(route("conversations.index"))
                 .then(res => {
-                    this.conversations = _.orderBy(
+                    this.mainConversations = this.conversations = _.orderBy(
                         res.data,
                         ["updated_at"],
                         ["desc"]
@@ -168,8 +177,19 @@ export default {
         },
 
         search() {
-            console.table(_.includes(_.toString(this.conversations[0].firstname), this.searchValue));
-            
+            let v = this.searchValue.toLowerCase();
+            this.mainConversations = _.filter(this.conversations, function(o) {
+                return (
+                    _.includes(o.friend.firstname.toLowerCase(), v) ||
+                    _.includes(o.friend.lastname.toLowerCase(), v) ||
+                    _.includes(
+                        o.friend.lastname.toLowerCase() + " " + o.friend.firstname.toLowerCase(),
+                        v
+                    ) ||
+                    _.includes(o.friend.firstname.toLowerCase() + " " + o.friend.lastname.toLowerCase(), v)
+                );
+            });
+            console.table(this.mainConversations);
         }
     },
 
