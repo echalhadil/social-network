@@ -49,6 +49,9 @@
                 @edit-post="editPost"
             />
 
+            <loading v-if="loading" />
+            <loading v-if="loading" />
+
             <!-- if ther is no publications this will be visible -->
             <div
                 v-if="posts.length == 0"
@@ -66,18 +69,22 @@
 import AddPost from "@/Pages/Post/AddPost";
 import swal from "sweetalert";
 import Post from "@/Pages/Post/Main";
+import Loading from "@/Pages/Post/Loading";
+
 
 export default {
     props: ["timelineClasses"],
 
     components: {
         AddPost,
-        Post
+        Post,
+        Loading,
     },
     data() {
         return {
             posts: [],
-            comment: { text: null, post_id: null }
+            comment: { text: null, post_id: null },
+            loading:true,
         };
     },
     methods: {
@@ -186,6 +193,7 @@ export default {
                 .then(response => {
                     // console.table(response.data)
                     this.posts = _.orderBy(response.data, ["id"], ["desc"]);
+                    this.loading  = false;
                 })
                 .catch(error => {
                     console.log(error);

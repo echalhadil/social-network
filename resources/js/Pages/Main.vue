@@ -5,7 +5,7 @@
                 <add-post @add-post="addPost"> </add-post>
 
                 <div
-                    v-if="posts.length > 0"
+                    v-if="!loading && posts.length > 0"
                     v-for="post in posts"
                     :key="post.id"
                     class=" md:w-9/12 mt-4 mx-auto "
@@ -98,7 +98,7 @@
 
                 <!-- if ther is no publications this will be visible -->
                 <div
-                    v-if="posts.length == 0"
+                    v-if="!loading && posts.length == 0"
                     class="text-gray-600 mt-8 h-96  justify-items-center  md:w-9/12  mx-auto text-center"
                 >
                     <p class=" mt-32 capitalize text-5xl ">
@@ -107,6 +107,13 @@
                     <i class="fa fa-moon-stars fa-9x " aria-hidden="true"></i>
                 </div>
                 <!-- if ther is no publications this will be visible -->
+
+                <!-- if loading -->
+                <loading v-if="loading" />
+                <loading v-if="loading" />
+                
+
+                
             </div>
 
             <div class="md:w-4/12 right-0 invisible md:visible mt-8 w-0">
@@ -168,6 +175,9 @@ import PostPicture from "./Post/Picture";
 // import post reactions
 import React from "./Post/React";
 
+import Loading from "./Post/Loading";
+
+
 // iport sweet alert
 import swal from "sweetalert";
 export default {
@@ -177,12 +187,14 @@ export default {
         React,
         PostOwner,
         PostText,
-        PostPicture
+        PostPicture,
+        Loading,
     },
     data() {
         return {
             posts: [],
-            comment: { text: null, post_id: null }
+            comment: { text: null, post_id: null },
+            loading: true
         };
     },
     methods: {
@@ -260,6 +272,7 @@ export default {
                 .get("/posts")
                 .then(response => {
                     this.posts = _.orderBy(response.data, ["id"], ["desc"]);
+                    this.loading = false;
                 })
                 .catch(error => {
                     console.log(error);
@@ -325,4 +338,7 @@ export default {
 .comments {
     max-height: 12rem;
 }
+
+
+
 </style>

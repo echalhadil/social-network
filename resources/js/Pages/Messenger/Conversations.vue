@@ -20,7 +20,7 @@
             />
         </div>
 
-        <div class="px-2 overflow-auto h-full conv">
+        <div class="px-2 overflow-auto  conv">
             <!-- waiting to get data -->
             <div v-if="loading">
                 <div
@@ -110,6 +110,9 @@
 </template>
 
 <style>
+.regular-conversations-height{
+    height:calc(100vh - 6rem);
+}
 .conv::-webkit-scrollbar {
     width: 5px;
 }

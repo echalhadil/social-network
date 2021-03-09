@@ -192,7 +192,8 @@
                                         <div
                                             class="block px-4 py-2 text-sm text-gray-400"
                                         >
-                                            Notifications
+                                            Notifications 
+                                            
                                         </div>
 
                                         <div
@@ -307,6 +308,7 @@
                                             class="block px-4 py-2 text-sm text-gray-400"
                                         >
                                             Conversations
+                                            <inertia-link href="/messenger" class=" float-right text-xs text-indigo-500 font-semibold capitalize "> messenger </inertia-link>
                                         </div>
 
                                         <div
@@ -327,12 +329,13 @@
 
                                         <div
                                             v-if="conversations.length > 0"
-                                            class=" text-gray-400 text-sm  "
+                                            class=" text-gray-400 text-sm h-64 "
                                         >
-                                            <div
+                                            <inertia-link
                                                 v-for="conversation in conversations"
                                                 :key="conversation.id"
                                                 class=" p-2 flex hover:bg-gray-100 "
+                                                :href="'/conversations/'+conversation.id"
                                             >
                                                 <div>
                                                     <img
@@ -363,7 +366,7 @@
                                                 
                                                     <i class="fa fa-circle text-indigo-500 fa-xs    "></i>
                                                 </div>
-                                            </div>
+                                            </inertia-link>
                                         </div>
                                     </template>
                                 </jet-dropdown>

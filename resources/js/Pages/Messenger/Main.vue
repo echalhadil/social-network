@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class="flex mt-6 overflow-x-hidden  ">
+        <div class="flex mt-6 overflow-x-hidden regular-conversations-height  ">
             <conversations />
             <div
                 class=" regular-messages-height w-0  sm:w-2/4 sm:visible  "
@@ -22,7 +22,7 @@
 
                 <div
                     v-if="!route().current('messenger')"
-                    class=" w-full h-full messages overflow-auto mt-3 "
+                    class=" w-full messages overflow-auto mt-3 "
                 >
                     <!-- loading for message -->
                     <div v-if="loading">
@@ -215,11 +215,9 @@ export default {
 </script>
 
 <style>
-.regular-conversations-height {
-    height: calc(100vh - 190px);
-}
-.regular-messages-height {
-    height: calc(100vh - 230px);
+
+.messages{
+    height:calc(100% - 9rem);
 }
 .messages::-webkit-scrollbar {
     width: 5px;

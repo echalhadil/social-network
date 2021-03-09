@@ -85,21 +85,24 @@
                     <i class="fal fa-trash-alt pr-1" aria-hidden="true"></i>
                     delete post
                 </div>
-                <inertia-link
-                    :href="'/profiles/' + post.user.id"
-                    v-if="!route().current('profiles.show')"
-                    class="p-2 hover:text-indigo-500 cursor-pointer"
-                >
-                    <i class="fal fa-user pr-1" aria-hidden="true"></i>
-                    view profile
-                </inertia-link>
-                <inertia-link
-                    :href="'/profiles/' + post.user.id"
-                    class="p-2 hover:text-indigo-500 cursor-pointer"
-                >
-                    <i class="fal fa-cannabis pr-1 my-auto" aria-hidden="true"></i>
-                    view post
-                </inertia-link>
+                <div  v-if="!route().current('profiles.show')"  class="p-2 hover:text-indigo-500 cursor-pointer">
+                    <inertia-link
+                        :href="'/profiles/' + post.user.id"
+                       
+                    >
+                        <i class="fal fa-user pr-1" aria-hidden="true"></i>
+                        view profile
+                    </inertia-link>
+                </div>
+                <div class="p-2 hover:text-indigo-500 cursor-pointer">
+                    <inertia-link :href="'/profiles/' + post.user.id">
+                        <i
+                            class="fal fa-cannabis pr-1 my-auto"
+                            aria-hidden="true"
+                        ></i>
+                        view post
+                    </inertia-link>
+                </div>
             </template>
         </jet-dropdown>
 
