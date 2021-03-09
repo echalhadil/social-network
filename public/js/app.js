@@ -4440,6 +4440,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4452,7 +4453,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     searchValue: _.debounce(function () {
       this.search();
-    }, 200)
+    }, 150)
   },
   methods: {
     getConversations: function getConversations() {
@@ -5347,6 +5348,55 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5409,7 +5459,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   props: {
     // user,
     post: Object,
@@ -62725,304 +62779,315 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("app-layout", [
-    _c("div", { staticClass: " w-full bg-gray-100  flex pb-10 " }, [
-      _c(
-        "div",
-        { staticClass: " md:w-8/12 mt-4 mb-2 mx-auto " },
-        [
-          _c("add-post", { on: { "add-post": _vm.addPost } }),
-          _vm._v(" "),
-          _vm._l(_vm.posts, function(post) {
-            return _vm.posts.length > 0
-              ? _c(
-                  "div",
-                  { key: post.id, staticClass: " md:w-9/12 mt-4 mx-auto " },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: " bg-white rounded-xl p-2 shadow" },
-                      [
-                        _c("post-owner", {
-                          attrs: {
-                            post: post,
-                            isowner: post.user.id == _vm.$page.user.id
-                          },
-                          on: {
-                            "delete-post": _vm.deletePost,
-                            "edit-post": _vm.editPost
-                          }
-                        }),
-                        _vm._v(" "),
-                        post.text
-                          ? _c("post-text", { attrs: { text: post.text } })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        post.picture
-                          ? _c("post-picture", { attrs: { src: post.picture } })
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("react", {
-                          attrs: {
-                            post: post,
-                            isReacted: _vm.isReacted(post, _vm.$page.user),
-                            userid: _vm.$page.user.id,
-                            reacts: post.reacts,
-                            comments: post.comments
-                          },
-                          on: { unreact: _vm.unreact, react: _vm.react }
-                        }),
-                        _vm._v(" "),
-                        _c("hr"),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "comments overflow-auto pt-3 mt-2  px-2"
-                          },
-                          _vm._l(post.comments, function(comment) {
-                            return _c(
-                              "div",
-                              { key: comment.id, staticClass: " pb-2 flex" },
-                              [
-                                _c("div", { staticClass: "pr-1" }, [
-                                  _c("img", {
-                                    staticClass:
-                                      " h-11 w-11 rounded-full object-cover  ",
-                                    attrs: { src: comment.user.picture }
-                                  })
-                                ]),
-                                _vm._v(" "),
-                                _c("div", { staticClass: " pl-1  w-11/12 " }, [
-                                  _c(
-                                    "p",
-                                    {
+    _c(
+      "div",
+      { staticClass: " w-full bg-gray-100  flex pb-10 overflow-x-hidden " },
+      [
+        _c(
+          "div",
+          { staticClass: " md:w-8/12 mt-4 mb-2 mx-auto " },
+          [
+            _c("add-post", { on: { "add-post": _vm.addPost } }),
+            _vm._v(" "),
+            _vm._l(_vm.posts, function(post) {
+              return _vm.posts.length > 0
+                ? _c(
+                    "div",
+                    { key: post.id, staticClass: " md:w-9/12 mt-4 mx-auto " },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: " bg-white rounded-xl p-2 shadow" },
+                        [
+                          _c("post-owner", {
+                            attrs: {
+                              post: post,
+                              isowner: post.user.id == _vm.$page.user.id
+                            },
+                            on: {
+                              "delete-post": _vm.deletePost,
+                              "edit-post": _vm.editPost
+                            }
+                          }),
+                          _vm._v(" "),
+                          post.text
+                            ? _c("post-text", { attrs: { text: post.text } })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          post.picture
+                            ? _c("post-picture", {
+                                attrs: { src: post.picture }
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("react", {
+                            attrs: {
+                              post: post,
+                              isReacted: _vm.isReacted(post, _vm.$page.user),
+                              userid: _vm.$page.user.id,
+                              reacts: post.reacts,
+                              comments: post.comments
+                            },
+                            on: { unreact: _vm.unreact, react: _vm.react }
+                          }),
+                          _vm._v(" "),
+                          _c("hr"),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "comments overflow-auto pt-3 mt-2  px-2"
+                            },
+                            _vm._l(post.comments, function(comment) {
+                              return _c(
+                                "div",
+                                { key: comment.id, staticClass: " pb-2 flex" },
+                                [
+                                  _c("div", { staticClass: "pr-1" }, [
+                                    _c("img", {
                                       staticClass:
-                                        " capitalize font-semibold text-sm "
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(comment.user.firstname) +
-                                          "\n                                    " +
-                                          _vm._s(comment.user.firstname) +
-                                          "\n                                "
-                                      )
-                                    ]
-                                  ),
+                                        " h-11 w-11 rounded-full object-cover  ",
+                                      attrs: { src: comment.user.picture }
+                                    })
+                                  ]),
                                   _vm._v(" "),
                                   _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        " capitalize text-sm text-cool-gray-600  "
-                                    },
+                                    "div",
+                                    { staticClass: " pl-1  w-11/12 " },
                                     [
-                                      _vm._v(
-                                        "\n                                    " +
-                                          _vm._s(comment.text) +
-                                          "\n                                    "
-                                      ),
                                       _c(
-                                        "span",
+                                        "p",
                                         {
-                                          staticClass: "px-1 text-xl font-bold "
+                                          staticClass:
+                                            " capitalize font-semibold text-sm "
                                         },
-                                        [_vm._v(".")]
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(comment.user.firstname) +
+                                              "\n                                    " +
+                                              _vm._s(comment.user.firstname) +
+                                              "\n                                "
+                                          )
+                                        ]
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "span",
+                                        "p",
                                         {
                                           staticClass:
-                                            " text-teal-400 capitalize"
+                                            " capitalize text-sm text-cool-gray-600  "
                                         },
-                                        [_vm._v(_vm._s(comment.timeago))]
+                                        [
+                                          _vm._v(
+                                            "\n                                    " +
+                                              _vm._s(comment.text) +
+                                              "\n                                    "
+                                          ),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "px-1 text-xl font-bold "
+                                            },
+                                            [_vm._v(".")]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                " text-teal-400 capitalize"
+                                            },
+                                            [_vm._v(_vm._s(comment.timeago))]
+                                          )
+                                        ]
                                       )
                                     ]
                                   )
-                                ])
-                              ]
-                            )
-                          }),
-                          0
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "px-2 pb-2" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.comment.text,
-                                expression: "comment.text"
-                              }
-                            ],
-                            staticClass:
-                              " mt-2 text-gray-600 capitalize w-full focus:outline-none focus:ring focus:border-blue-300 rounded h-10 border-2 ",
-                            attrs: { type: "text " },
-                            domProps: { value: _vm.comment.text },
-                            on: {
-                              keyup: function($event) {
-                                if (
-                                  !$event.type.indexOf("key") &&
-                                  _vm._k(
-                                    $event.keyCode,
-                                    "enter",
-                                    13,
-                                    $event.key,
-                                    "Enter"
+                                ]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "px-2 pb-2" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.comment.text,
+                                  expression: "comment.text"
+                                }
+                              ],
+                              staticClass:
+                                " mt-2 text-gray-600 capitalize w-full focus:outline-none focus:ring focus:border-blue-300 rounded h-10 border-2 ",
+                              attrs: { type: "text " },
+                              domProps: { value: _vm.comment.text },
+                              on: {
+                                keyup: function($event) {
+                                  if (
+                                    !$event.type.indexOf("key") &&
+                                    _vm._k(
+                                      $event.keyCode,
+                                      "enter",
+                                      13,
+                                      $event.key,
+                                      "Enter"
+                                    )
+                                  ) {
+                                    return null
+                                  }
+                                  return _vm.addComment(post)
+                                },
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.comment,
+                                    "text",
+                                    $event.target.value
                                   )
-                                ) {
-                                  return null
                                 }
-                                return _vm.addComment(post)
-                              },
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.comment,
-                                  "text",
-                                  $event.target.value
-                                )
                               }
-                            }
-                          })
-                        ])
-                      ],
-                      1
-                    )
+                            })
+                          ])
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                : _vm._e()
+            }),
+            _vm._v(" "),
+            _vm.posts.length == 0
+              ? _c(
+                  "div",
+                  {
+                    staticClass:
+                      "text-gray-600 mt-8 h-96  justify-items-center  md:w-9/12  mx-auto text-center"
+                  },
+                  [
+                    _c("p", { staticClass: " mt-32 capitalize text-5xl " }, [
+                      _vm._v(
+                        "\n                    Aucune publication\n                "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fa fa-moon-stars fa-9x ",
+                      attrs: { "aria-hidden": "true" }
+                    })
                   ]
                 )
               : _vm._e()
-          }),
-          _vm._v(" "),
-          _vm.posts.length == 0
-            ? _c(
-                "div",
-                {
-                  staticClass:
-                    "text-gray-600 mt-8 h-96  justify-items-center  md:w-9/12  mx-auto text-center"
-                },
-                [
-                  _c("p", { staticClass: " mt-32 capitalize text-5xl " }, [
-                    _vm._v(
-                      "\n                    Aucune publication\n                "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("i", {
-                    staticClass: "fa fa-moon-stars fa-9x ",
-                    attrs: { "aria-hidden": "true" }
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "md:w-4/12 right-0 invisible md:visible mt-8 w-0" },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  " mr-auto w-10/12 p-3 capitalize  shadow rounded-lg bg-white "
+              },
+              [
+                _c("div", { staticClass: " pb-3" }, [
+                  _c("img", {
+                    staticClass: " h-28 w-28 rounded-full mx-auto object-cover",
+                    attrs: {
+                      src: "http://127.0.0.1:8000/" + _vm.$page.user.picture
+                    }
                   })
-                ]
-              )
-            : _vm._e()
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "md:w-4/12 right-0 invisible md:visible mt-8 w-0" },
-        [
-          _c(
-            "div",
-            {
-              staticClass:
-                " mr-auto w-10/12 p-3 capitalize  shadow rounded-lg bg-white "
-            },
-            [
-              _c("div", { staticClass: " pb-3" }, [
-                _c("img", {
-                  staticClass: " h-28 w-28 rounded-full mx-auto object-cover",
-                  attrs: {
-                    src: "http://127.0.0.1:8000/" + _vm.$page.user.picture
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: " w-full justify-items-center " }, [
-                _c(
-                  "p",
-                  { staticClass: " text-center mx-auto font-bold text-3xl " },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.$page.user.firstname) +
-                        " " +
-                        _vm._s(_vm.$page.user.lastname) +
-                        "\n                    "
-                    )
-                  ]
-                ),
+                ]),
                 _vm._v(" "),
-                _c(
-                  "p",
-                  {
-                    staticClass:
-                      " text-center mx-auto mb-2 text-gray-500 text-sm "
-                  },
-                  [
-                    _vm._v(
-                      "\n                        @" +
-                        _vm._s(_vm.$page.user.username) +
-                        "\n                    "
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("hr", { staticClass: " w-10/12 mx-auto " }),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: " flex pt-3  " },
-                [
+                _c("div", { staticClass: " w-full justify-items-center " }, [
                   _c(
-                    "inertia-link",
-                    {
-                      staticClass:
-                        "p-2 w-1/2 text-center hover:bg-gray-100 rounded hover:text-indigo-500 cursor-pointer",
-                      attrs: { href: "/profiles/" + _vm.$page.user.id }
-                    },
+                    "p",
+                    { staticClass: " text-center mx-auto font-bold text-3xl " },
                     [
-                      _c("i", {
-                        staticClass: "fal fa-user pr-1 ",
-                        attrs: { "aria-hidden": "true" }
-                      }),
                       _vm._v(
-                        "\n                        profile\n                    "
+                        "\n                        " +
+                          _vm._s(_vm.$page.user.firstname) +
+                          " " +
+                          _vm._s(_vm.$page.user.lastname) +
+                          "\n                    "
                       )
                     ]
                   ),
                   _vm._v(" "),
                   _c(
-                    "div",
+                    "p",
                     {
                       staticClass:
-                        "p-2 text-center  w-1/2 hover:bg-gray-100 rounded  hover:text-indigo-500 cursor-pointer"
+                        " text-center mx-auto mb-2 text-gray-500 text-sm "
                     },
                     [
-                      _c("i", {
-                        staticClass: "fal fa-cog pr-1",
-                        attrs: { "aria-hidden": "true" }
-                      }),
                       _vm._v(
-                        "\n                        settings\n                    "
+                        "\n                        @" +
+                          _vm._s(_vm.$page.user.username) +
+                          "\n                    "
                       )
                     ]
                   )
-                ],
-                1
-              )
-            ]
-          )
-        ]
-      )
-    ])
+                ]),
+                _vm._v(" "),
+                _c("hr", { staticClass: " w-10/12 mx-auto " }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: " flex pt-3  " },
+                  [
+                    _c(
+                      "inertia-link",
+                      {
+                        staticClass:
+                          "p-2 w-1/2 text-center hover:bg-gray-100 rounded hover:text-indigo-500 cursor-pointer",
+                        attrs: { href: "/profiles/" + _vm.$page.user.id }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fal fa-user pr-1 ",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(
+                          "\n                        profile\n                    "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "p-2 text-center  w-1/2 hover:bg-gray-100 rounded  hover:text-indigo-500 cursor-pointer"
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fal fa-cog pr-1",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(
+                          "\n                        settings\n                    "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ]
+            )
+          ]
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -63118,7 +63183,7 @@ var render = function() {
                   {
                     key: conversation.id,
                     staticClass:
-                      "mt-2 cursor-pointer group shadow px-1 py-2 w-full flex rounded",
+                      "mt-2 cursor-pointer group shadow p-2 w-full flex rounded",
                     class: {
                       "bg-white hover:bg-gray-50":
                         conversation.id != _vm.$page.id,
@@ -63337,7 +63402,7 @@ var render = function() {
   return _c("app-layout", [
     _c(
       "div",
-      { staticClass: "flex mt-6 mx-3 " },
+      { staticClass: "flex mt-6 overflow-x-hidden  " },
       [
         _c("conversations"),
         _vm._v(" "),
@@ -64416,56 +64481,80 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "option ml-auto my-auto mr-1" }, [
-        _c("i", {
-          staticClass:
-            " text-gray-400 cursor-pointer hover:text-gray-500 fa fa-ellipsis-h",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
+      _c("jet-dropdown", {
+        staticClass: "ml-auto",
+        attrs: { align: "right", width: "32" },
+        scopedSlots: _vm._u([
           {
-            staticClass:
-              " -ml-3 capitalize list-none dropdown-menu hidden shadow-lg absolute text-gray-800  rounded bg-white p-2"
+            key: "trigger",
+            fn: function() {
+              return [
+                _c("i", {
+                  staticClass:
+                    "text-gray-400 cursor-pointer hover:text-gray-500 fa fa-ellipsis-h",
+                  attrs: { "aria-hidden": "true" }
+                })
+              ]
+            },
+            proxy: true
           },
-          [
-            _vm.isowner
-              ? _c(
-                  "li",
-                  {
-                    staticClass: "p-2 hover:text-indigo-500 cursor-pointer",
-                    on: { click: _vm.editpost }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fal fa-pencil pr-1",
-                      attrs: { "aria-hidden": "true" }
-                    }),
-                    _vm._v(" edit\n                post\n            ")
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.isowner
-              ? _c(
-                  "li",
-                  {
-                    staticClass: "p-2 hover:text-indigo-500 cursor-pointer",
-                    on: { click: _vm.deletepost }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fal fa-trash-alt pr-1",
-                      attrs: { "aria-hidden": "true" }
-                    }),
-                    _vm._v("\n                delete post\n            ")
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            !_vm.route().current("profiles.show")
-              ? _c(
+          {
+            key: "content",
+            fn: function() {
+              return [
+                _vm.isowner
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "p-2 flex hover:text-indigo-500 cursor-pointer",
+                        on: { click: _vm.editpost }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fal fa-pencil pr-1",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v("\n                edit post\n            ")
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isowner
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "p-2 hover:text-indigo-500 cursor-pointer",
+                        on: { click: _vm.deletepost }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fal fa-trash-alt pr-1",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v("\n                delete post\n            ")
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.route().current("profiles.show")
+                  ? _c(
+                      "inertia-link",
+                      {
+                        staticClass: "p-2 hover:text-indigo-500 cursor-pointer",
+                        attrs: { href: "/profiles/" + _vm.post.user.id }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fal fa-user pr-1",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v("\n                view profile\n            ")
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
                   "inertia-link",
                   {
                     staticClass: "p-2 hover:text-indigo-500 cursor-pointer",
@@ -64473,17 +64562,18 @@ var render = function() {
                   },
                   [
                     _c("i", {
-                      staticClass: "fal fa-user pr-1",
+                      staticClass: "fal fa-cannabis pr-1 my-auto",
                       attrs: { "aria-hidden": "true" }
                     }),
-                    _vm._v(" \n                view profile\n            ")
+                    _vm._v("\n                view post\n            ")
                   ]
                 )
-              : _vm._e()
-          ],
-          1
-        )
-      ])
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
     ],
     1
   )
@@ -65739,219 +65829,8 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("app-layout", [
-    _c(
-      "div",
-      { staticClass: "w-full bg-gray-100 pb-10" },
-      [
-        _c(
-          "div",
-          { staticClass: "w-11/12 bg-white mx-auto mt-6 shadow rounded-lg" },
-          [
-            _c(
-              "div",
-              { staticClass: " w-full h-64 " },
-              [
-                _c("friendship", {
-                  attrs: { profilerid: _vm.$page.profiler.id }
-                }),
-                _vm._v(" "),
-                _c("img", {
-                  staticClass: "w-full rounded-lg h-full object-cover p-1 ",
-                  attrs: {
-                    src:
-                      "https://i.pinimg.com/564x/d8/5f/45/d85f454c5884b1a0acbe576574f4b840.jpg"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: " w-full  " }, [
-              _c(
-                "div",
-                { staticClass: " w-36 h-36  mx-auto -mt-20 bg-transparent " },
-                [
-                  _c("img", {
-                    staticClass:
-                      " w-full h-full object-cover shadow-lg bg-transparent  rounded-full ",
-                    attrs: { src: "/" + _vm.$page.profiler.picture }
-                  }),
-                  _vm._v(" "),
-                  _vm.$page.user.id == _vm.$page.profiler.id
-                    ? _c("update-profile-picture", {
-                        attrs: { user: _vm.$page.profiler },
-                        on: {
-                          "update-profile-picture": _vm.updateProfilePicture,
-                          "delete-profile-picture": _vm.deleteProfilePicture
-                        }
-                      })
-                    : _vm._e()
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: " text-center p-2 " }, [
-                _c("p", { staticClass: " text-2xl capitalize font-bold " }, [
-                  _vm._v(
-                    "\n                        " +
-                      _vm._s(_vm.$page.profiler.firstname) +
-                      "\n                        " +
-                      _vm._s(_vm.$page.profiler.lastname) +
-                      "\n                    "
-                  )
-                ])
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass:
-              "w-11/12 mx-auto  bg-white mt-6 flex shadow rounded-lg  capitalize"
-          },
-          [
-            _c(
-              "div",
-              {
-                class: {
-                  "bg-indigo-500 hover:bg-indigo-400 text-white":
-                    _vm.currentsection == "timeline",
-                  "hover:text-indigo-500 text-gray-700 ":
-                    _vm.currentsection != "timeline",
-                  "w-1/4 text-center m-2 p-2 rounded cursor-pointer": true
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.show("timeline")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "fal fa-stream fa-2x" }),
-                _vm._v(" "),
-                _c("p", [_vm._v("timeline")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                class: {
-                  "bg-indigo-500 hover:bg-indigo-400 text-white":
-                    _vm.currentsection == "friends",
-                  "hover:text-indigo-500 text-gray-700 ":
-                    _vm.currentsection != "friends",
-                  "w-1/4 text-center m-2 p-2 rounded cursor-pointer": true
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.show("friends")
-                  }
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fal fa-users fa-2x",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _c("p", [_vm._v("friends")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                class: {
-                  "bg-indigo-500 hover:bg-indigo-400 text-white":
-                    _vm.currentsection == "pictures",
-                  "hover:text-indigo-500 text-gray-700 ":
-                    _vm.currentsection != "pictures",
-                  "w-1/4 text-center m-2 p-2 rounded cursor-pointer": true
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.show("pictures")
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "fal fa-images fa-2x  " }),
-                _vm._v(" "),
-                _c("p", [_vm._v("pictures")])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                class: {
-                  "bg-indigo-500 hover:bg-indigo-400 text-white":
-                    _vm.currentsection == "settings",
-                  "hover:text-indigo-500 text-gray-700 ":
-                    _vm.currentsection != "settings",
-                  "w-1/4 text-center m-2 p-2 rounded cursor-pointer": true
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.show("settings")
-                  }
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fal fa-2x",
-                  class: {
-                    "fa-cogs": _vm.$page.profiler.id == _vm.$page.user.id,
-                    " fa-info-circle":
-                      _vm.$page.profiler.id != _vm.$page.user.id
-                  },
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _vm.$page.profiler.id == _vm.$page.user.id
-                  ? _c("p", [_vm._v("settings")])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.$page.profiler.id != _vm.$page.user.id
-                  ? _c("p", [_vm._v("about")])
-                  : _vm._e()
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("timeline", { attrs: { timelineClasses: _vm.timelineClasses } }),
-        _vm._v(" "),
-        _c("pictures", {
-          attrs: {
-            picturesClasses: _vm.picturesClasses,
-            posts: _vm.$page.profiler.posts
-          }
-        }),
-        _vm._v(" "),
-        _c("friends", {
-          attrs: {
-            friendsClasses: _vm.friendsClasses,
-            posts: _vm.$page.profiler.posts
-          }
-        }),
-        _vm._v(" "),
-        _c("settings", { attrs: { settingsClasses: _vm.settingsClasses } })
-      ],
-      1
-    )
-  ])
-}
+var render = function () {}
 var staticRenderFns = []
-render._withStripped = true
 
 
 

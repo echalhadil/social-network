@@ -37,17 +37,16 @@
             </div>
 
             <div
-                class="w-11/12 mx-auto  bg-white mt-6 flex shadow rounded-lg  capitalize"
+                class="w-11/12 mx-auto bg-white p-1 sm:p-0 mt-6 flex shadow rounded-lg capitalize"
             >
                 <div
                     @click="show('timeline')"
-                    :class="{
-                        'bg-indigo-500 hover:bg-indigo-400 text-white':
-                            currentsection == 'timeline',
-                        'hover:text-indigo-500 text-gray-700 ':
-                            currentsection != 'timeline',
-                        'w-1/4 text-center m-2 p-2 rounded cursor-pointer': true
-                    }"
+                    class="w-1/4 text-center sm:m-2 p-2 rounded cursor-pointer"
+                    :class="
+                        'timeline' == currentsection
+                            ? 'bg-indigo-500 hover:bg-indigo-400 text-white'
+                            : 'hover:text-indigo-500 text-gray-700 '
+                    "
                 >
                     <i class="fal fa-stream fa-2x"></i>
                     <p>timeline</p>
@@ -55,13 +54,12 @@
 
                 <div
                     @click="show('friends')"
-                    :class="{
+                    class="w-1/4 text-center sm:m-2 p-2 rounded cursor-pointer"
+                    :class="
+                    currentsection == 'friends' ?
                         'bg-indigo-500 hover:bg-indigo-400 text-white':
-                            currentsection == 'friends',
-                        'hover:text-indigo-500 text-gray-700 ':
-                            currentsection != 'friends',
-                        'w-1/4 text-center m-2 p-2 rounded cursor-pointer': true
-                    }"
+                        'hover:text-indigo-500 text-gray-700 '                
+                "
                 >
                     <i class="fal fa-users fa-2x" aria-hidden="true"></i>
                     <p>friends</p>
@@ -74,7 +72,7 @@
                             currentsection == 'pictures',
                         'hover:text-indigo-500 text-gray-700 ':
                             currentsection != 'pictures',
-                        'w-1/4 text-center m-2 p-2 rounded cursor-pointer': true
+                        'w-1/4 text-center sm:m-2 p-2 rounded cursor-pointer': true
                     }"
                 >
                     <i class="fal fa-images fa-2x  "></i>
@@ -88,7 +86,7 @@
                             currentsection == 'settings',
                         'hover:text-indigo-500 text-gray-700 ':
                             currentsection != 'settings',
-                        'w-1/4 text-center m-2 p-2 rounded cursor-pointer': true
+                        'w-1/4 text-center sm:m-2 p-2 rounded cursor-pointer': true
                     }"
                 >
                     <i

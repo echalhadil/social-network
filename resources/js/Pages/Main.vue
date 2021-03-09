@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class=" w-full bg-gray-100  flex pb-10 ">
+        <div class=" w-full bg-gray-100  flex pb-10 overflow-x-hidden ">
             <div class=" md:w-8/12 mt-4 mb-2 mx-auto ">
                 <add-post @add-post="addPost"> </add-post>
 

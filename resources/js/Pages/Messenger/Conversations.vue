@@ -1,10 +1,11 @@
 <template>
     <div
-        class=" mx-auto w-0 sm:visible  sm:w-1/4 regular-conversations-height  "
-        :class="{
+    :class="{
             'invisible sm:visible': !route().current('messenger'),
             'w-full': route().current('messenger')
         }"
+        class=" mx-auto w-0 sm:visible  sm:w-1/4 regular-conversations-height  "
+        
     >
         <div class="w-full p-2">
             <p class="capitalize text-lg font-semibold">conversation</p>
@@ -56,7 +57,7 @@
                 v-for="conversation in mainConversations"
                 :key="conversation.id"
                 :href="'/conversations/' + conversation.id"
-                class="mt-2 cursor-pointer group shadow px-1 py-2 w-full flex rounded"
+                class="mt-2 cursor-pointer group shadow p-2 w-full flex rounded"
                 :class="{
                     'bg-white hover:bg-gray-50': conversation.id != $page.id,
                     'bg-indigo-500 hover:bg-indigo-600':
@@ -157,7 +158,7 @@ export default {
     watch: {
     searchValue: _.debounce(function() {
       this.search();
-    }, 200),
+    }, 150),
     },
     methods: {
         getConversations() {

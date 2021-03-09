@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class="flex mt-6 mx-3 ">
+        <div class="flex mt-6 overflow-x-hidden  ">
             <conversations />
             <div
                 class=" regular-messages-height w-0  sm:w-2/4 sm:visible  "

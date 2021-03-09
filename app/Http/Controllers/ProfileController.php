@@ -56,8 +56,9 @@ class ProfileController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        
 
-        return $user ?  Inertia::render('Profile/Main')->with('profiler', $user) : abort(404);
+        return $user ?  Inertia::render('Profile/Main')->with('profiler', $user)->with('posts',$user->posts) : abort(404);
     }
 
     public function youSentRequest($id)
