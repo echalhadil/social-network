@@ -1,11 +1,10 @@
 <template>
     <div
-    :class="{
+        :class="{
             'invisible sm:visible': !route().current('messenger'),
             'w-full': route().current('messenger')
         }"
         class=" mx-auto w-0 sm:visible  sm:w-1/4 regular-conversations-height  "
-        
     >
         <div class="w-full p-2">
             <p class="capitalize text-lg font-semibold">conversation</p>
@@ -73,7 +72,7 @@
                 <div
                     class="my-auto w-3/4"
                     :class="{ 'text-white': conversation.id == $page.id }"
-                    >
+                >
                     <p class=" capitalize font-semibold ">
                         {{ conversation.friend.firstname }}
                         {{ conversation.friend.lastname }}
@@ -103,19 +102,23 @@
                         }"
                         aria-hidden="true"
                     ></i>
-                    <div v-if="true && conversation.id != $page.id" class="ml-auto my-auto">
-                        <i class="fa fa-circle text-indigo-500 fa-xs circle   "></i>
+                    <div
+                        v-if="true && conversation.id != $page.id"
+                        class="ml-auto my-auto"
+                    >
+                        <i
+                            class="fa fa-circle text-indigo-500 fa-xs circle   "
+                        ></i>
                     </div>
                 </div>
-                
             </inertia-link>
         </div>
     </div>
 </template>
 
 <style>
-.regular-conversations-height{
-    height:calc(100vh - 6rem);
+.regular-conversations-height {
+    height: calc(100vh - 6rem);
 }
 .conv::-webkit-scrollbar {
     width: 5px;
@@ -157,15 +160,15 @@ export default {
     data() {
         return {
             conversations: [],
-            mainConversations:[],
+            mainConversations: [],
             loading: true,
-            searchValue: "",
+            searchValue: ""
         };
     },
     watch: {
-    searchValue: _.debounce(function() {
-      this.search();
-    }, 150),
+        searchValue: _.debounce(function() {
+            this.search();
+        }, 150)
     },
     methods: {
         getConversations() {
@@ -191,10 +194,17 @@ export default {
                     _.includes(o.friend.firstname.toLowerCase(), v) ||
                     _.includes(o.friend.lastname.toLowerCase(), v) ||
                     _.includes(
-                        o.friend.lastname.toLowerCase() + " " + o.friend.firstname.toLowerCase(),
+                        o.friend.lastname.toLowerCase() +
+                            " " +
+                            o.friend.firstname.toLowerCase(),
                         v
                     ) ||
-                    _.includes(o.friend.firstname.toLowerCase() + " " + o.friend.lastname.toLowerCase(), v)
+                    _.includes(
+                        o.friend.firstname.toLowerCase() +
+                            " " +
+                            o.friend.lastname.toLowerCase(),
+                        v
+                    )
                 );
             });
             console.table(this.mainConversations);
@@ -204,29 +214,40 @@ export default {
     mounted() {
         this.getConversations();
 
-
-
         Echo.channel("message-channel-" + this.$page.user.id).listen(
             ".MessageEvent",
             data => {
                 let conversation = data.conversation;
-                 
-                   _.forEach(this.conversations, function(c) {
-                       if(c.id == conversation.id)
-                       c = conversation
-                       else
-                       this.conversations.unshift(conversation);
 
-});
-                
+                var c = _.find(this.conversations, ["id", conversation.id]);
+                c = conversation;
+
+                var match = _.find(this.conversations, ["id", conversation.id]);
+                if (match) {
+                    var index = _.indexOf(
+                        this.conversations,
+                        _.find(this.conversations, ["id", conversation.id])
+                    );
+                    this.conversations.splice(index, 1, conversation);
+                    this.conversations = _.orderBy(
+                        this.conversations,
+                        ["updated_at"],
+                        ["desc"]
+                    );
+                } else {
+                    this.conversations.unshift(conversation);
+                }
+
+                //    else
+                //    this.conversations.unshift(conversation);
             }
         );
     }
 };
 </script>
 
-<style >
-    .circle{
-        font-size: xx-small;
-    }
+<style>
+.circle {
+    font-size: xx-small;
+}
 </style>

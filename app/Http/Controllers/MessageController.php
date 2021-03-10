@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\MessageEvent;
 use App\Models\Conversation;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -58,11 +59,17 @@ class MessageController extends Controller
         $message->timeago = $message->created_at->shortRelativeDiffForHumans();
         // $message->text = Crypt::decrypt($message->text);
 
-        $c = Conversation::find($request->conversation_id);
-        $c->last_message =  $request->text;
-        $c->save();
-        
-        event(new MessageEvent($message,$c));
+        $conversation = Conversation::find($request->conversation_id);
+        $conversation->last_message =  $request->text;
+        $conversation->save();
+        $conversation->timeago = $conversation->getTimeAgo($conversation->updated_at);
+        $conversation->from_id != $message->from_id?
+                $conversation->friend = User::find($conversation->to_id)
+            :
+                $conversation->friend = User::find($conversation->from_id);
+                
+
+        event(new MessageEvent($message,$conversation));
         
 
 

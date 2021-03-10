@@ -4325,9 +4325,227 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\hp\\web-project\\resources\\js\\Pages\\Messenger\\Conversations.vue: Unexpected token (220:26)\n\n\u001b[0m \u001b[90m 218 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 219 | \u001b[39m                   _\u001b[33m.\u001b[39mforEach(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mconversations\u001b[33m,\u001b[39m \u001b[36mfunction\u001b[39m(c) {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 220 | \u001b[39m                       \u001b[36mif\u001b[39m()\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 221 | \u001b[39m})\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 222 | \u001b[39m                \u001b[0m\n\u001b[0m \u001b[90m 223 | \u001b[39m            }\u001b[0m\n    at Parser._raise (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:748:17)\n    at Parser.raiseWithData (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:741:17)\n    at Parser.raise (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.unexpected (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9101:16)\n    at Parser.parseExprAtom (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10575:20)\n    at Parser.parseExprSubscripts (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOps (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9989:23)\n    at Parser.parseMaybeConditional (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9963:23)\n    at Parser.parseMaybeAssign (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9926:21)\n    at Parser.parseExpressionBase (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9871:23)\n    at C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9865:39\n    at Parser.allowInAnd (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11541:16)\n    at Parser.parseExpression (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9865:17)\n    at Parser.parseHeaderExpression (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11947:22)\n    at Parser.parseIfStatement (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12029:22)\n    at Parser.parseStatementContent (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11721:21)\n    at Parser.parseStatement (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11676:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12258:25)\n    at Parser.parseBlockBody (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12249:10)\n    at Parser.parseBlock (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12233:10)\n    at Parser.parseFunctionBody (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11221:24)\n    at Parser.parseFunctionBodyAndFinish (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11205:10)\n    at C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12391:12\n    at Parser.withTopicForbiddingContext (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11516:14)\n    at Parser.parseFunction (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12390:10)\n    at Parser.parseFunctionOrFunctionSent (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10659:17)\n    at Parser.parseExprAtom (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10495:21)\n    at Parser.parseExprSubscripts (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOps (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9989:23)\n    at Parser.parseMaybeConditional (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9963:23)\n    at Parser.parseMaybeAssign (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9926:21)\n    at C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9893:39");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      conversations: [],
+      mainConversations: [],
+      loading: true,
+      searchValue: ""
+    };
+  },
+  watch: {
+    searchValue: _.debounce(function () {
+      this.search();
+    }, 150)
+  },
+  methods: {
+    getConversations: function getConversations() {
+      var _this = this;
+
+      axios.get(route("conversations.index")).then(function (res) {
+        _this.mainConversations = _this.conversations = _.orderBy(res.data, ["updated_at"], ["desc"]);
+        _this.loading = false;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    search: function search() {
+      var v = this.searchValue.toLowerCase();
+      this.mainConversations = _.filter(this.conversations, function (o) {
+        return _.includes(o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase() + " " + o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.firstname.toLowerCase() + " " + o.friend.lastname.toLowerCase(), v);
+      });
+      console.table(this.mainConversations);
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.getConversations();
+    Echo.channel("message-channel-" + this.$page.user.id).listen(".MessageEvent", function (data) {
+      var conversation = data.conversation;
+
+      var c = _.find(_this2.conversations, ["id", conversation.id]);
+
+      c = conversation;
+
+      var match = _.find(_this2.conversations, ["id", conversation.id]);
+
+      if (match) {
+        var index = _.indexOf(_this2.conversations, _.find(_this2.conversations, ["id", conversation.id]));
+
+        _this2.conversations.splice(index, 1, conversation);
+
+        _this2.conversations = _.orderBy(_this2.conversations, ["updated_at"], ["desc"]);
+      } else {
+        _this2.conversations.unshift(conversation);
+      } //    else
+      //    this.conversations.unshift(conversation);
+
+    });
+  }
+});
 
 /***/ }),
 
@@ -7927,7 +8145,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".regular-conversations-height{\n  height:calc(100vh - 6rem);\n}\n.conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\r\n", ""]);
+exports.push([module.i, ".regular-conversations-height {\n  height: calc(100vh - 6rem);\n}\n.conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -7946,7 +8164,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".circle{\n  font-size: xx-small;\n}\n", ""]);
+exports.push([module.i, ".circle {\n  font-size: xx-small;\n}\r\n", ""]);
 
 // exports
 
