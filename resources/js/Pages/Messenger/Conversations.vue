@@ -73,7 +73,7 @@
                 <div
                     class="my-auto w-3/4"
                     :class="{ 'text-white': conversation.id == $page.id }"
-                >
+                    >
                     <p class=" capitalize font-semibold ">
                         {{ conversation.friend.firstname }}
                         {{ conversation.friend.lastname }}
@@ -103,7 +103,11 @@
                         }"
                         aria-hidden="true"
                     ></i>
+                    <div v-if="true && conversation.id != $page.id" class="ml-auto my-auto">
+                        <i class="fa fa-circle text-indigo-500 fa-xs circle   "></i>
+                    </div>
                 </div>
+                
             </inertia-link>
         </div>
     </div>
@@ -199,6 +203,30 @@ export default {
 
     mounted() {
         this.getConversations();
+
+
+
+        Echo.channel("message-channel-" + this.$page.user.id).listen(
+            ".MessageEvent",
+            data => {
+                let conversation = data.conversation;
+                 
+                   _.forEach(this.conversations, function(c) {
+                       if(c.id == conversation.id)
+                       c = conversation
+                       else
+                       this.conversations.unshift(conversation);
+
+});
+                
+            }
+        );
     }
 };
 </script>
+
+<style >
+    .circle{
+        font-size: xx-small;
+    }
+</style>

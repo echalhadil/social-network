@@ -31,3 +31,9 @@ Broadcast::channel('notification-channel-.{target_id}', function ($notification,
 Broadcast::channel('friend-request-channel-.{target_id}', function ($friendreqest, $target_id) {
     return $target_id === Auth::id();
 });
+
+
+
+Broadcast::channel('message-channel-.{target_id}', function ($message,$conversation, $target_id) {
+    return $target_id === Auth::id();
+});

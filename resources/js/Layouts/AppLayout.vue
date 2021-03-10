@@ -178,7 +178,7 @@
                                             <b
                                                 v-if="newNotifications != 0"
                                                 class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                                            >
+                                                >
                                                 {{
                                                     newNotifications > 9
                                                         ? "9+"
@@ -281,7 +281,7 @@
                                                     class=" ml-auto"
                                                 >
                                                     <i
-                                                        class="fa fa-circle text-indigo-500 fa-xs"
+                                                        class="fa fa-circle circle text-indigo-500 fa-xs"
                                                         aria-hidden="true"
                                                     ></i>
                                                 </div>
@@ -300,7 +300,18 @@
                                         <i
                                             class="far fa-envelope"
                                             aria-hidden="true"
-                                        ></i>
+                                        >
+                                        <b
+                                                v-if="newConversations != 0"
+                                                class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                                                >
+                                                {{
+                                                    newConversations > 9
+                                                        ? "9+"
+                                                        : newConversations
+                                                }}
+                                            </b>
+                                        </i>
                                     </template>
 
                                     <template #content>
@@ -364,7 +375,7 @@
                                                 </div>
                                                 <div v-if="true" class="ml-auto my-auto">
                                                 
-                                                    <i class="fa fa-circle text-indigo-500 fa-xs    "></i>
+                                                    <i class="fa circle fa-circle text-indigo-500 fa-xs    "></i>
                                                 </div>
                                             </inertia-link>
                                         </div>
@@ -657,6 +668,7 @@ export default {
             conversations: [],
             newNotifications: 0,
             newFriendRequest: 0,
+            newConversations:0,
             user_id: ""
         };
     },
@@ -811,6 +823,18 @@ export default {
                 this.playSound();
             }
         );
+
+         Echo.channel("message-channel-" + this.user_id).listen(
+            ".MessageEvent",
+            data => {
+                let friendRequest = data.friendrequest;
+                 console.table(data.conversation);
+                // this.friendsRequest.unshift(friendRequest);
+                 this.newConversations++;
+
+                this.playSound();
+            }
+        );
     }
 };
 </script>
@@ -831,4 +855,7 @@ export default {
 .dropdown::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+.circle{
+        font-size: xx-small;
+    }
 </style>

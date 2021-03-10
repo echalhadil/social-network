@@ -3465,6 +3465,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3486,6 +3497,7 @@ __webpack_require__.r(__webpack_exports__);
       conversations: [],
       newNotifications: 0,
       newFriendRequest: 0,
+      newConversations: 0,
       user_id: ""
     };
   },
@@ -3606,6 +3618,14 @@ __webpack_require__.r(__webpack_exports__);
       _this6.friendsRequest.unshift(friendRequest);
 
       _this6.newFriendRequest++;
+
+      _this6.playSound();
+    });
+    Echo.channel("message-channel-" + this.user_id).listen(".MessageEvent", function (data) {
+      var friendRequest = data.friendrequest;
+      console.table(data.conversation); // this.friendsRequest.unshift(friendRequest);
+
+      _this6.newConversations++;
 
       _this6.playSound();
     });
@@ -4305,197 +4325,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      conversations: [],
-      mainConversations: [],
-      loading: true,
-      searchValue: ""
-    };
-  },
-  watch: {
-    searchValue: _.debounce(function () {
-      this.search();
-    }, 150)
-  },
-  methods: {
-    getConversations: function getConversations() {
-      var _this = this;
-
-      axios.get(route("conversations.index")).then(function (res) {
-        _this.mainConversations = _this.conversations = _.orderBy(res.data, ["updated_at"], ["desc"]);
-        _this.loading = false;
-      })["catch"](function (err) {
-        console.log(err);
-      });
-    },
-    search: function search() {
-      var v = this.searchValue.toLowerCase();
-      this.mainConversations = _.filter(this.conversations, function (o) {
-        return _.includes(o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase() + " " + o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.firstname.toLowerCase() + " " + o.friend.lastname.toLowerCase(), v);
-      });
-      console.table(this.mainConversations);
-    }
-  },
-  mounted: function mounted() {
-    this.getConversations();
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\hp\\web-project\\resources\\js\\Pages\\Messenger\\Conversations.vue: Unexpected token (220:26)\n\n\u001b[0m \u001b[90m 218 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 219 | \u001b[39m                   _\u001b[33m.\u001b[39mforEach(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mconversations\u001b[33m,\u001b[39m \u001b[36mfunction\u001b[39m(c) {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 220 | \u001b[39m                       \u001b[36mif\u001b[39m()\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 221 | \u001b[39m})\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 222 | \u001b[39m                \u001b[0m\n\u001b[0m \u001b[90m 223 | \u001b[39m            }\u001b[0m\n    at Parser._raise (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:748:17)\n    at Parser.raiseWithData (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:741:17)\n    at Parser.raise (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:735:17)\n    at Parser.unexpected (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9101:16)\n    at Parser.parseExprAtom (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10575:20)\n    at Parser.parseExprSubscripts (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOps (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9989:23)\n    at Parser.parseMaybeConditional (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9963:23)\n    at Parser.parseMaybeAssign (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9926:21)\n    at Parser.parseExpressionBase (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9871:23)\n    at C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9865:39\n    at Parser.allowInAnd (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11541:16)\n    at Parser.parseExpression (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9865:17)\n    at Parser.parseHeaderExpression (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11947:22)\n    at Parser.parseIfStatement (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12029:22)\n    at Parser.parseStatementContent (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11721:21)\n    at Parser.parseStatement (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11676:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12258:25)\n    at Parser.parseBlockBody (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12249:10)\n    at Parser.parseBlock (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12233:10)\n    at Parser.parseFunctionBody (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11221:24)\n    at Parser.parseFunctionBodyAndFinish (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11205:10)\n    at C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12391:12\n    at Parser.withTopicForbiddingContext (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:11516:14)\n    at Parser.parseFunction (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:12390:10)\n    at Parser.parseFunctionOrFunctionSent (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10659:17)\n    at Parser.parseExprAtom (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10495:21)\n    at Parser.parseExprSubscripts (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10150:23)\n    at Parser.parseUpdate (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10130:21)\n    at Parser.parseMaybeUnary (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:10119:17)\n    at Parser.parseExprOps (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9989:23)\n    at Parser.parseMaybeConditional (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9963:23)\n    at Parser.parseMaybeAssign (C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9926:21)\n    at C:\\Users\\hp\\web-project\\node_modules\\@babel\\parser\\lib\\index.js:9893:39");
 
 /***/ }),
 
@@ -4724,7 +4556,20 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    var _this3 = this;
+
     this.getMessages();
+    Echo.channel("message-channel-" + this.$page.user.id).listen(".MessageEvent", function (data) {
+      var message = data.message;
+      console.table(data);
+      if (_this3.$page.id == data.conversation.id) _this3.messages.push(message);
+
+      var el = _this3.$el.getElementsByClassName("bottom")[0];
+
+      if (el) el.scrollIntoView({
+        behavior: "smooth"
+      });
+    });
   }
 });
 
@@ -8044,7 +7889,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n", ""]);
+exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.circle{\n  font-size: xx-small;\n}\n", ""]);
 
 // exports
 
@@ -8083,6 +7928,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 // module
 exports.push([module.i, ".regular-conversations-height{\n  height:calc(100vh - 6rem);\n}\n.conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".circle{\n  font-size: xx-small;\n}\n", ""]);
 
 // exports
 
@@ -54836,6 +54700,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Conversations.vue?vue&type=style&index=1&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Main.vue?vue&type=style&index=0&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Main.vue?vue&type=style&index=0&lang=css& ***!
@@ -61478,7 +61372,7 @@ var render = function() {
                                                     [
                                                       _c("i", {
                                                         staticClass:
-                                                          "fa fa-circle text-indigo-500 fa-xs",
+                                                          "fa fa-circle circle text-indigo-500 fa-xs",
                                                         attrs: {
                                                           "aria-hidden": "true"
                                                         }
@@ -61516,10 +61410,35 @@ var render = function() {
                               key: "trigger",
                               fn: function() {
                                 return [
-                                  _c("i", {
-                                    staticClass: "far fa-envelope",
-                                    attrs: { "aria-hidden": "true" }
-                                  })
+                                  _c(
+                                    "i",
+                                    {
+                                      staticClass: "far fa-envelope",
+                                      attrs: { "aria-hidden": "true" }
+                                    },
+                                    [
+                                      _vm.newConversations != 0
+                                        ? _c(
+                                            "b",
+                                            {
+                                              staticClass:
+                                                " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                                " +
+                                                  _vm._s(
+                                                    _vm.newConversations > 9
+                                                      ? "9+"
+                                                      : _vm.newConversations
+                                                  ) +
+                                                  "\n                                            "
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
                                 ]
                               },
                               proxy: true
@@ -61692,7 +61611,7 @@ var render = function() {
                                                     [
                                                       _c("i", {
                                                         staticClass:
-                                                          "fa fa-circle text-indigo-500 fa-xs    "
+                                                          "fa circle fa-circle text-indigo-500 fa-xs    "
                                                       })
                                                     ]
                                                   )
@@ -63415,7 +63334,16 @@ var render = function() {
                             conversation.id == _vm.$page.id
                         },
                         attrs: { "aria-hidden": "true" }
-                      })
+                      }),
+                      _vm._v(" "),
+                       true && conversation.id != _vm.$page.id
+                        ? _c("div", { staticClass: "ml-auto my-auto" }, [
+                            _c("i", {
+                              staticClass:
+                                "fa fa-circle text-indigo-500 fa-xs circle   "
+                            })
+                          ])
+                        : _vm._e()
                     ])
                   ]
                 )
@@ -63614,7 +63542,10 @@ var render = function() {
             !_vm.route().current("messenger")
               ? _c(
                   "div",
-                  { staticClass: " w-full messages overflow-auto mt-3 " },
+                  {
+                    staticClass:
+                      " w-full messages overflow-x-hidden overflow-y-auto mt-3 "
+                  },
                   [
                     _vm.loading
                       ? _c("div", [
@@ -83367,7 +83298,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Conversations.vue?vue&type=template&id=2c9de69b& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=template&id=2c9de69b&");
 /* harmony import */ var _Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Conversations.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Conversations.vue?vue&type=style&index=0&lang=css& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Conversations.vue?vue&type=style&index=1&lang=css& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -83376,7 +83309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -83420,6 +83353,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Conversations.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css& ***!
+  \*****************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Conversations.vue?vue&type=style&index=1&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),

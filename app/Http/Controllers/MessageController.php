@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageEvent;
 use App\Models\Conversation;
 use App\Models\Message;
 use Illuminate\Http\Request;
@@ -60,7 +61,9 @@ class MessageController extends Controller
         $c = Conversation::find($request->conversation_id);
         $c->last_message =  $request->text;
         $c->save();
-
+        
+        event(new MessageEvent($message,$c));
+        
 
 
         return response()->json($message);

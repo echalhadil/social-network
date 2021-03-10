@@ -22,7 +22,7 @@
 
                 <div
                     v-if="!route().current('messenger')"
-                    class=" w-full messages overflow-auto mt-3 "
+                    class=" w-full messages overflow-x-hidden overflow-y-auto mt-3 "
                 >
                     <!-- loading for message -->
                     <div v-if="loading">
@@ -168,7 +168,8 @@ export default {
     data() {
         return {
             messages: [],
-            loading: true
+            loading: true,
+           
         };
     },
     
@@ -210,6 +211,20 @@ export default {
     },
     mounted() {
         this.getMessages();
+
+
+         Echo.channel("message-channel-" + this.$page.user.id).listen(
+            ".MessageEvent",
+            data => {
+                let message = data.message;
+                 console.table(data);
+                if( this.$page.id  == data.conversation.id)
+                this.messages.push(message);
+                var el = this.$el.getElementsByClassName("bottom")[0];
+                    if(el)el.scrollIntoView({ behavior: "smooth" });
+                
+            }
+        );
     }
 };
 </script>
