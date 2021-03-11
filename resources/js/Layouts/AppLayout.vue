@@ -297,7 +297,7 @@
                             >
                                 <jet-dropdown align="right" width="72">
                                     <template #trigger>
-                                        <i
+                                        <i v-on:click="newConversations=0"
                                             class="far fa-envelope"
                                             aria-hidden="true"
                                         >
@@ -824,15 +824,34 @@ export default {
             }
         );
 
-         Echo.channel("message-channel-" + this.user_id).listen(
+       
+          Echo.channel("message-channel-" + this.$page.user.id).listen(
             ".MessageEvent",
             data => {
-                let friendRequest = data.friendrequest;
-                 console.table(data.conversation);
-                // this.friendsRequest.unshift(friendRequest);
-                 this.newConversations++;
+                let conversation = data.conversation;
+
+              
+                var match = _.find(this.conversations, ["id", conversation.id]);
+                if (match) {
+                    var index = _.indexOf(
+                        this.conversations,
+                        _.find(this.conversations, ["id", conversation.id])
+                    );
+                    this.conversations.splice(index, 1, conversation);
+                    this.conversations = _.orderBy(
+                        this.conversations,
+                        ["updated_at"],
+                        ["desc"]
+                    );
+                } else {
+                    this.conversations.unshift(conversation);
+                }
+                this.newConversations++;
 
                 this.playSound();
+
+                //    else
+                //    this.conversations.unshift(conversation);
             }
         );
     }

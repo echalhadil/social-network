@@ -3621,13 +3621,26 @@ __webpack_require__.r(__webpack_exports__);
 
       _this6.playSound();
     });
-    Echo.channel("message-channel-" + this.user_id).listen(".MessageEvent", function (data) {
-      var friendRequest = data.friendrequest;
-      console.table(data.conversation); // this.friendsRequest.unshift(friendRequest);
+    Echo.channel("message-channel-" + this.$page.user.id).listen(".MessageEvent", function (data) {
+      var conversation = data.conversation;
+
+      var match = _.find(_this6.conversations, ["id", conversation.id]);
+
+      if (match) {
+        var index = _.indexOf(_this6.conversations, _.find(_this6.conversations, ["id", conversation.id]));
+
+        _this6.conversations.splice(index, 1, conversation);
+
+        _this6.conversations = _.orderBy(_this6.conversations, ["updated_at"], ["desc"]);
+      } else {
+        _this6.conversations.unshift(conversation);
+      }
 
       _this6.newConversations++;
 
-      _this6.playSound();
+      _this6.playSound(); //    else
+      //    this.conversations.unshift(conversation);
+
     });
   }
 });
@@ -61632,7 +61645,12 @@ var render = function() {
                                     "i",
                                     {
                                       staticClass: "far fa-envelope",
-                                      attrs: { "aria-hidden": "true" }
+                                      attrs: { "aria-hidden": "true" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.newConversations = 0
+                                        }
+                                      }
                                     },
                                     [
                                       _vm.newConversations != 0
