@@ -4342,6 +4342,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -4499,7 +4502,33 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       conversations: [],
@@ -4530,6 +4559,14 @@ __webpack_require__.r(__webpack_exports__);
         return _.includes(o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase(), v) || _.includes(o.friend.lastname.toLowerCase() + " " + o.friend.firstname.toLowerCase(), v) || _.includes(o.friend.firstname.toLowerCase() + " " + o.friend.lastname.toLowerCase(), v);
       });
       console.table(this.mainConversations);
+    },
+    deleteConversation: function deleteConversation(id) {
+      this.conversations = _.filter(this.conversations, function (o) {
+        return !o.active;
+      });
+      this.mainConversations = _.filter(this.mainConversations, {
+        'id': !id
+      });
     }
   },
   mounted: function mounted() {
@@ -63498,7 +63535,7 @@ var render = function() {
           _vm._l(_vm.mainConversations, function(conversation) {
             return !_vm.loading
               ? _c(
-                  "inertia-link",
+                  "div",
                   {
                     key: conversation.id,
                     staticClass:
@@ -63508,22 +63545,31 @@ var render = function() {
                         conversation.id != _vm.$page.id,
                       "bg-indigo-500 hover:bg-indigo-600":
                         conversation.id == _vm.$page.id
-                    },
-                    attrs: { href: "/conversations/" + conversation.id }
+                    }
                   },
                   [
-                    _c("div", { staticClass: " p-1 " }, [
-                      _c("img", {
-                        staticClass: " h-14 w-14 object-cover rounded-full",
-                        attrs: { src: "/" + conversation.friend.picture }
-                      })
-                    ]),
+                    _c(
+                      "inertia-link",
+                      {
+                        staticClass: " p-1 ",
+                        attrs: { href: "/conversations/" + conversation.id }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: " h-14 w-14 object-cover rounded-full",
+                          attrs: { src: "/" + conversation.friend.picture }
+                        })
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
-                      "div",
+                      "inertia-link",
                       {
                         staticClass: "my-auto w-3/4",
-                        class: { "text-white": conversation.id == _vm.$page.id }
+                        class: {
+                          "text-white": conversation.id == _vm.$page.id
+                        },
+                        attrs: { href: "/conversations/" + conversation.id }
                       },
                       [
                         _c("p", { staticClass: " capitalize font-semibold " }, [
@@ -63560,28 +63606,84 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: " ml-auto mr-2" }, [
-                      _c("i", {
-                        staticClass: "fa fa-ellipsis-h",
-                        class: {
-                          "hover:text-gray-700 text-gray-600":
-                            conversation.id != _vm.$page.id,
-                          "hover:text-gray-50 text-white":
-                            conversation.id == _vm.$page.id
-                        },
-                        attrs: { "aria-hidden": "true" }
-                      }),
-                      _vm._v(" "),
-                       true && conversation.id != _vm.$page.id
-                        ? _c("div", { staticClass: "ml-auto my-auto" }, [
-                            _c("i", {
-                              staticClass:
-                                "fa fa-circle text-indigo-500 fa-xs circle   "
-                            })
-                          ])
-                        : _vm._e()
-                    ])
-                  ]
+                    _c(
+                      "div",
+                      { staticClass: " ml-auto mr-2" },
+                      [
+                        _c("jet-dropdown", {
+                          staticClass: "ml-auto",
+                          attrs: { align: "right", width: "auto" },
+                          scopedSlots: _vm._u(
+                            [
+                              {
+                                key: "trigger",
+                                fn: function() {
+                                  return [
+                                    _c("i", {
+                                      staticClass: "fa fa-ellipsis-h",
+                                      class: {
+                                        "hover:text-gray-700 text-gray-600":
+                                          conversation.id != _vm.$page.id,
+                                        "hover:text-gray-50 text-white":
+                                          conversation.id == _vm.$page.id
+                                      },
+                                      attrs: { "aria-hidden": "true" }
+                                    })
+                                  ]
+                                },
+                                proxy: true
+                              },
+                              {
+                                key: "content",
+                                fn: function() {
+                                  return [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "p-2 flex hover:text-indigo-500 cursor-pointer",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.deleteConversation(
+                                              conversation.id
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass:
+                                            "fal my-auto fa-trash-alt pr-1",
+                                          attrs: { "aria-hidden": "true" }
+                                        }),
+                                        _vm._v(
+                                          "\n                            delete\n                        "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                },
+                                proxy: true
+                              }
+                            ],
+                            null,
+                            true
+                          )
+                        }),
+                        _vm._v(" "),
+                         true && conversation.id != _vm.$page.id
+                          ? _c("div", { staticClass: "ml-auto my-auto" }, [
+                              _c("i", {
+                                staticClass:
+                                  "fa fa-circle text-indigo-500 fa-xs circle   "
+                              })
+                            ])
+                          : _vm._e()
+                      ],
+                      1
+                    )
+                  ],
+                  1
                 )
               : _vm._e()
           })

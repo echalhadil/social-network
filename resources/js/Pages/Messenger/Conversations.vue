@@ -51,11 +51,10 @@
                 </div>
             </div>
 
-            <inertia-link
+            <div
                 v-if="!loading"
                 v-for="conversation in mainConversations"
                 :key="conversation.id"
-                :href="'/conversations/' + conversation.id"
                 class="mt-2 cursor-pointer group shadow p-2 w-full flex rounded"
                 :class="{
                     'bg-white hover:bg-gray-50': conversation.id != $page.id,
@@ -63,13 +62,17 @@
                         conversation.id == $page.id
                 }"
             >
-                <div class=" p-1 ">
+                <inertia-link
+                    class=" p-1 "
+                    :href="'/conversations/' + conversation.id"
+                >
                     <img
                         :src="'/' + conversation.friend.picture"
                         class=" h-14 w-14 object-cover rounded-full"
                     />
-                </div>
-                <div
+                </inertia-link>
+                <inertia-link
+                    :href="'/conversations/' + conversation.id"
                     class="my-auto w-3/4"
                     :class="{ 'text-white': conversation.id == $page.id }"
                 >
@@ -90,18 +93,36 @@
                             >{{ conversation.timeago }}</span
                         >
                     </div>
-                </div>
+                </inertia-link>
                 <div class=" ml-auto mr-2">
-                    <i
-                        class="fa fa-ellipsis-h"
-                        :class="{
-                            'hover:text-gray-700 text-gray-600':
-                                conversation.id != $page.id,
-                            'hover:text-gray-50 text-white':
-                                conversation.id == $page.id
-                        }"
-                        aria-hidden="true"
-                    ></i>
+                    <jet-dropdown align="right" width="auto" class="ml-auto">
+                        <template class="" #trigger>
+                            <i
+                                class="fa fa-ellipsis-h"
+                                :class="{
+                                    'hover:text-gray-700 text-gray-600':
+                                        conversation.id != $page.id,
+                                    'hover:text-gray-50 text-white':
+                                        conversation.id == $page.id
+                                }"
+                                aria-hidden="true"
+                            ></i>
+                        </template>
+
+                        <template #content>
+                            <div
+                                @click="deleteConversation(conversation.id)"
+                                class="p-2 flex hover:text-indigo-500 cursor-pointer"
+                            >
+                                <i
+                                    class="fal my-auto fa-trash-alt pr-1"
+                                    aria-hidden="true"
+                                ></i>
+                                delete
+                            </div>
+                        </template>
+                    </jet-dropdown>
+
                     <div
                         v-if="true && conversation.id != $page.id"
                         class="ml-auto my-auto"
@@ -111,7 +132,7 @@
                         ></i>
                     </div>
                 </div>
-            </inertia-link>
+            </div>
         </div>
     </div>
 </template>
@@ -156,7 +177,13 @@
 </style>
 
 <script>
+import JetDropdown from "@/Jetstream/Dropdown";
+import Swal from "sweetalert2";
+
 export default {
+    components: {
+        JetDropdown
+    },
     data() {
         return {
             conversations: [],
@@ -208,6 +235,10 @@ export default {
                 );
             });
             console.table(this.mainConversations);
+        },
+        deleteConversation(id) {
+            this.conversations = _.filter(this.conversations, c =>{ return !c.id == id; });
+            this.mainConversations = _.filter(this.mainConversations,  c =>{ return !c.id == id; });
         }
     },
 
