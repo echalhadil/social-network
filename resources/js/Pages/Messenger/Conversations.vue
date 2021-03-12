@@ -178,7 +178,7 @@
 
 <script>
 import JetDropdown from "@/Jetstream/Dropdown";
-import Swal from "sweetalert2";
+import Swal from "sweetalert";
 
 export default {
     components: {
@@ -237,8 +237,30 @@ export default {
             console.table(this.mainConversations);
         },
         deleteConversation(id) {
-            this.conversations = _.filter(this.conversations, c =>{ return !c.id == id; });
-            this.mainConversations = _.filter(this.mainConversations,  c =>{ return !c.id == id; });
+           
+
+              swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this conversation",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(willDelete => {
+                if (willDelete) {
+                    swal("Your conversation has been deleted!", {
+                        icon: "success",
+                        button: "close"
+                    });
+
+                    this.conversations = _.filter(this.conversations, c =>{ return c.id != id; });
+                    this.mainConversations = _.filter(this.mainConversations,  c =>{ return c.id != id; });
+
+
+
+
+                    
+                }
+            });
         }
     },
 
@@ -280,5 +302,8 @@ export default {
 <style>
 .circle {
     font-size: xx-small;
+}
+.conv{
+        height: calc(100vh - 12rem);
 }
 </style>

@@ -4343,8 +4343,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
+/* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -4561,35 +4561,51 @@ __webpack_require__.r(__webpack_exports__);
       console.table(this.mainConversations);
     },
     deleteConversation: function deleteConversation(id) {
-      this.conversations = _.filter(this.conversations, function (o) {
-        return !o.active;
-      });
-      this.mainConversations = _.filter(this.mainConversations, {
-        'id': !id
+      var _this2 = this;
+
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this conversation",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(function (willDelete) {
+        if (willDelete) {
+          swal("Your conversation has been deleted!", {
+            icon: "success",
+            button: "close"
+          });
+          _this2.conversations = _.filter(_this2.conversations, function (c) {
+            return c.id != id;
+          });
+          _this2.mainConversations = _.filter(_this2.mainConversations, function (c) {
+            return c.id != id;
+          });
+        }
       });
     }
   },
   mounted: function mounted() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.getConversations();
     Echo.channel("message-channel-" + this.$page.user.id).listen(".MessageEvent", function (data) {
       var conversation = data.conversation;
 
-      var c = _.find(_this2.conversations, ["id", conversation.id]);
+      var c = _.find(_this3.conversations, ["id", conversation.id]);
 
       c = conversation;
 
-      var match = _.find(_this2.conversations, ["id", conversation.id]);
+      var match = _.find(_this3.conversations, ["id", conversation.id]);
 
       if (match) {
-        var index = _.indexOf(_this2.conversations, _.find(_this2.conversations, ["id", conversation.id]));
+        var index = _.indexOf(_this3.conversations, _.find(_this3.conversations, ["id", conversation.id]));
 
-        _this2.conversations.splice(index, 1, conversation);
+        _this3.conversations.splice(index, 1, conversation);
 
-        _this2.conversations = _.orderBy(_this2.conversations, ["updated_at"], ["desc"]);
+        _this3.conversations = _.orderBy(_this3.conversations, ["updated_at"], ["desc"]);
       } else {
-        _this2.conversations.unshift(conversation);
+        _this3.conversations.unshift(conversation);
       } //    else
       //    this.conversations.unshift(conversation);
 
@@ -8214,7 +8230,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".circle {\n  font-size: xx-small;\n}\r\n", ""]);
+exports.push([module.i, ".circle {\n  font-size: xx-small;\n}\n.conv{\n  height: calc(100vh - 12rem);\n}\r\n", ""]);
 
 // exports
 
