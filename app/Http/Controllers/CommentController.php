@@ -108,6 +108,10 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment)
     {
         //
+        $comment->text = $request->text;
+        $comment->save();
+
+        return response() -> json($comment);
     }
 
     /**

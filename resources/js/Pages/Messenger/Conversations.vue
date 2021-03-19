@@ -6,8 +6,86 @@
         }"
         class=" mx-auto w-0 sm:visible  sm:w-1/4 regular-conversations-height  "
     >
-        <div class="w-full p-2">
+        <div class="w-full flex p-2">
             <p class="capitalize text-lg font-semibold">conversation</p>
+
+            <i @click="getFriends" class="fal fa-plus my-auto ml-auto mr-4 text-indigo-500 cursor-pointer" aria-hidden="true"></i>
+        
+
+
+
+
+
+
+        <jet-dialog-modal
+        :show="startConversation"
+        @close="startConversation = false"
+        >
+            <template #title>
+                start conversation
+            </template>
+
+            <template #content>
+                <div class="mt-4">
+                        
+                    <div v-for="friend in friends" :key="friend.id">
+                        
+                        <div class=" p-1 ">
+                            <img
+                                :src="'/' + friend.picture"
+                                class=" h-14 w-14 object-cover rounded-full"
+                            />
+                        </div>
+                        <div class="my-auto w-3/4">
+                            <p class=" capitalize font-semibold ">
+                                {{ friend.firstname }}
+                                {{ friend.lastname }}
+                            </p>
+                        </div>
+                    
+                    </div>
+                
+                </div>
+
+                
+            </template>
+
+            <template #footer>
+                <jet-secondary-button
+                    @click.native="startConversation = false"
+                >
+                    Cancel
+                </jet-secondary-button>
+
+                <button
+                   
+                    class="ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:text-indigo-500 hover:bg-gray-50"
+                   
+                    
+                >
+                <!-- :disabled="preview_image == ''"  -->
+                    next
+                </button>
+
+            </template>
+        </jet-dialog-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
 
         <div class="px-2 py-1">
@@ -177,19 +255,34 @@
 </style>
 
 <script>
+import JetActionSection from "@/Jetstream/ActionSection";
+import JetDialogModal from "@/Jetstream/DialogModal";
+import JetDangerButton from "@/Jetstream/DangerButton";
+import JetInput from "@/Jetstream/Input";
+import JetInputError from "@/Jetstream/InputError";
+import JetSecondaryButton from "@/Jetstream/SecondaryButton";
 import JetDropdown from "@/Jetstream/Dropdown";
 import Swal from "sweetalert";
 
 export default {
     components: {
+        JetActionSection,
+        JetDangerButton,
+        JetDialogModal,
+        JetInput,
+        JetInputError,
+        JetSecondaryButton,
         JetDropdown
     },
     data() {
         return {
             conversations: [],
+            friends:[],
             mainConversations: [],
             loading: true,
-            searchValue: ""
+            searchValue: "",
+            startConversation: false,
+
         };
     },
     watch: {
@@ -254,6 +347,15 @@ export default {
 
                     this.conversations = _.filter(this.conversations, c =>{ return c.id != id; });
                     this.mainConversations = _.filter(this.mainConversations,  c =>{ return c.id != id; });
+                    
+                    axios
+                        .delete("/conversations/" + id)
+                        .then(response => {
+                            console.log(response.data);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
 
 
 
@@ -261,7 +363,24 @@ export default {
                     
                 }
             });
-        }
+        },
+        getFriends(){
+                this.startConversation = true;
+                axios
+                .get(route("friends.index"))
+                .then(res => {
+                    this.friends = _.orderBy(
+                        res.data,
+                        ["id"],
+                        ["desc"]
+                    );
+                    console.table(this.friends);
+                   
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        },
     },
 
     mounted() {
