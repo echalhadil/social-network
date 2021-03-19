@@ -4598,6 +4598,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -63751,35 +63768,76 @@ var render = function() {
                   return [
                     _c(
                       "div",
-                      { staticClass: "mt-4" },
-                      _vm._l(_vm.friends, function(friend) {
-                        return _c("div", { key: friend.id }, [
+                      { staticClass: "mt-4 max-h overflow-y-auto" },
+                      [
+                        _c("div", { staticClass: "flex" }, [
                           _c("div", { staticClass: " p-1 " }, [
-                            _c("img", {
+                            _c("div", {
                               staticClass:
-                                " h-14 w-14 object-cover rounded-full",
-                              attrs: { src: "/" + friend.picture }
+                                " h-14 w-14  rounded-full bg-gray-300 "
                             })
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "my-auto w-3/4" }, [
-                            _c(
-                              "p",
-                              { staticClass: " capitalize font-semibold " },
-                              [
-                                _vm._v(
-                                  "\n                            " +
-                                    _vm._s(friend.firstname) +
-                                    "\n                            " +
-                                    _vm._s(friend.lastname) +
-                                    "\n                        "
-                                )
-                              ]
-                            )
+                            _c("div", {
+                              staticClass:
+                                " capitalize font-semibold h-3 w-20 rounded-full bg-gray-300  "
+                            }),
+                            _vm._v(" "),
+                            _c("div", {
+                              staticClass:
+                                " capitalize font-semibold h-2 w-12 mt-2 rounded-full bg-gray-300  "
+                            })
                           ])
-                        ])
-                      }),
-                      0
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.friends, function(friend) {
+                          return _c(
+                            "div",
+                            {
+                              key: friend.id,
+                              staticClass:
+                                "flex cursor-pointer hover:bg-gray-50"
+                            },
+                            [
+                              _c("div", { staticClass: " p-1 " }, [
+                                _c("img", {
+                                  staticClass:
+                                    " h-14 w-14 object-cover rounded-full",
+                                  attrs: { src: "/" + friend.picture }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "my-auto w-3/4" }, [
+                                _c(
+                                  "p",
+                                  { staticClass: " capitalize font-semibold " },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(friend.firstname) +
+                                        "\n                            " +
+                                        _vm._s(friend.lastname) +
+                                        "\n                        "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: " capitalize text-gray-600 " },
+                                  [
+                                    _vm._v(
+                                      "\n                        Online\n                        "
+                                    )
+                                  ]
+                                )
+                              ])
+                            ]
+                          )
+                        })
+                      ],
+                      2
                     )
                   ]
                 },

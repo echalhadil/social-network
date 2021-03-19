@@ -26,9 +26,22 @@
             </template>
 
             <template #content>
-                <div class="mt-4">
+                <div class="mt-4 max-h overflow-y-auto">
+                <!-- waiting-->
+                    <div class="flex">
+                        <div class=" p-1 ">
+                            <div class=" h-14 w-14  rounded-full bg-gray-300 "></div>
+                        </div>
+                        <div class="my-auto w-3/4">
+                            <div class=" capitalize font-semibold h-3 w-20 rounded-full bg-gray-300  ">
+                            </div>
+                            <div class=" capitalize font-semibold h-2 w-12 mt-2 rounded-full bg-gray-300  ">
+                            </div>
+                        </div>
+                    </div>
+                    
                         
-                    <div v-for="friend in friends" :key="friend.id">
+                    <div v-for="friend in friends" :key="friend.id" class="flex cursor-pointer hover:bg-gray-50">
                         
                         <div class=" p-1 ">
                             <img
@@ -41,6 +54,9 @@
                                 {{ friend.firstname }}
                                 {{ friend.lastname }}
                             </p>
+                            <div class=" capitalize text-gray-600 ">
+                            Online
+                            </div>
                         </div>
                     
                     </div>
@@ -238,6 +254,12 @@
 .loading {
     background: linear-gradient(to right, #e5e7eb, #e3e3e3);
     animation: mymove 1s infinite;
+
+}
+.max-h{
+
+    max-height: 18rem/* 288px */;
+}
 }
 @keyframes mymove {
     0% {
