@@ -53,19 +53,19 @@
                                 :key="comment.id"
                                 class=" pb-2 flex"
                             >
-                                <div class="pr-1">
+                                <inertia-link :href="'/profiles/'+comment.user.id" class="pr-1">
                                     <img
                                         class=" h-11 w-11 rounded-full object-cover  "
                                         :src="comment.user.picture"
                                     />
-                                </div>
+                                </inertia-link>
                                 <div class=" pl-1  w-11/12 ">
-                                    <p
+                                    <inertia-link :href="'/profiles/'+comment.user.id"
                                         class=" capitalize font-semibold text-sm "
                                     >
                                         {{ comment.user.firstname }}
                                         {{ comment.user.firstname }}
-                                    </p>
+                                    </inertia-link>
                                     <p
                                         class=" capitalize text-sm text-cool-gray-600  "
                                     >
@@ -79,9 +79,44 @@
                                         >
                                     </p>
                                 </div>
+                                <div class="ml-auto my-auto mr-4">
+
+
+                                    <jet-dropdown align="right" width="32" class="ml-auto">
+                                        <template class="" #trigger>
+                                            <i
+                                                class="text-gray-400 cursor-pointer hover:text-gray-500 fa fa-ellipsis-h"
+                                                aria-hidden="true"
+                                            ></i>
+                                        </template>
+
+                                        <template #content>
+                                            <div
+                                                v-if="$page.user.id==comment.user.id"
+                                                class="p-2 flex  hover:text-indigo-500 cursor-pointer"
+                                            >
+                                                <i class="fal fa-pencil pr-1" aria-hidden="true"></i>
+                                                edit
+                                            </div>
+                                            <div
+                                                v-if="$page.user.id==post.user.id || $page.user.id==comment.user.id"
+                                                
+                                                class="p-2 hover:text-indigo-500 cursor-pointer"
+                                            >
+                                                <i class="fal fa-trash-alt pr-1" aria-hidden="true"></i>
+                                                delete
+                                            </div>
+                                            
+                                        </template>
+                                    </jet-dropdown>
+
+
+                                </div>
                             </div>
                         </div>
                         <!-- comments -->
+                        <post-comments :comments="post.comments" />
+
 
                         <!--add comment -->
                         <div class="px-2 pb-2">
@@ -160,6 +195,9 @@
 </template>
 
 <script>
+
+import JetDropdown from "@/Jetstream/Dropdown";
+
 import AppLayout from "@/Layouts/AppLayout";
 import AddPost from "./Post/AddPost";
 
@@ -177,11 +215,13 @@ import React from "./Post/React";
 
 import Loading from "./Post/Loading";
 
+import PostComments from "./Post/Comment";
 
 // iport sweet alert
 import swal from "sweetalert";
 export default {
     components: {
+        JetDropdown,
         AppLayout,
         AddPost,
         React,
@@ -189,6 +229,7 @@ export default {
         PostText,
         PostPicture,
         Loading,
+        PostComments,
     },
     data() {
         return {
@@ -198,6 +239,7 @@ export default {
         };
     },
     methods: {
+        // function to delete posts
         deletePost(post) {
             console.log("deleted !");
             let id = post.id;
@@ -228,6 +270,8 @@ export default {
                 }
             });
         },
+
+        // function to edit the posts 
         editPost(post) {
             console.log("edited");
             swal({
@@ -261,12 +305,14 @@ export default {
             });
         },
 
+        // function to add posts 
         addPost(post) {
             console.log(post);
 
             this.posts.unshift(post);
         },
 
+        // function to get posts 
         getPosts() {
             axios
                 .get("/posts")
@@ -278,6 +324,8 @@ export default {
                     console.log(error);
                 });
         },
+
+        // function to add comment
         addComment(post) {
             if (this.comment.text != null) {
                 try {
@@ -297,6 +345,11 @@ export default {
                 }
             }
         },
+
+
+        editComment(){},
+
+        deleteComment(){},
 
         isReacted(post, user) {
             return post.reacts.filter(react => react.user_id == user.id)

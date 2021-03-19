@@ -69,9 +69,42 @@
                             }}</span>
                         </p>
                     </div>
+                    <div class="ml-auto my-auto mr-4">
+                        <jet-dropdown align="right" width="32" class="ml-auto">
+                            <template class="" #trigger>
+                                <i
+                                    class="text-gray-400 cursor-pointer hover:text-gray-500 fa fa-ellipsis-h"
+                                    aria-hidden="true"
+                                ></i>
+                            </template>
+
+                            <template #content>
+                                <div
+                                    v-if="$page.user.id==comment.user.id"
+                                    class="p-2 flex  hover:text-indigo-500 cursor-pointer"
+                                >
+                                    <i class="fal fa-pencil pr-1" aria-hidden="true"></i>
+                                    edit
+                                </div>
+                                <div
+                                    v-if="$page.user.id==post.user.id || $page.user.id==comment.user.id"
+                                    
+                                    class="p-2 hover:text-indigo-500 cursor-pointer"
+                                >
+                                    <i class="fal fa-trash-alt pr-1" aria-hidden="true"></i>
+                                    delete
+                                </div>
+                                
+                            </template>
+                        </jet-dropdown>
+                    </div>
                 </div>
             </div>
             <!-- comments -->
+
+            <post-comments :comments="post.comments" />
+
+            
 
             <!--add comment -->
             <div class="px-2 pb-2">
@@ -98,12 +131,15 @@ import PostPicture from "./Picture";
 // import post reactions
 import React from "./React";
 
+import PostComments from "./Comment";
+
 export default {
     components: {
         React,
         PostOwner,
         PostText,
-        PostPicture
+        PostPicture,
+        PostComments,
     },
     props: {
         post: {}
