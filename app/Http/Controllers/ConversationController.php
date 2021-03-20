@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageEvent;
 use App\Models\Comment;
 use App\Models\Conversation;
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +30,8 @@ class ConversationController extends Controller
         // });
         // $c = User::find(Auth::id())->friendsFromMe()->orWhere->friendsToMe()->get();
         $c = Conversation::where('from_id', Auth::id())
-                    ->orWhere('to_id',  Auth::id())
-                    ->get();
+            ->orWhere('to_id',  Auth::id())
+            ->get();
         foreach ($c as $conversation) {
             $conversation->timeago = $conversation->getTimeAgo($conversation->updated_at);
             // $conversation->las_message = Crypt::decryptString($conversation->last_message);
@@ -60,7 +62,73 @@ class ConversationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "text" => "required",
+        ]);
+
+        $c = Conversation::where('from_id', Auth::id())->Where('to_id',  $request->to_id)->first();
+        if ($c != null) {
+            $c->last_message = $request->text;
+            $c->save();
+            $c->friend = User::find($request->to_id);
+            $c->timeago = $c->getTimeAgo($c->updated_at);
+
+
+            $message = new Message();
+            $message->conversation_id = $c->id;
+            $message->text = $request->text;
+            $message->from_id = Auth::id();
+            $message->save();
+
+            event(new MessageEvent($message, $c));
+
+            return response()->json($c);
+        } else
+        if (null != Conversation::where('to_id', Auth::id())->Where('from_id',  $request->to_id)->first()) {
+            $c =  Conversation::where('to_id', Auth::id())->Where('from_id',  $request->to_id)->first();
+
+            $c->last_message = $request->text;
+            $c->save();
+            $c->friend = User::find($request->to_id);
+            $c->timeago = $c->getTimeAgo($c->updated_at);
+
+
+            $message = new Message();
+            $message->conversation_id = $c->id;
+            $message->text = $request->text;
+            $message->from_id = Auth::id();
+            $message->save();
+
+            event(new MessageEvent($message, $c));
+
+            return response()->json($c);
+        } else
+            try {
+
+
+                $conversation = new Conversation();
+                $conversation->from_id = Auth::id();
+                $conversation->to_id = $request->to_id;
+                $conversation->last_message = $request->text;
+                $conversation->save();
+                $conversation->timeago = $conversation->getTimeAgo($conversation->updated_at);
+
+                
+
+                $conversation->friend = User::find($request->to_id);
+
+                $message = new Message();
+                $message->conversation_id = $conversation->id;
+                $message->text = $request->text;
+                $message->from_id = Auth::id();
+                $message->save();
+
+                return response()->json($conversation);
+            } catch (\Throwable $th) {
+                throw $th;
+            } finally {
+                event(new MessageEvent($message, $conversation));
+            }
     }
 
     /**
@@ -130,13 +198,13 @@ class ConversationController extends Controller
 
         $conversation = Conversation::find($id);
         if ($conversation && (Auth::id() == $conversation->from_id || Auth::id() == $conversation->to_id)) {
-      
-           foreach ($conversation->messages as $message) {
+
+            foreach ($conversation->messages as $message) {
                 $message->timeago = $message->created_at->shortRelativeDiffForHumans();
                 // $message->text = Crypt::decryptString($message->text);
             }
-        return response()->json($conversation->messages);
-    }
-    abort(404);
+            return response()->json($conversation->messages);
+        }
+        abort(404);
     }
 }

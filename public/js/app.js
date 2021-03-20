@@ -4615,6 +4615,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -4640,7 +4643,11 @@ __webpack_require__.r(__webpack_exports__);
       mainConversations: [],
       loading: true,
       searchValue: "",
-      startConversation: false
+      startConversation: false,
+      startMessage: false,
+      waitingForFriends: true,
+      selectedFriend: null,
+      newMessage: ''
     };
   },
   watch: {
@@ -4702,32 +4709,55 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(route("friends.index")).then(function (res) {
         _this3.friends = _.orderBy(res.data, ["id"], ["desc"]);
         console.table(_this3.friends);
+        _this3.waitingForFriends = false;
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    sendMessage: function sendMessage() {
+      var _this4 = this;
+
+      if (this.selectedFriend != null && this.newMessage != '') {
+        this.startConversation = false;
+        this.startMessage = false;
+        var c = {
+          'to_id': this.selectedFriend.id,
+          'text': this.newMessage
+        };
+        axios.post('/conversations', c).then(function (res) {
+          _this4.mainConversations.unshift(res.data);
+
+          _this4.conversations.unshift(res.data);
+
+          _this4.selectedFriend = null;
+          _this4.newMessage = '';
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
     }
   },
   mounted: function mounted() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.getConversations();
     Echo.channel("message-channel-" + this.$page.user.id).listen(".MessageEvent", function (data) {
       var conversation = data.conversation;
 
-      var c = _.find(_this4.conversations, ["id", conversation.id]);
+      var c = _.find(_this5.conversations, ["id", conversation.id]);
 
       c = conversation;
 
-      var match = _.find(_this4.conversations, ["id", conversation.id]);
+      var match = _.find(_this5.conversations, ["id", conversation.id]);
 
       if (match) {
-        var index = _.indexOf(_this4.conversations, _.find(_this4.conversations, ["id", conversation.id]));
+        var index = _.indexOf(_this5.conversations, _.find(_this5.conversations, ["id", conversation.id]));
 
-        _this4.conversations.splice(index, 1, conversation);
+        _this5.conversations.splice(index, 1, conversation);
 
-        _this4.conversations = _.orderBy(_this4.conversations, ["updated_at"], ["desc"]);
+        _this5.conversations = _.orderBy(_this5.conversations, ["updated_at"], ["desc"]);
       } else {
-        _this4.conversations.unshift(conversation);
+        _this5.conversations.unshift(conversation);
       } //    else
       //    this.conversations.unshift(conversation);
 
@@ -8470,26 +8500,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".regular-conversations-height {\n  height: calc(100vh - 6rem);\n}\n.conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\r\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&":
-/*!************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css& ***!
-  \************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, ".circle {\n  font-size: xx-small;\n}\n.conv{\n  height: calc(100vh - 12rem);\n}\r\n", ""]);
+exports.push([module.i, ".circle {\n  font-size: xx-small;\n}\n.conv {\n  height: calc(100vh - 12rem);\n}\n.regular-conversations-height {\n  height: calc(100vh - 6rem);\n}\n.conv::-webkit-scrollbar {\n  width: 5px;\n}\n.conv::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.conv::-webkit-scrollbar-thumb {\n  background: #e5e7eb;\n}\n.conv::-webkit-scrollbar-thumb:hover {\n  background: #e5e8ef;\n}\n.loading {\n  background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n  -webkit-animation: mymove 1s infinite;\n          animation: mymove 1s infinite;\n}\n.max-h {\n  max-height: 18rem;\n}\n@-webkit-keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\n@keyframes mymove {\n0% {\n    background: linear-gradient(to right, #e5e7eb, #e3e3e3);\n}\n50% {\n    background: linear-gradient(to right, #e3e3e3, #e3e3e3);\n}\n100% {\n    background: linear-gradient(to left, #e5e7eb, #e3e3e3);\n}\n}\r\n", ""]);
 
 // exports
 
@@ -55262,36 +55273,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&":
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Conversations.vue?vue&type=style&index=1&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Main.vue?vue&type=style&index=0&lang=css&":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Messenger/Main.vue?vue&type=style&index=0&lang=css& ***!
@@ -63758,7 +63739,9 @@ var render = function() {
               {
                 key: "title",
                 fn: function() {
-                  return [_vm._v("\n            start conversation\n        ")]
+                  return [
+                    _vm._v("\n                start conversation\n            ")
+                  ]
                 },
                 proxy: true
               },
@@ -63770,26 +63753,28 @@ var render = function() {
                       "div",
                       { staticClass: "mt-4 max-h overflow-y-auto" },
                       [
-                        _c("div", { staticClass: "flex" }, [
-                          _c("div", { staticClass: " p-1 " }, [
-                            _c("div", {
-                              staticClass:
-                                " h-14 w-14  rounded-full bg-gray-300 "
-                            })
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "my-auto w-3/4" }, [
-                            _c("div", {
-                              staticClass:
-                                " capitalize font-semibold h-3 w-20 rounded-full bg-gray-300  "
-                            }),
-                            _vm._v(" "),
-                            _c("div", {
-                              staticClass:
-                                " capitalize font-semibold h-2 w-12 mt-2 rounded-full bg-gray-300  "
-                            })
-                          ])
-                        ]),
+                        _vm.waitingForFriends
+                          ? _c("div", { staticClass: "flex" }, [
+                              _c("div", { staticClass: " p-1 " }, [
+                                _c("div", {
+                                  staticClass:
+                                    " h-14 w-14  rounded-full bg-gray-300 loading "
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "my-auto w-3/4" }, [
+                                _c("div", {
+                                  staticClass:
+                                    " capitalize font-semibold h-3 w-20 rounded-full bg-gray-300  loading"
+                                }),
+                                _vm._v(" "),
+                                _c("div", {
+                                  staticClass:
+                                    " capitalize font-semibold h-2 w-12 mt-2 rounded-full bg-gray-300 loading "
+                                })
+                              ])
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _vm._l(_vm.friends, function(friend) {
                           return _c(
@@ -63797,7 +63782,17 @@ var render = function() {
                             {
                               key: friend.id,
                               staticClass:
-                                "flex cursor-pointer hover:bg-gray-50"
+                                "flex cursor-pointer hover:bg-gray-50",
+                              class: {
+                                "bg-gray-100":
+                                  _vm.selectedFriend != null &&
+                                  _vm.selectedFriend.id == friend.id
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.selectedFriend = friend
+                                }
+                              }
                             },
                             [
                               _c("div", { staticClass: " p-1 " }, [
@@ -63814,11 +63809,11 @@ var render = function() {
                                   { staticClass: " capitalize font-semibold " },
                                   [
                                     _vm._v(
-                                      "\n                            " +
+                                      "\n                                " +
                                         _vm._s(friend.firstname) +
-                                        "\n                            " +
+                                        "\n                                " +
                                         _vm._s(friend.lastname) +
-                                        "\n                        "
+                                        "\n                            "
                                     )
                                   ]
                                 ),
@@ -63828,7 +63823,7 @@ var render = function() {
                                   { staticClass: " capitalize text-gray-600 " },
                                   [
                                     _vm._v(
-                                      "\n                        Online\n                        "
+                                      "\n                                Online\n                            "
                                     )
                                   ]
                                 )
@@ -63856,16 +63851,130 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n                Cancel\n            ")]
+                      [
+                        _c(
+                          "span",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.selectedFriend = null
+                              }
+                            }
+                          },
+                          [_vm._v("Cancel")]
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _c(
                       "button",
                       {
                         staticClass:
-                          "ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:text-indigo-500 hover:bg-gray-50"
+                          "ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:text-indigo-500 hover:bg-gray-50",
+                        class: { "opacity-50": _vm.selectedFriend == null },
+                        attrs: { disabled: _vm.selectedFriend == null },
+                        on: {
+                          click: function($event) {
+                            _vm.startMessage = true
+                          }
+                        }
                       },
-                      [_vm._v("\n                next\n            ")]
+                      [_vm._v("\n                    next\n                ")]
+                    )
+                  ]
+                },
+                proxy: true
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("jet-dialog-modal", {
+            attrs: { show: _vm.startMessage },
+            on: {
+              close: function($event) {
+                _vm.startMessage = false
+              }
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "title",
+                fn: function() {
+                  return [
+                    _vm._v("\n                type something\n            ")
+                  ]
+                },
+                proxy: true
+              },
+              {
+                key: "content",
+                fn: function() {
+                  return [
+                    _c("div", { staticClass: "mt-4 max-h overflow-y-auto" }, [
+                      _c("div", [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newMessage,
+                              expression: "newMessage"
+                            }
+                          ],
+                          staticClass: "resize-none border rounded-md w-full",
+                          domProps: { value: _vm.newMessage },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newMessage = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ])
+                  ]
+                },
+                proxy: true
+              },
+              {
+                key: "footer",
+                fn: function() {
+                  return [
+                    _c(
+                      "jet-secondary-button",
+                      {
+                        nativeOn: {
+                          click: function($event) {
+                            _vm.startMessage = false
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.selectedFriend = null
+                              }
+                            }
+                          },
+                          [_vm._v("Cancel")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:text-indigo-500 hover:bg-gray-50",
+                        class: { "opacity-50": _vm.newMessage == "" },
+                        attrs: { disabled: _vm.newMessage == "" },
+                        on: { click: _vm.sendMessage }
+                      },
+                      [_vm._v("\n                    send\n                ")]
                     )
                   ]
                 },
@@ -84220,9 +84329,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Conversations.vue?vue&type=template&id=2c9de69b& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=template&id=2c9de69b&");
 /* harmony import */ var _Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Conversations.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Conversations.vue?vue&type=style&index=0&lang=css& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Conversations.vue?vue&type=style&index=1&lang=css& */ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -84231,7 +84338,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _Conversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__["render"],
   _Conversations_vue_vue_type_template_id_2c9de69b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
@@ -84275,22 +84382,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Conversations.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css& ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/style-loader!../../../../node_modules/css-loader??ref--6-1!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/postcss-loader/src??ref--6-2!../../../../node_modules/vue-loader/lib??vue-loader-options!./Conversations.vue?vue&type=style&index=1&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Messenger/Conversations.vue?vue&type=style&index=1&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Conversations_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 
 
 /***/ }),
