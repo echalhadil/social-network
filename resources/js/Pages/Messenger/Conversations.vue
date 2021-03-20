@@ -9,99 +9,83 @@
         <div class="w-full flex p-2">
             <p class="capitalize text-lg font-semibold">conversation</p>
 
-            <i @click="getFriends" class="fal fa-plus my-auto ml-auto mr-4 text-indigo-500 cursor-pointer" aria-hidden="true"></i>
-        
+            <i
+                @click="getFriends"
+                class="fal fa-plus my-auto ml-auto mr-4 text-indigo-500 cursor-pointer"
+                aria-hidden="true"
+            ></i>
 
+            <jet-dialog-modal
+                :show="startConversation"
+                @close="startConversation = false"
+            >
+                <template #title>
+                    start conversation
+                </template>
 
+                <template #content>
+                    <div class="mt-4 max-h overflow-y-auto">
+                        <!-- waiting-->
 
-
-
-
-        <jet-dialog-modal
-        :show="startConversation"
-        @close="startConversation = false"
-        >
-            <template #title>
-                start conversation
-            </template>
-
-            <template #content>
-                <div class="mt-4 max-h overflow-y-auto">
-                <!-- waiting-->
-                    <div class="flex">
-                        <div class=" p-1 ">
-                            <div class=" h-14 w-14  rounded-full bg-gray-300 "></div>
-                        </div>
-                        <div class="my-auto w-3/4">
-                            <div class=" capitalize font-semibold h-3 w-20 rounded-full bg-gray-300  ">
+                        <div v-if="waitingForFriends" class="flex">
+                            <div class=" p-1 ">
+                                <div
+                                    class=" h-14 w-14  rounded-full bg-gray-300 loading "
+                                ></div>
                             </div>
-                            <div class=" capitalize font-semibold h-2 w-12 mt-2 rounded-full bg-gray-300  ">
+                            <div class="my-auto w-3/4">
+                                <div
+                                    class=" capitalize font-semibold h-3 w-20 rounded-full bg-gray-300  loading"
+                                ></div>
+                                <div
+                                    class=" capitalize font-semibold h-2 w-12 mt-2 rounded-full bg-gray-300 loading "
+                                ></div>
+                            </div>
+                        </div>
+
+                        <div
+                            v-for="friend in friends"
+                            :key="friend.id"
+                            @click="selectedFriend = friend"
+                            :class="{'bg-gray-100':selectedFriend!=null &&  selectedFriend.id == friend.id}"
+                            class="flex cursor-pointer hover:bg-gray-50"
+                        >
+                            <div class=" p-1 ">
+                                <img
+                                    :src="'/' + friend.picture"
+                                    class=" h-14 w-14 object-cover rounded-full"
+                                />
+                            </div>
+                            <div class="my-auto w-3/4">
+                                <p class=" capitalize font-semibold ">
+                                    {{ friend.firstname }}
+                                    {{ friend.lastname }}
+                                </p>
+                                <div class=" capitalize text-gray-600 ">
+                                    Online
+                                </div>
                             </div>
                         </div>
                     </div>
-                    
+                </template>
+
+                <template #footer>
+                    <jet-secondary-button
+                        @click.native="startConversation = false"
                         
-                    <div v-for="friend in friends" :key="friend.id" class="flex cursor-pointer hover:bg-gray-50">
-                        
-                        <div class=" p-1 ">
-                            <img
-                                :src="'/' + friend.picture"
-                                class=" h-14 w-14 object-cover rounded-full"
-                            />
-                        </div>
-                        <div class="my-auto w-3/4">
-                            <p class=" capitalize font-semibold ">
-                                {{ friend.firstname }}
-                                {{ friend.lastname }}
-                            </p>
-                            <div class=" capitalize text-gray-600 ">
-                            Online
-                            </div>
-                        </div>
-                    
-                    </div>
-                
-                </div>
+                    >
+                        <span v-on:click="selectedFriend = null" >Cancel</span>
+                    </jet-secondary-button>
 
-                
-            </template>
-
-            <template #footer>
-                <jet-secondary-button
-                    @click.native="startConversation = false"
-                >
-                    Cancel
-                </jet-secondary-button>
-
-                <button
-                   
-                    class="ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:text-indigo-500 hover:bg-gray-50"
-                   
-                    
-                >
-                <!-- :disabled="preview_image == ''"  -->
-                    next
-                </button>
-
-            </template>
-        </jet-dialog-modal>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <button
+                        class="ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:text-indigo-500 hover:bg-gray-50"
+                        :disabled="selectedFriend == null "
+                        :class="{ 'opacity-50':selectedFriend== null }"
+                    >
+                        next
+                    </button>
+                </template>
+            </jet-dialog-modal>
         </div>
 
         <div class="px-2 py-1">
@@ -254,12 +238,9 @@
 .loading {
     background: linear-gradient(to right, #e5e7eb, #e3e3e3);
     animation: mymove 1s infinite;
-
 }
-.max-h{
-
-    max-height: 18rem/* 288px */;
-}
+.max-h {
+    max-height: 18rem;
 }
 @keyframes mymove {
     0% {
@@ -299,12 +280,13 @@ export default {
     data() {
         return {
             conversations: [],
-            friends:[],
+            friends: [],
             mainConversations: [],
             loading: true,
             searchValue: "",
             startConversation: false,
-
+            waitingForFriends: true,
+            selectedFriend: null
         };
     },
     watch: {
@@ -352,11 +334,10 @@ export default {
             console.table(this.mainConversations);
         },
         deleteConversation(id) {
-           
-
-              swal({
+            swal({
                 title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this conversation",
+                text:
+                    "Once deleted, you will not be able to recover this conversation",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true
@@ -367,9 +348,16 @@ export default {
                         button: "close"
                     });
 
-                    this.conversations = _.filter(this.conversations, c =>{ return c.id != id; });
-                    this.mainConversations = _.filter(this.mainConversations,  c =>{ return c.id != id; });
-                    
+                    this.conversations = _.filter(this.conversations, c => {
+                        return c.id != id;
+                    });
+                    this.mainConversations = _.filter(
+                        this.mainConversations,
+                        c => {
+                            return c.id != id;
+                        }
+                    );
+
                     axios
                         .delete("/conversations/" + id)
                         .then(response => {
@@ -378,31 +366,22 @@ export default {
                         .catch(error => {
                             console.log(error);
                         });
-
-
-
-
-                    
                 }
             });
         },
-        getFriends(){
-                this.startConversation = true;
-                axios
+        getFriends() {
+            this.startConversation = true;
+            axios
                 .get(route("friends.index"))
                 .then(res => {
-                    this.friends = _.orderBy(
-                        res.data,
-                        ["id"],
-                        ["desc"]
-                    );
+                    this.friends = _.orderBy(res.data, ["id"], ["desc"]);
                     console.table(this.friends);
-                   
+                    this.waitingForFriends = false;
                 })
                 .catch(err => {
                     console.log(err);
                 });
-        },
+        }
     },
 
     mounted() {
@@ -444,7 +423,7 @@ export default {
 .circle {
     font-size: xx-small;
 }
-.conv{
-        height: calc(100vh - 12rem);
+.conv {
+    height: calc(100vh - 12rem);
 }
 </style>
