@@ -93,7 +93,7 @@ export default {
                     });
  
                     axios
-                        .delete("comments/" + comment.id)
+                        .delete("/comments/" + comment.id)
                         .then(response => {
                             console.log(response.data);
                             this.$emit('delete-comment', comment);
@@ -126,7 +126,7 @@ export default {
                 ).value;
 
                 axios
-                    .put("comments/" + comment.id, comment)
+                    .put("/comments/" + comment.id, comment)
                     .then(response => {
                         console.log(response.data);
                     })

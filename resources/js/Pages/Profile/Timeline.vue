@@ -47,6 +47,7 @@
                 :post="post"
                 @delete-post="deletePost"
                 @edit-post="editPost"
+                @delete-comment ="deleteComment"
             />
 
             <loading v-if="loading" />
@@ -198,7 +199,12 @@ export default {
                 .catch(error => {
                     console.log(error);
                 });
-        }
+        },
+        deleteComment(comment){
+            var thepost =_.find( this.posts, o => { return o.id ==  comment.post_id; });
+            thepost.comments =thepost.comments.filter(c =>c.id !=comment.id);
+        
+        },
     },
     computed: {
         countPictures() {
