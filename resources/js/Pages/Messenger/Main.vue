@@ -73,6 +73,7 @@
                         v-for="message in messages"
                         :key="message.id"
                         :message="message"
+                        @delete-message="deleteMessage"
                     />
                     
                     <div
@@ -207,6 +208,9 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
+        },
+        deleteMessage(id){
+                this.messages = this.messages.filter(m => m.id !=id)
         }
     },
     mounted() {

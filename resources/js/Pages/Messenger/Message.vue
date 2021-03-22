@@ -19,7 +19,25 @@
                     v-if="$page.user.id != message.from_id"
                     class="my-auto text-gray-500 mr-auto "
                 >
-                    <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                   
+                        <jet-dropdown align="right" width="auto" class="ml-auto">
+                            <template class="" #trigger>
+                                 <i class="fa cursor-pointer fa-ellipsis-h" aria-hidden="true"></i>
+                            </template>
+
+                            <template #content>
+                                <div
+                                     @click="deleteMessage(message.id)"
+                                    class="p-2 flex hover:text-indigo-500 cursor-pointer"
+                                >
+                                    <i
+                                        class="fal my-auto fa-trash-alt pr-1"
+                                        aria-hidden="true"
+                                    ></i>
+                                    delete
+                                </div>
+                            </template>
+                        </jet-dropdown>
                 </div>
             </div>
         </div>
@@ -38,10 +56,24 @@
                 v-if="$page.user.id == message.from_id"
                 class=" ml-auto my-auto text-gray-400"
             >
-                <i
-                    class=" ml-auto my-auto fa fa-ellipsis-h"
-                    aria-hidden="true"
-                ></i>
+                <jet-dropdown align="right" width="auto" class="ml-auto">
+                    <template class="" #trigger>
+                            <i class="fa cursor-pointer fa-ellipsis-h" aria-hidden="true"></i>
+                    </template>
+
+                    <template #content>
+                        <div
+                            @click="deleteMessage(message.id)"
+                            class="p-2 flex hover:text-indigo-500 cursor-pointer"
+                        >
+                            <i
+                                class="fal my-auto fa-trash-alt pr-1"
+                                aria-hidden="true"
+                            ></i>
+                            delete
+                        </div>
+                    </template>
+                </jet-dropdown>
             </div>
             <div
                 v-if="$page.user.id == message.from_id"
@@ -75,9 +107,48 @@
 </template>
 
 <script>
+import JetDropdown from "@/Jetstream/Dropdown";
+import Swal from "sweetalert";
 export default {
-    props: ["message"]
+    components:{
+        JetDropdown,
+    },
+    props: ["message"],
+
+    methods: {
+        deleteMessage(id){
+
+              swal({
+                title: "Are you sure?",
+                text:
+                    "Once deleted, you will not be able to recover this message",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true
+            }).then(willDelete => {
+                if (willDelete) {
+                    swal("Your message has been deleted!", {
+                        icon: "success",
+                        button: "close"
+                    });
+
+                    axios
+                        .delete("/messages/" + id)
+                        .then(response => {
+                            console.log(response.data);
+                            this.$emit('delete-message', id)
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+            });
+
+        },
+        
+    },
 };
+
 </script>
 
 <style>

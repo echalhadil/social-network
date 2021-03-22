@@ -33,7 +33,7 @@
         <jet-dialog-modal
             :show="confirmingUserDeletion"
             @close="confirmingUserDeletion = false"
-        >
+            >
             <template #title>
                 Update Profile Picture
             </template>

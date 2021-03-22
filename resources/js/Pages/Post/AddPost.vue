@@ -5,7 +5,7 @@
         </div>
         <div class=" border-t-2 border-gray-100">
             <div
-                @click="openModal"
+                @click="openModal = true"
                 class="p-3 cursor-pointer flex border-b-2 border-gray-100 "
             >
                 <div class="pr-3">
@@ -16,7 +16,7 @@
                 </div>
 
                 <div
-                    @click="openModal"
+                    @click="openModal = true"
                     class="my-auto cursor-pointer capitalize font-light text-gray-700"
                 >
                     write somthing here ...
@@ -25,7 +25,7 @@
 
             <div class="p-3 flex ">
                 <div
-                    @click="openModal"
+                    @click="openModal = true"
                     class=" cursor-pointer flex bg-cool-gray-200 hover:bg-gray-300 p-2 rounded "
                 >
                     <i class="my-auto fal fa-image"></i>
@@ -33,132 +33,169 @@
                 </div>
             </div>
         </div>
-
-        <!-- add post modal -->
-
-        <div :class="modalClasses">
-            <div class=" absolute w-full h-full bg-gray-500 opacity-50"></div>
-
-            <div
-                class="bg-white md:w-1/2 p-2 w-5/6 mx-auto rounded-sm shadow-lg z-50 "
+        <jet-dialog-modal
+            :show="openModal"
+            @close="openModal = false"
             >
-                <!-- title -->
-                <div class="p-1">
-                    <p class=" text-3xl capitalize text-gray-800 ">
-                        Create post
-                    </p>
+            <template #title>
+                Create Post
+            </template>
+
+            <template #content>
+                <div class="mt-4">
+                    
+                        <div class="bg-white  px-2 mx-auto ">
+                            
+                            <hr />
+                            <div class="p-3 flex ">
+                                <div class="pr-3">
+                                    <img
+                                        class="rounded-full w-16 h-16 "
+                                        :src="'/' + $page.user.picture"
+                                    />
+                                </div>
+
+                                <input
+                                    type="text"
+                                    v-model="post.text"
+                                    class="my-auto border-red-600  w-5/6 h-14 capitalize font-light text-gray-700"
+                                    placeholder="write somthing here ..."
+                                />
+                            </div>
+
+                            <hr class=" w-10/12 mx-auto border-gray-200 " />
+                            <div class="p-3 flex  ">
+                                <label
+                                    for="input-image"
+                                    roll="input"
+                                    type="file"
+                                    class=" cursor-pointer flex bg-cool-gray-200 hover:bg-gray-300 p-2 rounded "
+                                >
+                                    <i class="my-auto fal fa-image"></i>
+                                    <p class=" capitalize my-auto ml-1">Photo</p>
+                                </label>
+                                <input
+                                    id="input-image"
+                                    accept="image/*"
+                                    v-on:change="uploadfile"
+                                    type="file"
+                                    name="picture"
+                                    class=" hidden "
+                                />
+                            </div>
+
+                            <div class="mx-3 h-80 overflow-y-auto prev-picture " v-if="preview_image != ''">
+                                <i
+                                    class=" rounded-full bg-cool-gray-300 hover:bg-cool-gray-200 -ml-2 -mt-2  px-1 py-0.5 float-right mb-1 absolute text-gray-800 fal fa-times cursor-pointer"
+                                    v-on:click="preview_image = ''"
+                                    type="button"
+                                ></i>
+                                <img
+                                    class="  w-full  object-cover rounded-sm"
+                                    :src="preview_image"
+                                />
+                            </div>
+
+                         
+                        </div>
+
+
                 </div>
 
-                <!-- title -->
-                <hr />
-                <div class="p-3 flex ">
-                    <div class="pr-3">
-                        <img
-                            class="rounded-full w-16 h-16 "
-                            :src="'/' + $page.user.picture"
-                        />
-                    </div>
+                
+            </template>
 
-                    <input
-                        type="text"
-                        v-model="post.text"
-                        class="my-auto border-red-600  w-5/6 h-14 capitalize font-light text-gray-700"
-                        placeholder="write somthing here ..."
-                    />
-                </div>
-
-                <hr class=" w-10/12 mx-auto border-gray-200 " />
-                <div class="p-3 flex  ">
-                    <label
-                        for="input-image"
-                        roll="input"
-                        type="file"
-                        class=" cursor-pointer flex bg-cool-gray-200 hover:bg-gray-300 p-2 rounded "
-                    >
-                        <i class="my-auto fal fa-image"></i>
-                        <p class=" capitalize my-auto ml-1">Photo</p>
-                    </label>
-                    <input
-                        id="input-image"
-                        accept="image/*"
-                        v-on:change="uploadfile"
-                        type="file"
-                        name="picture"
-                        class=" hidden "
-                    />
-                </div>
-
-                <div class="pl-3 " v-if="preview_image != ''">
-                    <i
-                        class=" rounded-full bg-cool-gray-300 hover:bg-cool-gray-200 -ml-2 -mt-2  px-1 py-0.5 float-right mb-1 absolute text-gray-800 fal fa-times cursor-pointer"
-                        v-on:click="preview_image = ''"
-                        type="button"
-                    ></i>
-                    <img
-                        class=" md:w-1/3 w-full h-60 object-cover rounded-sm"
-                        :src="preview_image"
-                    />
-                </div>
-
-                <hr />
-
-                <div class=" flex mt-auto p-3 ml-auto w-4/12 ">
-                    <button
-                        @click="closeModal"
-                        type="button"
-                        class=" mr-1 bg-gray-200 hover:bg-gray-100 border-gray-500 p-1 w-20  rounded-sm "
-                    >
-                        cancel
-                    </button>
-                    <button
-                        @click="addPost"
-                        type="button"
-                        class=" bg-blue-600 hover:bg-blue-500 text-white  border-gray-500 p-1 w-20 rounded-sm"
-                    >
-                        post
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- add post modal -->
-
-        <!-- message -->
-        <div
-            v-if="message.visible"
-            class="relative py-3 pl-4 pr-10 leading-normal rounded-lg  "
-            :class="{
-                'text-green-700 bg-green-100': message.type,
-                'text-red-700 bg-red-100': !message.type
-            }"
-            role="alert"
-        >
-            <p class=" capitalize ">{{ message.content }}</p>
-            <span class="absolute inset-y-0 right-0 flex items-center mr-4">
-                <svg
-                    @click="message.visible = false"
-                    class="w-4 h-4 fill-current"
-                    role="button"
-                    viewBox="0 0 20 20"
+            <template #footer>
+                <jet-secondary-button
+                    @click.native="openModal = false"
                 >
-                    <path
-                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                        clip-rule="evenodd"
-                        fill-rule="evenodd"
-                    ></path>
-                </svg>
-            </span>
-        </div>
-        <!--message -->
+                    Cancel
+                </jet-secondary-button>
+
+                <button
+                  
+                    class=" text-sm ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:bg-indigo-600 "
+                    :class="{ 'opacity-50': preview_image == '' && post.text =='' }"
+                    :disabled="preview_image == '' && post.text ==''"
+                    @click="addPost"
+                >
+                    POST
+                </button>
+
+
+                <!-- message -->
+                <div
+                    v-if="message.visible"
+                    class="relative float-left py-2 pl-4 pr-10 leading-normal rounded-lg  "
+                    :class="{
+                        'text-green-700 bg-green-100': message.type,
+                        'text-red-700 bg-red-100': !message.type
+                    }"
+                    role="alert"
+                    >
+                    <p class=" capitalize ">{{ message.content }}</p>
+                    <span
+                        class="absolute inset-y-0 right-0 flex items-center mr-4"
+                    >
+                        <svg
+                            @click="message.visible = false"
+                            class="w-4 h-4 fill-current"
+                            role="button"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"
+                                fill-rule="evenodd"
+                            ></path>
+                        </svg>
+                    </span>
+                </div>
+                <!--message -->
+
+                
+            </template>
+        </jet-dialog-modal>
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
 </template>
 
 <script>
+
+import JetActionSection from "@/Jetstream/ActionSection";
+import JetDialogModal from "@/Jetstream/DialogModal";
+import JetDangerButton from "@/Jetstream/DangerButton";
+import JetInput from "@/Jetstream/Input";
+import JetInputError from "@/Jetstream/InputError";
+import JetSecondaryButton from "@/Jetstream/SecondaryButton";
+
+import swal from "sweetalert";
+
+
 export default {
+    components: {
+        JetActionSection,
+        JetDangerButton,
+        JetDialogModal,
+        JetInput,
+        JetInputError,
+        JetSecondaryButton
+    },
     data() {
         return {
-            modalClasses:
-                "opacity-0 pointer-events-none fixed w-full h-screen top-0 left-0 flex items-center justify-center",
+            openModal:false,
             post: {
                 text: "",
                 picture: ""
@@ -172,19 +209,7 @@ export default {
         };
     },
     methods: {
-        openModal() {
-            this.modalClasses =
-                "fixed w-full h-screen top-0 left-0 flex items-center justify-center";
-        },
-        closeModal() {
-            this.modalClasses =
-                "opacity-0 pointer-events-none fixed w-full h-screen top-0 left-0 flex items-center justify-center";
-            this.preview_image = "";
-            this.post = {
-                text: "",
-                picture: ""
-            };
-        },
+       
         uploadfile() {
             const reader = new FileReader();
 
@@ -210,23 +235,23 @@ export default {
                         headers: { "Content-Type": "multipart/form-data" }
                     })
                     .then(Response => {
-                        // this.posts.unshift(Response.data);
-
-                        this.closeModal();
-
+                        
                         this.$emit("add-post", Response.data);
                         this.message = {
                             type: true,
                             content: "your post has been published .",
                             visible: true
                         };
+                        this.post =  {text: "",picture: ""}
                         setTimeout(() => {
                             this.message = {
                                 type: true,
                                 content: "your post has been published .",
                                 visible: false
                             };
-                        }, 4000);
+                            this.openModal = false;
+
+                        }, 2000);
                     })
                     .catch(error => {
                         console.log(error);
@@ -242,3 +267,24 @@ export default {
     }
 };
 </script>
+
+<style>
+
+.prev-picture::-webkit-scrollbar {
+    width: 5px;
+}
+
+.prev-picture::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.prev-picture::-webkit-scrollbar-thumb {
+    background: #e5e7eb;
+}
+
+.prev-picture::-webkit-scrollbar-thumb:hover {
+    background: #e5e8ef;
+}
+
+
+</style>

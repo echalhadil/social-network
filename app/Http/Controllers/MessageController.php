@@ -47,28 +47,24 @@ class MessageController extends Controller
 
         $request->validate([
             "text" => "required",
+            "conversation_id" => "required",
         ]);
-
-        $message = new Message();
-        $message->text = $request->text;
-        // $message->text = Crypt::encrypt($request->text);
-        $message->conversation_id = $request->conversation_id;
-        $message->from_id = Auth::id();
-        $message->save();
-
-        $message->timeago = $message->created_at->shortRelativeDiffForHumans();
-        // $message->text = Crypt::decrypt($message->text);
 
         $conversation = Conversation::find($request->conversation_id);
         $conversation->last_message =  $request->text;
         $conversation->save();
         $conversation->timeago = $conversation->getTimeAgo($conversation->updated_at);
-        $conversation->from_id != $message->from_id?
+        $conversation->from_id == Auth::id()?
                 $conversation->friend = User::find($conversation->to_id)
             :
                 $conversation->friend = User::find($conversation->from_id);
                 
 
+        $message = $conversation->messages()->create([
+            'text'=>$request->text,
+            'from_id'=>Auth::id()
+        ]);
+        $message->timeago = $message->created_at->shortRelativeDiffForHumans();
         event(new MessageEvent($message,$conversation));
         
 
