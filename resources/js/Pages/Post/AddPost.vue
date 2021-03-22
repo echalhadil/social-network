@@ -84,7 +84,7 @@
                                 />
                             </div>
 
-                            <div class="mx-3 h-80 overflow-y-auto prev-picture " v-if="preview_image != ''">
+                            <div class="mx-3 h-60 overflow-y-auto prev-picture " v-if="preview_image != ''">
                                 <i
                                     class=" rounded-full bg-cool-gray-300 hover:bg-cool-gray-200 -ml-2 -mt-2  px-1 py-0.5 float-right mb-1 absolute text-gray-800 fal fa-times cursor-pointer"
                                     v-on:click="preview_image = ''"
@@ -106,12 +106,13 @@
             </template>
 
             <template #footer>
-                <jet-secondary-button
-                    @click.native="openModal = false"
-                >
-                    Cancel
-                </jet-secondary-button>
-
+                <span @click="post.text=preview_image = ''" >
+                    <jet-secondary-button
+                        @click.native="openModal = false"
+                    >
+                        Cancel
+                    </jet-secondary-button>
+                </span>
                 <button
                   
                     class=" text-sm ml-2 px-4 py-2 ring shadow border rounded-md bg-indigo-500 text-white  hover:bg-indigo-600 "

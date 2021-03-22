@@ -55,7 +55,7 @@
 
             <!-- if ther is no publications this will be visible -->
             <div
-                v-if="posts.length == 0"
+                v-if="posts.length == 0 && !loading"
                 class="text-gray-600 mt-8 h-96 justify-items-center md:w-9/12 mx-auto text-center"
             >
                 <p class=" mt-32 capitalize text-5xl ">Aucune publication</p>
