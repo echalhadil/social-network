@@ -7,6 +7,7 @@
             <img
                 :src="'/' + $page.friend.picture"
                 class="w-10 h-10 rounded-full my-auto"
+                loading="lazy"
             />
         </div>
         <div class=" capitalize my-auto ">
