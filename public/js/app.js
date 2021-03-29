@@ -2830,6 +2830,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Jetstream/DropdownLink */ "./resources/js/Jetstream/DropdownLink.vue");
 /* harmony import */ var _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Jetstream/NavLink */ "./resources/js/Jetstream/NavLink.vue");
 /* harmony import */ var _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Jetstream/ResponsiveNavLink */ "./resources/js/Jetstream/ResponsiveNavLink.vue");
+/* harmony import */ var _DropdownFriendsRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DropdownFriendsRequest */ "./resources/js/Layouts/DropdownFriendsRequest.vue");
+/* harmony import */ var _DropdownNotifications__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DropdownNotifications */ "./resources/js/Layouts/DropdownNotifications.vue");
+/* harmony import */ var _DropdownConversations__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownConversations */ "./resources/js/Layouts/DropdownConversations.vue");
 //
 //
 //
@@ -3072,410 +3075,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 
 
@@ -3487,7 +3089,10 @@ __webpack_require__.r(__webpack_exports__);
     JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_1__["default"],
     JetDropdownLink: _Jetstream_DropdownLink__WEBPACK_IMPORTED_MODULE_2__["default"],
     JetNavLink: _Jetstream_NavLink__WEBPACK_IMPORTED_MODULE_3__["default"],
-    JetResponsiveNavLink: _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_4__["default"]
+    JetResponsiveNavLink: _Jetstream_ResponsiveNavLink__WEBPACK_IMPORTED_MODULE_4__["default"],
+    DropdownFriendsRequest: _DropdownFriendsRequest__WEBPACK_IMPORTED_MODULE_5__["default"],
+    DropdownNotifications: _DropdownNotifications__WEBPACK_IMPORTED_MODULE_6__["default"],
+    DropdownConversations: _DropdownConversations__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   data: function data() {
     return {
@@ -3641,6 +3246,566 @@ __webpack_require__.r(__webpack_exports__);
       _this6.playSound(); //    else
       //    this.conversations.unshift(conversation);
 
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownConversations.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/DropdownConversations.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      conversations: [],
+      newConversations: 0
+    };
+  },
+  methods: {
+    getConversations: function getConversations() {
+      var _this = this;
+
+      axios.get("/conversations").then(function (res) {
+        _this.conversations = _.orderBy(res.data, ["updated_at"], ["desc"]);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.getConversations();
+    Echo.channel("message-channel-" + this.$page.user.id).listen(".MessageEvent", function (data) {
+      var conversation = data.conversation;
+
+      var match = _.find(_this2.conversations, ["id", conversation.id]);
+
+      if (match) {
+        var index = _.indexOf(_this2.conversations, _.find(_this2.conversations, ["id", conversation.id]));
+
+        _this2.conversations.splice(index, 1, conversation);
+
+        _this2.conversations = _.orderBy(_this2.conversations, ["updated_at"], ["desc"]);
+      } else {
+        _this2.conversations.unshift(conversation);
+      }
+
+      _this2.newConversations++;
+
+      _this2.playSound(); //    else
+      //    this.conversations.unshift(conversation);
+
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      friendsRequest: [],
+      newFriendRequest: 0
+    };
+  },
+  methods: {
+    playSound: function playSound() {
+      var soundurl = "https://assets.mixkit.co/sfx/preview/mixkit-home-standard-ding-dong-109.mp3";
+      var audio = new Audio(soundurl);
+      audio.play();
+    },
+    getFriendsRequest: function getFriendsRequest() {
+      var _this = this;
+
+      axios.get(route("friendrequests.index")).then(function (response) {
+        _this.friendsRequest = response.data;
+        _this.newFriendRequest = response.data.filter(function (fr) {
+          return fr.seen === 0;
+        }).length;
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    deletFriendRequest: function deletFriendRequest(id) {
+      var _this2 = this;
+
+      axios["delete"]("/friendrequests/" + id).then(function (response) {
+        console.log(response.data);
+        _this2.friendsRequest = _this2.friendsRequest.filter(function (fr) {
+          return fr.id != id;
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    },
+    confirmFriendRequest: function confirmFriendRequest(friendrequest) {
+      var _this3 = this;
+
+      axios.post("/friends/", friendrequest).then(function (response) {
+        console.log(response.data);
+        _this3.friendsRequest = _this3.friendsRequest.filter(function (fr) {
+          return fr.id != friendrequest.id;
+        });
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  },
+  mounted: function mounted() {
+    var _this4 = this;
+
+    this.getFriendsRequest();
+    Echo.channel("friend-request-channel-" + this.user_id).listen(".FriendRequestEvent", function (data) {
+      var friendRequest = data.friendrequest;
+      console.table(friendRequest);
+
+      _this4.friendsRequest.unshift(friendRequest);
+
+      _this4.newFriendRequest++;
+
+      _this4.playSound();
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownNotifications.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/DropdownNotifications.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    JetDropdown: _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      notifications: [],
+      newNotifications: 0
+    };
+  },
+  methods: {
+    playSound: function playSound() {
+      var soundurl = "https://assets.mixkit.co/sfx/preview/mixkit-home-standard-ding-dong-109.mp3";
+      var audio = new Audio(soundurl);
+      audio.play();
+    },
+    getNotifications: function getNotifications() {
+      var _this = this;
+
+      axios.get(route("notifications.index").url()).then(function (response) {
+        console.table(response.data);
+        _this.notifications = _.orderBy(response.data, ["created_at"], ["desc"]);
+        _this.newNotifications = response.data.filter(function (n) {
+          return n.seen === 0;
+        }).length;
+        console.log(_this.newNotifications);
+      })["catch"](function (err) {
+        console.table(err);
+      });
+    },
+    seeNotifications: function seeNotifications() {
+      if (this.newNotifications != 0) {
+        this.newNotifications = 0;
+        axios.get("/seenotifications").then(function (response) {
+          console.log(response);
+        })["catch"](function (err) {
+          console.log(err);
+        });
+      }
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    this.getNotifications();
+    Echo.channel("notification-channel-" + this.user_id).listen(".NotificationEvent", function (data) {
+      var notification = data.notification;
+      console.table(notification);
+
+      _this2.notifications.unshift(notification);
+
+      _this2.newNotifications++;
+
+      _this2.playSound();
     });
   }
 });
@@ -4647,6 +4812,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4991,6 +5157,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -5086,14 +5253,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8579,7 +8738,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.circle{\n  font-size: xx-small;\n}\n", ""]);
+exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.circle {\n  font-size: xx-small;\n}\n", ""]);
 
 // exports
 
@@ -61650,731 +61809,11 @@ var render = function() {
                       ]
                     ),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          " cursor-pointer hover:text-indigo-700 mx-auto"
-                      },
-                      [
-                        _c("jet-dropdown", {
-                          attrs: { align: "left", width: "72" },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "trigger",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "i",
-                                    { staticClass: " far fa-user-friends" },
-                                    [
-                                      _vm.newFriendRequest != 0
-                                        ? _c(
-                                            "b",
-                                            {
-                                              staticClass:
-                                                " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                " +
-                                                  _vm._s(
-                                                    _vm.newFriendRequest > 9
-                                                      ? "9+"
-                                                      : _vm.newFriendRequest
-                                                  ) +
-                                                  "\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            },
-                            {
-                              key: "content",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "block px-4 py-2 text-sm text-gray-400"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            Friendship Requests\n                                        "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "border-t border-gray-100"
-                                  }),
-                                  _vm._v(" "),
-                                  _vm.friendsRequest.length == 0
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "px-4 text-gray-400 text-center "
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass:
-                                              "fa mt-7 fa-3x fa-user-times",
-                                            attrs: { "aria-hidden": "true" }
-                                          }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                " mb-7 mt-3 text-sm  "
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                No Requests\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.friendsRequest.length > 0
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "dropdown  overflow-auto h-64 text-gray-400 text-center "
-                                        },
-                                        _vm._l(_vm.friendsRequest, function(
-                                          friendRequest
-                                        ) {
-                                          return _c(
-                                            "div",
-                                            {
-                                              key: friendRequest.id,
-                                              staticClass:
-                                                "p-2 capitalize flex hover:bg-gray-100 rounded-md "
-                                            },
-                                            [
-                                              _c(
-                                                "inertia-link",
-                                                {
-                                                  staticClass: " h-13 w-13",
-                                                  attrs: {
-                                                    href:
-                                                      "profiles/" +
-                                                      friendRequest.maker.id
-                                                  }
-                                                },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      " h-12 w-12 rounded-full ",
-                                                    attrs: {
-                                                      src:
-                                                        "/" +
-                                                        friendRequest.maker
-                                                          .picture
-                                                    }
-                                                  })
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    " pl-1 text-left pr-0.5  "
-                                                },
-                                                [
-                                                  _c(
-                                                    "p",
-                                                    {
-                                                      staticClass:
-                                                        " text-sm text-gray-700 font-bold "
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                        " +
-                                                          _vm._s(
-                                                            friendRequest.maker
-                                                              .firstname
-                                                          ) +
-                                                          "\n                                                        " +
-                                                          _vm._s(
-                                                            friendRequest.maker
-                                                              .lastname
-                                                          ) +
-                                                          "\n                                                        "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    { staticClass: " text-sm" },
-                                                    [
-                                                      _c(
-                                                        "button",
-                                                        {
-                                                          staticClass:
-                                                            "capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white ",
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.confirmFriendRequest(
-                                                                friendRequest
-                                                              )
-                                                            }
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\n                                                            confirm\n                                                        "
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "button",
-                                                        {
-                                                          staticClass:
-                                                            "capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 ",
-                                                          on: {
-                                                            click: function(
-                                                              $event
-                                                            ) {
-                                                              return _vm.deletFriendRequest(
-                                                                friendRequest.id
-                                                              )
-                                                            }
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\n                                                            delete\n                                                        "
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          )
-                                        }),
-                                        0
-                                      )
-                                    : _vm._e()
-                                ]
-                              },
-                              proxy: true
-                            }
-                          ])
-                        })
-                      ],
-                      1
-                    ),
+                    _c("dropdown-friends-request"),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "cursor-pointer hover:text-indigo-700 mx-auto"
-                      },
-                      [
-                        (_vm.user_id = _vm.$page.user.id)
-                          ? _c("div")
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _c("jet-dropdown", {
-                          attrs: { align: "right", width: "72" },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "trigger",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "i",
-                                    {
-                                      staticClass: "far fa-bell",
-                                      attrs: { "aria-hidden": "true" },
-                                      on: { click: _vm.seeNotifications }
-                                    },
-                                    [
-                                      _vm.newNotifications != 0
-                                        ? _c(
-                                            "b",
-                                            {
-                                              staticClass:
-                                                " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                " +
-                                                  _vm._s(
-                                                    _vm.newNotifications > 9
-                                                      ? "9+"
-                                                      : _vm.newNotifications
-                                                  ) +
-                                                  "\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            },
-                            {
-                              key: "content",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "block px-4 py-2 text-sm text-gray-400"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            Notifications \n                                            \n                                        "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "border-t border-gray-100"
-                                  }),
-                                  _vm._v(" "),
-                                  _vm.notifications.length === 0
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "px-4 text-gray-400 text-center "
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass:
-                                              "fa mt-7 fa-3x fa-bell-slash",
-                                            attrs: { "aria-hidden": "true" }
-                                          }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                " mb-7 mt-3 text-sm  "
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                No Notifications\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.notifications.length > 0
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "dropdown  overflow-auto h-64 text-gray-400 text-center "
-                                        },
-                                        _vm._l(_vm.notifications, function(
-                                          notification
-                                        ) {
-                                          return _c(
-                                            "div",
-                                            {
-                                              key: notification.id,
-                                              staticClass:
-                                                " p-2 capitalize flex hover:bg-gray-100 rounded-md "
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                { staticClass: " w-1/4" },
-                                                [
-                                                  _c("img", {
-                                                    staticClass:
-                                                      " h-12 w-12 rounded-full ",
-                                                    attrs: {
-                                                      src:
-                                                        "/" +
-                                                        notification.maker
-                                                          .picture
-                                                    }
-                                                  })
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass:
-                                                    " pl-1 text-left pr-0.5  "
-                                                },
-                                                [
-                                                  _c(
-                                                    "p",
-                                                    {
-                                                      staticClass:
-                                                        " float-left text-gray-700 text-xs font-bold "
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                        " +
-                                                          _vm._s(
-                                                            notification.maker
-                                                              .firstname
-                                                          ) +
-                                                          "\n                                                        " +
-                                                          _vm._s(
-                                                            notification.maker
-                                                              .lastname
-                                                          ) +
-                                                          "\n                                                        "
-                                                      ),
-                                                      _c(
-                                                        "span",
-                                                        {
-                                                          staticClass:
-                                                            " font-normal text-xs "
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\n                                                            " +
-                                                              _vm._s(
-                                                                notification.type ==
-                                                                  "c"
-                                                                  ? " commented on your post."
-                                                                  : ""
-                                                              ) +
-                                                              "\n                                                            " +
-                                                              _vm._s(
-                                                                notification.type ==
-                                                                  "r"
-                                                                  ? " reacted to your post."
-                                                                  : ""
-                                                              ) +
-                                                              "\n                                                            " +
-                                                              _vm._s(
-                                                                notification.type ==
-                                                                  "f"
-                                                                  ? " accepted your friend request."
-                                                                  : ""
-                                                              ) +
-                                                              "\n                                                        "
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "p",
-                                                    {
-                                                      staticClass: " text-xs "
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                        " +
-                                                          _vm._s(
-                                                            notification.timeago
-                                                          ) +
-                                                          "\n                                                    "
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              !notification.readed
-                                                ? _c(
-                                                    "div",
-                                                    { staticClass: " ml-auto" },
-                                                    [
-                                                      _c("i", {
-                                                        staticClass:
-                                                          "fa fa-circle circle text-indigo-500 fa-xs",
-                                                        attrs: {
-                                                          "aria-hidden": "true"
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                : _vm._e()
-                                            ]
-                                          )
-                                        }),
-                                        0
-                                      )
-                                    : _vm._e()
-                                ]
-                              },
-                              proxy: true
-                            }
-                          ])
-                        })
-                      ],
-                      1
-                    ),
+                    _c("dropdown-notifications"),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "cursor-pointer hover:text-indigo-700 mx-auto "
-                      },
-                      [
-                        _c("jet-dropdown", {
-                          attrs: { align: "right", width: "72" },
-                          scopedSlots: _vm._u([
-                            {
-                              key: "trigger",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "i",
-                                    {
-                                      staticClass: "far fa-envelope",
-                                      attrs: { "aria-hidden": "true" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.newConversations = 0
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm.newConversations != 0
-                                        ? _c(
-                                            "b",
-                                            {
-                                              staticClass:
-                                                " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                " +
-                                                  _vm._s(
-                                                    _vm.newConversations > 9
-                                                      ? "9+"
-                                                      : _vm.newConversations
-                                                  ) +
-                                                  "\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ]
-                                  )
-                                ]
-                              },
-                              proxy: true
-                            },
-                            {
-                              key: "content",
-                              fn: function() {
-                                return [
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "block px-4 py-2 text-sm text-gray-400"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\n                                            Conversations\n                                            "
-                                      ),
-                                      _c(
-                                        "inertia-link",
-                                        {
-                                          staticClass:
-                                            " float-right text-xs text-indigo-500 font-semibold capitalize ",
-                                          attrs: { href: "/messenger" }
-                                        },
-                                        [_vm._v(" messenger ")]
-                                      )
-                                    ],
-                                    1
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", {
-                                    staticClass: "border-t border-gray-100"
-                                  }),
-                                  _vm._v(" "),
-                                  _vm.conversations.length == 0
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            "px-4 text-gray-400 text-center "
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass:
-                                              "fa mt-7 fa-3x fa-comment-alt-slash",
-                                            attrs: { "aria-hidden": "true" }
-                                          }),
-                                          _vm._v(" "),
-                                          _c(
-                                            "p",
-                                            {
-                                              staticClass:
-                                                " mb-7 mt-3 text-sm  "
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                No Conversations\n                                            "
-                                              )
-                                            ]
-                                          )
-                                        ]
-                                      )
-                                    : _vm._e(),
-                                  _vm._v(" "),
-                                  _vm.conversations.length > 0
-                                    ? _c(
-                                        "div",
-                                        {
-                                          staticClass:
-                                            " text-gray-400 text-sm h-64 "
-                                        },
-                                        _vm._l(_vm.conversations, function(
-                                          conversation
-                                        ) {
-                                          return _c(
-                                            "inertia-link",
-                                            {
-                                              key: conversation.id,
-                                              staticClass:
-                                                " p-2 flex hover:bg-gray-100 ",
-                                              attrs: {
-                                                href:
-                                                  "/conversations/" +
-                                                  conversation.id
-                                              }
-                                            },
-                                            [
-                                              _c("div", [
-                                                _c("img", {
-                                                  staticClass:
-                                                    " h-12 w-12 rounded-full mr-1 my-auto ",
-                                                  attrs: {
-                                                    src:
-                                                      "/" +
-                                                      conversation.friend
-                                                        .picture
-                                                  }
-                                                })
-                                              ]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                { staticClass: "my-auto" },
-                                                [
-                                                  _c(
-                                                    "p",
-                                                    {
-                                                      staticClass:
-                                                        " font-bold text-gray-800 "
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        _vm._s(
-                                                          conversation.friend
-                                                            .firstname
-                                                        ) +
-                                                          " " +
-                                                          _vm._s(
-                                                            conversation.friend
-                                                              .lastname
-                                                          ) +
-                                                          " "
-                                                      )
-                                                    ]
-                                                  ),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "p",
-                                                    {
-                                                      staticClass:
-                                                        "text-xs truncate float-left  text-gray-500"
-                                                    },
-                                                    [
-                                                      _vm._v(
-                                                        "\n                                                        " +
-                                                          _vm._s(
-                                                            conversation.last_message
-                                                          ) +
-                                                          " .\n                                                        "
-                                                      ),
-                                                      _c(
-                                                        "span",
-                                                        {
-                                                          staticClass:
-                                                            " float-right ml-1 text-gray-400 text-xs "
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\n                                                        " +
-                                                              _vm._s(
-                                                                conversation.timeago
-                                                              ) +
-                                                              "\n                                                        "
-                                                          )
-                                                        ]
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              true
-                                                ? _c(
-                                                    "div",
-                                                    {
-                                                      staticClass:
-                                                        "ml-auto my-auto"
-                                                    },
-                                                    [
-                                                      _c("i", {
-                                                        staticClass:
-                                                          "fa circle fa-circle text-indigo-500 fa-xs    "
-                                                      })
-                                                    ]
-                                                  )
-                                                : undefined
-                                            ]
-                                          )
-                                        }),
-                                        1
-                                      )
-                                    : _vm._e()
-                                ]
-                              },
-                              proxy: true
-                            }
-                          ])
-                        })
-                      ],
-                      1
-                    )
+                    _c("dropdown-conversations")
                   ],
                   1
                 )
@@ -62575,7 +62014,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Dashboard\n                    "
+                        "\n                        Manage Account\n                    "
                       )
                     ]
                   )
@@ -62583,81 +62022,63 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "pt-4 pb-1 border-t border-gray-200" }, [
-                _c("div", { staticClass: "flex items-center px-4" }, [
-                  _c("div", { staticClass: "flex-shrink-0" }, [
-                    _c("img", {
-                      staticClass: "h-10 w-10 rounded-full",
+              _c(
+                "div",
+                { staticClass: "pt-4 pb-1 border-t border-gray-200" },
+                [
+                  _c(
+                    "inertia-link",
+                    {
+                      staticClass: "flex items-center px-4",
                       attrs: {
-                        src: "/" + _vm.$page.user.picture,
-                        alt: _vm.$page.user.name
+                        href: _vm.route("profile.show"),
+                        active: _vm.route().current("profile.show")
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "ml-3" }, [
-                    _c(
-                      "div",
-                      { staticClass: "font-medium text-base text-gray-800" },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.$page.user.name) +
-                            "\n                            "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "font-medium text-sm text-gray-500" },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.$page.user.email) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "mt-3 space-y-1" },
-                  [
-                    _c(
-                      "jet-responsive-nav-link",
-                      {
-                        attrs: {
-                          href: _vm.route("profile.show"),
-                          active: _vm.route().current("profile.show")
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            Profile\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm.$page.jetstream.hasApiFeatures
-                      ? _c(
-                          "jet-responsive-nav-link",
+                    },
+                    [
+                      _c("div", { staticClass: "flex-shrink-0" }, [
+                        _c("img", {
+                          staticClass: "h-10 w-10 rounded-full",
+                          attrs: {
+                            src: "/" + _vm.$page.user.picture,
+                            alt: _vm.$page.user.firstname
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "ml-3" }, [
+                        _c(
+                          "div",
                           {
-                            attrs: {
-                              href: _vm.route("api-tokens.index"),
-                              active: _vm.route().current("api-tokens.index")
-                            }
+                            staticClass: "font-medium text-base text-gray-800"
                           },
                           [
                             _vm._v(
-                              "\n                            API Tokens\n                        "
+                              "\n                                " +
+                                _vm._s(_vm.$page.user.firstname) +
+                                "\n                                " +
+                                _vm._s(_vm.$page.user.lastname) +
+                                "\n                            "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "font-medium text-sm text-gray-500" },
+                          [
+                            _vm._v(
+                              "\n                                @" +
+                                _vm._s(_vm.$page.user.username) +
+                                "\n                            "
                             )
                           ]
                         )
-                      : _vm._e(),
-                    _vm._v(" "),
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mt-3 space-y-1" }, [
                     _c(
                       "form",
                       {
@@ -62681,142 +62102,11 @@ var render = function() {
                         )
                       ],
                       1
-                    ),
-                    _vm._v(" "),
-                    _vm.$page.jetstream.hasTeamFeatures
-                      ? [
-                          _c("div", {
-                            staticClass: "border-t border-gray-200"
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "block px-4 py-2 text-xs text-gray-400"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                Manage Team\n                            "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "jet-responsive-nav-link",
-                            {
-                              attrs: {
-                                href: _vm.route(
-                                  "teams.show",
-                                  _vm.$page.user.current_team
-                                ),
-                                active: _vm.route().current("teams.show")
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                Team Settings\n                            "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "jet-responsive-nav-link",
-                            {
-                              attrs: {
-                                href: _vm.route("teams.create"),
-                                active: _vm.route().current("teams.create")
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                Create New Team\n                            "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", {
-                            staticClass: "border-t border-gray-200"
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "block px-4 py-2 text-xs text-gray-400"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                Switch Teams\n                            "
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm._l(_vm.$page.user.all_teams, function(team) {
-                            return [
-                              _c(
-                                "form",
-                                {
-                                  key: team.id,
-                                  on: {
-                                    submit: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.switchToTeam(team)
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "jet-responsive-nav-link",
-                                    { attrs: { as: "button" } },
-                                    [
-                                      _c(
-                                        "div",
-                                        { staticClass: "flex items-center" },
-                                        [
-                                          team.id ==
-                                          _vm.$page.user.current_team_id
-                                            ? _c(
-                                                "svg",
-                                                {
-                                                  staticClass:
-                                                    "mr-2 h-5 w-5 text-green-400",
-                                                  attrs: {
-                                                    fill: "none",
-                                                    "stroke-linecap": "round",
-                                                    "stroke-linejoin": "round",
-                                                    "stroke-width": "2",
-                                                    stroke: "currentColor",
-                                                    viewBox: "0 0 24 24"
-                                                  }
-                                                },
-                                                [
-                                                  _c("path", {
-                                                    attrs: {
-                                                      d:
-                                                        "M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                    }
-                                                  })
-                                                ]
-                                              )
-                                            : _vm._e(),
-                                          _vm._v(" "),
-                                          _c("div", [_vm._v(_vm._s(team.name))])
-                                        ]
-                                      )
-                                    ]
-                                  )
-                                ],
-                                1
-                              )
-                            ]
-                          })
-                        ]
-                      : _vm._e()
-                  ],
-                  2
-                )
-              ])
+                    )
+                  ])
+                ],
+                1
+              )
             ]
           )
         ]
@@ -62825,6 +62115,641 @@ var render = function() {
       _c("main", { staticClass: " pt-15 " }, [_vm._t("default")], 2),
       _vm._v(" "),
       _c("portal-target", { attrs: { name: "modal", multiple: "" } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownConversations.vue?vue&type=template&id=0a61466b&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/DropdownConversations.vue?vue&type=template&id=0a61466b& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "cursor-pointer hover:text-indigo-700 mx-auto " },
+    [
+      _c("jet-dropdown", {
+        attrs: { align: "right", width: "72" },
+        scopedSlots: _vm._u([
+          {
+            key: "trigger",
+            fn: function() {
+              return [
+                _c(
+                  "i",
+                  {
+                    staticClass: "far fa-envelope",
+                    attrs: { "aria-hidden": "true" },
+                    on: {
+                      click: function($event) {
+                        _vm.newConversations = 0
+                      }
+                    }
+                  },
+                  [
+                    _vm.newConversations != 0
+                      ? _c(
+                          "b",
+                          {
+                            staticClass:
+                              " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(
+                                  _vm.newConversations > 9
+                                    ? "9+"
+                                    : _vm.newConversations
+                                ) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "content",
+            fn: function() {
+              return [
+                _c(
+                  "div",
+                  { staticClass: "block px-4 py-2 text-sm text-gray-400" },
+                  [
+                    _vm._v("\n                Conversations\n                "),
+                    _c(
+                      "inertia-link",
+                      {
+                        staticClass:
+                          " float-right text-xs text-indigo-500 font-semibold capitalize ",
+                        attrs: { href: "/messenger" }
+                      },
+                      [_vm._v(" messenger ")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "border-t border-gray-100" }),
+                _vm._v(" "),
+                _vm.conversations.length == 0
+                  ? _c(
+                      "div",
+                      { staticClass: "px-4 text-gray-400 text-center " },
+                      [
+                        _c("i", {
+                          staticClass: "fa mt-7 fa-3x fa-comment-alt-slash",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: " mb-7 mt-3 text-sm  " }, [
+                          _vm._v(
+                            "\n                    No Conversations\n                "
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.conversations.length > 0
+                  ? _c(
+                      "div",
+                      { staticClass: " text-gray-400 text-sm h-64 " },
+                      _vm._l(_vm.conversations, function(conversation) {
+                        return _c(
+                          "inertia-link",
+                          {
+                            key: conversation.id,
+                            staticClass: " p-2 flex hover:bg-gray-100 ",
+                            attrs: { href: "/conversations/" + conversation.id }
+                          },
+                          [
+                            _c("div", [
+                              _c("img", {
+                                staticClass:
+                                  " h-12 w-12 rounded-full mr-1 my-auto ",
+                                attrs: {
+                                  src: "/" + conversation.friend.picture
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "my-auto" }, [
+                              _c(
+                                "p",
+                                { staticClass: " font-bold text-gray-800 " },
+                                [
+                                  _vm._v(
+                                    _vm._s(conversation.friend.firstname) +
+                                      " " +
+                                      _vm._s(conversation.friend.lastname) +
+                                      " "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                {
+                                  staticClass:
+                                    "text-xs truncate float-left  text-gray-500"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(conversation.last_message) +
+                                      " .\n                            "
+                                  ),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        " float-right ml-1 text-gray-400 text-xs "
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(conversation.timeago) +
+                                          "\n                            "
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            true
+                              ? _c("div", { staticClass: "ml-auto my-auto" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fa circle fa-circle text-indigo-500 fa-xs    "
+                                  })
+                                ])
+                              : undefined
+                          ]
+                        )
+                      }),
+                      1
+                    )
+                  : _vm._e()
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=template&id=37092daf&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=template&id=37092daf& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: " cursor-pointer hover:text-indigo-700 mx-auto" },
+    [
+      _c("jet-dropdown", {
+        attrs: { align: "left", width: "72" },
+        scopedSlots: _vm._u([
+          {
+            key: "trigger",
+            fn: function() {
+              return [
+                _c(
+                  "i",
+                  {
+                    staticClass: " far fa-user-friends",
+                    on: {
+                      click: function($event) {
+                        _vm.newFriendRequest = 0
+                      }
+                    }
+                  },
+                  [
+                    _vm.newFriendRequest != 0
+                      ? _c(
+                          "b",
+                          {
+                            staticClass:
+                              " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(
+                                  _vm.newFriendRequest > 9
+                                    ? "9+"
+                                    : _vm.newFriendRequest
+                                ) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "content",
+            fn: function() {
+              return [
+                _c(
+                  "div",
+                  { staticClass: "block px-4 py-2 text-sm text-gray-400" },
+                  [
+                    _vm._v(
+                      "\n                Friendship Requests\n            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "border-t border-gray-100" }),
+                _vm._v(" "),
+                _vm.friendsRequest.length == 0
+                  ? _c(
+                      "div",
+                      { staticClass: "px-4 text-gray-400 text-center " },
+                      [
+                        _c("i", {
+                          staticClass: "fa mt-7 fa-3x fa-user-times",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: " mb-7 mt-3 text-sm  " }, [
+                          _vm._v(
+                            "\n                    No Requests\n                "
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.friendsRequest.length > 0
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "dropdown  overflow-auto h-64 text-gray-400 text-center "
+                      },
+                      _vm._l(_vm.friendsRequest, function(friendRequest) {
+                        return _c(
+                          "div",
+                          {
+                            key: friendRequest.id,
+                            staticClass:
+                              "p-2 capitalize flex hover:bg-gray-100 rounded-md "
+                          },
+                          [
+                            _c(
+                              "inertia-link",
+                              {
+                                staticClass: " h-13 w-13",
+                                attrs: {
+                                  href: "profiles/" + friendRequest.maker.id
+                                }
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: " h-12 w-12 rounded-full ",
+                                  attrs: {
+                                    src: "/" + friendRequest.maker.picture
+                                  }
+                                })
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: " pl-1 text-left pr-0.5  " },
+                              [
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      " text-sm text-gray-700 font-bold "
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(friendRequest.maker.firstname) +
+                                        "\n                            " +
+                                        _vm._s(friendRequest.maker.lastname) +
+                                        "\n                            "
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("div", { staticClass: " text-sm" }, [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white ",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.confirmFriendRequest(
+                                            friendRequest
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                confirm\n                            "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass:
+                                        "capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 ",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deletFriendRequest(
+                                            friendRequest.id
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                delete\n                            "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownNotifications.vue?vue&type=template&id=7f881b03&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Layouts/DropdownNotifications.vue?vue&type=template&id=7f881b03& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "cursor-pointer hover:text-indigo-700 mx-auto" },
+    [
+      (_vm.user_id = _vm.$page.user.id) ? _c("div") : _vm._e(),
+      _vm._v(" "),
+      _c("jet-dropdown", {
+        attrs: { align: "right", width: "72" },
+        scopedSlots: _vm._u([
+          {
+            key: "trigger",
+            fn: function() {
+              return [
+                _c(
+                  "i",
+                  {
+                    staticClass: "far fa-bell",
+                    attrs: { "aria-hidden": "true" },
+                    on: { click: _vm.seeNotifications }
+                  },
+                  [
+                    _vm.newNotifications != 0
+                      ? _c(
+                          "b",
+                          {
+                            staticClass:
+                              " fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
+                          },
+                          [
+                            _vm._v(
+                              "\n                    " +
+                                _vm._s(
+                                  _vm.newNotifications > 9
+                                    ? "9+"
+                                    : _vm.newNotifications
+                                ) +
+                                "\n                "
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]
+                )
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "content",
+            fn: function() {
+              return [
+                _c(
+                  "div",
+                  { staticClass: "block px-4 py-2 text-sm text-gray-400" },
+                  [
+                    _vm._v(
+                      "\n                Notifications \n                \n            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "border-t border-gray-100" }),
+                _vm._v(" "),
+                _vm.notifications.length === 0
+                  ? _c(
+                      "div",
+                      { staticClass: "px-4 text-gray-400 text-center " },
+                      [
+                        _c("i", {
+                          staticClass: "fa mt-7 fa-3x fa-bell-slash",
+                          attrs: { "aria-hidden": "true" }
+                        }),
+                        _vm._v(" "),
+                        _c("p", { staticClass: " mb-7 mt-3 text-sm  " }, [
+                          _vm._v(
+                            "\n                    No Notifications\n                "
+                          )
+                        ])
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.notifications.length > 0
+                  ? _c(
+                      "div",
+                      {
+                        staticClass:
+                          "dropdown  overflow-auto h-64 text-gray-400 text-center "
+                      },
+                      _vm._l(_vm.notifications, function(notification) {
+                        return _c(
+                          "div",
+                          {
+                            key: notification.id,
+                            staticClass:
+                              " p-2 capitalize flex hover:bg-gray-100 rounded-md "
+                          },
+                          [
+                            _c("div", { staticClass: " w-1/4" }, [
+                              _c("img", {
+                                staticClass: " h-12 w-12 rounded-full ",
+                                attrs: { src: "/" + notification.maker.picture }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: " pl-1 text-left pr-0.5  " },
+                              [
+                                _c(
+                                  "p",
+                                  {
+                                    staticClass:
+                                      " float-left text-gray-700 text-xs font-bold "
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                            " +
+                                        _vm._s(notification.maker.firstname) +
+                                        "\n                            " +
+                                        _vm._s(notification.maker.lastname) +
+                                        "\n                            "
+                                    ),
+                                    _c(
+                                      "span",
+                                      { staticClass: " font-normal text-xs " },
+                                      [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s(
+                                              notification.type == "c"
+                                                ? " commented on your post."
+                                                : ""
+                                            ) +
+                                            "\n                                " +
+                                            _vm._s(
+                                              notification.type == "r"
+                                                ? " reacted to your post."
+                                                : ""
+                                            ) +
+                                            "\n                                " +
+                                            _vm._s(
+                                              notification.type == "f"
+                                                ? " accepted your friend request."
+                                                : ""
+                                            ) +
+                                            "\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c("p", { staticClass: " text-xs " }, [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(notification.timeago) +
+                                      "\n                        "
+                                  )
+                                ])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            !notification.readed
+                              ? _c("div", { staticClass: " ml-auto" }, [
+                                  _c("i", {
+                                    staticClass:
+                                      "fa fa-circle circle text-indigo-500 fa-xs",
+                                    attrs: { "aria-hidden": "true" }
+                                  })
+                                ])
+                              : _vm._e()
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  : _vm._e()
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
     ],
     1
   )
@@ -63758,9 +63683,7 @@ var render = function() {
                 _c("div", { staticClass: " pb-3" }, [
                   _c("img", {
                     staticClass: " h-28 w-28 rounded-full mx-auto object-cover",
-                    attrs: {
-                      src: "http://127.0.0.1:8000/" + _vm.$page.user.picture
-                    }
+                    attrs: { src: "/" + _vm.$page.user.picture }
                   })
                 ]),
                 _vm._v(" "),
@@ -64283,7 +64206,10 @@ var render = function() {
                       [
                         _c("img", {
                           staticClass: " h-14 w-14 object-cover rounded-full",
-                          attrs: { src: "/" + conversation.friend.picture }
+                          attrs: {
+                            src: "/" + conversation.friend.picture,
+                            loading: "lazy"
+                          }
                         })
                       ]
                     ),
@@ -64502,7 +64428,7 @@ var render = function() {
       _c("div", { staticClass: " pr-1 my-auto " }, [
         _c("img", {
           staticClass: "w-10 h-10 rounded-full my-auto",
-          attrs: { src: "/" + _vm.$page.friend.picture }
+          attrs: { src: "/" + _vm.$page.friend.picture, loading: "lazy" }
         })
       ]),
       _vm._v(" "),
@@ -64784,7 +64710,8 @@ var render = function() {
                   attrs: {
                     href: _vm.route().current("messenger")
                       ? "/profiles/" + _vm.$page.user.id
-                      : "/profiles/" + _vm.$page.friend.id
+                      : "/profiles/" + _vm.$page.friend.id,
+                    loading: "lazy"
                   }
                 },
                 [
@@ -64837,16 +64764,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "p-2 mt-1" }, [
     _c("div", { staticClass: "flex" }, [
-      _vm.$page.user.id != _vm.message.from_id
-        ? _c("img", {
-            staticClass: "h-10 w-10 rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-            }
-          })
-        : _vm._e(),
-      _vm._v(" "),
       _vm.$page.user.id != _vm.message.from_id
         ? _c("div", { staticClass: " flex  w-full" }, [
             _c(
@@ -65023,16 +64940,6 @@ var render = function() {
               ]
             )
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.$page.user.id == _vm.message.from_id
-        ? _c("img", {
-            staticClass: "h-10 w-10 rounded-full ",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-            }
-          })
         : _vm._e()
     ]),
     _vm._v(" "),
@@ -84155,6 +84062,213 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLayout_vue_vue_type_template_id_5663af57___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownConversations.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/Layouts/DropdownConversations.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DropdownConversations_vue_vue_type_template_id_0a61466b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropdownConversations.vue?vue&type=template&id=0a61466b& */ "./resources/js/Layouts/DropdownConversations.vue?vue&type=template&id=0a61466b&");
+/* harmony import */ var _DropdownConversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownConversations.vue?vue&type=script&lang=js& */ "./resources/js/Layouts/DropdownConversations.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DropdownConversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DropdownConversations_vue_vue_type_template_id_0a61466b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DropdownConversations_vue_vue_type_template_id_0a61466b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Layouts/DropdownConversations.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownConversations.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Layouts/DropdownConversations.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownConversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DropdownConversations.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownConversations.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownConversations_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownConversations.vue?vue&type=template&id=0a61466b&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Layouts/DropdownConversations.vue?vue&type=template&id=0a61466b& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownConversations_vue_vue_type_template_id_0a61466b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DropdownConversations.vue?vue&type=template&id=0a61466b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownConversations.vue?vue&type=template&id=0a61466b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownConversations_vue_vue_type_template_id_0a61466b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownConversations_vue_vue_type_template_id_0a61466b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownFriendsRequest.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/Layouts/DropdownFriendsRequest.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DropdownFriendsRequest_vue_vue_type_template_id_37092daf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropdownFriendsRequest.vue?vue&type=template&id=37092daf& */ "./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=template&id=37092daf&");
+/* harmony import */ var _DropdownFriendsRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownFriendsRequest.vue?vue&type=script&lang=js& */ "./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DropdownFriendsRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DropdownFriendsRequest_vue_vue_type_template_id_37092daf___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DropdownFriendsRequest_vue_vue_type_template_id_37092daf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Layouts/DropdownFriendsRequest.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownFriendsRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DropdownFriendsRequest.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownFriendsRequest_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=template&id=37092daf&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=template&id=37092daf& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownFriendsRequest_vue_vue_type_template_id_37092daf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DropdownFriendsRequest.vue?vue&type=template&id=37092daf& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownFriendsRequest.vue?vue&type=template&id=37092daf&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownFriendsRequest_vue_vue_type_template_id_37092daf___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownFriendsRequest_vue_vue_type_template_id_37092daf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownNotifications.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/Layouts/DropdownNotifications.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DropdownNotifications_vue_vue_type_template_id_7f881b03___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DropdownNotifications.vue?vue&type=template&id=7f881b03& */ "./resources/js/Layouts/DropdownNotifications.vue?vue&type=template&id=7f881b03&");
+/* harmony import */ var _DropdownNotifications_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DropdownNotifications.vue?vue&type=script&lang=js& */ "./resources/js/Layouts/DropdownNotifications.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DropdownNotifications_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DropdownNotifications_vue_vue_type_template_id_7f881b03___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DropdownNotifications_vue_vue_type_template_id_7f881b03___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Layouts/DropdownNotifications.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownNotifications.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Layouts/DropdownNotifications.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownNotifications_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./DropdownNotifications.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownNotifications.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownNotifications_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Layouts/DropdownNotifications.vue?vue&type=template&id=7f881b03&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/Layouts/DropdownNotifications.vue?vue&type=template&id=7f881b03& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownNotifications_vue_vue_type_template_id_7f881b03___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./DropdownNotifications.vue?vue&type=template&id=7f881b03& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Layouts/DropdownNotifications.vue?vue&type=template&id=7f881b03&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownNotifications_vue_vue_type_template_id_7f881b03___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DropdownNotifications_vue_vue_type_template_id_7f881b03___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
