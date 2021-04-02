@@ -2,7 +2,11 @@
     <div class="p-2 mt-1">
         <!-- recive message -->
         <div class="flex">
-            
+            <img
+                v-if="$page.user.id != message.from_id"
+                src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
+                class="h-10 w-10 rounded-full"
+            />
             <div v-if="$page.user.id != message.from_id" class=" flex  w-full">
                 <div
                     class=" shadow p-2 mx-2 bg-white rounded-t-lg rounded-r-lg max-width "
@@ -84,7 +88,11 @@
                 </div>
             </div>
 
-           
+            <img
+                v-if="$page.user.id == message.from_id"
+                src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
+                class="h-10 w-10 rounded-full "
+            />
         </div>
 
         <div

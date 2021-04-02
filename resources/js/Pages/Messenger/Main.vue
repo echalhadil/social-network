@@ -135,7 +135,6 @@
                                 ? '/profiles/' + $page.user.id
                                 : '/profiles/' + $page.friend.id
                         "
-                        loading="lazy"
                         class="flex mx-auto w-11/12  text-center mt-3 p-2 hover:bg-gray-50 hover:text-indigo-500"
                     >
                         <i

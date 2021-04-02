@@ -233,7 +233,6 @@
                     <img
                         :src="'/' + conversation.friend.picture"
                         class=" h-14 w-14 object-cover rounded-full"
-                        loading="lazy"
                     />
                 </inertia-link>
                 <inertia-link
