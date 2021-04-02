@@ -167,8 +167,8 @@
                 <div class="pt-4 pb-1 border-t border-gray-200">
                     <inertia-link
                         class="flex items-center px-4"
-                        :href="route('profile.show')"
-                        :active="route().current('profile.show')"
+                        :href="'/profiles/' + $page.user.id"
+                        :active="route().current('profile.main')"
                     >
                         <div class="flex-shrink-0">
                             <img
