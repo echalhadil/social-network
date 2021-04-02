@@ -1,8 +1,5 @@
 <template>
-
-    <div
-        class="cursor-pointer hover:text-indigo-700 mx-auto"
-        >
+    <div class="cursor-pointer hover:text-indigo-700 mx-auto">
         <div v-if="(user_id = $page.user.id)"></div>
         <jet-dropdown align="right" width="72">
             <template #trigger>
@@ -14,27 +11,18 @@
                     <b
                         v-if="newNotifications != 0"
                         class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                        >
-                        {{
-                            newNotifications > 9
-                                ? "9+"
-                                : newNotifications
-                        }}
+                    >
+                        {{ newNotifications > 9 ? "9+" : newNotifications }}
                     </b>
                 </i>
             </template>
 
             <template #content>
-                <div
-                    class="block px-4 py-2 text-sm text-gray-400"
-                >
-                    Notifications 
-                    
+                <div class="block px-4 py-2 text-sm text-gray-400">
+                    Notifications
                 </div>
 
-                <div
-                    class="border-t border-gray-100"
-                ></div>
+                <div class="border-t border-gray-100"></div>
                 <!-- no notifications -->
                 <div
                     v-if="notifications.length === 0"
@@ -60,62 +48,39 @@
                     >
                         <div class=" w-1/4">
                             <img
-                                :src="
-                                    '/' +
-                                        notification
-                                            .maker
-                                            .picture
-                                "
+                                :src="'/' + notification.maker.picture"
                                 class=" h-12 w-12 rounded-full "
                             />
                         </div>
-                        <div
-                            class=" pl-1 text-left pr-0.5  "
-                        >
+                        <div class=" pl-1 text-left pr-0.5  ">
                             <p
                                 class=" float-left text-gray-700 text-xs font-bold "
                             >
-                                {{
-                                    notification.maker
-                                        .firstname
-                                }}
-                                {{
-                                    notification.maker
-                                        .lastname
-                                }}
-                                <span
-                                    class=" font-normal text-xs "
-                                >
+                                {{ notification.maker.firstname }}
+                                {{ notification.maker.lastname }}
+                                <span class=" font-normal text-xs ">
                                     {{
-                                        notification.type ==
-                                        "c"
+                                        notification.type == "c"
                                             ? " commented on your post."
                                             : ""
                                     }}
                                     {{
-                                        notification.type ==
-                                        "r"
+                                        notification.type == "r"
                                             ? " reacted to your post."
                                             : ""
                                     }}
                                     {{
-                                        notification.type ==
-                                        "f"
+                                        notification.type == "f"
                                             ? " accepted your friend request."
                                             : ""
                                     }}
                                 </span>
                             </p>
                             <p class=" text-xs ">
-                                {{
-                                    notification.timeago
-                                }}
+                                {{ notification.timeago }}
                             </p>
                         </div>
-                        <div
-                            v-if="!notification.readed"
-                            class=" ml-auto"
-                        >
+                        <div v-if="!notification.readed" class=" ml-auto">
                             <i
                                 class="fa fa-circle circle text-indigo-500 fa-xs"
                                 aria-hidden="true"
@@ -125,7 +90,52 @@
                 </div>
             </template>
         </jet-dropdown>
+
+
+    <!--notification stuff -->
+
+        <div  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
+            <div class=" px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md ">
+                <div class=" h-12 w-12">
+                    <img :src="'http://127.0.0.1:8000/'+$page.user.picture" class=" h-12 w-12 rounded-full " >
+                </div>
+                <div class=" pl-1 text-left  ">
+                    <p class=" float-left  text-sm pr-1 "> 
+                    {{$page.user.firstname}} {{$page.user.lastname}} 
+                    </p>
+                    <p class=" text-gray-700 text-sm ">
+                        commented on your post.
+                    </p>
+                  
+                    
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
     </div>
+
+
+        
+
+
+
+
+
+
+
+
+
+
 
 </template>
 
@@ -133,14 +143,14 @@
 import JetDropdown from "@/Jetstream/Dropdown";
 
 export default {
-    components:{
-        JetDropdown,
+    components: {
+        JetDropdown
     },
     data() {
         return {
             notifications: [],
-            newNotifications: 0,
-        }
+            newNotifications: 0
+        };
     },
     methods: {
         playSound() {
@@ -181,11 +191,11 @@ export default {
                         console.log(err);
                     });
             }
-        },
+        }
     },
     mounted() {
-            this.getNotifications();
-           Echo.channel("notification-channel-" + this.user_id).listen(
+        this.getNotifications();
+        Echo.channel("notification-channel-" + this.user_id).listen(
             ".NotificationEvent",
             data => {
                 let notification = data.notification;
@@ -195,7 +205,6 @@ export default {
                 this.playSound();
             }
         );
-        
-    },
-}
+    }
+};
 </script>
