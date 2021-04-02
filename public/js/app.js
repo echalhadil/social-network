@@ -8579,7 +8579,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.circle{\n  font-size: xx-small;\n}\n", ""]);
+exports.push([module.i, ".dropdown::-webkit-scrollbar {\n  width: 3px;\n}\n.dropdown::-webkit-scrollbar-track {\n  background: #f1f1f1;\n}\n.dropdown::-webkit-scrollbar-thumb {\n  background: #cfd0d1;\n}\n.dropdown::-webkit-scrollbar-thumb:hover {\n  background: #555;\n}\n.circle{\n  font-size: xx-small;\n}\r\n", ""]);
 
 // exports
 
