@@ -13,6 +13,7 @@
                         v-if="newConversations != 0"
                         class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
                         >
+
                         {{
                             newConversations > 9
                                 ? "9+"
@@ -104,7 +105,7 @@ export default {
             
             conversations: [],
             newConversations:0,
-           
+         
         }
     },  
     methods: {

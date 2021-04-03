@@ -166,7 +166,7 @@
                     <p
                         class=" w-2/3 font-semibold capitalize mx-auto border-b-2 text-lg "
                     >
-                        end of results
+                        End of results
                     </p>
                 </div>
             </div>

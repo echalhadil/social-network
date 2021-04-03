@@ -2,11 +2,7 @@
     <div class="p-2 mt-1">
         <!-- recive message -->
         <div class="flex">
-            <img
-                v-if="$page.user.id != message.from_id"
-                src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                class="h-10 w-10 rounded-full"
-            />
+            
             <div v-if="$page.user.id != message.from_id" class=" flex  w-full">
                 <div
                     class=" shadow p-2 mx-2 bg-white rounded-t-lg rounded-r-lg max-width "
@@ -44,7 +40,7 @@
 
         <div
             v-if="$page.user.id != message.from_id"
-            class="capitalize ml-12 mt-1"
+            class="capitalize ml-2 mt-1"
         >
             <p class=" text-xs text-gray-500 ">{{ message.timeago }}.</p>
         </div>
@@ -88,18 +84,14 @@
                 </div>
             </div>
 
-            <img
-                v-if="$page.user.id == message.from_id"
-                src="https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-                class="h-10 w-10 rounded-full "
-            />
+           
         </div>
 
         <div
             v-if="$page.user.id == message.from_id"
             class="w-full ml-auto capitalize mt-1"
         >
-            <span class="float-right text-xs text-gray-500 mr-12"
+            <span class="float-right text-xs text-gray-500 mr-1"
                 >{{ message.timeago }}.</span
             >
         </div>

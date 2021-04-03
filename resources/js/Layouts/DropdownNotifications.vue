@@ -94,48 +94,41 @@
 
     <!--notification stuff -->
 
-        <div  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
+        <div v-if="showDroppingNotification"  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
             <div class=" px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md ">
-                <div class=" h-12 w-12">
-                    <img :src="'http://127.0.0.1:8000/'+$page.user.picture" class=" h-12 w-12 rounded-full " >
+                <div class=" h-12 w-12 ">
+                    <img :src="'/'+DroppingNotification.maker.picture" class=" h-12 w-12 rounded-full " >
                 </div>
                 <div class=" pl-1 text-left  ">
                     <p class=" float-left  text-sm pr-1 "> 
-                    {{$page.user.firstname}} {{$page.user.lastname}} 
+                    {{DroppingNotification.maker.firstname}} {{DroppingNotification.maker.lastname}} 
                     </p>
                     <p class=" text-gray-700 text-sm ">
-                        commented on your post.
+                       {{
+                                        DroppingNotification.type == "c"
+                                            ? " commented on your post."
+                                            : ""
+                                    }}
+                                    {{
+                                        DroppingNotification.type == "r"
+                                            ? " reacted to your post."
+                                            : ""
+                                    }}
+                                    {{
+                                        DroppingNotification.type == "f"
+                                            ? " accepted your friend request."
+                                            : ""
+                                    }}
                     </p>
                   
                     
                 </div>
+                <div @click="showDroppingNotification = false" class=" my-auto rounded-full p-2.5 text-center text-gray-600 py-0.5 hover:bg-gray-300 ">
+                    <i class="fa fa-times h-2 w-2" ></i>
+                </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
     </div>
-
-
-        
-
-
-
-
-
-
-
-
-
-
 
 </template>
 
@@ -149,8 +142,12 @@ export default {
     data() {
         return {
             notifications: [],
+            showDroppingNotification : false,
+            DroppingNotification :{
+            },
             newNotifications: 0
         };
+
     },
     methods: {
         playSound() {
@@ -201,7 +198,12 @@ export default {
                 let notification = data.notification;
                 console.table(notification);
                 this.notifications.unshift(notification);
+                this.DroppingNotification = notification;
+                this.showDroppingNotification = true;
+
                 this.newNotifications++;
+
+
                 this.playSound();
             }
         );

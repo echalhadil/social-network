@@ -18,16 +18,13 @@
                         <div
                             class="hidden  w-1/2 space-x-8 sm:-my-px sm:ml-10 sm:flex"
                         >
-                            <!--<jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                Dashboard
-                            </jet-nav-link>
-                            -->
-
+                            
                             <input
                                 v-on:keyup.enter="search"
                                 placeholder="type here to search..."
                                 class="focus:outline-none focus:ring-2 focus:border-indigo-500  bg-gray-100 ml-auto h-12 capitalize my-auto w-10/12 border-blue-100 border-2 rounded-lg "
                                 type="text"
+                                value=""
                             />
                         </div>
 
@@ -253,7 +250,8 @@ export default {
             newNotifications: 0,
             newFriendRequest: 0,
             newConversations: 0,
-            user_id: ""
+            user_id: "",
+          
         };
     },
 

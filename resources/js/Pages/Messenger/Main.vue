@@ -27,7 +27,7 @@
                     <!-- loading for message -->
                     <div v-if="loading">
                         <div class="p-2 flex">
-                            <div class="h-10 w-10 rounded-full loading"></div>
+                           
                             <div class="ml-2 w-3/4">
                                 <div
                                     class=" shadow p-2 loading rounded-t-lg rounded-r-lg h-20 w-full "
@@ -63,9 +63,7 @@
                                 </div>
                             </div>
 
-                            <div
-                                class="h-10 w-10 rounded-full ml-2 loading"
-                            ></div>
+                            
                         </div>
                     </div>
                     <message
