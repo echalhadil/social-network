@@ -3053,9 +3053,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -3736,13 +3733,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -3752,6 +3742,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       notifications: [],
       showDroppingNotification: false,
+      DroppingNotification: {},
       newNotifications: 0
     };
   },
@@ -3796,6 +3787,8 @@ __webpack_require__.r(__webpack_exports__);
 
       _this2.notifications.unshift(notification);
 
+      _this2.DroppingNotification = notification;
+      _this2.showDroppingNotification = true;
       _this2.newNotifications++;
 
       _this2.playSound();
@@ -5147,8 +5140,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -5244,14 +5235,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Jetstream_Dropdown__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Jetstream/Dropdown */ "./resources/js/Jetstream/Dropdown.vue");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert */ "./node_modules/sweetalert/dist/sweetalert.min.js");
 /* harmony import */ var sweetalert__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert__WEBPACK_IMPORTED_MODULE_1__);
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8540,6 +8523,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_AppLayout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout */ "./resources/js/Layouts/AppLayout.vue");
+//
 //
 //
 //
@@ -61758,7 +61742,8 @@ var render = function() {
                         "focus:outline-none focus:ring-2 focus:border-indigo-500  bg-gray-100 ml-auto h-12 capitalize my-auto w-10/12 border-blue-100 border-2 rounded-lg ",
                       attrs: {
                         placeholder: "type here to search...",
-                        type: "text"
+                        type: "text",
+                        value: ""
                       },
                       on: {
                         keyup: function($event) {
@@ -62761,11 +62746,11 @@ var render = function() {
                     " px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md "
                 },
                 [
-                  _c("div", { staticClass: " h-12 w-12" }, [
+                  _c("div", { staticClass: " h-12 w-12 " }, [
                     _c("img", {
                       staticClass: " h-12 w-12 rounded-full ",
                       attrs: {
-                        src: "http://127.0.0.1:8000/" + _vm.$page.user.picture
+                        src: "/" + _vm.DroppingNotification.maker.picture
                       }
                     })
                   ]),
@@ -62774,19 +62759,51 @@ var render = function() {
                     _c("p", { staticClass: " float-left  text-sm pr-1 " }, [
                       _vm._v(
                         " \n                " +
-                          _vm._s(_vm.$page.user.firstname) +
+                          _vm._s(_vm.DroppingNotification.maker.firstname) +
                           " " +
-                          _vm._s(_vm.$page.user.lastname) +
+                          _vm._s(_vm.DroppingNotification.maker.lastname) +
                           " \n                "
                       )
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: " text-gray-700 text-sm " }, [
                       _vm._v(
-                        "\n                    commented on your post.\n                "
+                        "\n                   " +
+                          _vm._s(
+                            _vm.DroppingNotification.type == "c"
+                              ? " commented on your post."
+                              : ""
+                          ) +
+                          "\n                                " +
+                          _vm._s(
+                            _vm.DroppingNotification.type == "r"
+                              ? " reacted to your post."
+                              : ""
+                          ) +
+                          "\n                                " +
+                          _vm._s(
+                            _vm.DroppingNotification.type == "f"
+                              ? " accepted your friend request."
+                              : ""
+                          ) +
+                          "\n                "
                       )
                     ])
-                  ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        " my-auto rounded-full p-2.5 text-center text-gray-600 py-0.5 hover:bg-gray-300 ",
+                      on: {
+                        click: function($event) {
+                          _vm.showDroppingNotification = false
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fa fa-times h-2 w-2" })]
+                  )
                 ]
               )
             ]
@@ -64569,10 +64586,6 @@ var render = function() {
                     _vm.loading
                       ? _c("div", [
                           _c("div", { staticClass: "p-2 flex" }, [
-                            _c("div", {
-                              staticClass: "h-10 w-10 rounded-full loading"
-                            }),
-                            _vm._v(" "),
                             _c("div", { staticClass: "ml-2 w-3/4" }, [
                               _c(
                                 "div",
@@ -64632,11 +64645,7 @@ var render = function() {
                                   })
                                 ]
                               )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", {
-                              staticClass: "h-10 w-10 rounded-full ml-2 loading"
-                            })
+                            ])
                           ])
                         ])
                       : _vm._e(),
@@ -64803,16 +64812,6 @@ var render = function() {
   return _c("div", { staticClass: "p-2 mt-1" }, [
     _c("div", { staticClass: "flex" }, [
       _vm.$page.user.id != _vm.message.from_id
-        ? _c("img", {
-            staticClass: "h-10 w-10 rounded-full",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-            }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.$page.user.id != _vm.message.from_id
         ? _c("div", { staticClass: " flex  w-full" }, [
             _c(
               "div",
@@ -64899,7 +64898,7 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.$page.user.id != _vm.message.from_id
-      ? _c("div", { staticClass: "capitalize ml-12 mt-1" }, [
+      ? _c("div", { staticClass: "capitalize ml-2 mt-1" }, [
           _c("p", { staticClass: " text-xs text-gray-500 " }, [
             _vm._v(_vm._s(_vm.message.timeago) + ".")
           ])
@@ -64988,16 +64987,6 @@ var render = function() {
               ]
             )
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.$page.user.id == _vm.message.from_id
-        ? _c("img", {
-            staticClass: "h-10 w-10 rounded-full ",
-            attrs: {
-              src:
-                "https://i.pinimg.com/564x/cf/63/60/cf636099f5e41f4773c55c1a677c6326.jpg"
-            }
-          })
         : _vm._e()
     ]),
     _vm._v(" "),
@@ -65005,7 +64994,7 @@ var render = function() {
       ? _c("div", { staticClass: "w-full ml-auto capitalize mt-1" }, [
           _c(
             "span",
-            { staticClass: "float-right text-xs text-gray-500 mr-12" },
+            { staticClass: "float-right text-xs text-gray-500 mr-1" },
             [_vm._v(_vm._s(_vm.message.timeago) + ".")]
           )
         ])
@@ -68809,7 +68798,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("app-layout", [
-    _c("div", { staticClass: "w-full bg-gray-100 flex" }, [
+    _c("div", { staticClass: "w-full  md:flex" }, [
       _c(
         "div",
         { staticClass: " fixed h-screen bg-white w-1/4 pt-3 mr-auto shadow " },
@@ -68909,7 +68898,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "w-2/3 ml-auto mt-3 pt-3 rounded-lg h-96 " },
+        { staticClass: "w-2/3 ml-auto mt-3 pt-3 rounded-lg  " },
         [
           _vm._l(_vm.$page.users, function(user) {
             return _c(
@@ -69055,10 +69044,7 @@ var render = function() {
                   _c("div", {}, [
                     _c("img", {
                       staticClass: " h-15 w-15 rounded-full ",
-                      attrs: {
-                        src:
-                          "https://i.pinimg.com/564x/a0/f0/02/a0f002f1f149ec32516de35e920fe946.jpg"
-                      }
+                      attrs: { src: "/" + post.user.picture }
                     })
                   ]),
                   _vm._v(" "),
@@ -69113,11 +69099,13 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("img", {
-                    staticClass:
-                      "  ml-auto rounded h-28 w-28  m-2 object-cover ",
-                    attrs: { src: "/" + post.picture }
-                  })
+                  post.picture != null
+                    ? _c("img", {
+                        staticClass:
+                          "  ml-auto rounded h-28 w-28  m-2 object-cover ",
+                        attrs: { src: "/" + post.picture }
+                      })
+                    : _vm._e()
                 ])
               ]
             )
@@ -69130,7 +69118,7 @@ var render = function() {
                 staticClass:
                   " w-2/3 font-semibold capitalize mx-auto border-b-2 text-lg "
               },
-              [_vm._v("\n                    end of results\n                ")]
+              [_vm._v("\n                    End of results\n                ")]
             )
           ])
         ],

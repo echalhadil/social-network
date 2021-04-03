@@ -18,8 +18,13 @@ class SearchController extends Controller
     public function index()
     {
         $users = User::all();
+        $posts = Post::with("user")->get();
+        foreach ($posts as $post) {
+            $post->timeago = $post->created_at->diffforhumans();
+            
+        }
 
-        return Inertia::render('Result/Main')->with('results', $users);
+        return Inertia::render('Result/Main')->with('users', $users)->with('posts', $posts);
     }
 
     /**

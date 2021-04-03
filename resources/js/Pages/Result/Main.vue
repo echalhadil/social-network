@@ -1,6 +1,6 @@
 <template>
     <app-layout>
-        <div class="w-full bg-gray-100 flex">
+        <div class="w-full  md:flex">
             <div class=" fixed h-screen bg-white w-1/4 pt-3 mr-auto shadow ">
                 <div class="ml-3 capitalize font-semibold my-2 ">
                     <p>filters</p>
@@ -55,12 +55,12 @@
                 </div>
             </div>
 
-            <div class="w-2/3 ml-auto mt-3 pt-3 rounded-lg h-96 ">
+            <div class="w-2/3 ml-auto mt-3 pt-3 rounded-lg  ">
                 <div
                     v-for="user in $page.users"
                     :key="user.id"
                     class=" flex shadow rounded-lg p-1 bg-white w-2/3 mt-3  mx-auto"
-                >
+                    >
                     <inertia-link
                         :href="'/profiles/' + user.id"
                         class=" md:w-28 w-24 h-24 md:h-28 "
@@ -124,13 +124,13 @@
                     v-for="post in $page.posts"
                     :key="post.id"
                     class=" shadow rounded-lg p-1 w-2/3 mt-3  mx-auto bg-white "
-                >
+                    >
                     <!-- owner -->
                     <div class="flex m-2">
                         <div class="">
                             <img
                                 class=" h-15 w-15 rounded-full "
-                                src="https://i.pinimg.com/564x/a0/f0/02/a0f002f1f149ec32516de35e920fe946.jpg"
+                                :src="'/' + post.user.picture"
                             />
                         </div>
                         <div class="ml-2 capitalize text-black my-auto">
@@ -156,6 +156,7 @@
                             </p>
                         </div>
                         <img
+                            v-if="post.picture!=null"
                             class="  ml-auto rounded h-28 w-28  m-2 object-cover "
                             :src="'/' + post.picture"
                         />
