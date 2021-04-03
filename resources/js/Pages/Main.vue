@@ -93,7 +93,7 @@
                     <div class=" pb-3">
                         <img
                             class=" h-28 w-28 rounded-full mx-auto object-cover"
-                            :src="'http://127.0.0.1:8000/' + $page.user.picture"
+                            :src="'/' + $page.user.picture"
                         />
                     </div>
                     <div class=" w-full justify-items-center ">

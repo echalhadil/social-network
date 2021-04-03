@@ -47,341 +47,11 @@
                             </inertia-link>
 
                             <!--friends request -->
-                            <div
-                                class=" cursor-pointer hover:text-indigo-700 mx-auto"
-                            >
-                                <jet-dropdown align="left" width="72">
-                                    <template #trigger>
-                                        <i class=" far fa-user-friends">
-                                            <b
-                                                v-if="newFriendRequest != 0"
-                                                class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                                            >
-                                                {{
-                                                    newFriendRequest > 9
-                                                        ? "9+"
-                                                        : newFriendRequest
-                                                }}
-                                            </b>
-                                        </i>
-                                    </template>
-
-                                    <template #content>
-                                        <div
-                                            class="block px-4 py-2 text-sm text-gray-400"
-                                        >
-                                            Friendship Requests
-                                        </div>
-
-                                        <div
-                                            class="border-t border-gray-100"
-                                        ></div>
-
-                                        <div
-                                            v-if="friendsRequest.length == 0"
-                                            class="px-4 text-gray-400 text-center "
-                                        >
-                                            <i
-                                                class="fa mt-7 fa-3x fa-user-times"
-                                                aria-hidden="true"
-                                            ></i>
-                                            <p class=" mb-7 mt-3 text-sm  ">
-                                                No Requests
-                                            </p>
-                                        </div>
-
-                                        <div
-                                            v-if="friendsRequest.length > 0"
-                                            class="dropdown  overflow-auto h-64 text-gray-400 text-center "
-                                        >
-                                            <div
-                                                v-for="friendRequest in friendsRequest"
-                                                :key="friendRequest.id"
-                                                class="p-2 capitalize flex hover:bg-gray-100 rounded-md "
-                                            >
-                                                <inertia-link
-                                                    :href="
-                                                        'profiles/' +
-                                                            friendRequest.maker
-                                                                .id
-                                                    "
-                                                    class=" h-13 w-13"
-                                                >
-                                                    <img
-                                                        :src="
-                                                            '/' +
-                                                                friendRequest
-                                                                    .maker
-                                                                    .picture
-                                                        "
-                                                        class=" h-12 w-12 rounded-full "
-                                                    />
-                                                </inertia-link>
-                                                <div
-                                                    class=" pl-1 text-left pr-0.5  "
-                                                >
-                                                    <p
-                                                        class=" text-sm text-gray-700 font-bold "
-                                                    >
-                                                        {{
-                                                            friendRequest.maker
-                                                                .firstname
-                                                        }}
-                                                        {{
-                                                            friendRequest.maker
-                                                                .lastname
-                                                        }}
-                                                        <!--<span class=" font-normal text-xs ">sent you friend request.</span> -->
-                                                    </p>
-
-                                                    <div class=" text-sm">
-                                                        <button
-                                                            @click="
-                                                                confirmFriendRequest(
-                                                                    friendRequest
-                                                                )
-                                                            "
-                                                            class="capitalize font-bold mr-0.5 px-4 py-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg text-white "
-                                                        >
-                                                            confirm
-                                                        </button>
-                                                        <button
-                                                            @click="
-                                                                deletFriendRequest(
-                                                                    friendRequest.id
-                                                                )
-                                                            "
-                                                            class="capitalize font-bold ml-0.5 px-4 py-2 rounded-lg bg-cool-gray-100 hover:bg-cool-gray-200 text-gray-800 "
-                                                        >
-                                                            delete
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </jet-dropdown>
-                            </div>
-
+                            <dropdown-friends-request />
                             <!--notifications -->
-                            <div
-                                class="cursor-pointer hover:text-indigo-700 mx-auto"
-                            >
-                                <div v-if="(user_id = $page.user.id)"></div>
-                                <jet-dropdown align="right" width="72">
-                                    <template #trigger>
-                                        <i
-                                            v-on:click="seeNotifications"
-                                            class="far fa-bell"
-                                            aria-hidden="true"
-                                        >
-                                            <b
-                                                v-if="newNotifications != 0"
-                                                class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                                                >
-                                                {{
-                                                    newNotifications > 9
-                                                        ? "9+"
-                                                        : newNotifications
-                                                }}
-                                            </b>
-                                        </i>
-                                    </template>
-
-                                    <template #content>
-                                        <div
-                                            class="block px-4 py-2 text-sm text-gray-400"
-                                        >
-                                            Notifications 
-                                            
-                                        </div>
-
-                                        <div
-                                            class="border-t border-gray-100"
-                                        ></div>
-                                        <!-- no notifications -->
-                                        <div
-                                            v-if="notifications.length === 0"
-                                            class="px-4 text-gray-400 text-center "
-                                        >
-                                            <i
-                                                class="fa mt-7 fa-3x fa-bell-slash"
-                                                aria-hidden="true"
-                                            ></i>
-                                            <p class=" mb-7 mt-3 text-sm  ">
-                                                No Notifications
-                                            </p>
-                                        </div>
-
-                                        <div
-                                            v-if="notifications.length > 0"
-                                            class="dropdown  overflow-auto h-64 text-gray-400 text-center "
-                                        >
-                                            <div
-                                                v-for="notification in notifications"
-                                                :key="notification.id"
-                                                class=" p-2 capitalize flex hover:bg-gray-100 rounded-md "
-                                            >
-                                                <div class=" w-1/4">
-                                                    <img
-                                                        :src="
-                                                            '/' +
-                                                                notification
-                                                                    .maker
-                                                                    .picture
-                                                        "
-                                                        class=" h-12 w-12 rounded-full "
-                                                    />
-                                                </div>
-                                                <div
-                                                    class=" pl-1 text-left pr-0.5  "
-                                                >
-                                                    <p
-                                                        class=" float-left text-gray-700 text-xs font-bold "
-                                                    >
-                                                        {{
-                                                            notification.maker
-                                                                .firstname
-                                                        }}
-                                                        {{
-                                                            notification.maker
-                                                                .lastname
-                                                        }}
-                                                        <span
-                                                            class=" font-normal text-xs "
-                                                        >
-                                                            {{
-                                                                notification.type ==
-                                                                "c"
-                                                                    ? " commented on your post."
-                                                                    : ""
-                                                            }}
-                                                            {{
-                                                                notification.type ==
-                                                                "r"
-                                                                    ? " reacted to your post."
-                                                                    : ""
-                                                            }}
-                                                            {{
-                                                                notification.type ==
-                                                                "f"
-                                                                    ? " accepted your friend request."
-                                                                    : ""
-                                                            }}
-                                                        </span>
-                                                    </p>
-                                                    <p class=" text-xs ">
-                                                        {{
-                                                            notification.timeago
-                                                        }}
-                                                    </p>
-                                                </div>
-                                                <div
-                                                    v-if="!notification.readed"
-                                                    class=" ml-auto"
-                                                >
-                                                    <i
-                                                        class="fa fa-circle circle text-indigo-500 fa-xs"
-                                                        aria-hidden="true"
-                                                    ></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </template>
-                                </jet-dropdown>
-                            </div>
-
+                            <dropdown-notifications />
                             <!--messages -->
-                            <div
-                                class="cursor-pointer hover:text-indigo-700 mx-auto "
-                            >
-                                <jet-dropdown align="right" width="72">
-                                    <template #trigger>
-                                        <i v-on:click="newConversations=0"
-                                            class="far fa-envelope"
-                                            aria-hidden="true"
-                                        >
-                                        <b
-                                                v-if="newConversations != 0"
-                                                class=" fixed w-3 p-0.5 -ml-1 -mt-2 text-center text-white text-xs bg-red-600 rounded-full "
-                                                >
-                                                {{
-                                                    newConversations > 9
-                                                        ? "9+"
-                                                        : newConversations
-                                                }}
-                                            </b>
-                                        </i>
-                                    </template>
-
-                                    <template #content>
-                                        <div
-                                            class="block px-4 py-2 text-sm text-gray-400"
-                                        >
-                                            Conversations
-                                            <inertia-link href="/messenger" class=" float-right text-xs text-indigo-500 font-semibold capitalize "> messenger </inertia-link>
-                                        </div>
-
-                                        <div
-                                            class="border-t border-gray-100"
-                                        ></div>
-                                        <div
-                                            v-if="conversations.length == 0"
-                                            class="px-4 text-gray-400 text-center "
-                                        >
-                                            <i
-                                                class="fa mt-7 fa-3x fa-comment-alt-slash"
-                                                aria-hidden="true"
-                                            ></i>
-                                            <p class=" mb-7 mt-3 text-sm  ">
-                                                No Conversations
-                                            </p>
-                                        </div>
-
-                                        <div
-                                            v-if="conversations.length > 0"
-                                            class=" text-gray-400 text-sm h-64 "
-                                        >
-                                            <inertia-link
-                                                v-for="conversation in conversations"
-                                                :key="conversation.id"
-                                                class=" p-2 flex hover:bg-gray-100 "
-                                                :href="'/conversations/'+conversation.id"
-                                            >
-                                                <div>
-                                                    <img
-                                                        class=" h-12 w-12 rounded-full mr-1 my-auto "
-                                                        :src="
-                                                            '/' +
-                                                                conversation
-                                                                    .friend
-                                                                    .picture
-                                                        "
-                                                    />
-                                                </div>
-                                                <div class="my-auto">
-                                                    <p class=" font-bold text-gray-800 ">{{conversation.friend.firstname}} {{conversation.friend.lastname}} </p>
-                                                    <p class="text-xs truncate float-left  text-gray-500">
-                                                        {{
-                                                            conversation.last_message
-                                                        }} .
-                                                        <span class=" float-right ml-1 text-gray-400 text-xs ">
-                                                        {{
-                                                            conversation.timeago
-                                                        }}
-                                                        </span>
-                                                    </p>
-                                                   
-                                                </div>
-                                                <div v-if="true" class="ml-auto my-auto">
-                                                
-                                                    <i class="fa circle fa-circle text-indigo-500 fa-xs    "></i>
-                                                </div>
-                                            </inertia-link>
-                                        </div>
-                                    </template>
-                                </jet-dropdown>
-                            </div>
+                            <dropdown-conversations />
                         </div>
                     </div>
 
@@ -489,117 +159,43 @@
                         :href="route('dashboard')"
                         :active="route().current('dashboard')"
                     >
-                        Dashboard
+                        Manage Account
                     </jet-responsive-nav-link>
                 </div>
 
                 <!-- Responsive Settings Options -->
                 <div class="pt-4 pb-1 border-t border-gray-200">
-                    <div class="flex items-center px-4">
+                    <inertia-link
+                        class="flex items-center px-4"
+                        :href="'/profiles/' + $page.user.id"
+                        :active="route().current('profile.main')"
+                    >
                         <div class="flex-shrink-0">
                             <img
                                 class="h-10 w-10 rounded-full"
                                 :src="'/' + $page.user.picture"
-                                :alt="$page.user.name"
+                                :alt="$page.user.firstname"
                             />
                         </div>
 
                         <div class="ml-3">
                             <div class="font-medium text-base text-gray-800">
-                                {{ $page.user.name }}
+                                {{ $page.user.firstname }}
+                                {{ $page.user.lastname }}
                             </div>
                             <div class="font-medium text-sm text-gray-500">
-                                {{ $page.user.email }}
+                                @{{ $page.user.username }}
                             </div>
                         </div>
-                    </div>
+                    </inertia-link>
 
                     <div class="mt-3 space-y-1">
-                        <jet-responsive-nav-link
-                            :href="route('profile.show')"
-                            :active="route().current('profile.show')"
-                        >
-                            Profile
-                        </jet-responsive-nav-link>
-
-                        <jet-responsive-nav-link
-                            :href="route('api-tokens.index')"
-                            :active="route().current('api-tokens.index')"
-                            v-if="$page.jetstream.hasApiFeatures"
-                        >
-                            API Tokens
-                        </jet-responsive-nav-link>
-
                         <!-- Authentication -->
                         <form method="POST" @submit.prevent="logout">
                             <jet-responsive-nav-link as="button">
                                 Logout
                             </jet-responsive-nav-link>
                         </form>
-
-                        <!-- Team Management -->
-                        <template v-if="$page.jetstream.hasTeamFeatures">
-                            <div class="border-t border-gray-200"></div>
-
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                Manage Team
-                            </div>
-
-                            <!-- Team Settings -->
-                            <jet-responsive-nav-link
-                                :href="
-                                    route('teams.show', $page.user.current_team)
-                                "
-                                :active="route().current('teams.show')"
-                            >
-                                Team Settings
-                            </jet-responsive-nav-link>
-
-                            <jet-responsive-nav-link
-                                :href="route('teams.create')"
-                                :active="route().current('teams.create')"
-                            >
-                                Create New Team
-                            </jet-responsive-nav-link>
-
-                            <div class="border-t border-gray-200"></div>
-
-                            <!-- Team Switcher -->
-                            <div class="block px-4 py-2 text-xs text-gray-400">
-                                Switch Teams
-                            </div>
-
-                            <template v-for="team in $page.user.all_teams">
-                                <form
-                                    @submit.prevent="switchToTeam(team)"
-                                    :key="team.id"
-                                >
-                                    <jet-responsive-nav-link as="button">
-                                        <div class="flex items-center">
-                                            <svg
-                                                v-if="
-                                                    team.id ==
-                                                        $page.user
-                                                            .current_team_id
-                                                "
-                                                class="mr-2 h-5 w-5 text-green-400"
-                                                fill="none"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="2"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path
-                                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                                ></path>
-                                            </svg>
-                                            <div>{{ team.name }}</div>
-                                        </div>
-                                    </jet-responsive-nav-link>
-                                </form>
-                            </template>
-                        </template>
                     </div>
                 </div>
             </div>
@@ -621,26 +217,7 @@
         <!-- Modal Portal -->
         <portal-target name="modal" multiple> </portal-target>
 
-        <!--notification stuff -->
-        <!--
-        <div  class=" fixed bottom-0 m-3 right-0 bg-white hover:bg-gray-200 shadow-md rounded-lg ">
-            <div class=" px-2 py-4 capitalize flex hover:bg-gray-100 rounded-md ">
-                <div class=" h-12 w-12">
-                    <img :src="'http://127.0.0.1:8000/'+$page.user.picture" class=" h-12 w-12 rounded-full " >
-                </div>
-                <div class=" pl-1 text-left  ">
-                    <p class=" float-left  text-sm pr-1 "> 
-                    {{$page.user.firstname}} {{$page.user.lastname}} 
-                    </p>
-                    <p class=" text-gray-700 text-sm ">
-                        commented on your post.
-                    </p>
-                  
-                    
-                </div>
-            </div>
-        </div>
--->
+
     </div>
 </template>
 
@@ -651,13 +228,20 @@ import JetDropdownLink from "@/Jetstream/DropdownLink";
 import JetNavLink from "@/Jetstream/NavLink";
 import JetResponsiveNavLink from "@/Jetstream/ResponsiveNavLink";
 
+import DropdownFriendsRequest from "./DropdownFriendsRequest";
+import DropdownNotifications from "./DropdownNotifications";
+import DropdownConversations from "./DropdownConversations";
+
 export default {
     components: {
         JetApplicationMark,
         JetDropdown,
         JetDropdownLink,
         JetNavLink,
-        JetResponsiveNavLink
+        JetResponsiveNavLink,
+        DropdownFriendsRequest,
+        DropdownNotifications,
+        DropdownConversations
     },
 
     data() {
@@ -668,7 +252,7 @@ export default {
             conversations: [],
             newNotifications: 0,
             newFriendRequest: 0,
-            newConversations:0,
+            newConversations: 0,
             user_id: ""
         };
     },
@@ -824,13 +408,11 @@ export default {
             }
         );
 
-       
-          Echo.channel("message-channel-" + this.$page.user.id).listen(
+        Echo.channel("message-channel-" + this.$page.user.id).listen(
             ".MessageEvent",
             data => {
                 let conversation = data.conversation;
 
-              
                 var match = _.find(this.conversations, ["id", conversation.id]);
                 if (match) {
                     var index = _.indexOf(
@@ -874,7 +456,7 @@ export default {
 .dropdown::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-.circle{
-        font-size: xx-small;
-    }
+.circle {
+    font-size: xx-small;
+}
 </style>

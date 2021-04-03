@@ -11,7 +11,7 @@
     },
     "devDependencies": {
         "@inertiajs/inertia": "^0.3.0",
-        "@inertiajs/inertia-vue": "^0.2.0",
+        "@inertiajs/inertia-vue": "^0.5.7",
         "@tailwindcss/ui": "^0.6.0",
         "axios": "^0.19",
         "cross-env": "^7.0",
