@@ -287,6 +287,7 @@ export default {
         deleteComment(comment){
             var thepost =_.find( this.posts, o => { return o.id ==  comment.post_id; });
             thepost.comments =thepost.comments.filter(c =>c.id !=comment.id);
+            thepost.comments.without(comment)
         },
 
         isReacted(post, user) {
